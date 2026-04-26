@@ -1,31 +1,49 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerSpeed;//プレイヤーのスピード
     private Vector2 moveInput = Vector2.zero;
-    //private InputAction moveAction;
-    //private InputAction shotAction;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shotPoint;
-    //[SerializeField] private
+
+    [SerializeField, Header("体力")] public int HP;
+    [SerializeField] private GameObject enemy;
+
+    private Animator animator;
+
+    float time = 0;
+    [SerializeField, Header("クールタイム")] private float coolTime;
+
+    //回避出来るか、出来ないか
+    private bool bDodge = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //moveのリファレンスを探す
-        //moveAction = InputSystem.actions.FindAction("Move");
-        //shotAction = InputSystem.actions.FindAction("Attack");
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        Debug.Log(time);
+        if (bDodge)
+        {
+            time += Time.deltaTime;
+            if (time >= coolTime)
+            {
+                time = coolTime;
+                bDodge = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -36,8 +54,7 @@ public class PlayerManager : MonoBehaviour
     private void PlayerController()
     {
         //移動処理
-        //var moveValue = context.ReadValue<Vector2>();
-        var move = new Vector3(moveInput.x, 0, -moveInput.y) * playerSpeed * Time.deltaTime;
+        var move = new Vector3(moveInput.x, moveInput.y, 0) * playerSpeed * Time.deltaTime;
         transform.Translate(move);
     }
 
@@ -50,7 +67,7 @@ public class PlayerManager : MonoBehaviour
     //発射ボタン
     public void OnShot(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !bDodge)
         {
             //弾を生成
             Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);
@@ -60,10 +77,41 @@ public class PlayerManager : MonoBehaviour
     //回避動作
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !bDodge)
         {
-
+            Dodge();
         }
     }
 
+    private void Dodge()
+    {
+        bDodge = true;
+        time = 0;
+
+        //回転アニメーション
+        transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+    }
+
+    //private void OnTriggerEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Enemy") && !bDodge)
+    //    {
+    //        enemy.GetComponent<EnemyManager>().PlayerDamage(this);
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //敵に触れたら
+        if (other.gameObject.CompareTag("Enemy") && !bDodge)
+        {
+            enemy.GetComponent<EnemyManager>().PlayerDamage(this);
+        }
+    }
+
+    //プレイヤーに受けるダメージ
+    public void Damage(int damage)
+    {
+        HP -= Mathf.Max(0, damage);
+    }
 }
