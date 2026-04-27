@@ -6,14 +6,18 @@ using UnityEngine.UIElements;
 public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] private float playerSpeed;//プレイヤーのスピード
+    //プレイヤーのスピード
+    [SerializeField] private float playerSpeed;
     private Vector2 moveInput = Vector2.zero;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shotPoint;
 
-    [SerializeField, Header("体力")] public int HP;
+    [SerializeField, Header("体力")] public int playerHP;
     [SerializeField] private GameObject enemy;
+
+    //経験値
+    public int experiencePoint = 0;
 
     private Animator animator;
 
@@ -33,8 +37,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(time);
         if (bDodge)
         {
             time += Time.deltaTime;
@@ -112,6 +114,6 @@ public class PlayerManager : MonoBehaviour
     //プレイヤーに受けるダメージ
     public void Damage(int damage)
     {
-        HP -= Mathf.Max(0, damage);
+        playerHP -= Mathf.Max(0, damage);
     }
 }
