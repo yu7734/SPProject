@@ -1,6 +1,4 @@
-using System.Data;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class EnemyManager : MonoBehaviour
 {
