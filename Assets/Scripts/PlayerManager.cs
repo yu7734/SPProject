@@ -10,11 +10,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerSpeed;
     private Vector2 moveInput = Vector2.zero;
 
+    //プレイヤーの弾
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shotPoint;
 
     [SerializeField, Header("体力")] public int playerHP;
+    [SerializeField, Header("最大体力")] public int MaxPlayerHP;
     [SerializeField] private GameObject enemy;
+
+    [SerializeField] private UIManager ui;
 
     //経験値
     public int experiencePoint = 0;
@@ -69,7 +73,7 @@ public class PlayerManager : MonoBehaviour
     //発射ボタン
     public void OnShot(InputAction.CallbackContext context)
     {
-        if (context.performed && !bDodge)
+        if (context.performed && !bDodge && !ui.bSelect)
         {
             //弾を生成
             Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);

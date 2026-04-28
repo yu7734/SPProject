@@ -4,7 +4,7 @@ public class BulletManagert : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private int bulletPower;
+    [SerializeField] public static int bulletPower = 5;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

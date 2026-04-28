@@ -49,6 +49,9 @@ public class EnemyManager : MonoBehaviour
         {
             //ƒ_ƒ[ƒW‚ğó‚¯‚é
             playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
+
+            Debug.Log("hit");
+            //Destroy(playerBullet);
         }
     }
 
@@ -58,7 +61,6 @@ public class EnemyManager : MonoBehaviour
         if (enemyHP <= 0)
         {
             ui.Experience(10);
-            Destroy(playerBullet);
             Destroy(gameObject);
         }
     }
