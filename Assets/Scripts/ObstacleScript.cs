@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class ObstacleScript : MonoBehaviour
 {
     GameObject Camera;//プレハブ化するのでプライベート
     void Start()
