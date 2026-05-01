@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SkyboxCamera
   - Stage2
+  - Obstacle
   layers:
   - Default
   - TransparentFX
