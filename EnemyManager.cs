@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [Tooltip("自機狙いの弾")]
     public bool isTrackShot = false;
     [Tooltip("自機狙い突進")]
-    public bool isRushShot = false;
+    public bool isRush = false;
 
     [Header("射撃にかかわる変数")]
     public GameObject Bullet;
@@ -60,14 +60,14 @@ public class EnemyManager : MonoBehaviour
         {
             ShotPattern();
         }
-        if (isRushShot)
+        if (isRush)
         {
             RushPattern();
         }
     }
     void TrackShotPattern()
     {
-        if(!isRushShot) transform.LookAt(player.transform); //プレイヤー側に常に向く
+        if(!isRush) transform.LookAt(player.transform); //プレイヤー側に常に向く
         trackShotTimer += Time.deltaTime;
         if (trackShotTimer > coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
         {
