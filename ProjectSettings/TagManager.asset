@@ -7,6 +7,8 @@ TagManager:
   - SkyboxCamera
   - Stage2
   - Obstacle
+  - Enemy
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
