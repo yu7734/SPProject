@@ -30,7 +30,6 @@ public class EnemyManager : MonoBehaviour
     private float shotTimer = 0;
     private float rushTimer = 0;
 
-    private float timer = 0;
     Transform player;   //プレイヤーの座標
     Rigidbody rb; 
 
