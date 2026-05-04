@@ -111,7 +111,7 @@ public class PlayerManager : MonoBehaviour
         //ìGÇ…êGÇÍÇΩÇÁ
         if (other.gameObject.CompareTag("Enemy") && !bDodge)
         {
-            enemy.GetComponent<EnemyManager>().PlayerDamage(this);
+            enemy.GetComponent<EnemyManager2>().PlayerDamage(this);
         }
     }
 
