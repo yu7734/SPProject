@@ -55,5 +55,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2cd86cf7137a2194184d2e917b2ca3ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6591651031754641593}
   m_SourcePrefab: {fileID: 100100000, guid: 2cd86cf7137a2194184d2e917b2ca3ca, type: 3}
+--- !u!1 &5840823151837032197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2cd86cf7137a2194184d2e917b2ca3ca, type: 3}
+  m_PrefabInstance: {fileID: 6759811111422431828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6591651031754641593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840823151837032197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c038926ecee7cfe46bea0e70501e7d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 0
+  bulletPrefab: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
+  shotPoint: {fileID: 0}
+  playerHP: 0
+  MaxPlayerHP: 0
+  ui: {fileID: 0}
+  justDodgeManager: {fileID: 0}
+  experiencePoint: 0
+  coolTime: 0
+  _state: 0

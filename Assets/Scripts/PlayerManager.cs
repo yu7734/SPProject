@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine.UIElements;
+using TMPro.EditorUtilities;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField, Header("体力")] public int playerHP;
     [SerializeField, Header("最大体力")] public int MaxPlayerHP;
-    [SerializeField] private GameObject enemy;
+    private GameObject enemy;
 
     [SerializeField] private UIManager ui;
+    [SerializeField] private JustDodgeManager justDodgeManager;
 
     //経験値
     public int experiencePoint = 0;
@@ -28,28 +30,53 @@ public class PlayerManager : MonoBehaviour
     float time = 0;
     [SerializeField, Header("クールタイム")] private float coolTime;
 
-    //回避出来るか、出来ないか
-    private bool bDodge = false;
+    //回避の状態ステートマシン
+    public enum dodgeState{
+        None,
+        JustDodge,
+        dodge,
+        coolTime,
+    }
+
+    public dodgeState _state = dodgeState.None;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        enemy = GameObject.FindWithTag("Enemy");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (bDodge)
+        switch (_state)
         {
-            time += Time.deltaTime;
-            if (time >= coolTime)
-            {
-                time = coolTime;
-                bDodge = false;
-            }
+            case dodgeState.None:
+                break;
+
+            case dodgeState.JustDodge:
+                justDodgeManager.JustDodge();
+                break;
+
+            case dodgeState.dodge:
+                Dodge();
+                break;
+
+            case dodgeState.coolTime:
+                break;
         }
+
+        //if (bDodge)
+        //{
+        //    time += Time.deltaTime;
+        //    if (time >= coolTime)
+        //    {
+        //        time = coolTime;
+        //        bDodge = false;
+        //    }
+        //}
     }
 
     private void FixedUpdate()
@@ -73,7 +100,7 @@ public class PlayerManager : MonoBehaviour
     //発射ボタン
     public void OnShot(InputAction.CallbackContext context)
     {
-        if (context.performed && !bDodge && !ui.bSelect)
+        if (context.performed && !ui.bSelect)
         {
             //弾を生成
             Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);
@@ -83,19 +110,20 @@ public class PlayerManager : MonoBehaviour
     //回避動作
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.performed && !bDodge)
+        if (context.performed )
         {
-            Dodge();
+            //回転アニメーション
+            transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+            _state = dodgeState.JustDodge;
         }
     }
 
     private void Dodge()
     {
-        bDodge = true;
         time = 0;
-
-        //回転アニメーション
-        transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+        time += Time.deltaTime;
+        if (time >= 0.9f)
+            _state = dodgeState.coolTime;
     }
 
     //private void OnTriggerEnter(Collision collision)
@@ -109,7 +137,7 @@ public class PlayerManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //敵に触れたら
-        if (other.gameObject.CompareTag("Enemy") && !bDodge)
+        if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
         {
             enemy.GetComponent<EnemyManager2>().PlayerDamage(this);
         }
@@ -119,5 +147,14 @@ public class PlayerManager : MonoBehaviour
     public void Damage(int damage)
     {
         playerHP -= Mathf.Max(0, damage);
+    }
+
+    void DodgeCoolTime()
+    {
+        float dodgeTime = 0;
+        dodgeTime += Time.deltaTime;
+        if (dodgeTime > coolTime)
+            _state = dodgeState.None;
+
     }
 }
