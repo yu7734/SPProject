@@ -27,6 +27,16 @@ public class EnemyManager : MonoBehaviour
     [Tooltip("敵をプレイヤー通過後に非表示にするまでの距離")]
     public float RushOffset = 10f;
 
+    //ダメージ量
+    [SerializeField] private int attackPower;
+
+    //敵のHP
+    [SerializeField] private int enemyHP;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private GameObject playerBullet;
+
+    [SerializeField] private GameObject exprosion;
+
     private float offset = 1.5f; // 敵の大きさによって調整
     private float trackShotTimer = 0;
     private float shotTimer = 0;
@@ -65,6 +75,8 @@ public class EnemyManager : MonoBehaviour
         {
             RushPattern();
         }
+
+        EnemyDie();
     }
     void TrackShotPattern()
     {
@@ -112,6 +124,41 @@ public class EnemyManager : MonoBehaviour
         if (transform.position.z < player.position.z + -RushOffset)
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //プレイヤーの弾に触れたら
+        if (other.gameObject.CompareTag("PlayerBullet"))
+        {
+            //ダメージを受ける
+            playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
+
+            Debug.Log("hit");
+            //Destroy(playerBullet);
+        }
+    }
+
+    //プレイヤーに与えるダメージ量
+    public void PlayerDamage(PlayerManager player)
+    {
+        player.Damage(attackPower);
+    }
+
+    //敵が受けるダメージ量
+    public void EnemyDamaged(int damage)
+    {
+        enemyHP -= Mathf.Max(0, damage);
+    }
+
+    private void EnemyDie()
+    {
+        if (enemyHP <= 0)
+        {
+            ui.Experience(10);
+            Instantiate(exprosion, this.transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }

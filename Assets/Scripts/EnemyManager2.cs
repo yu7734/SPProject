@@ -48,7 +48,7 @@ public class EnemyManager2 : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
             //ƒ_ƒ[ƒW‚ğó‚¯‚é
-            playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
+            //playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
 
             Debug.Log("hit");
             //Destroy(playerBullet);

@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
     private Animator animator;
 
     float time = 0;
+    float dodgeTime = 0;
     [SerializeField, Header("クールタイム")] private float coolTime;
 
     //回避の状態ステートマシン
@@ -51,13 +52,14 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_state);
         switch (_state)
         {
             case dodgeState.None:
                 break;
 
             case dodgeState.JustDodge:
-                justDodgeManager.JustDodge();
+                JustDodge();
                 break;
 
             case dodgeState.dodge:
@@ -65,6 +67,7 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case dodgeState.coolTime:
+                DodgeCoolTime();
                 break;
         }
 
@@ -110,7 +113,7 @@ public class PlayerManager : MonoBehaviour
     //回避動作
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.performed )
+        if (context.performed && _state == dodgeState.None)
         {
             //回転アニメーション
             transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
@@ -120,10 +123,21 @@ public class PlayerManager : MonoBehaviour
 
     private void Dodge()
     {
-        time = 0;
         time += Time.deltaTime;
-        if (time >= 0.9f)
+        if (time >= 1f)
+        {
+            time = 0;
             _state = dodgeState.coolTime;
+        }
+    }
+
+    public void JustDodge()
+    {
+        time += Time.deltaTime;
+        if (time >= 0.1f)
+        {
+            _state = PlayerManager.dodgeState.dodge;
+        }
     }
 
     //private void OnTriggerEnter(Collision collision)
@@ -136,10 +150,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (enemy == null) return;
         //敵に触れたら
         if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
         {
-            enemy.GetComponent<EnemyManager2>().PlayerDamage(this);
+            enemy.GetComponent<EnemyManager>().PlayerDamage(this);
         }
     }
 
@@ -151,10 +166,10 @@ public class PlayerManager : MonoBehaviour
 
     void DodgeCoolTime()
     {
-        float dodgeTime = 0;
         dodgeTime += Time.deltaTime;
-        if (dodgeTime > coolTime)
-            _state = dodgeState.None;
 
+        if (dodgeTime > coolTime)
+            dodgeTime = 0;
+            _state = dodgeState.None;
     }
 }

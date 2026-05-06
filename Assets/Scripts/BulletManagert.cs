@@ -19,7 +19,7 @@ public class BulletManagert : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    public void EnemyDamage(EnemyManager2 enemy)
+    public void EnemyDamage(EnemyManager enemy)
     {
         enemy.EnemyDamaged(bulletPower);
     }
