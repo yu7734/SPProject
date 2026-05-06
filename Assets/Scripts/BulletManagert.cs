@@ -19,6 +19,12 @@ public class BulletManagert : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (other.gameObject.CompareTag("Enemy"))
+        //    Destroy(gameObject);
+    }
+
     public void EnemyDamage(EnemyManager enemy)
     {
         enemy.EnemyDamaged(bulletPower);

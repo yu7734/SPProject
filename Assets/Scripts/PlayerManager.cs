@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using UnityEngine.UIElements;
-using TMPro.EditorUtilities;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -18,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Header("‘Ì—Í")] public int playerHP;
     [SerializeField, Header("Å‘å‘Ì—Í")] public int MaxPlayerHP;
     private GameObject enemy;
+
+    [SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
     [SerializeField] private JustDodgeManager justDodgeManager;
@@ -154,6 +154,9 @@ public class PlayerManager : MonoBehaviour
         //“G‚ÉG‚ê‚½‚ç
         if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
         {
+            //ƒJƒƒ‰‚ªU“®‚·‚é
+            cameraShake.CameraShaker();
+            //ƒ_ƒ[ƒW‚ğó‚¯‚é
             enemy.GetComponent<EnemyManager>().PlayerDamage(this);
         }
     }

@@ -460,6 +460,7 @@ MonoBehaviour:
   shotPoint: {fileID: 1923262858}
   playerHP: 100
   MaxPlayerHP: 100
+  cameraShake: {fileID: 330585551}
   ui: {fileID: 1377977813}
   justDodgeManager: {fileID: 66326955}
   experiencePoint: 0
@@ -570,6 +571,9 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585551}
+  - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -704,6 +708,105 @@ Skybox:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 2d056ac30ecc9e542b26e06133f23602, type: 2}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 0
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 3
+    DissipationRate: 0
+    RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    AmplitudeGain: 3
+    FrequencyGain: 3
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  IgnoreTag: 
+  UseImpactDirection: 0
+  ScaleImpactWithMass: 0
+  ScaleImpactWithSpeed: 0
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &330585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e060a5150744248a27f6b3d22b517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 330585546}
+  positionStrength: {x: 0.1, y: 0.1, z: 0.1}
+  rotationStrength: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: isTrackShot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1104,9 +1207,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 1377977813}
+    - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
       propertyPath: coolTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
+      propertyPath: shotPoint
+      value: 
+      objectReference: {fileID: 1923262858}
+    - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 330585551}
+    - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
+      propertyPath: experiencePoint
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591651031754641593, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
+      propertyPath: justDodgeManager
+      value: 
+      objectReference: {fileID: 66326955}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2689,6 +2812,7 @@ MonoBehaviour:
   shotPoint: {fileID: 1745523443}
   playerHP: 100
   MaxPlayerHP: 100
+  cameraShake: {fileID: 0}
   ui: {fileID: 1377977813}
   justDodgeManager: {fileID: 0}
   experiencePoint: 99
