@@ -144,13 +144,13 @@ MonoBehaviour:
   isTrackShot: 0
   isRush: 0
   Bullet: {fileID: 8478904341349103195, guid: a2824e4dbd017614e957276562a26c25, type: 3}
-  coolTime: 0.5
+  coolTime: 1
   enemyBulletForce: 800
   stopTime: 1
   lookAtTime: 2
   enemyRushSpeed: 3
   RushOffset: 10
-  attackPower: 0
+  attackPower: 5
   enemyHP: 10
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}

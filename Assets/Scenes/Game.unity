@@ -1082,8 +1082,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377977813}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+      propertyPath: isRush
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: isShot
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+      propertyPath: enemyHP
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: isTrackShot

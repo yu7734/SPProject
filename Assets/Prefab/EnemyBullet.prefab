@@ -163,3 +163,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cde80421496e89498e56f6653000c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShot: 0
+  isTrackShot: 0
+  isRush: 1
+  Bullet: {fileID: 0}
+  coolTime: 0.5
+  enemyBulletForce: 3
+  stopTime: 1
+  lookAtTime: 2
+  enemyRushSpeed: 3
+  RushOffset: 10
+  attackPower: 5
+  enemyHP: 1
+  ui: {fileID: 0}
+  playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
+  exprosion: {fileID: 0}

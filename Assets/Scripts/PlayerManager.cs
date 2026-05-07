@@ -27,8 +27,9 @@ public class PlayerManager : MonoBehaviour
 
     private Animator animator;
 
-    float time = 0;
-    float dodgeTime = 0;
+    float dodgetime = 0;
+    float justDodgeTime = 0;
+    float dodgeCoolTime = 0;
     [SerializeField, Header("クールタイム")] private float coolTime;
 
     //回避の状態ステートマシン
@@ -52,9 +53,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_state);
         switch (_state)
         {
+
             case dodgeState.None:
                 break;
 
@@ -123,20 +124,20 @@ public class PlayerManager : MonoBehaviour
 
     private void Dodge()
     {
-        time += Time.deltaTime;
-        if (time >= 1f)
+        dodgetime += Time.deltaTime;
+        if (dodgetime >= 1f)
         {
-            time = 0;
+            dodgetime = 0;
             _state = dodgeState.coolTime;
         }
     }
 
     public void JustDodge()
     {
-        time += Time.deltaTime;
-        if (time >= 0.1f)
+        justDodgeTime += Time.deltaTime;
+        if (justDodgeTime >= 0.1f)
         {
-            _state = PlayerManager.dodgeState.dodge;
+            _state = dodgeState.dodge;
         }
     }
 
@@ -154,10 +155,11 @@ public class PlayerManager : MonoBehaviour
         //敵に触れたら
         if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
         {
+            Debug.Log("ヒット");
             //カメラが振動する
             cameraShake.CameraShaker();
             //ダメージを受ける
-            enemy.GetComponent<EnemyManager>().PlayerDamage(this);
+            other.GetComponent<EnemyManager>().PlayerDamage(this);
         }
     }
 
@@ -169,10 +171,12 @@ public class PlayerManager : MonoBehaviour
 
     void DodgeCoolTime()
     {
-        dodgeTime += Time.deltaTime;
+        dodgeCoolTime += Time.deltaTime;
 
-        if (dodgeTime > coolTime)
-            dodgeTime = 0;
+        if (dodgeCoolTime > coolTime)
+        {
+            dodgeCoolTime = 0;
             _state = dodgeState.None;
+        }
     }
 }

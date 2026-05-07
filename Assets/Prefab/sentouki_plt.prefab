@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sentouki_plt
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2cd86cf7137a2194184d2e917b2ca3ca, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -80,10 +84,11 @@ MonoBehaviour:
   playerSpeed: 0
   bulletPrefab: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   shotPoint: {fileID: 0}
-  playerHP: 0
-  MaxPlayerHP: 0
+  playerHP: 100
+  MaxPlayerHP: 100
+  cameraShake: {fileID: 0}
   ui: {fileID: 0}
   justDodgeManager: {fileID: 0}
   experiencePoint: 0
-  coolTime: 0
+  coolTime: 1
   _state: 0
