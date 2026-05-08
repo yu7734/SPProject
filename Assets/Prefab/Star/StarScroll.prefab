@@ -13,8 +13,13 @@ GameObject:
   - component: {fileID: 3089533249542326608}
   - component: {fileID: 7892840137448668098}
   m_Layer: 0
+<<<<<<< HEAD:Assets/Prefab/Star/StarScroll.prefab
   m_Name: Sphere
   m_TagString: Untagged
+=======
+  m_Name: Bullet
+  m_TagString: PlayerBullet
+>>>>>>> main:Assets/Prefab/Bullet.prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +107,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
