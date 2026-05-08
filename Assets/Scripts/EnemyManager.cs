@@ -1,6 +1,11 @@
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public interface IEnemyDamage
+{
+    public void EnemyDamaged(int damage);
+}
+
+public class EnemyManager : MonoBehaviour, IEnemyDamage
 {
     [Header("行動種類(複数選択可)")]
     [Tooltip("通常弾")]
@@ -129,22 +134,29 @@ public class EnemyManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //プレイヤーの弾に触れたら
-        if (other.gameObject.CompareTag("PlayerBullet"))
+        //プレイヤーにダメージを与える
+        IPlayerDamage damage = other.gameObject.GetComponent<IPlayerDamage>();
+        if (damage != null)
         {
-            //ダメージを受ける
-            playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
-
+            damage.Damage(attackPower);
             Debug.Log("hit");
-            //Destroy(playerBullet);
         }
+        //プレイヤーの弾に触れたら
+        //if (other.gameObject.CompareTag("PlayerBullet"))
+        //{
+        //    //ダメージを受ける
+        //    //playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
+
+        //    Debug.Log("hit");
+        //    //Destroy(playerBullet);
+        //}
     }
 
     //プレイヤーに与えるダメージ量
-    public void PlayerDamage(PlayerManager player)
-    {
-        player.Damage(attackPower);
-    }
+    //public void PlayerDamage(PlayerManager player)
+    //{
+    //    player.Damage(attackPower);
+    //}
 
     //敵が受けるダメージ量
     public void EnemyDamaged(int damage)

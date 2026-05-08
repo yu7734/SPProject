@@ -16,6 +16,15 @@ public class EnemyBullet : EnemyManager
 
     private void OnTriggerEnter(Collider other)
     {
-        //Destroy(other.gameObject);
+
+        if (other.gameObject.CompareTag("PlayerBullet"))
+        {
+            Destroy(gameObject);
+        }
+
+        //if (damage != null)
+        //{
+        //    damage.Damage()
+        //}
     }
 }

@@ -86,9 +86,11 @@ MonoBehaviour:
   shotPoint: {fileID: 0}
   playerHP: 100
   MaxPlayerHP: 100
+  enemy:
+  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+  - {fileID: 8478904341349103195, guid: a2824e4dbd017614e957276562a26c25, type: 3}
   cameraShake: {fileID: 0}
   ui: {fileID: 0}
   justDodgeManager: {fileID: 0}
-  experiencePoint: 0
   coolTime: 1
   _state: 0

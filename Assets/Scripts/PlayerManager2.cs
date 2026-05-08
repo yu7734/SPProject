@@ -3,14 +3,14 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 
 //インターフェイスでダメージ処理
-public interface IPlayerDamage
-{
-    public void Damage(int value);
-    //public void Death();
-}
+//public interface IPlayerDamage
+//{
+//    public void Damage(int value);
+//    //public void Death();
+//}
 
 
-public class PlayerManager : MonoBehaviour, IPlayerDamage
+public class PlayerManager2 : MonoBehaviour, IPlayerDamage
 {
     Rigidbody rb;
     //プレイヤーのスピード
@@ -160,28 +160,22 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
     {
         if (enemy == null) return;
         //敵に触れたら
-        //if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
-        //{
-        //    Debug.Log("ヒット");
-        //    //カメラが振動する
-        //    cameraShake.CameraShaker();
-        //    //ダメージを受ける
-
-        //    //other.GetComponent<EnemyManager>().PlayerDamage(this);
-        //}
+        if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
+        {
+            Debug.Log("ヒット");
+            //カメラが振動する
+            cameraShake.CameraShaker();
+            //ダメージを受ける
+            
+            //other.GetComponent<EnemyManager>().PlayerDamage(this);
+        }
     }
 
     //プレイヤーに受けるダメージ
     public void Damage(int value)
     {
         if (_state == dodgeState.None || _state == dodgeState.coolTime)
-        {
-            Debug.Log("ヒット");
-            //カメラが振動する
-            cameraShake.CameraShaker();
-
             playerHP -= value;
-        }
     }
 
     void DodgeCoolTime()
