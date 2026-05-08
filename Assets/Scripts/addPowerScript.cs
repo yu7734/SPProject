@@ -29,8 +29,8 @@ public class addPowerScript : MonoBehaviour
     {
         for(int i = 0;i < PlayerPowerInventory.Length; i++)
         {
-            if (PlayerPowerInventory[i] == 0) ;
-            if (PlayerPowerInventory[i] == 1) ;
+            if (PlayerPowerInventory[i] == 0) return ;
+            if (PlayerPowerInventory[i] == 1) return ;
         }
     }
 }
