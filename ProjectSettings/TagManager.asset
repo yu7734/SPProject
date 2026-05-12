@@ -4,6 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - SkyboxCamera
+  - Stage2
+  - Obstacle
+  - Star
+  - Enemy
+  - PlayerBullet
   - PlayerBullet
   - Enemy
   - Star
