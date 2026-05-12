@@ -8,7 +8,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject selectItemImage;
     [SerializeField] private PlayerManager player;
     //[SerializeField] private BulletManagert bullet;
-    [SerializeField] private int experiencePoint;
+    [SerializeField] private int _experiencePoint;
+
+    // å¤–éƒ¨ã‹ã‚‰ã®èª­ã¿å–ã‚Šç”¨ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ï¼ˆHUDPanel / EXPBar ã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹ã•ã‚Œã‚‹ï¼‰
+    public int experiencePoint => _experiencePoint;
 
     public bool bSelect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,38 +28,38 @@ public class UIManager : MonoBehaviour
         SelectItem();
     }
 
-    //‘Ì—Í‚ÌUI
+    //ï¿½Ì—Í‚ï¿½UI
     private void HPUI()
     {
         HPText.text = "HP : " + player.playerHP + " / " + player.MaxPlayerHP;
     }
 
-    //ŒoŒ±’lUI
+    //ï¿½oï¿½ï¿½ï¿½lUI
     private void ExperienceUI()
     {
-        experienceText.text = "EX : " + experiencePoint + " / 100";
+        experienceText.text = "EX : " + _experiencePoint + " / 100";
     }
 
-    //ŒoŒ±’l‘‰Á
+    //ï¿½oï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½
     public void Experience(int point)
     {
-        experiencePoint += point;
+        _experiencePoint += point;
     }
 
-    //ƒAƒCƒeƒ€‘I‘ðƒV[ƒ“
+    //ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½
 
     private void SelectItem()
     {
-        if (experiencePoint >= 100)
+        if (_experiencePoint >= 100)
         {
             bSelect = true;
-            experiencePoint %= 100;
+            _experiencePoint %= 100;
             selectItemImage.SetActive(true);
             Time.timeScale = 0;
         }
     }
 
-    //‰Î—ÍƒAƒbƒv
+    //ï¿½Î—ÍƒAï¿½bï¿½v
     public void PowerUp()
     {
         BulletManagert.bulletPower += 5;
@@ -65,7 +68,7 @@ public class UIManager : MonoBehaviour
         selectItemImage.SetActive(false);
     }
 
-    //‘Ì—ÍƒAƒbƒv
+    //ï¿½Ì—ÍƒAï¿½bï¿½v
     public void HPUp()
     {
         player.MaxPlayerHP += 10;
