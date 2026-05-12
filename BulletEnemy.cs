@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class BulletEnemy : EnemyManager
 {
-    [Header("ËŒ‚‚É‚©‚©‚í‚é•Ï”")]
-    public GameObject Bullet;
-    [Tooltip("’e‚ğŒ‚‚ÂŠÔŠui•bj")]
-    public float coolTime = 0.5f;
-    [Tooltip("’e‚ğŒ‚‚Â—Íi‘¬‚³j")]
-    public float enemyBulletForce = 3f;
+    [SerializeField, Header("ËŒ‚‚É‚©‚©‚í‚é•Ï”")]
+    private GameObject Bullet;
+    [SerializeField, Tooltip("’e‚ğŒ‚‚ÂŠÔŠui•bj")]
+    private float coolTime = 0.5f;
+    [SerializeField, Tooltip("’e‚ğŒ‚‚Â—Íi‘¬‚³j")]
+    private float enemyBulletForce = 3f;
     
-    [Tooltip("’e‚ğÅ‰‚É¶¬‚·‚éêŠ")]
-    public float offset = 1.5f;
+    [SerializeField, Tooltip("’e‚ğÅ‰‚É¶¬‚·‚éêŠ")]
+    private float offset = 1.5f;
 
     [NonSerialized] public float shotTimer = 0;
     private void Update()
