@@ -4,15 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - SkyboxCamera
-  - Stage2
-  - Obstacle
-<<<<<<< HEAD
-  - Star
-=======
-  - Enemy
   - PlayerBullet
->>>>>>> main
+  - Enemy
+  - Star
+  - Stage2
   layers:
   - Default
   - TransparentFX
@@ -20,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Postprosess
+  - 
   - 
   - 
   - 
