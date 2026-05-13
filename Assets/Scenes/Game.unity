@@ -171,7 +171,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.08
+  m_Radius: 0.12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &66326955
 MonoBehaviour:
@@ -1223,6 +1223,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: RushOffset
       value: 50
       objectReference: {fileID: 0}
@@ -1244,7 +1248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.55
+      value: -4.28
       objectReference: {fileID: 0}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3758,8 +3762,8 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1377977814}
+  - {fileID: 990258964}
   - {fileID: 2140254401}
   - {fileID: 626812392}
   - {fileID: 256158732}
   - {fileID: 708894971}
-  - {fileID: 990258964}

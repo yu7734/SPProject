@@ -19,7 +19,7 @@ public class JustDodgeManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") && (player._state == PlayerManager.dodgeState.JustDodge))
+        if (other.CompareTag("Enemy") && (player._state == PlayerManager.dodgeState.JustDodge))
         {
             Debug.Log("Just");
             ui.Experience(10);

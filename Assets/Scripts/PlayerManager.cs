@@ -58,6 +58,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_state);
         switch (_state)
         {
 
@@ -137,7 +138,7 @@ public class PlayerManager : MonoBehaviour
     private void Dodge()
     {
         dodgetime += Time.deltaTime;
-        if (dodgetime >= 1f)
+        if (dodgetime >= 0.5f)
         {
             dodgetime = 0;
             _state = dodgeState.coolTime;
@@ -147,7 +148,7 @@ public class PlayerManager : MonoBehaviour
     public void JustDodge()
     {
         justDodgeTime += Time.deltaTime;
-        if (justDodgeTime >= 0.1f)
+        if (justDodgeTime >= 1f)
         {
             justDodgeTime = 0;
             _state = dodgeState.dodge;
