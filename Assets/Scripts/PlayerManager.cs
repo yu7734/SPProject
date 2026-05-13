@@ -10,7 +10,7 @@ public interface IPlayerDamage
 }
 
 
-public class PlayerManager : MonoBehaviour, IPlayerDamage
+public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
     //プレイヤーのスピード
@@ -19,17 +19,19 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
 
     //プレイヤーの弾
     [SerializeField] private GameObject bulletPrefab;
+    //弾が発射する所
     [SerializeField] private Transform shotPoint;
 
     [SerializeField, Header("体力")] public int playerHP;
     [SerializeField, Header("最大体力")] public int MaxPlayerHP;
     public GameObject[] enemy;
 
-    [SerializeField] public CameraShake cameraShake;
+    //[SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
     [SerializeField] private JustDodgeManager justDodgeManager;
 
+    [SerializeField] private Transform playerModel;
     float dodgetime = 0;
     float justDodgeTime = 0;
     float dodgeCoolTime = 0;
@@ -59,20 +61,24 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
         switch (_state)
         {
 
+            //何もしていない状態
             case dodgeState.None:
                 //Debug.Log(_state);
                 break;
 
+            //ジャスト回避状態
             case dodgeState.JustDodge:
                 //Debug.Log(_state);
                 JustDodge();
                 break;
 
+            //普通の回避状態
             case dodgeState.dodge:
                 //Debug.Log(_state);
                 Dodge();
                 break;
 
+            //回避が出来ないクールタイム状態
             case dodgeState.coolTime:
                 DodgeCoolTime();
                 break;
@@ -123,7 +129,7 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
         if (context.performed && _state == dodgeState.None)
         {
             //回転アニメーション
-            transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
             _state = dodgeState.JustDodge;
         }
     }
@@ -156,33 +162,18 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
     //    }
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (enemy == null) return;
-        //敵に触れたら
-        //if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
-        //{
-        //    Debug.Log("ヒット");
-        //    //カメラが振動する
-        //    cameraShake.CameraShaker();
-        //    //ダメージを受ける
-
-        //    //other.GetComponent<EnemyManager>().PlayerDamage(this);
-        //}
-    }
-
     //プレイヤーに受けるダメージ
-    public void Damage(int value)
-    {
-        if (_state == dodgeState.None || _state == dodgeState.coolTime)
-        {
-            Debug.Log("ヒット");
-            //カメラが振動する
-            //cameraShake.CameraShaker();
+    //public void Damage(int value)
+    //{
+    //    if (_state == dodgeState.None || _state == dodgeState.coolTime)
+    //    {
+    //        Debug.Log("ヒット");
+    //        //カメラが振動する
+    //        cameraShake.CameraShaker();
 
-            playerHP -= value;
-        }
-    }
+    //        playerHP -= Mathf.Max(0, value);
+    //    }
+    //}
 
     void DodgeCoolTime()
     {
