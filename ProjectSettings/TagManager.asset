@@ -10,10 +10,6 @@ TagManager:
   - Star
   - Enemy
   - PlayerBullet
-  - PlayerBullet
-  - Enemy
-  - Star
-  - Stage2
   layers:
   - Default
   - TransparentFX
@@ -21,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Postprosess
   - 
   - 
   - 

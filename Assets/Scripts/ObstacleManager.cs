@@ -19,7 +19,7 @@ public class ObstacleManager : MonoBehaviour
         {
             default:
             case 1:
-                GameObject[] tagobj1 = GameObject.FindGameObjectsWithTag("Obstacle");//Obstacleのついたobjectをtagobjに配列化
+                GameObject[] tagobj = GameObject.FindGameObjectsWithTag("Obstacle");//Obstacleのついたobjectをtagobjに配列化
                 timer += Time.deltaTime;
                 if (timer >= frequency)//frequency秒毎にObstacleを生成する
                 {
@@ -27,23 +27,10 @@ public class ObstacleManager : MonoBehaviour
                     int x = Random.Range(0, 5);
                     int y = Random.Range(0, 5);
                     int z = Random.Range(0, 5);
-                    if (tagobj1.Length < limit) Instantiate(Obstacle1[i], new Vector3(x, y, z + this.transform.position.z), Quaternion.identity);//tagobjとlimitを比較、ランダムに呼び出し
+                    if (tagobj.Length < limit) Instantiate(Obstacle1[i], new Vector3(x, y, z + this.transform.position.z), Quaternion.identity);//tagobjとlimitを比較、ランダムに呼び出し
                     timer -= frequency;
                 }
             break;
-            case 2:
-                GameObject[] tagobj2 = GameObject.FindGameObjectsWithTag("Enemy");//Obstacleのついたobjectをtagobjに配列化
-                timer += Time.deltaTime;
-                if (timer >= frequency)//frequency秒毎にObstacleを生成する
-                {
-                    int i = Random.Range(0, Obstacle2.Length);
-                    int x = Random.Range(0, 5);
-                    int y = Random.Range(0, 5);
-                    int z = Random.Range(0, 5);
-                    if (tagobj2.Length < limit) Instantiate(Obstacle2[i], new Vector3(x, y, z + this.transform.position.z), Quaternion.identity);//tagobjとlimitを比較、ランダムに呼び出し
-                    timer -= frequency;
-                }
-                break;
         }
     }
 }

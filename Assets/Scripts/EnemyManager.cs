@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     // Update is called once per frame
     void Update()
     {
-        //if (player == null) return;
+        if (player == null) return;
 
         if (isTrackShot)   //インスペクターで制御
         {
@@ -79,11 +79,6 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         if (isRush)
         {
             RushPattern();
-        }
-
-        if (transform.position.z <= -9.7f)
-        {
-            Destroy(this.gameObject);
         }
 
         EnemyDie();
