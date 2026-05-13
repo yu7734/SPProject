@@ -178,7 +178,7 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
         {
             Debug.Log("ƒqƒbƒg");
             //ƒJƒƒ‰‚ªU“®‚·‚é
-            cameraShake.CameraShaker();
+            //cameraShake.CameraShaker();
 
             playerHP -= value;
         }
