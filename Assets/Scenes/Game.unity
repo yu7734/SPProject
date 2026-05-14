@@ -2382,6 +2382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377977814}
   - component: {fileID: 1377977813}
+  - component: {fileID: 1377977815}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2422,6 +2423,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377977815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377977812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeX:
+    min: -15
+    max: 15
+  rangeY:
+    min: -15
+    max: 15
+  spawnZ: 17
+  enemyPrefabs:
+  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+  - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
+  spawnTimer: 5
 --- !u!1 &1631584884
 GameObject:
   m_ObjectHideFlags: 0
