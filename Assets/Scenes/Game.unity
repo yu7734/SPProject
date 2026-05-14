@@ -130,13 +130,14 @@ GameObject:
   - component: {fileID: 66326953}
   - component: {fileID: 66326954}
   - component: {fileID: 66326955}
+  - component: {fileID: 66326956}
   m_Layer: 0
   m_Name: JustRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &66326953
 Transform:
   m_ObjectHideFlags: 0
@@ -186,7 +187,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1377977813}
-  player: {fileID: 322533267}
+  player: {fileID: 990258963}
+--- !u!54 &66326956
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66326952}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &128411776
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +433,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322533267}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -425,7 +453,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322533267}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: OnShot
         m_Mode: 0
@@ -449,7 +477,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 322533267}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: OnDodge
         m_Mode: 0
@@ -520,31 +548,6 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &322533267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322533264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c038926ecee7cfe46bea0e70501e7d53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 10
-  bulletPrefab: {fileID: 8478904341349103195, guid: df94811fa9a66f54fa516feb34ff46ff, type: 3}
-  shotPoint: {fileID: 1923262858}
-  playerHP: 100
-  MaxPlayerHP: 100
-  enemy:
-  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
-  - {fileID: 8478904341349103195, guid: a2824e4dbd017614e957276562a26c25, type: 3}
-  ui: {fileID: 1377977813}
-  justDodgeManager: {fileID: 66326955}
-  playerModel: {fileID: 0}
-  coolTime: 1
-  _state: 0
 --- !u!136 &322533268
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1224,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: RushOffset
@@ -1248,7 +1251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.28
+      value: 21.73
       objectReference: {fileID: 0}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1390,9 +1393,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 66326953}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5840823151837032197, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 322533267}
     - targetCorrespondingSourceObject: {fileID: 5840823151837032197, guid: 31a7901acbbfe954f98f2a5b3a9fd3b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 322533274}
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67d310aa6d0574e9e099efac291d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 322533267}
+  player: {fileID: 0}
   hpSlider: {fileID: 858422409}
   hpFillImage: {fileID: 1991811457}
   smoothSpeed: 5
@@ -2087,7 +2087,10 @@ GameObject:
   m_Component:
   - component: {fileID: 990258964}
   - component: {fileID: 990258963}
+  - component: {fileID: 990258967}
+  - component: {fileID: 990258966}
   - component: {fileID: 990258965}
+  - component: {fileID: 990258968}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2116,6 +2119,8 @@ MonoBehaviour:
   ui: {fileID: 1377977813}
   justDodgeManager: {fileID: 66326955}
   playerModel: {fileID: 322533265}
+  bJustDodge: 0
+  dodgeCoolTime: 0
   coolTime: 1
   _state: 0
 --- !u!4 &990258964
@@ -2276,6 +2281,68 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!135 &990258966
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990258962}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.72
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &990258967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990258962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678e4d82228200743b272c8b10be654a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 1377977813}
+  player: {fileID: 990258963}
+--- !u!54 &990258968
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990258962}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1214881567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,7 +2696,7 @@ MonoBehaviour:
   experienceText: {fileID: 784103631}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  _experiencePoint: 0
+  _experiencePoint: 80
   bSelect: 0
 --- !u!4 &1377977814
 Transform:
@@ -3634,6 +3701,8 @@ MonoBehaviour:
   ui: {fileID: 1377977813}
   justDodgeManager: {fileID: 0}
   playerModel: {fileID: 0}
+  bJustDodge: 0
+  dodgeCoolTime: 0
   coolTime: 1
   _state: 0
 --- !u!54 &2140254397

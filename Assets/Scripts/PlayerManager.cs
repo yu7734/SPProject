@@ -33,8 +33,10 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private Transform playerModel;
     float dodgetime = 0;
+    //ジャスト回避状態か
+    public bool bJustDodge = false;
     float justDodgeTime = 0;
-    float dodgeCoolTime = 0;
+    public float dodgeCoolTime = 0;
     [SerializeField, Header("クールタイム")] private float coolTime;
 
     //回避の状態ステートマシン
@@ -58,7 +60,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_state);
+        Debug.Log(bJustDodge);
         switch (_state)
         {
 
@@ -84,16 +86,6 @@ public class PlayerManager : MonoBehaviour
                 DodgeCoolTime();
                 break;
         }
-
-        //if (bDodge)
-        //{
-        //    time += Time.deltaTime;
-        //    if (time >= coolTime)
-        //    {
-        //        time = coolTime;
-        //        bDodge = false;
-        //    }
-        //}
     }
 
     private void FixedUpdate()
@@ -131,16 +123,24 @@ public class PlayerManager : MonoBehaviour
         {
             //回転アニメーション
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
-            _state = dodgeState.JustDodge;
+            bJustDodge = true;
+            _state = dodgeState.dodge;
         }
     }
 
     private void Dodge()
     {
+        //ジャスト回避状態
+        justDodgeTime += Time.deltaTime;
+        if (justDodgeTime >= 0.3f)
+            bJustDodge = false;
+
+        //普通の回避状態
         dodgetime += Time.deltaTime;
-        if (dodgetime >= 0.5f)
+        if (dodgetime >= 1f)
         {
             dodgetime = 0;
+            justDodgeTime = 0;
             _state = dodgeState.coolTime;
         }
     }
@@ -155,27 +155,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemy") && !bDodge)
-    //    {
-    //        enemy.GetComponent<EnemyManager>().PlayerDamage(this);
-    //    }
-    //}
-
-    //プレイヤーに受けるダメージ
-    //public void Damage(int value)
-    //{
-    //    if (_state == dodgeState.None || _state == dodgeState.coolTime)
-    //    {
-    //        Debug.Log("ヒット");
-    //        //カメラが振動する
-    //        cameraShake.CameraShaker();
-
-    //        playerHP -= Mathf.Max(0, value);
-    //    }
-    //}
-
+    //クールタイム
     void DodgeCoolTime()
     {
         dodgeCoolTime += Time.deltaTime;
