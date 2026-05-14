@@ -10,7 +10,7 @@ public interface IPlayerDamage
 }
 
 
-public class PlayerManager : MonoBehaviour, IPlayerDamage
+public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
     //プレイヤーのスピード
@@ -19,20 +19,24 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
 
     //プレイヤーの弾
     [SerializeField] private GameObject bulletPrefab;
+    //弾が発射する所
     [SerializeField] private Transform shotPoint;
 
     [SerializeField, Header("体力")] public int playerHP;
     [SerializeField, Header("最大体力")] public int MaxPlayerHP;
     public GameObject[] enemy;
 
-    [SerializeField] public CameraShake cameraShake;
+    //[SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
     [SerializeField] private JustDodgeManager justDodgeManager;
 
+    [SerializeField] private Transform playerModel;
     float dodgetime = 0;
+    //ジャスト回避状態か
+    public bool bJustDodge = false;
     float justDodgeTime = 0;
-    float dodgeCoolTime = 0;
+    public float dodgeCoolTime = 0;
     [SerializeField, Header("クールタイム")] private float coolTime;
 
     //回避の状態ステートマシン
@@ -56,37 +60,32 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(bJustDodge);
         switch (_state)
         {
 
+            //何もしていない状態
             case dodgeState.None:
                 //Debug.Log(_state);
                 break;
 
+            //ジャスト回避状態
             case dodgeState.JustDodge:
                 //Debug.Log(_state);
                 JustDodge();
                 break;
 
+            //普通の回避状態
             case dodgeState.dodge:
                 //Debug.Log(_state);
                 Dodge();
                 break;
 
+            //回避が出来ないクールタイム状態
             case dodgeState.coolTime:
                 DodgeCoolTime();
                 break;
         }
-
-        //if (bDodge)
-        //{
-        //    time += Time.deltaTime;
-        //    if (time >= coolTime)
-        //    {
-        //        time = coolTime;
-        //        bDodge = false;
-        //    }
-        //}
     }
 
     private void FixedUpdate()
@@ -123,17 +122,25 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
         if (context.performed && _state == dodgeState.None)
         {
             //回転アニメーション
-            transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
-            _state = dodgeState.JustDodge;
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+            bJustDodge = true;
+            _state = dodgeState.dodge;
         }
     }
 
     private void Dodge()
     {
+        //ジャスト回避状態
+        justDodgeTime += Time.deltaTime;
+        if (justDodgeTime >= 0.3f)
+            bJustDodge = false;
+
+        //普通の回避状態
         dodgetime += Time.deltaTime;
         if (dodgetime >= 1f)
         {
             dodgetime = 0;
+            justDodgeTime = 0;
             _state = dodgeState.coolTime;
         }
     }
@@ -141,49 +148,14 @@ public class PlayerManager : MonoBehaviour, IPlayerDamage
     public void JustDodge()
     {
         justDodgeTime += Time.deltaTime;
-        if (justDodgeTime >= 0.1f)
+        if (justDodgeTime >= 1f)
         {
             justDodgeTime = 0;
             _state = dodgeState.dodge;
         }
     }
 
-    //private void OnTriggerEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemy") && !bDodge)
-    //    {
-    //        enemy.GetComponent<EnemyManager>().PlayerDamage(this);
-    //    }
-    //}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (enemy == null) return;
-        //敵に触れたら
-        //if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
-        //{
-        //    Debug.Log("ヒット");
-        //    //カメラが振動する
-        //    cameraShake.CameraShaker();
-        //    //ダメージを受ける
-
-        //    //other.GetComponent<EnemyManager>().PlayerDamage(this);
-        //}
-    }
-
-    //プレイヤーに受けるダメージ
-    public void Damage(int value)
-    {
-        if (_state == dodgeState.None || _state == dodgeState.coolTime)
-        {
-            Debug.Log("ヒット");
-            //カメラが振動する
-            //cameraShake.CameraShaker();
-
-            playerHP -= value;
-        }
-    }
-
+    //クールタイム
     void DodgeCoolTime()
     {
         dodgeCoolTime += Time.deltaTime;
