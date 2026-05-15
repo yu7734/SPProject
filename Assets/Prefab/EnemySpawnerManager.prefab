@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeX:
-    min: -15
-    max: 15
+    min: -8
+    max: 8
   rangeY:
-    min: -15
-    max: 15
+    min: -8
+    max: 8
   spawnZ: 17
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
