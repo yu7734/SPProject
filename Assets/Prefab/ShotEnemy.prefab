@@ -141,6 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 8478904341349103195, guid: a2824e4dbd017614e957276562a26c25, type: 3}
   isTracking: 1
-  coolTime: 1
-  enemyBulletForce: 800
-  offset: -1.5
+  coolTime: 3
+  enemyBulletForce: 500
+  offset: 1.5

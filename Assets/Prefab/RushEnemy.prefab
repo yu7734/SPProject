@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 1881761762722010160}
   - component: {fileID: 2674671007568266344}
   - component: {fileID: 8689709892366153393}
-  - component: {fileID: 8699908776044055405}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: RushEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 5
+  attackPower: 10
   enemyHP: 10
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
@@ -141,23 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopTime: 1
-  lookAtTime: 2
+  lookAtTime: 5
   enemyRushSpeed: 3
   RushOffset: 50
---- !u!114 &8699908776044055405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1667e82863105b94dab0256737d3316c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet: {fileID: 8478904341349103195, guid: a2824e4dbd017614e957276562a26c25, type: 3}
-  isTracking: 1
-  coolTime: 1
-  enemyBulletForce: 800
-  offset: 1.5

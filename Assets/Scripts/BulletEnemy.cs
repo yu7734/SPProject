@@ -26,6 +26,7 @@ public class BulletEnemy : EnemyAttackBase
         shotTimer += Time.deltaTime;
         if (shotTimer > coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
         {
+            if(isTracking) transform.LookAt(player.transform);
             Vector3 spawnPosition = transform.position + transform.forward * offset;
 
             GameObject newBullet = Instantiate(Bullet, spawnPosition, transform.rotation);
@@ -34,7 +35,7 @@ public class BulletEnemy : EnemyAttackBase
             if (isTracking)
             {
                 Vector3 shotDirection = (player.position - spawnPosition).normalized;
-                Bulletrb.AddForce(shotDirection * enemyBulletForce);
+                Bulletrb.AddForce(-shotDirection * -enemyBulletForce);
             }
             else
             {
