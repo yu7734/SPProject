@@ -2020,7 +2020,7 @@ PrefabInstance:
     - target: {fileID: 2674671007568266344, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: playerBullet
       value: 
-      objectReference: {fileID: 8478904341349103195, guid: df94811fa9a66f54fa516feb34ff46ff, type: 3}
+      objectReference: {fileID: 6210192057997434411, guid: 84c2dce4f99e67c4d93bb897f2482db5, type: 3}
     - target: {fileID: 5307879454309032039, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -6440,6 +6440,10 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 1377977813}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 6210192057997434411, guid: 84c2dce4f99e67c4d93bb897f2482db5, type: 3}
     - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: cameraShake
       value: 
