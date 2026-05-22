@@ -21,6 +21,7 @@ public class BulletManagert : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag(this.tag)) return;
         IEnemyDamage damage = other.gameObject.GetComponent<IEnemyDamage>();
 
         if (damage != null)

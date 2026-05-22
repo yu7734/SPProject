@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4066032087193441066}
   - component: {fileID: 8695163145267107749}
   - component: {fileID: 1881761762722010160}
+  - component: {fileID: -850026788006474330}
   - component: {fileID: 2674671007568266344}
   - component: {fileID: 8689709892366153393}
   m_Layer: 0
@@ -110,6 +111,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-850026788006474330
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720357861559527564}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &2674671007568266344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 10
-  enemyHP: 10
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
@@ -139,7 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56410ff2015c3644087a631ad2db3725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPower: 10
+  maxEnemyHP: 10
   stopTime: 1
-  lookAtTime: 5
-  enemyRushSpeed: 3
-  RushOffset: 50
+  lookAtTime: 3
+  enemyRushSpeed: 10
