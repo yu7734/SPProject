@@ -2974,6 +2974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  moveInput: {x: 0, y: 0}
   bulletPrefab: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   shotPoint: {fileID: 1745523443}
   playerHP: 100
@@ -3112,6 +3113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3096564412198948779, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: ui
       value: 
@@ -3131,6 +3136,10 @@ PrefabInstance:
     - target: {fileID: 5467476009098623023, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467476009098623023, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8380161179720321260, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_LocalPosition.x

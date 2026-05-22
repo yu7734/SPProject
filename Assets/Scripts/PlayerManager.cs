@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     Rigidbody rb;
     //プレイヤーのスピード
     [SerializeField] private float playerSpeed;
-    private Vector2 moveInput = Vector2.zero;
+    public Vector2 moveInput = Vector2.zero;
 
     //プレイヤーの弾
     [SerializeField] private GameObject bulletPrefab;
