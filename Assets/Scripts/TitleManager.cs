@@ -103,6 +103,12 @@ public class TitleManager : MonoBehaviour
         {
             howToPlayPanel.SetActive(false);
         }
+
+        // 閉じるときに専用の効果音を鳴らす（ButtonSoundManager がシーンにあれば）
+        if (ButtonSoundManager.Instance != null)
+        {
+            ButtonSoundManager.Instance.PlayClose();
+        }
     }
 
     // 終了ボタンを押したときに呼ばれる
