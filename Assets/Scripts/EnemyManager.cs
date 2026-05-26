@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public interface IEnemyDamage
 {
@@ -8,25 +10,39 @@ public interface IEnemyDamage
 
 public class EnemyManager : MonoBehaviour, IEnemyDamage
 {
-    //ダメージ量
-    [SerializeField] private int attackPower;
-
     //敵のHP
-    [SerializeField] private int enemyHP;
+    
+    private int enemyHP;
     [SerializeField,Tooltip("nameでGameManagerを探しているため、埋める必要はない。")] 
     private UIManager ui;
     [SerializeField] private GameObject playerBullet;
 
     [SerializeField] private GameObject exprosion;
     [NonSerialized] public Transform player;
-
+    
+    EnemyAttackBase enemyAttackBase;
     Rigidbody rb;
+    public IObjectPool<GameObject> MyPool { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void OnEnable()
+    {
+        enemyAttackBase = GetComponent<EnemyAttackBase>();
+    }
+    public void OnReset()
+    {
+        enemyHP = enemyAttackBase.maxEnemyHP;
+        if (ui == null)
+        {
+            ui = GameObject.Find("GameManager").GetComponent<UIManager>();
+        }
+        
+    }
+        
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        
         GameObject playerObject = GameObject.FindWithTag("Player"); //プレイヤーはPlayerタグを使用する想定
         ui = GameObject.Find("GameManager").GetComponent<UIManager>();
         if (playerObject != null)
@@ -43,10 +59,11 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
         if (transform.position.z <= -9.7f)
         {
-            Destroy(this.gameObject);
+            MyPool.Release(this.gameObject);
+            return;
         }
 
-        EnemyDie();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,7 +72,16 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         IPlayerDamage damage = other.gameObject.GetComponent<IPlayerDamage>();
         if (damage != null)
         {
-            damage.Damage(attackPower);
+            if (enemyAttackBase == null)
+            {
+                enemyAttackBase = GetComponent<EnemyAttackBase>();
+            }
+
+            if (enemyAttackBase != null)
+            {
+                damage.Damage(enemyAttackBase.attackPower);
+            }
+            
             Debug.Log("hit");
         }
         //プレイヤーの弾に触れたら
@@ -79,15 +105,33 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     public void EnemyDamaged(int damage)
     {
         enemyHP -= Mathf.Max(0, damage);
+        if (enemyHP <= 0)
+        {
+            EnemyDie();
+        }
+            
     }
 
     private void EnemyDie()
     {
-        if (enemyHP <= 0)
+        Instantiate(exprosion, this.transform.position, Quaternion.identity);
+        if (ui == null)
+        {
+            ui = GameObject.Find("GameManager").GetComponent<UIManager>();
+        }
+
+        if (ui != null)
         {
             ui.Experience(10);
-            Instantiate(exprosion, this.transform.position, Quaternion.identity);
-            Destroy(gameObject);
+        }
+        
+        if(MyPool != null)
+        {
+            MyPool.Release(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
 }
