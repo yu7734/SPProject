@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossAttackScript : MonoBehaviour
+public class BossAttackScript1 : MonoBehaviour
 {
     GameObject Camera;
     GameObject player;
@@ -20,8 +20,8 @@ public class BossAttackScript : MonoBehaviour
         {
             //対象の位置の方向を向く
             transform.LookAt(player.transform);
-            speed = 30;
-            Attackactive = false;
+            speed = 15;
+            if(gameObject.transform.position.z < player.transform.position.z+5) Attackactive = false;
         }
 
         //自分自身の位置から相対的に移動する
