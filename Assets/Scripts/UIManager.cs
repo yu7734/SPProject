@@ -9,9 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerManager player;
     //[SerializeField] private BulletManagert bullet;
     [SerializeField] private int _experiencePoint;
+    [SerializeField, Header("現在のレベル（初期値1）")] private int _level = 1;
 
     // 外部からの読み取り用プロパティ（HUDPanel / EXPBar からアクセスされる）
     public int experiencePoint => _experiencePoint;
+    public int level => _level;
 
     public bool bSelect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,12 +33,16 @@ public class UIManager : MonoBehaviour
     //�̗͂�UI
     private void HPUI()
     {
+        // HPText が未設定でも落ちないようにする（HPBar.cs 側で数値表示する場合は未設定でOK）
+        if (HPText == null || player == null) return;
         HPText.text = "HP : " + player.playerHP + " / " + player.MaxPlayerHP;
     }
 
     //�o���lUI
     private void ExperienceUI()
     {
+        // experienceText が未設定でも落ちないようにする（EXPBar.cs 側で数値表示する場合は未設定でOK）
+        if (experienceText == null) return;
         experienceText.text = "EX : " + _experiencePoint + " / 100";
     }
 
@@ -53,6 +59,8 @@ public class UIManager : MonoBehaviour
         if (_experiencePoint >= 100)
         {
             bSelect = true;
+            // 経験値が 100 を超えた回数だけレベルアップ
+            _level += _experiencePoint / 100;
             _experiencePoint %= 100;
             selectItemImage.SetActive(true);
             Time.timeScale = 0;

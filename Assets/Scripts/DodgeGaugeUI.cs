@@ -47,13 +47,30 @@ public class DodgeGaugeUI : MonoBehaviour
 
             case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
-                gaugeImage.fillAmount = 0f;
+                // 回避中：dodgetime（PlayerManagerの内部時間）に応じて 1 → 0 へ減る
+                gaugeImage.fillAmount = 1f - GetDodgeProgress();
                 break;
 
             case PlayerManager.dodgeState.coolTime:
+                // クールタイム中：時間経過に合わせて 0 → 1 へ回復
                 gaugeImage.fillAmount = GetCooldownProgress();
                 break;
         }
+    }
+
+    // 回避中の進捗（0〜1）。PlayerManager の dodgetime / 1秒（=回避時間）から算出
+    private float GetDodgeProgress()
+    {
+        var t = typeof(PlayerManager);
+        var instanceFlags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+
+        // PlayerManager の実際の変数名は dodgetime（全部小文字）
+        var dodgetimeField = t.GetField("dodgetime", instanceFlags);
+        if (dodgetimeField == null) return 0f;
+
+        float dodgetime = (float)dodgetimeField.GetValue(player);
+        // PlayerManager 側は 1 秒経過で coolTime ステートに切り替わる
+        return Mathf.Clamp01(dodgetime / 1f);
     }
 
     private void UpdateText()
@@ -69,7 +86,9 @@ public class DodgeGaugeUI : MonoBehaviour
 
             case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
-                valueText.text = "0.0";
+                // 回避中：残り回避時間を表示（1秒から減っていく）
+                float dodgeRemain = Mathf.Max(0f, 1f - GetDodgeProgress());
+                valueText.text = dodgeRemain.ToString("F1");
                 break;
 
             case PlayerManager.dodgeState.coolTime:
@@ -99,26 +118,37 @@ public class DodgeGaugeUI : MonoBehaviour
 
     private float GetCooldownProgress()
     {
+        // PlayerManager 側の実際の変数名は dodgeCoolTime（public）と coolTime（private）
         var t = typeof(PlayerManager);
-        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-        var dodgeTimeField = t.GetField("dodgeTime", flags);
-        var coolTimeField = t.GetField("coolTime", flags);
-        if (dodgeTimeField == null || coolTimeField == null) return 0f;
-        float dodgeTime = (float)dodgeTimeField.GetValue(player);
+        var instanceFlags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+
+        var dodgeCoolTimeField = t.GetField("dodgeCoolTime", instanceFlags);
+        var coolTimeField = t.GetField("coolTime", instanceFlags);
+
+        if (dodgeCoolTimeField == null || coolTimeField == null) return 0f;
+
+        float dodgeCoolTime = (float)dodgeCoolTimeField.GetValue(player);
         float coolTime = (float)coolTimeField.GetValue(player);
+
         if (coolTime <= 0f) return 1f;
-        return Mathf.Clamp01(dodgeTime / coolTime);
+        // 経過時間 / 全体時間 → 0 から 1 へ徐々に増える（ゲージが回復していくイメージ）
+        return Mathf.Clamp01(dodgeCoolTime / coolTime);
     }
 
     private float GetRemainingTime()
     {
         var t = typeof(PlayerManager);
-        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-        var dodgeTimeField = t.GetField("dodgeTime", flags);
-        var coolTimeField = t.GetField("coolTime", flags);
-        if (dodgeTimeField == null || coolTimeField == null) return 0f;
-        float dodgeTime = (float)dodgeTimeField.GetValue(player);
+        var instanceFlags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+
+        var dodgeCoolTimeField = t.GetField("dodgeCoolTime", instanceFlags);
+        var coolTimeField = t.GetField("coolTime", instanceFlags);
+
+        if (dodgeCoolTimeField == null || coolTimeField == null) return 0f;
+
+        float dodgeCoolTime = (float)dodgeCoolTimeField.GetValue(player);
         float coolTime = (float)coolTimeField.GetValue(player);
-        return Mathf.Max(0f, coolTime - dodgeTime);
+
+        // 残り時間 = 全体時間 - 経過時間
+        return Mathf.Max(0f, coolTime - dodgeCoolTime);
     }
 }
