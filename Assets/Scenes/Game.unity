@@ -1619,9 +1619,13 @@ MonoBehaviour:
   hoverScale: 1.1
   pressedScale: 1.05
   scaleDuration: 0.15
+  enableColorChange: 1
   hoverColor: {r: 1335.418, g: 1335.418, b: 1335.418, a: 1}
   colorDuration: 0.15
   targetImage: {fileID: 0}
+  syncSelectionOnHover: 1
+  playHoverSound: 1
+  playClickSound: 1
 --- !u!1 &531459934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,9 +3158,13 @@ MonoBehaviour:
   hoverScale: 1.1
   pressedScale: 1.05
   scaleDuration: 0.15
+  enableColorChange: 1
   hoverColor: {r: 1.4, g: 1.4, b: 1.4, a: 1}
   colorDuration: 0.15
   targetImage: {fileID: 0}
+  syncSelectionOnHover: 1
+  playHoverSound: 1
+  playClickSound: 1
 --- !u!1 &978247045
 GameObject:
   m_ObjectHideFlags: 0
@@ -5796,9 +5804,13 @@ MonoBehaviour:
   hoverScale: 1.1
   pressedScale: 1.05
   scaleDuration: 0.15
+  enableColorChange: 1
   hoverColor: {r: 1.4, g: 1.4, b: 1.4, a: 1}
   colorDuration: 0.15
   targetImage: {fileID: 0}
+  syncSelectionOnHover: 1
+  playHoverSound: 1
+  playClickSound: 1
 --- !u!1 &2131586094
 GameObject:
   m_ObjectHideFlags: 0
@@ -6273,12 +6285,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377977813}
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
       propertyPath: justText
       value: 
       objectReference: {fileID: 645235598}
+    - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: expPopupText
       value: 
