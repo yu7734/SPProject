@@ -7,13 +7,13 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
     //CameraShake���擾
     [SerializeField] public CameraShake cameraShake;
 
-    //�����ړ����ɋ@������E�ɌX����g���N
+    // 水平移動時に機首を左右に向けるトルク
     [SerializeField] private float yawTorqueMagnitude = 20.0f;
-    //�����ړ����ɋ@����㉺�ɌX����g���N
+    // 垂直移動時に機首を上下に向けるトルク
     [SerializeField] private float pithcTorqueMagnitude = 60.0f;
-    //�����ړ����ɋ@�̂����E�ɌX����g���N
+    // 水平移動時に機体を左右に傾けるトルク
     [SerializeField] private float rollTorqueMagnitude = 30.0f;
-    //�o�l�̂悤�Ɏp�������ɖ߂��g���N
+    // バネのように姿勢を元に戻すトルク
     [SerializeField] private float restoringTorqueMagnitude = 100.0f;
 
     private Rigidbody rb;
@@ -21,7 +21,7 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //�o�l�̕����͂ł����h�ꑱ����̂�h������,angularDamping��傫�߂ɂ���
+        //常にブレないように,angularDampingを大きめに設定
         rb.angularDamping = 20.0f;
     }
 
@@ -36,16 +36,16 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
         InclineTorque();
     }
 
-    //�_���[�W����
+    //ダメージ処理
     public void Damage(int value)
     {
-        //������Ă��Ȃ���Ԃ���
+        //回避していないかクールタイムか
         if (player._state == PlayerManager.dodgeState.None || player._state == PlayerManager.dodgeState.coolTime)
         {
-            Debug.Log("�q�b�g");
-            //�J�������U������
+            Debug.Log("hit");
+            //カメラを揺らす
             cameraShake.CameraShaker();
-            //HP������
+            //HP減少
             player.playerHP -= Mathf.Max(0, value);
         }
     }

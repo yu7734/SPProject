@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  moveInput: {x: 0, y: 0}
   bulletPrefab: {fileID: 8478904341349103195, guid: df94811fa9a66f54fa516feb34ff46ff, type: 3}
   shotPoint: {fileID: 230322089902159654}
   playerHP: 100
@@ -535,6 +536,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3248423529176856624}
   cameraShake: {fileID: 0}
+  yawTorqueMagnitude: 20
+  pithcTorqueMagnitude: 60
+  rollTorqueMagnitude: 30
+  restoringTorqueMagnitude: 100
 --- !u!54 &4417157468962316149
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -577,9 +582,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.02, z: 0.05}
   m_Center: {x: -0.035, y: -0.005, z: -0.04}
@@ -598,9 +603,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.02, z: 0.05}
   m_Center: {x: 0.035, y: -0.005, z: -0.04}
@@ -619,7 +624,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -656,7 +661,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -60,19 +60,12 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(bJustDodge);
         switch (_state)
         {
 
             //何もしていない状態
             case dodgeState.None:
                 //Debug.Log(_state);
-                break;
-
-            //ジャスト回避状態
-            case dodgeState.JustDodge:
-                //Debug.Log(_state);
-                JustDodge();
                 break;
 
             //普通の回避状態
@@ -122,7 +115,7 @@ public class PlayerManager : MonoBehaviour
         if (context.performed && _state == dodgeState.None)
         {
             //回転アニメーション
-            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutSine);
             bJustDodge = true;
             _state = dodgeState.dodge;
         }
@@ -142,16 +135,6 @@ public class PlayerManager : MonoBehaviour
             dodgetime = 0;
             justDodgeTime = 0;
             _state = dodgeState.coolTime;
-        }
-    }
-
-    public void JustDodge()
-    {
-        justDodgeTime += Time.deltaTime;
-        if (justDodgeTime >= 1f)
-        {
-            justDodgeTime = 0;
-            _state = dodgeState.dodge;
         }
     }
 

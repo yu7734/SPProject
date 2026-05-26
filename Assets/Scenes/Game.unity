@@ -3133,10 +3133,22 @@ PrefabInstance:
       propertyPath: cameraShake
       value: 
       objectReference: {fileID: 330585551}
+    - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: yawTorqueMagnitude
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387444970664966248, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: ui
       value: 
       objectReference: {fileID: 1377977813}
+    - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5409762031440898568, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: ui
       value: 
@@ -3162,6 +3174,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6501147306939242178, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970430722123539372, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_Radius
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970430722123539372, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}

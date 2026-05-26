@@ -40,14 +40,4 @@ public class JustDodgeManager : MonoBehaviour
             ui.Experience(10);
         }
     }
-
-    //public void JustDodge()
-    //{
-    //    justDodgeTime += Time.deltaTime;
-    //    if (justDodgeTime >= 0.1f)
-    //    {
-    //        justDodgeTime = 0;
-    //        player._state = PlayerManager.dodgeState.dodge;
-    //    }
-    //}
 }
