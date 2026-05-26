@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1138779779717423737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469700656528470101}
+  - component: {fileID: 4349001124872373693}
+  m_Layer: 0
+  m_Name: StageScrollManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1469700656528470101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138779779717423737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4349001124872373693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138779779717423737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c6338fcb9c44d4cb915027f7737e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stage: 1
+  StagePearent:
+  - {fileID: 7481032156044013942, guid: decef871126e08445a11c22ccc5b11da, type: 3}
+  - {fileID: 8994925083178711462, guid: f11ac1cc5bb42724bac559980dfb03ce, type: 3}
+  - {fileID: 256012461830364591, guid: 2dfcb2874c11d4e4aaceb59ed83152ed, type: 3}
+  Stage1:
+  - {fileID: 5337736080340093637, guid: b4bc0d89300e35240850320079d51af9, type: 3}
+  - {fileID: 1368063391002556667, guid: 1a9fed95ed9580841bd21c957252ed53, type: 3}
+  - {fileID: 5566520851584978736, guid: 18c0f06e1b759404c996f071fc6f36ba, type: 3}
+  - {fileID: 6270923069153578765, guid: 89b874957533deb44b7367694dcafd34, type: 3}
+  - {fileID: 8318835202240261375, guid: e7baa99d17bce0046999ef19eae1f408, type: 3}
+  Stage2:
+  - {fileID: 5337736080340093637, guid: 93b5b6c2f4958af49832a1d45aa42dae, type: 3}
+  - {fileID: 1368063391002556667, guid: a1d0b4dcd465760429556045a3344e5b, type: 3}
+  - {fileID: 5566520851584978736, guid: 0b9c4a1410e3dea46a1c4056af4eb836, type: 3}
+  - {fileID: 6270923069153578765, guid: a3a7548f37280534da7aa273c5b60996, type: 3}
+  - {fileID: 8318835202240261375, guid: 4bd012cf5e44257469777e555e823c4a, type: 3}
+  Stage3: []

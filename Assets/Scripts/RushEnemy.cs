@@ -10,15 +10,19 @@ public class RushEnemy : EnemyAttackBase
     private float lookAtTime = 2;
     [SerializeField, Tooltip("敵の突撃速度")]
     private float enemyRushSpeed = 3f;
-    [SerializeField, Tooltip("敵をプレイヤー通過後に非表示にするまでの距離")]
-    private float RushOffset = 10f;
 
-    [NonSerialized] public float rushTimer = 0;
+    private float rushTimer = 0;
 
     private void Update()
     {
+
         if (player == null) return;
         RushPattern();
+    }
+    public override void OnReset()
+    {
+        base.OnReset();
+        rushTimer = 0;
     }
     public void RushPattern()  //lookAtTimeになるまでプレイヤーの座標に向けて移動し、それ以降はその時向いていた方向に直線的に移動。プレイヤーZが手前に移動したとき非表示。
     {
@@ -30,9 +34,5 @@ public class RushEnemy : EnemyAttackBase
         }
         transform.position += transform.forward * enemyRushSpeed * Time.deltaTime;
 
-        if (transform.position.z < player.position.z + -RushOffset)
-        {
-            gameObject.SetActive(false);
-        }
     }
 }
