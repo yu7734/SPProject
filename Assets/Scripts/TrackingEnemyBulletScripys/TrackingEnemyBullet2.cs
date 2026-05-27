@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossAttackScript1 : MonoBehaviour
+public class TrackingEnemyBullet2 : MonoBehaviour
 {
     GameObject Camera;
     GameObject player;
@@ -27,10 +27,9 @@ public class BossAttackScript1 : MonoBehaviour
         //自分自身の位置から相対的に移動する
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        float pos1 = this.transform.position.z;//Cameraの存在する方へ書き換えねばならない
+        float pos1 = transform.position.z;//Cameraの存在する方へ書き換えねばならない
         float pos2 = Camera.transform.position.z;//上記と同様
-        //transform.Translate(new Vector3(0f, 0f, -1f) * 10f * Time.deltaTime);//上記と同様
-        if (pos1 <= pos2) Destroy(this.gameObject);//Cameraの後ろに行ったらこれのobjectを破壊する
+        if (pos1 <= pos2) Destroy(gameObject);//Cameraの後ろに行ったらこれのobjectを破壊する
 
     }
 }
