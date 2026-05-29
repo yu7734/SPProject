@@ -80,6 +80,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             if (enemyAttackBase != null)
             {
                 damage.Damage(enemyAttackBase.attackPower);
+                EnemyDie();
             }
             
             Debug.Log("hit");

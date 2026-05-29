@@ -5,6 +5,8 @@ public class EnemyAttackBase : MonoBehaviour
 {
     public int attackPower;
     public int maxEnemyHP;
+    [SerializeField,Tooltip("“G‚ªŒü‚©‚Á‚Ä‚­‚é‘¬‚³")]
+    protected float enemyMoveSpeed = 3f;
     [NonSerialized] public Transform player;
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,5 +24,4 @@ public class EnemyAttackBase : MonoBehaviour
             player = playerObject.transform;
         }
     }
-
 }
