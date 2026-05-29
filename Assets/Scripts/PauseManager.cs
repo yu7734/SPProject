@@ -235,6 +235,12 @@ public class PauseManager : MonoBehaviour
         {
             howToPlayPanel.SetActive(false);
         }
+
+        // 閉じるときに専用の効果音を鳴らす（ButtonSoundManager がシーンにあれば）
+        if (ButtonSoundManager.Instance != null)
+        {
+            ButtonSoundManager.Instance.PlayClose();
+        }
     }
 
     // シーン遷移時などに timeScale や InputActionAsset の状態が戻らないままになる事故を防ぐ

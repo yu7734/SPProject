@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 4165981349097672209}
   - component: {fileID: 1233167114078899225}
   - component: {fileID: 7203161479391108310}
-  - component: {fileID: 3541218389368389179}
-  - component: {fileID: -5467840109618255739}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Enemy
@@ -152,57 +150,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 3000
---- !u!114 &3541218389368389179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8478904341349103195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cde80421496e89498e56f6653000c16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShot: 0
-  isTrackShot: 0
-  isRush: 1
-  Bullet: {fileID: 0}
-  coolTime: 0.5
-  enemyBulletForce: 3
-  stopTime: 1
-  lookAtTime: 2
-  enemyRushSpeed: 3
-  RushOffset: 10
-  attackPower: 5
-  enemyHP: 1
-  ui: {fileID: 0}
-  playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
-  exprosion: {fileID: 0}
---- !u!114 &-5467840109618255739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8478904341349103195}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShot: 0
-  isTrackShot: 0
-  isRush: 1
-  Bullet: {fileID: 0}
-  coolTime: 1
-  enemyBulletForce: 30
-  stopTime: 1
-  lookAtTime: 2
-  enemyRushSpeed: 3
-  RushOffset: 10
-  attackPower: 5
-  enemyHP: 1
-  ui: {fileID: 0}
-  playerBullet: {fileID: 0}
-  exprosion: {fileID: 0}

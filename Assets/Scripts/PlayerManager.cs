@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     Rigidbody rb;
     //�v���C���[�̃X�s�[�h
     [SerializeField] private float playerSpeed;
-    private Vector2 moveInput = Vector2.zero;
+    public Vector2 moveInput = Vector2.zero;
 
     //�v���C���[�̒e
     [SerializeField] private GameObject bulletPrefab;
@@ -60,7 +60,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(bJustDodge);
         switch (_state)
         {
 
@@ -122,7 +121,7 @@ public class PlayerManager : MonoBehaviour
         if (context.performed && _state == dodgeState.None)
         {
             //��]�A�j���[�V����
-            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutSine);
             bJustDodge = true;
             _state = dodgeState.dodge;
         }
