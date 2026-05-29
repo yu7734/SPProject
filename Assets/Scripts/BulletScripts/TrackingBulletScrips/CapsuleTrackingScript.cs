@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrackingScript : MonoBehaviour
+public class CapsuleTrackingScript : MonoBehaviour
 {
     [SerializeField] string SearchTag="Enemy";
     public float SearchDistance = 2f;//1以下にすると追尾がほぼ無効になる
@@ -14,8 +14,9 @@ public class TrackingScript : MonoBehaviour
         {
             //対象の位置の方向を向く
             transform.LookAt(nearestObj.transform);
+            transform.Rotate(Vector3.right * 90);
             //自分自身の位置から相対的に移動する
-            transform.Translate(Vector3.forward * 50*Time.deltaTime);
+            transform.Translate(Vector3.up * 50*Time.deltaTime);
         }
         
     }
