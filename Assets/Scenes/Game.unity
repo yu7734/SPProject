@@ -1626,6 +1626,7 @@ MonoBehaviour:
   syncSelectionOnHover: 1
   playHoverSound: 1
   playClickSound: 1
+  selectedOnlyObjects: []
 --- !u!1 &531459934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,6 +3166,7 @@ MonoBehaviour:
   syncSelectionOnHover: 1
   playHoverSound: 1
   playClickSound: 1
+  selectedOnlyObjects: []
 --- !u!1 &978247045
 GameObject:
   m_ObjectHideFlags: 0
@@ -5811,6 +5813,7 @@ MonoBehaviour:
   syncSelectionOnHover: 1
   playHoverSound: 1
   playClickSound: 1
+  selectedOnlyObjects: []
 --- !u!1 &2131586094
 GameObject:
   m_ObjectHideFlags: 0
@@ -6267,7 +6270,7 @@ PrefabInstance:
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 6210192057997434411, guid: 84c2dce4f99e67c4d93bb897f2482db5, type: 3}
+      objectReference: {fileID: 6830236781976906278, guid: c5b92e8728bdede479bccdea1aad1641, type: 3}
     - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: cameraShake
       value: 
