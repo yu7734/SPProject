@@ -23,6 +23,9 @@ public class ButtonHoverEffect : MonoBehaviour,
     [SerializeField] private float scaleDuration = 0.15f;
 
     [Header("発光（色を明るくする）")]
+    [Tooltip("色変更を有効にする。Sprite Swap と併用したいときは OFF にする（Sprite変更を邪魔しない）")]
+    [SerializeField] private bool enableColorChange = true;
+
     [Tooltip("カーソルを当てたときに掛ける色（HDR 対応。Intensity を上げると Bloom で光る）")]
     [ColorUsage(true, true)] // (showAlpha, hdr) → HDR ピッカーを有効化
     [SerializeField] private Color hoverColor = new Color(1.4f, 1.4f, 1.4f, 1f);
@@ -33,6 +36,20 @@ public class ButtonHoverEffect : MonoBehaviour,
     [Header("対象")]
     [Tooltip("色を変える対象の Image。未指定なら自分の Image を使う")]
     [SerializeField] private Image targetImage;
+
+    [Header("マウスとキー選択の同期")]
+    [Tooltip("マウスホバー時にも自動で Selected（キー選択）を切り替える。複数のボタンが同時に光るのを防ぐ")]
+    [SerializeField] private bool syncSelectionOnHover = true;
+
+    [Header("効果音")]
+    [Tooltip("選択（カーソル移動/ホバー）したときに ButtonSoundManager を呼んで音を鳴らす")]
+    [SerializeField] private bool playHoverSound = true;
+    [Tooltip("クリック（押下）したときに ButtonSoundManager を呼んで音を鳴らす")]
+    [SerializeField] private bool playClickSound = true;
+
+    [Header("選択中だけ表示するオブジェクト")]
+    [Tooltip("選択中（ホバー or キー選択）の時だけ表示するGameObject。ボタンの裏に置く装飾画像など。複数登録可")]
+    [SerializeField] private GameObject[] selectedOnlyObjects;
 
     // 元のスケール・元の色を保存しておく
     private Vector3 originalScale;
@@ -75,9 +92,29 @@ public class ButtonHoverEffect : MonoBehaviour,
         {
             rectTransform.localScale = originalScale;
         }
-        if (targetImage != null)
+        // 色変更を有効にしている場合だけ、初期色に戻す
+        if (enableColorChange && targetImage != null)
         {
             targetImage.color = originalColor;
+        }
+
+        // 選択中だけ表示するオブジェクトは最初は非表示
+        UpdateSelectedOnlyObjects(false);
+    }
+
+    /// <summary>
+    /// 「選択中だけ表示するオブジェクト」の表示/非表示を切り替える
+    /// </summary>
+    private void UpdateSelectedOnlyObjects(bool show)
+    {
+        if (selectedOnlyObjects == null) return;
+
+        foreach (GameObject obj in selectedOnlyObjects)
+        {
+            if (obj != null && obj.activeSelf != show)
+            {
+                obj.SetActive(show);
+            }
         }
     }
 
@@ -118,7 +155,9 @@ public class ButtonHoverEffect : MonoBehaviour,
             rectTransform.localScale = originalScale * scale;
         }
 
-        if (targetImage != null)
+        // 色変更が有効な場合だけ Color を書き換える
+        // ※OFFにすると Sprite Swap などの他の色変更機能と競合しなくなる
+        if (enableColorChange && targetImage != null)
         {
             // 色を originalColor と hoverColor の間で補間
             // hoverColor は乗算的に使う（1より大きければ明るく光る）
@@ -133,17 +172,44 @@ public class ButtonHoverEffect : MonoBehaviour,
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
+
+        // 選択中だけ表示するオブジェクトを表示する
+        UpdateSelectedOnlyObjects(true);
+
+        // マウスホバー時にも EventSystem の Selected を自分にして、
+        // キー選択中の他のボタンと「選択中扱い」が重複しないようにする。
+        // これで Selected Sprite の青枠が常に1つのボタンにだけ出るようになる。
+        if (syncSelectionOnHover && EventSystem.current != null)
+        {
+            // 既に自分が選択中なら呼ばない(無駄な OnSelect/OnDeselect 発火を避ける)
+            if (EventSystem.current.currentSelectedGameObject != gameObject)
+            {
+                EventSystem.current.SetSelectedGameObject(gameObject);
+            }
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovering = false;
         isPressed = false;
+
+        // ※キー選択でフォーカスが残っている場合は OnDeselect でも非表示にしないと残るが、
+        //   ここで非表示にすると、マウスを外した瞬間にキー選択中の表示も消えてしまう。
+        //   syncSelectionOnHover=true の場合は OnDeselect が必ず呼ばれるのでそこに任せる。
+        //   ただし「マウスを外したら裏画像も即消したい」場合は下の行をアンコメントしてOK。
+        // UpdateSelectedOnlyObjects(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
+
+        // クリック音を鳴らす
+        if (playClickSound && ButtonSoundManager.Instance != null)
+        {
+            ButtonSoundManager.Instance.PlayClick();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -156,11 +222,25 @@ public class ButtonHoverEffect : MonoBehaviour,
     {
         // 方向キーやゲームパッドで選択されたときもホバー扱い
         isHovering = true;
+
+        // 選択中だけ表示するオブジェクトを表示する
+        UpdateSelectedOnlyObjects(true);
+
+        // 選択音を鳴らす
+        // ※ syncSelectionOnHover=true ならマウスホバー時にも EventSystem.SetSelectedGameObject
+        //    が呼ばれて OnSelect が発火するので、マウス・キー両方この1か所で音が鳴る
+        if (playHoverSound && ButtonSoundManager.Instance != null)
+        {
+            ButtonSoundManager.Instance.PlayHover();
+        }
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         isHovering = false;
         isPressed = false;
+
+        // 選択が外れたら裏画像を非表示にする
+        UpdateSelectedOnlyObjects(false);
     }
 }

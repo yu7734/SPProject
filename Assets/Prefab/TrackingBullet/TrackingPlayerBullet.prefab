@@ -164,4 +164,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SearchTag: Enemy
-  SearchDistance: 2
+  SearchDistance: 1
