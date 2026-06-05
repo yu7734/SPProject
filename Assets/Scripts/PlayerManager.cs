@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
         if (context.performed && _state == dodgeState.None)
         {
             //��]�A�j���[�V����
-            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutSine);
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutCubic);
             bJustDodge = true;
             _state = dodgeState.dodge;
         }

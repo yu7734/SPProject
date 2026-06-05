@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class EnemyBullet : EnemyManager
+public class EnemyBullet :MonoBehaviour
 {
+    [SerializeField, Tooltip("’e‚ÌUŒ‚—ÍB“G–{‘Ì‚Ìƒ_ƒ[ƒW‚Æ‚Í•Ê")]
+    private int attackPower = 5;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,14 +19,14 @@ public class EnemyBullet : EnemyManager
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.CompareTag("PlayerBullet"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            IPlayerDamage damage = other.GetComponent<IPlayerDamage>();
+            if (damage != null)
+            {
+                damage.Damage(attackPower);
+            }
         }
-
-        //if (damage != null)
-        //{
-        //    damage.Damage()
-        //}
+        
     }
 }
