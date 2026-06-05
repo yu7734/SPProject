@@ -69,21 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   player: {fileID: 3248423529176856624}
-  justText: {fileID: 0}
-  justString: JUST!
-  justTextDuration: 0.8
-  justTextFadeDuration: 0.4
-  justTextPopScale: 1.3
-  justTextScreenOffset: {x: 0, y: 80}
-  justTextFloatUp: 40
-  mainCamera: {fileID: 0}
-  expPopupText: {fileID: 0}
-  expPopupFormat: +{0} EXP
-  expPopupDuration: 1
-  expPopupFadeDuration: 0.5
-  expPopupScreenOffset: {x: 0, y: 30}
-  expPopupFloatUp: 60
-  expPopupPopScale: 1.2
 --- !u!54 &4664985217152750894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   moveInput: {x: 0, y: 0}
-  bulletPrefab: {fileID: 6830236781976906278, guid: c5b92e8728bdede479bccdea1aad1641, type: 3}
+  bulletPrefab: {fileID: 8478904341349103195, guid: df94811fa9a66f54fa516feb34ff46ff, type: 3}
   shotPoint: {fileID: 230322089902159654}
   playerHP: 100
   MaxPlayerHP: 100
@@ -188,21 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   player: {fileID: 3248423529176856624}
-  justText: {fileID: 0}
-  justString: JUST!
-  justTextDuration: 0.8
-  justTextFadeDuration: 0.4
-  justTextPopScale: 1.3
-  justTextScreenOffset: {x: 0, y: 80}
-  justTextFloatUp: 40
-  mainCamera: {fileID: 0}
-  expPopupText: {fileID: 0}
-  expPopupFormat: +{0} EXP
-  expPopupDuration: 1
-  expPopupFadeDuration: 0.5
-  expPopupScreenOffset: {x: 0, y: 30}
-  expPopupFloatUp: 60
-  expPopupPopScale: 1.2
 --- !u!135 &3387444970664966248
 SphereCollider:
   m_ObjectHideFlags: 0
