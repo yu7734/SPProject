@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initPoolSize: 10
+  maxPoolSize: 100
   rangeX:
     min: -8
     max: 8
@@ -54,4 +56,5 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
   - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
-  spawnTimer: 5
+  - {fileID: 720357861559527564, guid: 103286d098ed1c042bcf923d6e7ec96a, type: 3}
+  spawnTimer: 2

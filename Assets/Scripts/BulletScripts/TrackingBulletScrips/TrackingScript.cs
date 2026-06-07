@@ -15,7 +15,7 @@ public class TrackingScript : MonoBehaviour
             //対象の位置の方向を向く
             transform.LookAt(nearestObj.transform);
             //自分自身の位置から相対的に移動する
-            transform.Translate(Vector3.forward * 50*Time.deltaTime);
+            transform.Translate(Vector3.forward * 100*Time.deltaTime);
         }
         
     }
