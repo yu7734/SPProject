@@ -522,7 +522,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -575,6 +575,48 @@ MonoBehaviour:
   pithcTorqueMagnitude: 60
   rollTorqueMagnitude: 30
   restoringTorqueMagnitude: 100
+--- !u!65 &224840805
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224840798}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06, y: 0.01, z: 0.05}
+  m_Center: {x: 0.035, y: -0.009, z: -0.04}
+--- !u!65 &224840806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224840798}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06, y: 0.01, z: 0.05}
+  m_Center: {x: -0.035, y: -0.009, z: -0.04}
 --- !u!1 &256158728
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,6 +4834,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3291751867557571225, guid: 42cd8fe9eb915744983b4b2ea65119ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 224840800}
+    - targetCorrespondingSourceObject: {fileID: 3291751867557571225, guid: 42cd8fe9eb915744983b4b2ea65119ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 224840806}
+    - targetCorrespondingSourceObject: {fileID: 3291751867557571225, guid: 42cd8fe9eb915744983b4b2ea65119ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 224840805}
   m_SourcePrefab: {fileID: 100100000, guid: 42cd8fe9eb915744983b4b2ea65119ce, type: 3}
 --- !u!1 &1682765315
 GameObject:
@@ -6496,6 +6544,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377977813}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: shotPoint
+      value: 
+      objectReference: {fileID: 1741753068}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: playerModel
+      value: 
+      objectReference: {fileID: 224840799}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6210192057997434411, guid: 84c2dce4f99e67c4d93bb897f2482db5, type: 3}
@@ -6527,6 +6583,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: expPopupText
       value: 
