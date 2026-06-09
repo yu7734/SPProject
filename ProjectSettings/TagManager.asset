@@ -10,6 +10,7 @@ TagManager:
   - Star
   - Enemy
   - PlayerBullet
+  - Fanel
   layers:
   - Default
   - TransparentFX
