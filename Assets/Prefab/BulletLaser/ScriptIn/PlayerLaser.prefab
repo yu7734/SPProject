@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &720357861559527564
+--- !u!1 &6830236781976906278
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5307879454309032039}
-  - component: {fileID: 4066032087193441066}
-  - component: {fileID: 8695163145267107749}
-  - component: {fileID: 1881761762722010160}
-  - component: {fileID: 6403168884136164498}
-  - component: {fileID: 2674671007568266344}
-  - component: {fileID: 8699908776044055405}
+  - component: {fileID: 3648812549783219097}
+  - component: {fileID: 1732058715353256004}
+  - component: {fileID: 2392960535360912241}
+  - component: {fileID: 8897842880269451759}
+  - component: {fileID: 8974765710068024719}
+  - component: {fileID: 2347769216971132833}
+  - component: {fileID: 2514436150562940556}
   m_Layer: 0
-  m_Name: ShotEnemy
-  m_TagString: Enemy
+  m_Name: PlayerLaser
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5307879454309032039
+--- !u!4 &3648812549783219097
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
+  m_GameObject: {fileID: 6830236781976906278}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 16.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!33 &4066032087193441066
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1732058715353256004
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8695163145267107749
+  m_GameObject: {fileID: 6830236781976906278}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2392960535360912241
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
+  m_GameObject: {fileID: 6830236781976906278}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8ee4506336905e54ebcd7b1020b60878, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,34 +90,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1881761762722010160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6403168884136164498
+--- !u!54 &8897842880269451759
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
+  m_GameObject: {fileID: 6830236781976906278}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -138,37 +117,53 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2674671007568266344
+--- !u!136 &8974765710068024719
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830236781976906278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2347769216971132833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
+  m_GameObject: {fileID: 6830236781976906278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
+  m_Script: {fileID: 11500000, guid: 71a786bc10155e6449f1bc72607b0c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 0}
-  playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
-  exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
---- !u!114 &8699908776044055405
+  bulletSpeed: 3000
+--- !u!114 &2514436150562940556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720357861559527564}
+  m_GameObject: {fileID: 6830236781976906278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1667e82863105b94dab0256737d3316c, type: 3}
+  m_Script: {fileID: 11500000, guid: e172b8dbc2bfb47448120341016702ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 5
-  maxEnemyHP: 10
-  Bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
-  isTracking: 1
-  coolTime: 3
-  enemyBulletForce: 1500
-  offset: 1.5
+  SearchTag: Enemy
+  SearchDistance: 2
