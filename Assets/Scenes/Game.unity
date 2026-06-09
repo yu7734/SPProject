@@ -2125,6 +2125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1881761762722010160, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
       propertyPath: m_Enabled
       value: 0
