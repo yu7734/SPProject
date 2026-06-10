@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 174753626349600304}
   - component: {fileID: 4165981349097672209}
   - component: {fileID: 1233167114078899225}
-  - component: {fileID: 1922666030010483786}
+  - component: {fileID: 7203161479391108310}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Enemy
@@ -137,16 +137,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1922666030010483786
+--- !u!114 &7203161479391108310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8478904341349103195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cde80421496e89498e56f6653000c16, type: 3}
+  m_Script: {fileID: 11500000, guid: 71a786bc10155e6449f1bc72607b0c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 5
+  bulletSpeed: 3000
