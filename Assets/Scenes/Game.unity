@@ -2276,6 +2276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1881761762722010160, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3194,7 +3198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 131}
+  m_AnchoredPosition: {x: 250, y: 185}
   m_SizeDelta: {x: 205, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &858422408
@@ -3616,7 +3620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: 134}
+  m_AnchoredPosition: {x: -240, y: 185}
   m_SizeDelta: {x: 205, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1060628671
@@ -3737,6 +3741,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 377338547483159791, guid: f05bc1a95ef94eb4d8cae2c80abf772f, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 720357861559527564, guid: ace36fb94fe3ecd4faf30a492e0f53c3, type: 3}
     - target: {fileID: 5906679000946202383, guid: f05bc1a95ef94eb4d8cae2c80abf772f, type: 3}
       propertyPath: m_Name
       value: EnemySpawnerManager
