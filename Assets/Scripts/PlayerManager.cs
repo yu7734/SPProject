@@ -63,7 +63,7 @@ public class PlayerManager : MonoBehaviour
         switch (_state)
         {
 
-            //�������Ă��Ȃ����
+            //何もない状態
             case dodgeState.None:
                 //Debug.Log(_state);
                 break;
@@ -74,13 +74,13 @@ public class PlayerManager : MonoBehaviour
                 JustDodge();
                 break;
 
-            //���ʂ̉�����
+            //回避状態
             case dodgeState.dodge:
                 //Debug.Log(_state);
                 Dodge();
                 break;
 
-            //������o���Ȃ��N�[���^�C�����
+            //クールタイム状態
             case dodgeState.coolTime:
                 DodgeCoolTime();
                 break;
@@ -94,18 +94,18 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerController()
     {
-        //�ړ�����
+        //移動
         var move = new Vector3(moveInput.x, moveInput.y, 0) * playerSpeed * Time.deltaTime;
         transform.Translate(move);
     }
 
-    //�v���C���[�̈ړ�
+    //移動ボタン
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    //���˃{�^��
+    //発射ボタン
     public void OnShot(InputAction.CallbackContext context)
     {
         if (context.performed && !ui.bSelect)
@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
         if (context.performed && _state == dodgeState.None)
         {
             //��]�A�j���[�V����
-            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutCubic);
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
             bJustDodge = true;
             _state = dodgeState.dodge;
         }

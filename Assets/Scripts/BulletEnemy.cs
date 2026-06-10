@@ -20,19 +20,18 @@ public class BulletEnemy : EnemyAttackBase
     {
         if (player == null) return;
         ShotPattern();
-        transform.position -= Vector3.forward * enemyMoveSpeed * Time.deltaTime;
     }
     public void ShotPattern()
     {
         shotTimer += Time.deltaTime;
         if (shotTimer > coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
         {
-            /*if (isTracking)
+            if (isTracking)
             {
-                if(RushEnemy.lookAtTime)
+                //if(RushEnemy.lookAtTime)
                 transform.LookAt(player.transform);
-            }*/
-            Vector3 spawnPosition = transform.position + transform.forward * offset;
+            }
+                Vector3 spawnPosition = transform.position + transform.forward * offset;
 
             GameObject newBullet = Instantiate(Bullet, spawnPosition, transform.rotation);
             Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
