@@ -29,7 +29,6 @@ public class PlayerManager : MonoBehaviour
     //[SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
-    [SerializeField] private JustDodgeManager justDodgeManager;
 
     [SerializeField] private Transform playerModel;
     float dodgetime = 0;
