@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 
-//�C���^�[�t�F�C�X�Ń_���[�W����
+//プレイヤーに受けるダメージ
 public interface IPlayerDamage
 {
     public void Damage(int value);
@@ -13,17 +13,17 @@ public interface IPlayerDamage
 public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
-    //�v���C���[�̃X�s�[�h
+    //プレイヤーのスピード
     [SerializeField] private float playerSpeed;
     public Vector2 moveInput = Vector2.zero;
 
-    //�v���C���[�̒e
+    //プレイヤー
     [SerializeField] private GameObject bulletPrefab;
-    //�e�����˂��鏊
+    //発射する位置
     [SerializeField] private Transform shotPoint;
 
-    [SerializeField, Header("�̗�")] public int playerHP;
-    [SerializeField, Header("�ő�̗�")] public int MaxPlayerHP;
+    [SerializeField, Header("プレイヤーの体力")] public int playerHP;
+    [SerializeField, Header("プレイヤーの最大体力")] public int MaxPlayerHP;
     public GameObject[] enemy;
 
     //[SerializeField] public CameraShake cameraShake;
@@ -33,13 +33,13 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private Transform playerModel;
     float dodgetime = 0;
-    //�W���X�g�����Ԃ�
+    //ジャスト回避のフラグ
     public bool bJustDodge = false;
     float justDodgeTime = 0;
     public float dodgeCoolTime = 0;
-    [SerializeField, Header("�N�[���^�C��")] private float coolTime;
+    [SerializeField, Header("回避のクールタイム")] private float coolTime;
 
-    //����̏�ԃX�e�[�g�}�V��
+    //回避のステートマシン
     public enum dodgeState
     {
         None,
@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
                 //Debug.Log(_state);
                 break;
 
-            //�W���X�g������
+            //ジャスト回避状態
             case dodgeState.JustDodge:
                 //Debug.Log(_state);
                 JustDodge();
@@ -110,17 +110,17 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed && !ui.bSelect)
         {
-            //�e�𐶐�
+            //弾を呼び出す
             Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);
         }
     }
 
-    //��𓮍�
+    //回避ボタンが押されたら
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (context.performed && _state == dodgeState.None)
         {
-            //��]�A�j���[�V����
+            //自機を回転
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
             bJustDodge = true;
             _state = dodgeState.dodge;
@@ -129,12 +129,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Dodge()
     {
-        //�W���X�g������
+        //ジャスト回避のカウント開始
         justDodgeTime += Time.deltaTime;
         if (justDodgeTime >= 0.3f)
             bJustDodge = false;
 
-        //���ʂ̉�����
+        //回避のカウント開始
         dodgetime += Time.deltaTime;
         if (dodgetime >= 1f)
         {
@@ -154,7 +154,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //�N�[���^�C��
+    //クールタイム
     void DodgeCoolTime()
     {
         dodgeCoolTime += Time.deltaTime;
