@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
+public class PlayerObjectManager : MonoBehaviour
 {
     //PlayerManager���擾
     [SerializeField] private PlayerManager player;
@@ -53,16 +53,16 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
     private void InclineTorque()
     {
 
-        //�v���C���[�̓��͂ɉ����Ďp����P�낤�Ƃ���g���N
+        // プレイヤーの入力に応じて姿勢をひねろうとするトルク
         Vector3 rotationTorque = new Vector3(-player.moveInput.y * pithcTorqueMagnitude, player.moveInput.x * yawTorqueMagnitude, -player.moveInput.x * rollTorqueMagnitude);
 
-        //���݂̎p���̂���ɔ�Ⴕ���傫���ŋt�����ɔP�낤�Ƃ���g���N
+        // 現在の姿勢のずれに比例した大きさで逆方向にひねろうとするトルク
         Vector3 right = transform.right;
         Vector3 up = transform.up;
         Vector3 forward = transform.forward;
         Vector3 restoringTorque = new Vector3(forward.y - up.z, right.z - forward.x, up.x - right.y) * restoringTorqueMagnitude;
 
-        //���҂Ƀg���N��������
+        // 機体にトルクを加える
         rb.AddTorque(rotationTorque + restoringTorque);
     }
 }
