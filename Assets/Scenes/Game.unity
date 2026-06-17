@@ -3168,7 +3168,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1991811456}
   m_HandleRect: {fileID: 0}
@@ -3340,6 +3340,11 @@ MonoBehaviour:
   playClickSound: 1
   selectedOnlyObjects:
   - {fileID: 90257509}
+--- !u!4 &928311197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3480692165958562761, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
+  m_PrefabInstance: {fileID: 5236111666683461445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978247045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,7 +3593,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1523839203}
   m_HandleRect: {fileID: 0}
@@ -5071,37 +5076,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717193472}
   m_CullTransparentMesh: 1
---- !u!1 &1745523442
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1745523443}
-  m_Layer: 0
-  m_Name: PlayerShotPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1745523443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745523442}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5637256}
-  m_LocalScale: {x: 2, y: 0.4901961, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2140254401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890880184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,6 +6732,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377977813}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: shotPoint
+      value: 
+      objectReference: {fileID: 928311197}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: playerModel
       value: 
       objectReference: {fileID: 7722781366759089924}
@@ -6878,10 +6856,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4482654805904373246, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8380161179720321260, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 7722781366759089924}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
@@ -6910,3 +6889,4 @@ SceneRoots:
   - {fileID: 708894971}
   - {fileID: 1988692010}
   - {fileID: 1982466855}
+  - {fileID: 1099205168}
