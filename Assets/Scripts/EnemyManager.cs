@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -10,18 +10,19 @@ public interface IEnemyDamage
 
 public class EnemyManager : MonoBehaviour, IEnemyDamage
 {
-    //“G‚ÌHP
-    
+    //æ•µã®HP
+
     private int enemyHP;
-    [SerializeField,Tooltip("name‚ÅGameManager‚ğ’T‚µ‚Ä‚¢‚é‚½‚ßA–„‚ß‚é•K—v‚Í‚È‚¢B")] 
+    [SerializeField]
     private UIManager ui;
     [SerializeField] private GameObject playerBullet;
 
     [SerializeField] private GameObject exprosion;
     [NonSerialized] public Transform player;
-    
+
     EnemyAttackBase enemyAttackBase;
     Rigidbody rb;
+    private bool isReleased = false;
     public IObjectPool<GameObject> MyPool { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,18 +33,19 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP;
+        isReleased = false;
         if (ui == null)
         {
             ui = GameObject.Find("GameManager").GetComponent<UIManager>();
         }
-        
+
     }
-        
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        GameObject playerObject = GameObject.FindWithTag("Player"); //ƒvƒŒƒCƒ„[‚ÍPlayerƒ^ƒO‚ğg—p‚·‚é‘z’è
+
+        GameObject playerObject = GameObject.FindWithTag("Player"); //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯Playerã‚¿ã‚°ã‚’ä½¿ç”¨ã™ã‚‹æƒ³å®š
         ui = GameObject.Find("GameManager").GetComponent<UIManager>();
         if (playerObject != null)
         {
@@ -55,7 +57,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     void Update()
     {
         //if (player == null) return;
-
+        if (isReleased) return;
 
         if (transform.position.z <= -9.7f)
         {
@@ -68,7 +70,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        //ƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+        if (isReleased) return;
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
         IPlayerDamage damage = other.gameObject.GetComponent<IPlayerDamage>();
         if (damage != null)
         {
@@ -80,36 +83,22 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             if (enemyAttackBase != null)
             {
                 damage.Damage(enemyAttackBase.attackPower);
+                EnemyDie();
             }
-            
+
             Debug.Log("hit");
         }
-        //ƒvƒŒƒCƒ„[‚Ì’e‚ÉG‚ê‚½‚ç
-        //if (other.gameObject.CompareTag("PlayerBullet"))
-        //{
-        //    //ƒ_ƒ[ƒW‚ğó‚¯‚é
-        //    //playerBullet.GetComponent<BulletManagert>().EnemyDamage(this);
-
-        //    Debug.Log("hit");
-        //    //Destroy(playerBullet);
-        //}
     }
-
-    //ƒvƒŒƒCƒ„[‚É—^‚¦‚éƒ_ƒ[ƒW—Ê
-    //public void PlayerDamage(PlayerManager player)
-    //{
-    //    player.Damage(attackPower);
-    //}
-
-    //“G‚ªó‚¯‚éƒ_ƒ[ƒW—Ê
+    //æ•µãŒå—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸é‡
     public void EnemyDamaged(int damage)
     {
+        if (isReleased) return;
         enemyHP -= Mathf.Max(0, damage);
         if (enemyHP <= 0)
         {
             EnemyDie();
         }
-            
+
     }
 
     private void EnemyDie()
@@ -124,8 +113,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         {
             ui.Experience(10);
         }
-        
-        if(MyPool != null)
+
+        if (MyPool != null)
         {
             MyPool.Release(this.gameObject);
         }
@@ -135,3 +124,4 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         }
     }
 }
+
