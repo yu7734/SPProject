@@ -9,7 +9,7 @@ public class newFanelScript : MonoBehaviour
     public Tracking Tracking = Tracking.Off;
     GameObject player;
     GameObject Enemy;
-    [HideInInspector] public Vector3 offset = new Vector3(0f, 0f, -2f); // プレイヤーが動いていない場合の位置
+    [HideInInspector] public Vector3 offset = new Vector3(0f, 0f, -1.25f); // プレイヤーが動いていない場合の位置
     float smoothSpeed = 3f; // 追従の速さ
     Quaternion setup = Quaternion.identity;
 

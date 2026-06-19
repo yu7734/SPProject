@@ -6,8 +6,8 @@ public class FanelManager : MonoBehaviour
 {
     bool one=true, two=true, thr = true, fou = true;
     [HideInInspector] public int Fanelcount = 0;
-    [SerializeField] GameObject[] Fanel;
-    [SerializeField] newFanelScript[] fanelScripts;
+    GameObject[] Fanel;
+    newFanelScript[] fanelScripts;
 
     void Update()
     {
@@ -27,22 +27,22 @@ public class FanelManager : MonoBehaviour
         {
             default:
             case 1:
-                fanelScripts[0].offset = new Vector3(0f, 0f, -2f);
+                fanelScripts[0].offset = new Vector3(0f, 0f, -1.25f);
                 break;
             case 2:
-                fanelScripts[0].offset = new Vector3(1f, 0f, -2f);
-                fanelScripts[1].offset = new Vector3(-1f, 0f, -2f);
+                fanelScripts[0].offset = new Vector3(0.5f, 0f, -1.25f);
+                fanelScripts[1].offset = new Vector3(-0.5f, 0f, -1.25f);
                 break;
             case 3:
-                fanelScripts[0].offset = new Vector3(1f, -0.5f, -2f);
-                fanelScripts[1].offset = new Vector3(-1f, -0.5f, -2f);
-                fanelScripts[2].offset = new Vector3(0f, 1f, -2f);
+                fanelScripts[0].offset = new Vector3(0.5f, -0.5f, -1.25f);
+                fanelScripts[1].offset = new Vector3(-0.5f, -0.5f, -1.25f);
+                fanelScripts[2].offset = new Vector3(0f, 0.5f, -1.25f);
                 break;
             case 4:
-                fanelScripts[0].offset = new Vector3(1f, 0f, -2f);
-                fanelScripts[1].offset = new Vector3(0f, 1f, -2f);
-                fanelScripts[2].offset = new Vector3(-1f, 0f, -2f);
-                fanelScripts[3].offset = new Vector3(0f, -1f, -2f);
+                fanelScripts[0].offset = new Vector3(0.5f, -0.5f, -1.25f);
+                fanelScripts[1].offset = new Vector3(-0.5f, -0.5f, -1.25f);
+                fanelScripts[2].offset = new Vector3(-0.5f, 0.5f, -1.25f);
+                fanelScripts[3].offset = new Vector3(0.5f, 0.5f, -1.25f);
                 break;
         }
     }

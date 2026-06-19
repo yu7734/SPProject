@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62,7 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       propertyPath: m_Name
-      value: Ppj-Item-basic
+      value: Fanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
+      propertyPath: m_TagString
+      value: Fanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8759341276014386647}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8627875595544899329}
   m_SourcePrefab: {fileID: 100100000, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
 --- !u!1 &1393654434365384442 stripped
 GameObject:
@@ -92,3 +99,17 @@ MonoBehaviour:
   SearchTag: Enemy
   Tracking: 0
   offset: {x: 0, y: 0, z: -2}
+--- !u!114 &8627875595544899329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393654434365384442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b9f229c266f5147abc69825bee90bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6830236781976906278, guid: f6f48223a52d0d24cb2bdb5f5df50655, type: 3}
+  Ofset: {x: 0, y: 0, z: 1}
