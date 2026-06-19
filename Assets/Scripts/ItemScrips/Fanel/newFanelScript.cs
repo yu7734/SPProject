@@ -5,10 +5,11 @@ public enum Tracking { Off, On }
 public class newFanelScript : MonoBehaviour
 {
     [SerializeField] string SearchTag = "Enemy";
+    FanelManager fanelManager;
     public Tracking Tracking = Tracking.Off;
     GameObject player;
     GameObject Enemy;
-    Vector3 offset = new Vector3(0f, 0f, -1f); // プレイヤーが動いていない場合の位置
+    [HideInInspector] public Vector3 offset = new Vector3(0f, 0f, -2f); // プレイヤーが動いていない場合の位置
     float smoothSpeed = 3f; // 追従の速さ
     Quaternion setup = Quaternion.identity;
 
@@ -17,6 +18,13 @@ public class newFanelScript : MonoBehaviour
         player = GameObject.Find("Player");//自機のオブジェクト名
         transform.position = player.transform.position+offset;//出現した時にプレイヤーの真後ろに生成
         setup = transform.rotation;
+        GameObject fanelManagerObj = GameObject.Find("FanelManager");
+        fanelManager=fanelManagerObj.GetComponent<FanelManager>();
+    }
+
+    void Start()
+    {
+        ++fanelManager.Fanelcount;
     }
     void Update()
     {
