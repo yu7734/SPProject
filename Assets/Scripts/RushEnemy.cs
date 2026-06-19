@@ -11,24 +11,26 @@ public class RushEnemy : EnemyAttackBase
         [Tooltip("自機狙いかどうか")]
         public bool isTracking = false;
         [Tooltip("弾を撃つ間隔（秒）")]
-        public float coolTime = 0.5f;
+        public float coolTime;
         [Tooltip("弾を撃つ力（速さ）")]
-        public float enemyBulletForce = 3f;
+        public float enemyBulletForce;
 
         [Tooltip("弾を最初に生成する場所")]
-        public float offset = 1.5f;
+        public float offset;
+        [Tooltip("プレイヤーの手前で弾を撃たなくする")]
+        public float playerDistance;
     }
 
     [Header("突撃にかかわる変数")]
     [SerializeField, Tooltip("最初の停止時間（秒）")]
-    private float stopTime = 1;
+    private float stopTime;
     [SerializeField, Tooltip("プレイヤーを見ている時間（秒）")]
-    private float lookAtTime = 2;
+    private float lookAtTime;
     [SerializeField, Tooltip("射撃するかどうか")]
     private bool canShot = false;
 
-    private float rushTimer = 0;
-    [NonSerialized] public float shotTimer = 0;
+    private float rushTimer;
+    [NonSerialized] public float shotTimer;
 
     [SerializeField] private ShotSetting shot = new();
 
@@ -37,7 +39,7 @@ public class RushEnemy : EnemyAttackBase
 
         if (player == null) return;
         RushPattern();
-        if (canShot) ShotPattern();
+        if (canShot&&transform.position.z > player.position.z + shot.playerDistance) ShotPattern();
     }
     public override void OnReset()
     {

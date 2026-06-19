@@ -6456,12 +6456,11 @@ MonoBehaviour:
   playerSpeed: 10
   moveInput: {x: 0, y: 0}
   bulletPrefab: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
-  shotPoint: {fileID: 1745523443}
+  shotPoint: {fileID: 0}
   playerHP: 100
   MaxPlayerHP: 100
   enemy: []
   ui: {fileID: 1377977813}
-  justDodgeManager: {fileID: 0}
   playerModel: {fileID: 0}
   bJustDodge: 0
   dodgeCoolTime: 0
@@ -6581,7 +6580,6 @@ Transform:
   m_LocalScale: {x: 1, y: 0.5, z: 2.04}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1745523443}
   - {fileID: 1247251254}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6889,4 +6887,3 @@ SceneRoots:
   - {fileID: 708894971}
   - {fileID: 1988692010}
   - {fileID: 1982466855}
-  - {fileID: 1099205168}

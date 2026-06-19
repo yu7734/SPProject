@@ -14,13 +14,15 @@ public class BulletEnemy : EnemyAttackBase
 
     [SerializeField, Tooltip("弾を最初に生成する場所")]
     private float offset = 1.5f;
-
+    [SerializeField, Tooltip("プレイヤーの手前で弾を撃たなくする")] 
+    private float playerDistance;
     [NonSerialized] public float shotTimer = 0;
+
     private void Update()
     {
         if (player == null) return;
-        ShotPattern();
         transform.position -= Vector3.forward * enemyMoveSpeed * Time.deltaTime;
+        if (transform.position.z > player.position.z+playerDistance) ShotPattern();
     }
     public void ShotPattern()
     {
