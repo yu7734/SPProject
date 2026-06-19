@@ -61,6 +61,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
         if (transform.position.z <= -9.7f)
         {
+            isReleased = true;
             MyPool.Release(this.gameObject);
             return;
         }
@@ -103,6 +104,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
     private void EnemyDie()
     {
+        if (isReleased) return;
+        isReleased = true;
         Instantiate(exprosion, this.transform.position, Quaternion.identity);
         if (ui == null)
         {
