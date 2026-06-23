@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   moveInput: {x: 0, y: 0}
-  bulletPrefab: {fileID: 6830236781976906278, guid: c5b92e8728bdede479bccdea1aad1641, type: 3}
+  bulletPrefab: {fileID: 8478904341349103195, guid: df94811fa9a66f54fa516feb34ff46ff, type: 3}
   shotPoint: {fileID: 230322089902159654}
   playerHP: 100
   MaxPlayerHP: 100

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class newTrackingScript : MonoBehaviour
 {
-    [SerializeField] string SearchTag="Enemy";
+    public string SearchTag="Enemy";
     GameObject Target=null;
     public float SearchDistance = 2f;
 

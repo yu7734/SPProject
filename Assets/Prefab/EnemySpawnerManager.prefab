@@ -55,6 +55,5 @@ MonoBehaviour:
   spawnZ: 17
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
-  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
-  - {fileID: 720357861559527564, guid: e0fe8fc446f294c4a9ce0e71e84d5524, type: 3}
-  spawnTimer: 3
+  - {fileID: 720357861559527564, guid: 103286d098ed1c042bcf923d6e7ec96a, type: 3}
+  spawnTimer: 2
