@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class BulletManagert : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class BulletManagert : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //RigidBody‚ğæ“¾‚µA‘O•û‚É”ò‚Î‚·
+        //RigidBodyã‚’å–å¾—ã—ã€å‰æ–¹ã«é£›ã°ã™
         rb = GetComponent<Rigidbody>(); 
         rb.AddForce(Vector3.forward * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
     }
@@ -22,7 +22,7 @@ public class BulletManagert : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(this.tag)) return;
-        IEnemyDamage damage = other.gameObject.GetComponent<IEnemyDamage>();
+        IEnemyDamage damage = other.gameObject.GetComponentInParent<IEnemyDamage>();
 
         if (damage != null)
         {

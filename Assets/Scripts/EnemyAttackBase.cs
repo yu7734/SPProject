@@ -1,10 +1,12 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public class EnemyAttackBase : MonoBehaviour
 {
     public int attackPower;
     public int maxEnemyHP;
+    [SerializeField, Tooltip("æ•µãŒå‘ã‹ã£ã¦ãã‚‹é€Ÿã•")]
+    protected float enemyMoveSpeed = 3f;
     [NonSerialized] public Transform player;
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,12 +17,11 @@ public class EnemyAttackBase : MonoBehaviour
 
     public virtual void OnReset()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player"); //ƒvƒŒƒCƒ„[‚ÍPlayerƒ^ƒO‚ğg—p‚·‚é‘z’è
+        GameObject playerObject = GameObject.FindWithTag("Player"); //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯Playerã‚¿ã‚°ã‚’ä½¿ç”¨ã™ã‚‹æƒ³å®š
 
         if (playerObject != null)
         {
             player = playerObject.transform;
         }
     }
-
 }

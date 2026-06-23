@@ -2,40 +2,43 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 
-//ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Åƒ_ƒ[ƒWˆ—
-//public interface IPlayerDamage
-//{
-//    public void Damage(int value);
-//    //public void Death();
-//}
+//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
+public interface IPlayerDamage
+{
+    public void Damage(int value);
+    //public void Death();
+}
 
 
-public class PlayerManager2 : MonoBehaviour, IPlayerDamage
+public class PlayerManager : MonoBehaviour
 {
     Rigidbody rb;
-    //ƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ”ãƒ¼ãƒ‰
     [SerializeField] private float playerSpeed;
-    private Vector2 moveInput = Vector2.zero;
+    public Vector2 moveInput = Vector2.zero;
 
-    //ƒvƒŒƒCƒ„[‚Ì’e
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
     [SerializeField] private GameObject bulletPrefab;
+    //ç™ºå°„ã™ã‚‹ä½ç½®
     [SerializeField] private Transform shotPoint;
 
-    [SerializeField, Header("‘Ì—Í")] public int playerHP;
-    [SerializeField, Header("Å‘å‘Ì—Í")] public int MaxPlayerHP;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½“åŠ›")] public int playerHP;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æœ€å¤§ä½“åŠ›")] public int MaxPlayerHP;
     public GameObject[] enemy;
 
-    [SerializeField] public CameraShake cameraShake;
+    //[SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
-    [SerializeField] private JustDodgeManager justDodgeManager;
 
+    [SerializeField] private Transform playerModel;
     float dodgetime = 0;
+    //ã‚¸ãƒ£ã‚¹ãƒˆå›é¿ã®ãƒ•ãƒ©ã‚°
+    public bool bJustDodge = false;
     float justDodgeTime = 0;
-    float dodgeCoolTime = 0;
-    [SerializeField, Header("ƒN[ƒ‹ƒ^ƒCƒ€")] private float coolTime;
+    public float dodgeCoolTime = 0;
+    [SerializeField, Header("å›é¿ã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ")] private float coolTime;
 
-    //‰ñ”ğ‚Ìó‘ÔƒXƒe[ƒgƒ}ƒVƒ“
+    //å›é¿ã®ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³
     public enum dodgeState
     {
         None,
@@ -59,34 +62,28 @@ public class PlayerManager2 : MonoBehaviour, IPlayerDamage
         switch (_state)
         {
 
+            //ä½•ã‚‚ãªã„çŠ¶æ…‹
             case dodgeState.None:
                 //Debug.Log(_state);
                 break;
 
+            //ã‚¸ãƒ£ã‚¹ãƒˆå›é¿çŠ¶æ…‹
             case dodgeState.JustDodge:
                 //Debug.Log(_state);
                 JustDodge();
                 break;
 
+            //å›é¿çŠ¶æ…‹
             case dodgeState.dodge:
                 //Debug.Log(_state);
                 Dodge();
                 break;
 
+            //ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ çŠ¶æ…‹
             case dodgeState.coolTime:
                 DodgeCoolTime();
                 break;
         }
-
-        //if (bDodge)
-        //{
-        //    time += Time.deltaTime;
-        //    if (time >= coolTime)
-        //    {
-        //        time = coolTime;
-        //        bDodge = false;
-        //    }
-        //}
     }
 
     private void FixedUpdate()
@@ -96,44 +93,52 @@ public class PlayerManager2 : MonoBehaviour, IPlayerDamage
 
     private void PlayerController()
     {
-        //ˆÚ“®ˆ—
+        //ç§»å‹•
         var move = new Vector3(moveInput.x, moveInput.y, 0) * playerSpeed * Time.deltaTime;
         transform.Translate(move);
     }
 
-    //ƒvƒŒƒCƒ„[‚ÌˆÚ“®
+    //ç§»å‹•ãƒœã‚¿ãƒ³
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    //”­Ëƒ{ƒ^ƒ“
+    //ç™ºå°„ãƒœã‚¿ãƒ³
     public void OnShot(InputAction.CallbackContext context)
     {
         if (context.performed && !ui.bSelect)
         {
-            //’e‚ğ¶¬
+            //å¼¾ã‚’å‘¼ã³å‡ºã™
             Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);
         }
     }
 
-    //‰ñ”ğ“®ì
+    //å›é¿ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (context.performed && _state == dodgeState.None)
         {
-            //‰ñ“]ƒAƒjƒ[ƒVƒ‡ƒ“
-            transform.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd);
-            _state = dodgeState.JustDodge;
+            //è‡ªæ©Ÿã‚’å›è»¢
+            playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
+            bJustDodge = true;
+            _state = dodgeState.dodge;
         }
     }
 
     private void Dodge()
     {
+        //ã‚¸ãƒ£ã‚¹ãƒˆå›é¿ã®ã‚«ã‚¦ãƒ³ãƒˆé–‹å§‹
+        justDodgeTime += Time.deltaTime;
+        if (justDodgeTime >= 0.3f)
+            bJustDodge = false;
+
+        //å›é¿ã®ã‚«ã‚¦ãƒ³ãƒˆé–‹å§‹
         dodgetime += Time.deltaTime;
         if (dodgetime >= 1f)
         {
             dodgetime = 0;
+            justDodgeTime = 0;
             _state = dodgeState.coolTime;
         }
     }
@@ -141,43 +146,14 @@ public class PlayerManager2 : MonoBehaviour, IPlayerDamage
     public void JustDodge()
     {
         justDodgeTime += Time.deltaTime;
-        if (justDodgeTime >= 0.1f)
+        if (justDodgeTime >= 1f)
         {
             justDodgeTime = 0;
             _state = dodgeState.dodge;
         }
     }
 
-    //private void OnTriggerEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemy") && !bDodge)
-    //    {
-    //        enemy.GetComponent<EnemyManager>().PlayerDamage(this);
-    //    }
-    //}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (enemy == null) return;
-        //“G‚ÉG‚ê‚½‚ç
-        if (other.gameObject.CompareTag("Enemy") && (_state == dodgeState.None || _state == dodgeState.coolTime))
-        {
-            Debug.Log("ƒqƒbƒg");
-            //ƒJƒƒ‰‚ªU“®‚·‚é
-            cameraShake.CameraShaker();
-            //ƒ_ƒ[ƒW‚ğó‚¯‚é
-            
-            //other.GetComponent<EnemyManager>().PlayerDamage(this);
-        }
-    }
-
-    //ƒvƒŒƒCƒ„[‚Éó‚¯‚éƒ_ƒ[ƒW
-    public void Damage(int value)
-    {
-        if (_state == dodgeState.None || _state == dodgeState.coolTime)
-            playerHP -= value;
-    }
-
+    //ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
     void DodgeCoolTime()
     {
         dodgeCoolTime += Time.deltaTime;

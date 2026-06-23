@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5906679000946202383
+--- !u!1 &6562564495504082392
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 108675635089127099}
-  - component: {fileID: 377338547483159791}
+  - component: {fileID: 2386028378136015771}
+  - component: {fileID: 4782783293320573894}
   m_Layer: 0
   m_Name: EnemySpawnerManager
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &108675635089127099
+--- !u!4 &2386028378136015771
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5906679000946202383}
+  m_GameObject: {fileID: 6562564495504082392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 21.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &377338547483159791
+--- !u!114 &4782783293320573894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5906679000946202383}
+  m_GameObject: {fileID: 6562564495504082392}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
@@ -54,7 +54,6 @@ MonoBehaviour:
     max: 8
   spawnZ: 17
   enemyPrefabs:
-  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
   - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
   - {fileID: 720357861559527564, guid: 103286d098ed1c042bcf923d6e7ec96a, type: 3}
   spawnTimer: 2

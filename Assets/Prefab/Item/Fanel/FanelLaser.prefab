@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 2392960535360912241}
   - component: {fileID: 8897842880269451759}
   - component: {fileID: 8974765710068024719}
-  - component: {fileID: 2347769216971132833}
-  - component: {fileID: 2514436150562940556}
+  - component: {fileID: 2968108220612676439}
   m_Layer: 0
-  m_Name: FanelLaser
-  m_TagString: Untagged
+  m_Name: GreenLaser
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

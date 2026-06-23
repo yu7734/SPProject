@@ -440,6 +440,26 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 522
     m_Height: 1023
+  - m_X: 101
+    m_Y: 93
+    m_Width: 922
+    m_Height: 930
+  - m_X: 101
+    m_Y: 27
+    m_Width: 47
+    m_Height: 996
+  - m_X: 0
+    m_Y: 188
+    m_Width: 1023
+    m_Height: 835
+  - m_X: 50
+    m_Y: 116
+    m_Width: 973
+    m_Height: 907
+  - m_X: 50
+    m_Y: 99
+    m_Width: 23
+    m_Height: 924
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords: []
@@ -7911,9 +7931,9 @@ Texture2D:
     Hash: 00000000000000000000000000000000
   m_IsAlphaChannelOptional: 0
   serializedVersion: 3
-  m_Width: 1
-  m_Height: 1
-  m_CompleteImageSize: 1
+  m_Width: 1024
+  m_Height: 1024
+  m_CompleteImageSize: 1048576
   m_MipsStripped: 0
   m_TextureFormat: 1
   m_MipCount: 1
