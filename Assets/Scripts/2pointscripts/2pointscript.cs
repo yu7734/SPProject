@@ -3,7 +3,8 @@ using System.Linq;
 
 public class Towpointscrips : MonoBehaviour
 {
-    [SerializeField, Header("back‚Ì•û‚Íobj1‚ÉCamera\nobj2‚ÉAimPoint\nPlayerShotPoint‚ğ‘ã“ü\nnear‚Ì•û‚Íobj1‚Éback\nobj2‚Ésentouki\nPlayerShotPoint‚Í‘ã“ü‚µ‚È‚¢\nNewTrackingScript‚É‚ÍG‚ê‚Ê‚æ‚¤‚É")] newTrackingScript newTrackingScript;
+    [SerializeField, Header("back‚Ì•û‚Íobj1‚ÉCamera\nobj2‚ÉAimPoint\nPlayerShotPoint‚ğ‘ã“ü\nnear‚Ì•û‚Íobj1‚Éback\nobj2‚Ésentouki\nPlayerShotPoint‚Í‘ã“ü‚µ‚È‚¢\nNewTrackingScript‚É‚ÍG‚ê‚Ê‚æ‚¤‚É")] 
+    newTrackingScript newTrackingScript;
     GameObject Target = null;
     GameObject Enemy = null;
     [SerializeField] GameObject obj1, obj2, PlayerShotPoint;

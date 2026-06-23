@@ -8,7 +8,7 @@ public class newFanelScript : MonoBehaviour
     public Tracking Tracking = Tracking.Off;
     GameObject player;
     GameObject Enemy;
-    Vector3 offset = new Vector3(0f, 0f, -1f); // プレイヤーが動いていない場合の位置
+    public Vector3 offset = new Vector3(0f, 0f, -1f); // プレイヤーが動いていない場合の位置
     float smoothSpeed = 3f; // 追従の速さ
 
     void Awake()
