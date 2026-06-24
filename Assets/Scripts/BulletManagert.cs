@@ -10,7 +10,7 @@ public class BulletManagert : MonoBehaviour
     {
         //RigidBodyを取得し、前方に飛ばす
         rb = GetComponent<Rigidbody>(); 
-        rb.AddForce(Vector3.forward * bulletSpeed * Time.deltaTime, ForceMode.Impulse);
+        rb.AddForce(Vector3.forward * bulletSpeed);
     }
 
     // Update is called once per frame
