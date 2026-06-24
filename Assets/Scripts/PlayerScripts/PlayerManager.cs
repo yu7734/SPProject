@@ -18,10 +18,10 @@ public class PlayerManager : MonoBehaviour
     public Vector2 moveInput = Vector2.zero;
 
     [Header("プレイヤーの移動範囲")]
-    [SerializeField] private float minPlayerRangeX;
-    [SerializeField] private float maxPlayerRangeX;
-    [SerializeField] private float minPlayerRangeY;
-    [SerializeField] private float maxPlayerRangeY;
+    [SerializeField, Tooltip("横移動の最小")] private float minPlayerRangeX;
+    [SerializeField, Tooltip("横移動の最大")] private float maxPlayerRangeX;
+    [SerializeField, Tooltip("縦移動の最小")] private float minPlayerRangeY;
+    [SerializeField, Tooltip("縦移動の最大")] private float maxPlayerRangeY;
 
     //プレイヤー
     [SerializeField] private GameObject bulletPrefab;
