@@ -3,8 +3,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// ボタンにカーソルを当てたとき、少し拡大しつつ色を明るくして「光った」ように見せる演出。
+/// ボタンにカーソルを当てた／選択したとき、少し拡大しつつ色を変える演出。
 /// ボタン本体（Image があるオブジェクト）にアタッチして使用する。
+///
+/// 色の演出は2種類から選べる（colorMode）：
+///   ・Brighten     … 元の色を明るくして「光った」ように見せる（従来動作）
+///   ・FlowGradient … 専用の2色グラデーションが流れる（選択中だけ別の色味になる）
+/// どちらのモードでも拡大は常に併存する。非選択時は元の色に戻る。
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
 public class ButtonHoverEffect : MonoBehaviour,
@@ -12,8 +17,14 @@ public class ButtonHoverEffect : MonoBehaviour,
     IPointerDownHandler, IPointerUpHandler,
     ISelectHandler, IDeselectHandler
 {
+    public enum ColorMode
+    {
+        Brighten,      // 元の色を明るくする（従来）
+        FlowGradient,  // 専用の2色グラデーションを流す
+    }
+
     [Header("拡大")]
-    [Tooltip("カーソルを当てたときの拡大倍率")]
+    [Tooltip("カーソルを当てた／選択したときの拡大倍率")]
     [SerializeField] private float hoverScale = 1.1f;
 
     [Tooltip("クリック中（押下中）の拡大倍率（少し縮ませて押下感を出す）")]
@@ -22,55 +33,68 @@ public class ButtonHoverEffect : MonoBehaviour,
     [Tooltip("スケール変化にかける時間（秒）")]
     [SerializeField] private float scaleDuration = 0.15f;
 
-    [Header("発光（色を明るくする）")]
-    [Tooltip("色変更を有効にする。Sprite Swap と併用したいときは OFF にする（Sprite変更を邪魔しない）")]
+    [Header("色の演出")]
+    [Tooltip("色変更を有効にするか。OFFなら色は一切変えない（Sprite Swap併用時など）")]
     [SerializeField] private bool enableColorChange = true;
 
-    [Tooltip("カーソルを当てたときに掛ける色（HDR 対応。Intensity を上げると Bloom で光る）")]
-    [ColorUsage(true, true)] // (showAlpha, hdr) → HDR ピッカーを有効化
+    [Tooltip("色の演出モード。Brighten=明るく光る / FlowGradient=専用2色のグラデーションが流れる")]
+    [SerializeField] private ColorMode colorMode = ColorMode.Brighten;
+
+    [Tooltip("色変化（フェードイン/アウト）にかける時間（秒）")]
+    [SerializeField] private float colorDuration = 0.15f;
+
+    [Header("Brighten モード設定")]
+    [Tooltip("カーソルを当てたときに掛ける色（HDR 対応。Intensityを上げるとBloomで光る）")]
+    [ColorUsage(true, true)]
     [SerializeField] private Color hoverColor = new Color(1.4f, 1.4f, 1.4f, 1f);
 
-    [Tooltip("色変化にかける時間（秒）")]
-    [SerializeField] private float colorDuration = 0.15f;
+    [Header("FlowGradient モード設定")]
+    [Tooltip("選択中に流れるグラデーションの色その1")]
+    [SerializeField] private Color flowColorA = new Color(0.2f, 1f, 1f, 1f);   // 水色
+
+    [Tooltip("選択中に流れるグラデーションの色その2")]
+    [SerializeField] private Color flowColorB = new Color(0.6f, 0.3f, 1f, 1f); // 紫
+
+    [Tooltip("グラデーションが流れる速さ（大きいほど速い）")]
+    [SerializeField] private float flowSpeed = 1.5f;
+
+    [Tooltip("ON=選択していなくても常にグラデーションを流す / OFF=選択中だけ流す")]
+    [SerializeField] private bool flowAlways = false;
 
     [Header("対象")]
     [Tooltip("色を変える対象の Image。未指定なら自分の Image を使う")]
     [SerializeField] private Image targetImage;
 
     [Header("マウスとキー選択の同期")]
-    [Tooltip("マウスホバー時にも自動で Selected（キー選択）を切り替える。複数のボタンが同時に光るのを防ぐ")]
+    [Tooltip("マウスホバー時にも自動で Selected（キー選択）を切り替える")]
     [SerializeField] private bool syncSelectionOnHover = true;
 
     [Header("効果音")]
-    [Tooltip("選択（カーソル移動/ホバー）したときに ButtonSoundManager を呼んで音を鳴らす")]
+    [Tooltip("選択（カーソル移動/ホバー）したときに音を鳴らす")]
     [SerializeField] private bool playHoverSound = true;
-    [Tooltip("クリック（押下）したときに ButtonSoundManager を呼んで音を鳴らす")]
+    [Tooltip("クリック（押下）したときに音を鳴らす")]
     [SerializeField] private bool playClickSound = true;
 
     [Header("選択中だけ表示するオブジェクト")]
-    [Tooltip("選択中（ホバー or キー選択）の時だけ表示するGameObject。ボタンの裏に置く装飾画像など。複数登録可")]
+    [Tooltip("選択中の時だけ表示するGameObject。複数登録可")]
     [SerializeField] private GameObject[] selectedOnlyObjects;
 
-    // 元のスケール・元の色を保存しておく
     private Vector3 originalScale;
     private Color originalColor;
     private RectTransform rectTransform;
 
-    // ホバー中かどうか
     private bool isHovering = false;
-    // 押下中かどうか
     private bool isPressed = false;
 
-    // アニメーション用の進行度
     private float currentScaleT = 0f;
-    private float currentColorT = 0f;
+    private float currentColorT = 0f;  // 色演出の進行度（0=元の色, 1=演出色）
+    private float flowPhase = 0f;      // グラデーションの位相
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         originalScale = rectTransform.localScale;
 
-        // ターゲットImageが未指定なら自分から取得
         if (targetImage == null)
         {
             targetImage = GetComponent<Image>();
@@ -83,28 +107,23 @@ public class ButtonHoverEffect : MonoBehaviour,
 
     private void OnEnable()
     {
-        // 有効化されたタイミングで状態をリセット（ポーズ復帰時などに変な状態にならないように）
         isHovering = false;
         isPressed = false;
         currentScaleT = 0f;
         currentColorT = 0f;
+        flowPhase = 0f;
         if (rectTransform != null)
         {
             rectTransform.localScale = originalScale;
         }
-        // 色変更を有効にしている場合だけ、初期色に戻す
         if (enableColorChange && targetImage != null)
         {
             targetImage.color = originalColor;
         }
 
-        // 選択中だけ表示するオブジェクトは最初は非表示
         UpdateSelectedOnlyObjects(false);
     }
 
-    /// <summary>
-    /// 「選択中だけ表示するオブジェクト」の表示/非表示を切り替える
-    /// </summary>
     private void UpdateSelectedOnlyObjects(bool show)
     {
         if (selectedOnlyObjects == null) return;
@@ -120,68 +139,81 @@ public class ButtonHoverEffect : MonoBehaviour,
 
     private void Update()
     {
-        // 目標値（ホバー中/押下中ならアニメーションを進める、そうでないなら戻す）
-        float targetT = (isHovering || isPressed) ? 1f : 0f;
-
-        // timeScale=0（ポーズ中）でも動くように unscaledDeltaTime を使う
+        bool selected = isHovering || isPressed;
+        float targetT = selected ? 1f : 0f;
         float dt = Time.unscaledDeltaTime;
 
-        // スケールの補間
+        // 拡大の補間
         if (scaleDuration > 0f)
-        {
             currentScaleT = Mathf.MoveTowards(currentScaleT, targetT, dt / scaleDuration);
-        }
         else
-        {
             currentScaleT = targetT;
-        }
 
-        // 色の補間
+        // 色演出の進行度の補間
         if (colorDuration > 0f)
-        {
             currentColorT = Mathf.MoveTowards(currentColorT, targetT, dt / colorDuration);
-        }
         else
-        {
             currentColorT = targetT;
-        }
 
-        // 適用
+        // 拡大の適用（常に有効）
         if (rectTransform != null)
         {
-            // 押下中は pressedScale、それ以外（ホバー中）は hoverScale を目標にする
             float scaleGoal = isPressed ? pressedScale : hoverScale;
             float scale = Mathf.LerpUnclamped(1f, scaleGoal, currentScaleT);
             rectTransform.localScale = originalScale * scale;
         }
 
-        // 色変更が有効な場合だけ Color を書き換える
-        // ※OFFにすると Sprite Swap などの他の色変更機能と競合しなくなる
+        // 色の適用（1か所に集約して競合を防ぐ）
         if (enableColorChange && targetImage != null)
         {
-            // 色を originalColor と hoverColor の間で補間
-            // hoverColor は乗算的に使う（1より大きければ明るく光る）
-            Color blended = Color.LerpUnclamped(originalColor, originalColor * hoverColor, currentColorT);
-            // アルファは元のまま保持
-            blended.a = originalColor.a;
-            targetImage.color = blended;
+            if (colorMode == ColorMode.FlowGradient)
+                ApplyFlowGradient(dt, selected);
+            else
+                ApplyBrighten();
         }
     }
 
-    // ===== マウス（ポインター）イベント =====
+    /// <summary>
+    /// Brighten：元の色 ⇄ originalColor*hoverColor を currentColorT で補間（従来動作）
+    /// </summary>
+    private void ApplyBrighten()
+    {
+        Color blended = Color.LerpUnclamped(originalColor, originalColor * hoverColor, currentColorT);
+        blended.a = originalColor.a;
+        targetImage.color = blended;
+    }
+
+    /// <summary>
+    /// FlowGradient：選択中に flowColorA ⇄ flowColorB のグラデーションを流す。
+    /// 非選択時は元の色に戻る（currentColorT でなめらかにブレンド）。
+    /// </summary>
+    private void ApplyFlowGradient(float dt, bool selected)
+    {
+        // 位相は流すべきとき（選択中 or flowAlways）だけ進める
+        if (flowAlways || selected)
+        {
+            flowPhase += dt * flowSpeed;
+        }
+
+        // 今この瞬間のグラデーション色
+        float t = Mathf.Sin(flowPhase) * 0.5f + 0.5f;
+        Color flow = Color.Lerp(flowColorA, flowColorB, t);
+
+        // 非選択 → 元の色、選択中 → グラデーション色 を currentColorT でブレンド
+        // （flowAlways=ON のときは常にグラデーション色）
+        float blendT = flowAlways ? 1f : currentColorT;
+        Color result = Color.LerpUnclamped(originalColor, flow, blendT);
+        result.a = originalColor.a;
+        targetImage.color = result;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
-
-        // 選択中だけ表示するオブジェクトを表示する
         UpdateSelectedOnlyObjects(true);
 
-        // マウスホバー時にも EventSystem の Selected を自分にして、
-        // キー選択中の他のボタンと「選択中扱い」が重複しないようにする。
-        // これで Selected Sprite の青枠が常に1つのボタンにだけ出るようになる。
         if (syncSelectionOnHover && EventSystem.current != null)
         {
-            // 既に自分が選択中なら呼ばない(無駄な OnSelect/OnDeselect 発火を避ける)
             if (EventSystem.current.currentSelectedGameObject != gameObject)
             {
                 EventSystem.current.SetSelectedGameObject(gameObject);
@@ -193,19 +225,12 @@ public class ButtonHoverEffect : MonoBehaviour,
     {
         isHovering = false;
         isPressed = false;
-
-        // ※キー選択でフォーカスが残っている場合は OnDeselect でも非表示にしないと残るが、
-        //   ここで非表示にすると、マウスを外した瞬間にキー選択中の表示も消えてしまう。
-        //   syncSelectionOnHover=true の場合は OnDeselect が必ず呼ばれるのでそこに任せる。
-        //   ただし「マウスを外したら裏画像も即消したい」場合は下の行をアンコメントしてOK。
-        // UpdateSelectedOnlyObjects(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
 
-        // クリック音を鳴らす
         if (playClickSound && ButtonSoundManager.Instance != null)
         {
             ButtonSoundManager.Instance.PlayClick();
@@ -217,18 +242,11 @@ public class ButtonHoverEffect : MonoBehaviour,
         isPressed = false;
     }
 
-    // ===== キーボード/ゲームパッドでのナビゲーション選択イベント =====
     public void OnSelect(BaseEventData eventData)
     {
-        // 方向キーやゲームパッドで選択されたときもホバー扱い
         isHovering = true;
-
-        // 選択中だけ表示するオブジェクトを表示する
         UpdateSelectedOnlyObjects(true);
 
-        // 選択音を鳴らす
-        // ※ syncSelectionOnHover=true ならマウスホバー時にも EventSystem.SetSelectedGameObject
-        //    が呼ばれて OnSelect が発火するので、マウス・キー両方この1か所で音が鳴る
         if (playHoverSound && ButtonSoundManager.Instance != null)
         {
             ButtonSoundManager.Instance.PlayHover();
@@ -239,8 +257,6 @@ public class ButtonHoverEffect : MonoBehaviour,
     {
         isHovering = false;
         isPressed = false;
-
-        // 選択が外れたら裏画像を非表示にする
         UpdateSelectedOnlyObjects(false);
     }
 }
