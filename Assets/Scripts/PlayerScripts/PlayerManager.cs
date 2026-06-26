@@ -17,9 +17,10 @@ public class PlayerManager : MonoBehaviour
     public Vector2 moveInput = Vector2.zero;
 
     //プレイヤー
-    [SerializeField, Tooltip("自機オブジェクトの位置")]
-    private Transform playerChildObject;
+    [Tooltip("自機オブジェクトの位置")] private GameObject playerChildObject;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField, Tooltip("弾の速度")] private float bulletSpeed;
+    
     //発射する位置
     [SerializeField] private Transform shotPoint;
 
@@ -42,17 +43,22 @@ public class PlayerManager : MonoBehaviour
     public enum dodgeState
     {
         None,
-        JustDodge,
         dodge,
         coolTime,
     }
 
     public dodgeState _state = dodgeState.None;
 
+    private void Awake()
+    {
+        //bulletPrefab = GetComponent<Rigidbody>();
+        //Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerChildObject = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -102,6 +108,9 @@ public class PlayerManager : MonoBehaviour
             //Vector3 playerShotDirection = playerChildObject.rotation;
             //弾を呼び出す
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
+            Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
+            bulletRigid.AddForce(Vector3.forward * bulletSpeed);
+
         }
     }
 
