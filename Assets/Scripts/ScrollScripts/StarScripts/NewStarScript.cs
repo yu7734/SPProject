@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class NewStarScript : MonoBehaviour
 {
-    [SerializeField]GameObject Star;
+    [SerializeField,Header("生成する星の大きさや色を変更する場合はここを変更")]GameObject Star;
     GameObject Camera;//プレハブ化するのでプライベート
-    float Distance = 11f;
-    float Speed = 50f;
+    [SerializeField] float Distance = 11f;
+    [SerializeField] float Speed = 50f;
     void Start()
     {
         Camera = GameObject.Find("Main Camera");//名前指定なので変えると動かなくなる
