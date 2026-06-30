@@ -74,7 +74,7 @@ public class DodgeGauge : MonoBehaviour
                 targetFill = 1f;
                 break;
 
-            case PlayerManager.dodgeState.JustDodge:
+            //case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
                 // 回避中 → 0
                 targetFill = 0f;
@@ -115,7 +115,7 @@ public class DodgeGauge : MonoBehaviour
             case PlayerManager.dodgeState.None:
                 baseColor = readyColor;
                 break;
-            case PlayerManager.dodgeState.JustDodge:
+            //case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
                 baseColor = dodgingColor;
                 break;

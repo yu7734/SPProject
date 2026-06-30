@@ -12,7 +12,6 @@ public interface IPlayerDamage
 
 public class PlayerManager : MonoBehaviour
 {
-    Rigidbody rb;
     //プレイヤーのスピード
     [SerializeField] private float playerSpeed;
     public Vector2 moveInput = Vector2.zero;
@@ -24,15 +23,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Tooltip("縦移動の最大")] private float maxPlayerRangeY;
 
     //プレイヤー
+    [Tooltip("自機オブジェクトの位置")] private GameObject playerChildObject;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField, Tooltip("弾の速度")] private float bulletSpeed;
+    
     //発射する位置
     [SerializeField] private Transform shotPoint;
 
     [SerializeField, Header("プレイヤーの体力")] public int playerHP;
     [SerializeField, Header("プレイヤーの最大体力")] public int MaxPlayerHP;
-    public GameObject[] enemy;
 
-    //[SerializeField] public CameraShake cameraShake;
 
     [SerializeField] private UIManager ui;
 
@@ -42,24 +42,29 @@ public class PlayerManager : MonoBehaviour
     public bool bJustDodge = false;
     float justDodgeTime = 0;
     public float dodgeCoolTime = 0;
-    [SerializeField, Header("回避のクールタイム")] private float coolTime;
+    [SerializeField, Header("回避のクールタイム")] 
+    private float coolTime;
 
     //回避のステートマシン
     public enum dodgeState
     {
         None,
-        JustDodge,
         dodge,
         coolTime,
     }
 
     public dodgeState _state = dodgeState.None;
 
+    private void Awake()
+    {
+        //bulletPrefab = GetComponent<Rigidbody>();
+        //Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
+        playerChildObject = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -67,21 +72,12 @@ public class PlayerManager : MonoBehaviour
     {
         switch (_state)
         {
-
             //何もない状態
             case dodgeState.None:
-                //Debug.Log(_state);
-                break;
-
-            //ジャスト回避状態
-            case dodgeState.JustDodge:
-                //Debug.Log(_state);
-                JustDodge();
                 break;
 
             //回避状態
             case dodgeState.dodge:
-                //Debug.Log(_state);
                 Dodge();
                 break;
 
@@ -125,8 +121,10 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed && !ui.bSelect)
         {
+            //Vector3 playerShotDirection = playerChildObject.rotation;
             //弾を呼び出す
-            Instantiate(bulletPrefab, shotPoint.transform.position, Quaternion.identity);
+            Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
+
         }
     }
 
@@ -156,16 +154,6 @@ public class PlayerManager : MonoBehaviour
             dodgetime = 0;
             justDodgeTime = 0;
             _state = dodgeState.coolTime;
-        }
-    }
-
-    public void JustDodge()
-    {
-        justDodgeTime += Time.deltaTime;
-        if (justDodgeTime >= 1f)
-        {
-            justDodgeTime = 0;
-            _state = dodgeState.dodge;
         }
     }
 

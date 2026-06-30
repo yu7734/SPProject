@@ -28,6 +28,10 @@ public class PauseManager : MonoBehaviour
     [Tooltip("Resume ボタンを押したクリックが射撃に化けないように、この時間だけプレイヤー入力を遮断する")]
     [SerializeField] private float inputIgnoreDuration = 0.15f;
 
+    [Header("アイテム選択UIの参照")]
+    [Tooltip("アイテム選択中はResumeしても時間を止めたままにするために参照する。未設定でも動作するが、設定推奨。")]
+    [SerializeField] private UIManager uiManager;
+
     // 現在ポーズ中かどうか
     public bool IsPaused { get; private set; } = false;
 
@@ -165,8 +169,18 @@ public class PauseManager : MonoBehaviour
             pausePanel.SetActive(false);
         }
 
-        // ゲーム内の時間を通常速度に戻す
-        Time.timeScale = 1f;
+        // アイテム選択中（bSelect == true）にポーズしていた場合、
+        // ここで時間を動かしてしまうと「アイテム選択画面が出たまま時間が進む」バグになる。
+        // そのため、アイテム選択中は timeScale を 0 のまま維持し、選択が終わるまで止めておく。
+        if (uiManager != null && uiManager.bSelect)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            // 通常のポーズ解除：ゲーム内の時間を通常速度に戻す
+            Time.timeScale = 1f;
+        }
 
         // 退避していた速度を元に戻す
         RestoreAllRigidbodies();
