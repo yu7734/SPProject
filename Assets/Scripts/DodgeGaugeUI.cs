@@ -45,7 +45,7 @@ public class DodgeGaugeUI : MonoBehaviour
                 gaugeImage.fillAmount = 1f;
                 break;
 
-            case PlayerManager.dodgeState.JustDodge:
+            //case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
                 // 回避中：dodgetime（PlayerManagerの内部時間）に応じて 1 → 0 へ減る
                 gaugeImage.fillAmount = 1f - GetDodgeProgress();
@@ -84,7 +84,7 @@ public class DodgeGaugeUI : MonoBehaviour
                 valueText.text = readyString;
                 break;
 
-            case PlayerManager.dodgeState.JustDodge:
+            //case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
                 // 回避中：残り回避時間を表示（1秒から減っていく）
                 float dodgeRemain = Mathf.Max(0f, 1f - GetDodgeProgress());
@@ -106,7 +106,7 @@ public class DodgeGaugeUI : MonoBehaviour
             case PlayerManager.dodgeState.None:
                 gaugeImage.color = readyColor;
                 break;
-            case PlayerManager.dodgeState.JustDodge:
+            //case PlayerManager.dodgeState.JustDodge:
             case PlayerManager.dodgeState.dodge:
                 gaugeImage.color = dodgingColor;
                 break;
