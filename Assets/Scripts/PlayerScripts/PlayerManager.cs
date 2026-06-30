@@ -108,8 +108,6 @@ public class PlayerManager : MonoBehaviour
             //Vector3 playerShotDirection = playerChildObject.rotation;
             //弾を呼び出す
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
-            Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
-            bulletRigid.AddForce(Vector3.forward * bulletSpeed);
 
         }
     }

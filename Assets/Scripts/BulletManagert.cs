@@ -8,9 +8,9 @@ public class BulletManagert : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //RigidBodyを取得し、前方に飛ばす
+        //RigidBodyを取得し、プレイヤーの向いている方向に弾を飛ばす
         rb = GetComponent<Rigidbody>(); 
-        rb.AddForce(Vector3.forward * bulletSpeed);
+        rb.linearVelocity = this.transform.forward * bulletSpeed * Time.deltaTime;
     }
 
     // Update is called once per frame
