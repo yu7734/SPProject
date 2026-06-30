@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerObjectManager : MonoBehaviour
+public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
 {
     [SerializeField, Tooltip("PlayerManagerを取得")] private PlayerManager player;
     [SerializeField, Tooltip("CameraShake取得")] public CameraShake cameraShake;
