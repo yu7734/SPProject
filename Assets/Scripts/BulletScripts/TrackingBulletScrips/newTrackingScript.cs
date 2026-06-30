@@ -5,6 +5,7 @@ public class newTrackingScript : MonoBehaviour
 {
     [SerializeField] public string SearchTag="Enemy";
     GameObject Target=null;
+    bool TargertLost = false;
     public float SearchDistance = 2f;
 
     void Awake()
@@ -26,12 +27,19 @@ public class newTrackingScript : MonoBehaviour
     }
     void Update()
     {
+        if(Target!=null&&Target.activeSelf==false)Target = null;
         if (Target != null)// 最寄りのオブジェクトが見つかった場合の処理
         {
+            TargertLost = true;
             //対象の位置の方向を向く
             transform.LookAt(Target.transform);
             //自分自身の位置から相対的に移動する
             transform.Translate(Vector3.forward * 50*Time.deltaTime);
         }
+        if(Target&&Target.activeSelf == false)
+        {
+            Target = null;
+        }
+        if(TargertLost&&Target==null) transform.Translate(Vector3.forward * 50 * Time.deltaTime);
     }
 }

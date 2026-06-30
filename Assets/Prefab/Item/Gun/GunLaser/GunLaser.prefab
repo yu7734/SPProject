@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2347769216971132833}
   - component: {fileID: -9051184507754538812}
   m_Layer: 0
-  m_Name: PlayerLaser
+  m_Name: GunLaser
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SearchTag: Enemy
-  SearchDistance: 2
+  SearchDistance: 3
