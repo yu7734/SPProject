@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class BulletManagert : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class BulletManagert : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //RigidBody‚ğæ“¾‚µAƒvƒŒƒCƒ„[‚ÌŒü‚¢‚Ä‚¢‚é•ûŒü‚É’e‚ğ”ò‚Î‚·
+        //RigidBodyï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Aï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É’eï¿½ï¿½ï¿½Î‚ï¿½
         rb = GetComponent<Rigidbody>(); 
         rb.linearVelocity = this.transform.forward * bulletSpeed * Time.deltaTime;
     }
@@ -22,7 +22,7 @@ public class BulletManagert : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(this.tag)) return;
-        IEnemyDamage damage = other.gameObject.GetComponent<IEnemyDamage>();
+        IEnemyDamage damage = other.gameObject.GetComponentInParent<IEnemyDamage>();
 
         if (damage != null)
         {

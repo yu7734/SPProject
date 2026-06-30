@@ -16,6 +16,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerSpeed;
     public Vector2 moveInput = Vector2.zero;
 
+    [Header("プレイヤーの移動範囲")]
+    [SerializeField, Tooltip("横移動の最小")] private float minPlayerRangeX;
+    [SerializeField, Tooltip("横移動の最大")] private float maxPlayerRangeX;
+    [SerializeField, Tooltip("縦移動の最小")] private float minPlayerRangeY;
+    [SerializeField, Tooltip("縦移動の最大")] private float maxPlayerRangeY;
+
     //プレイヤー
     [Tooltip("自機オブジェクトの位置")] private GameObject playerChildObject;
     [SerializeField] private GameObject bulletPrefab;
@@ -92,6 +98,16 @@ public class PlayerManager : MonoBehaviour
         //移動
         var move = new Vector3(moveInput.x, moveInput.y, 0) * playerSpeed * Time.deltaTime;
         transform.Translate(move);
+
+        //現在の位置
+        Vector3 currentPosition = this.transform.position;
+
+        //移動範囲
+        currentPosition.x = Mathf.Clamp(currentPosition.x, minPlayerRangeX, maxPlayerRangeX);
+        currentPosition.y = Mathf.Clamp(currentPosition.y, minPlayerRangeY, maxPlayerRangeY);
+
+        //現在の位置をcurrentPositionにする
+        this.transform.position = currentPosition;
     }
 
     //移動ボタン

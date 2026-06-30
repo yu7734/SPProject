@@ -5,16 +5,26 @@ public enum Tracking { Off, On }
 public class newFanelScript : MonoBehaviour
 {
     [SerializeField] string SearchTag = "Enemy";
+    FanelManager fanelManager;
     public Tracking Tracking = Tracking.Off;
     GameObject player;
     GameObject Enemy;
-    Vector3 offset = new Vector3(0f, 0f, -1f); // プレイヤーが動いていない場合の位置
+    [HideInInspector] public Vector3 offset = new Vector3(0f, 0f, -1.25f); // プレイヤーが動いていない場合の位置
     float smoothSpeed = 3f; // 追従の速さ
+    Quaternion setup = Quaternion.identity;
 
     void Awake()
     {
         player = GameObject.Find("Player");//自機のオブジェクト名
-        gameObject.transform.position = player.transform.position+offset;//出現した時にプレイヤーの真後ろに生成
+        transform.position = player.transform.position + offset;//出現した時にプレイヤーの真後ろに生成
+        setup = transform.rotation;
+        GameObject fanelManagerObj = GameObject.Find("FanelManager");
+        fanelManager = fanelManagerObj.GetComponent<FanelManager>();
+    }
+
+    void Start()
+    {
+        ++fanelManager.Fanelcount;
     }
     void Update()
     {
@@ -25,7 +35,7 @@ public class newFanelScript : MonoBehaviour
         transform.position = smoothedPosition;
 
         if (Tracking == Tracking.On) Enemy = GameObject.FindGameObjectsWithTag(SearchTag).OrderBy((GameObject e) => { float distance = float.MaxValue; if (player.transform.position.z < e.transform.position.z) distance = Vector3.Distance(player.transform.position, e.transform.position); return distance; }).FirstOrDefault();
-        else { Enemy = null; transform.rotation = Quaternion.Euler(0f, 0f, 0f); }
+        else { Enemy = null; transform.rotation = setup; }
         if (Enemy != null) transform.LookAt(Enemy.transform.position);
     }
 }
