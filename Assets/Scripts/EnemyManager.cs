@@ -107,6 +107,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         if (isReleased) return;
         isReleased = true;
+        Instantiate(exprosion, this.transform.position, Quaternion.identity);
         if (ui == null)
         {
             ui = GameObject.Find("GameManager").GetComponent<UIManager>();
