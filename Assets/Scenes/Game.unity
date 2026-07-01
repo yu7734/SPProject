@@ -492,7 +492,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Item
+  m_text: 'Laser
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2265,6 +2267,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613332417}
   m_CullTransparentMesh: 1
+--- !u!1 &617775350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4607650782760298612, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+  m_PrefabInstance: {fileID: 949554760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &645175237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,9 +3509,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 7722781366759089924}
     m_Modifications:
     - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+      propertyPath: LaserNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+      propertyPath: BigLaser.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+      propertyPath: 'BigLaser.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6001417430121220690, guid: e74b40ba37198ee43a80ab39873278e2, type: 3}
+    - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+      propertyPath: 'BigLaser.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6001417430121220690, guid: e74b40ba37198ee43a80ab39873278e2, type: 3}
+    - target: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+      propertyPath: 'BigLaser.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1495688348878943749, guid: f08b6284b1fe6c34fabfdd9d156a1ce9, type: 3}
     - target: {fileID: 3799482645407740622, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.036
@@ -3563,7 +3590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4607650782760298612, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3575,6 +3602,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3799482645407740622, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
   m_PrefabInstance: {fileID: 949554760}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &949554762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 160574271570205470, guid: 81465f86f1aadf24da1e54c58c076dd2, type: 3}
+  m_PrefabInstance: {fileID: 949554760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617775350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2092252d3ad1c47b1de48f6d9c3aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &978247045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,9 +3981,20 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  _experiencePoint: 0
+  _experiencePoint: 100
   _level: 1
   bSelect: 0
+  laserCannonObject: {fileID: 617775350}
+  laserCannon: {fileID: 949554762}
+  laserLevel: 0
+  fanelPrefab: {fileID: 1393654434365384442, guid: 36385d89ab9570d47a3d30e715c3050c, type: 3}
+  fanelManager: {fileID: 4859662784852281508, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+  laserButtonLabel: {fileID: 193401388}
+  fanelButtonLabel: {fileID: 2078087022}
+  laserLabelNormal: Laser
+  laserLabelPower: Power
+  fanelLabelNormal: Fanel
+  fanelLabelPower: Power
 --- !u!4 &1377977814
 Transform:
   m_ObjectHideFlags: 0
@@ -4712,7 +4761,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1377977813}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: PowerUp
+        m_MethodName: AddFanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5472,6 +5521,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1989210600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 912558210379144103, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_Name
+      value: FanelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126086055216604269, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
 --- !u!1 &1991811455
 GameObject:
   m_ObjectHideFlags: 0
@@ -5735,7 +5841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Power
+  m_text: Fannel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6338,7 +6444,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2131586097}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1377977813}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: LaserOrPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2131586097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6711,9 +6829,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377977813}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: playerHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: shotPoint
       value: 
       objectReference: {fileID: 928311197}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: MaxPlayerHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: playerModel
       value: 
@@ -6884,3 +7010,4 @@ SceneRoots:
   - {fileID: 1988692010}
   - {fileID: 1982466855}
   - {fileID: 1917672199}
+  - {fileID: 1989210600}
