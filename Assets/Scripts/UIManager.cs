@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI experienceText;
     [SerializeField] private GameObject selectItemImage;
     [SerializeField] private PlayerManager player;
+    [SerializeField] private AudioClip selectSE;
+    private AudioSource audio;
     //[SerializeField] private BulletManagert bullet;
     [SerializeField] private int _experiencePoint;
     [SerializeField, Header("現在のレベル（初期値1）")] private int _level = 1;
@@ -16,6 +18,11 @@ public class UIManager : MonoBehaviour
     public int level => _level;
 
     public bool bSelect;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -71,6 +78,7 @@ public class UIManager : MonoBehaviour
     public void PowerUp()
     {
         BulletManagert.bulletPower += 5;
+        audio.PlayOneShot(selectSE);
         Time.timeScale = 1;
         bSelect = false;
         selectItemImage.SetActive(false);
@@ -81,6 +89,7 @@ public class UIManager : MonoBehaviour
     {
         player.MaxPlayerHP += 10;
         player.playerHP += 10;
+        audio.PlayOneShot(selectSE);
         Time.timeScale = 1;
         bSelect = false;
         selectItemImage.SetActive(false);
