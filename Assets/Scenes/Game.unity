@@ -4055,7 +4055,7 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  _experiencePoint: 100
+  _experiencePoint: 0
   _level: 1
   bSelect: 0
   laserCannonObject: {fileID: 1078579869}
@@ -5143,7 +5143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticleImage: {fileID: 1788693889}
-  target: {fileID: 7244485144327828577}
+  target: {fileID: 7722781366759089924}
   aimDirectionMode: 1
   aimDistance: 25
   mainCamera: {fileID: 330585545}
@@ -6984,6 +6984,10 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 1377977813}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: playerHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: shotPoint
       value: 
