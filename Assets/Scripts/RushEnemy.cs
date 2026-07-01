@@ -3,23 +3,6 @@ using UnityEngine;
 
 public class RushEnemy : EnemyAttackBase
 {
-    [Serializable]
-    public class ShotSetting
-    {
-        [Header("射撃にかかわる変数")]
-        public GameObject Bullet;
-        [Tooltip("自機狙いかどうか")]
-        public bool isTracking = false;
-        [Tooltip("弾を撃つ間隔（秒）")]
-        public float coolTime;
-        [Tooltip("弾を撃つ力（速さ）")]
-        public float enemyBulletForce;
-
-        [Tooltip("弾を最初に生成する場所")]
-        public float offset;
-        [Tooltip("プレイヤーの手前で弾を撃たなくする")]
-        public float playerDistance;
-    }
 
     [Header("突撃にかかわる変数")]
     [SerializeField, Tooltip("最初の停止時間（秒）")]
@@ -32,14 +15,11 @@ public class RushEnemy : EnemyAttackBase
     private float rushTimer;
     [NonSerialized] public float shotTimer;
 
-    [SerializeField] private ShotSetting shot = new();
-
     private void Update()
     {
 
         if (player == null) return;
-        RushPattern();
-        if (canShot&&transform.position.z > player.position.z + shot.playerDistance) ShotPattern();
+        RushPattern(); 
     }
     public override void OnReset()
     {
@@ -57,29 +37,5 @@ public class RushEnemy : EnemyAttackBase
         }
         transform.position += transform.forward * enemyMoveSpeed * Time.deltaTime;
 
-    }
-    public void ShotPattern()
-    {
-        shotTimer += Time.deltaTime;
-        if (shotTimer > shot.coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
-        {
-            Vector3 spawnPosition = transform.position + transform.forward * shot.offset;
-
-            GameObject newBullet = Instantiate(shot.Bullet, spawnPosition, transform.rotation);
-            Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
-
-            if (shot.isTracking)
-            {
-                Vector3 shotDirection = (player.position - spawnPosition).normalized;
-                Bulletrb.AddForce(-shotDirection * -shot.enemyBulletForce);
-            }
-            else
-            {
-                Bulletrb.AddForce(-transform.forward * shot.enemyBulletForce);
-            }
-
-            Destroy(newBullet, 3f);
-            shotTimer = 0;
-        }
     }
 }
