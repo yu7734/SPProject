@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8695163145267107749}
   - component: {fileID: 6403168884136164498}
   - component: {fileID: 2674671007568266344}
-  - component: {fileID: 450169408210268630}
-  m_Layer: 0
-  m_Name: RushShotEnemy
+  - component: {fileID: -5045371219731648541}
+  - component: {fileID: 6271215281304353177}
+  m_Layer: 8
+  m_Name: RailSpreadEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 720357861559527564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 16.55}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 15, y: 5, z: 25}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1812538620162573794}
@@ -44,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720357861559527564}
-  m_Mesh: {fileID: 4300000, guid: af381da0e8c6dd84e8c9083f58df2f80, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 35bfceec004a4b6479a5051f96a164b5, type: 3}
 --- !u!23 &8695163145267107749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &2674671007568266344
 MonoBehaviour:
@@ -132,7 +133,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
---- !u!114 &450169408210268630
+--- !u!114 &-5045371219731648541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,22 +142,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 720357861559527564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56410ff2015c3644087a631ad2db3725, type: 3}
+  m_Script: {fileID: 11500000, guid: 85de7803dbcd1fc4ea76cfa983884827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 20
-  maxEnemyHP: 15
-  enemyMoveSpeed: 10
-  stopTime: 1
-  lookAtTime: 2
-  canShot: 1
-  shot:
-    Bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
-    isTracking: 1
-    coolTime: 2
-    enemyBulletForce: 3000
-    offset: 1.5
-    playerDistance: 3
+  rangeX:
+    min: -10
+    max: 10
+  rangeY:
+    min: -10
+    max: 10
+  playerDistance: 7
+  attackPower: 10
+  maxEnemyHP: 5
+  enemyMoveSpeed: 3
+  Bullet: {fileID: 6678171959917968696, guid: d43b0bdf16a4e254ba7939204fab98ee, type: 3}
+  coolTime: 0.5
+  enemyBulletForce: 750
+  offset: 1.5
+  rangeMin: 2.5
+  rangeMax: 3
+--- !u!114 &6271215281304353177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720357861559527564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 556905855827106479, guid: 826a5b4ef3966e5419f9591520a3b21e, type: 3}
+  m_PlayOnAwake: 1
+  m_LoopMode: 1
+  m_Method: 0
+  m_Duration: 10
+  m_MaxSpeed: 1.6
+  m_EasingMode: 0
+  m_AlignmentMode: 0
+  m_ObjectForwardAxis: 5
+  m_ObjectUpAxis: 4
+  m_StartOffset: 0
 --- !u!1 &5897295723147043457
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +195,7 @@ GameObject:
   - component: {fileID: 1812538620162573794}
   - component: {fileID: 9023125667194576570}
   - component: {fileID: 4990580998132395660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,8 +236,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 35, y: 5.5, z: 17}
-  m_Center: {x: 0, y: 1, z: -5}
+  m_Size: {x: 15, y: 9, z: 8}
+  m_Center: {x: 0, y: 0, z: -2}
 --- !u!65 &4990580998132395660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -230,5 +257,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 9, z: 20}
-  m_Center: {x: 0, y: -1, z: -5}
+  m_Size: {x: 6, y: 4, z: 12}
+  m_Center: {x: 0, y: 0, z: -1}
