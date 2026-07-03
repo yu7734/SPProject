@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP;
+
         isReleased = false;
         if (ui == null)
         {

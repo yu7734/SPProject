@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
         SelectItem();
     }
 
-    //�̗͂�UI
+    //HPのUI
     private void HPUI()
     {
         // HPText が未設定でも落ちないようにする（HPBar.cs 側で数値表示する場合は未設定でOK）
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
         HPText.text = "HP : " + player.playerHP + " / " + player.MaxPlayerHP;
     }
 
-    //�o���lUI
+    //経験値UI
     private void ExperienceUI()
     {
         // experienceText が未設定でも落ちないようにする（EXPBar.cs 側で数値表示する場合は未設定でOK）
@@ -75,14 +75,13 @@ public class UIManager : MonoBehaviour
         experienceText.text = "EX : " + _experiencePoint + " / 100";
     }
 
-    //�o���l����
+    //経験値加算
     public void Experience(int point)
     {
         _experiencePoint += point;
     }
 
-    //�A�C�e���I���V�[��
-
+    //アイテム選択シーン
     private void SelectItem()
     {
         if (_experiencePoint >= 100)
@@ -115,7 +114,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //�ἨA�b�v
+    //攻撃力アップ
     public void PowerUp()
     {
         BulletManagert.bulletPower += 5;
@@ -124,7 +123,7 @@ public class UIManager : MonoBehaviour
         selectItemImage.SetActive(false);
     }
 
-    //�̗̓A�b�v
+    //体力アップ
     public void HPUp()
     {
         player.MaxPlayerHP += 10;

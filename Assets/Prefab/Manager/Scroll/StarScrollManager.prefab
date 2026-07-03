@@ -48,5 +48,6 @@ MonoBehaviour:
   limit: 25
   Star1:
   - {fileID: 437314430778629639, guid: 80e7440974f1b6c44a5cf9ad9f556f45, type: 3}
+  - {fileID: 437314430778629639, guid: 2a2bdc52ebc797f46967a789385932ee, type: 3}
   Star2: []
   Star3: []

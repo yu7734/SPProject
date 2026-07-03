@@ -14,29 +14,29 @@ public class BulletEnemy : EnemyAttackBase
 
     [SerializeField, Tooltip("弾を最初に生成する場所")]
     private float offset = 1.5f;
-    [SerializeField, Tooltip("プレイヤーの手前で弾を撃たなくする")] 
-    private float playerDistance;
+
     [NonSerialized] public float shotTimer = 0;
 
     private void Update()
     {
         if (player == null) return;
         transform.position -= Vector3.forward * enemyMoveSpeed * Time.deltaTime;
-        if (transform.position.z > player.position.z+playerDistance) ShotPattern();
+        if ((transform.position.x > rangeX.min && transform.position.x <= rangeX.max) &&
+            (transform.position.y > rangeY.min && transform.position.y <= rangeY.max) &&
+             transform.position.z > player.position.z + playerDistance)
+            ShotPattern();
     }
     public void ShotPattern()
     {
         shotTimer += Time.deltaTime;
         if (shotTimer > coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
         {
-            /*if (isTracking)
-            {
-                if(RushEnemy.lookAtTime)
-                transform.LookAt(player.transform);
-            }*/
             Vector3 spawnPosition = transform.position + transform.forward * offset;
 
-            GameObject newBullet = Instantiate(Bullet, spawnPosition, transform.rotation);
+            Vector3 direction = (player.position - spawnPosition).normalized;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            GameObject newBullet = Instantiate(Bullet, spawnPosition, rotation);
             Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
 
             if (isTracking)

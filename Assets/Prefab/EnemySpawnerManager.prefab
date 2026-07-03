@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2386028378136015771}
   - component: {fileID: 4782783293320573894}
+  - component: {fileID: -2938909185062001225}
+  - component: {fileID: 6264320676704088284}
   m_Layer: 0
   m_Name: EnemySpawnerManager
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,13 +41,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6562564495504082392}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initPoolSize: 10
   maxPoolSize: 100
+  EnemySpawnerMemo: "\u901A\u5E38\u6575"
   rangeX:
     min: -8
     max: 8
@@ -56,5 +59,54 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
   - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
-  - {fileID: 720357861559527564, guid: e0fe8fc446f294c4a9ce0e71e84d5524, type: 3}
-  spawnTimer: 3
+  spawnTimer: 1
+--- !u!114 &-2938909185062001225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562564495504082392}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initPoolSize: 1
+  maxPoolSize: 1
+  EnemySpawnerMemo: "\u30EC\u30FC\u30B6\u30FC\u6575"
+  rangeX:
+    min: 0
+    max: 0
+  rangeY:
+    min: 0
+    max: 0
+  spawnZ: 20
+  enemyPrefabs:
+  - {fileID: 720357861559527564, guid: 93e1f977ef5e29a4c9c6463f5b36f6a2, type: 3}
+  spawnTimer: 5
+--- !u!114 &6264320676704088284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562564495504082392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initPoolSize: 1
+  maxPoolSize: 1
+  EnemySpawnerMemo: "\u30EC\u30FC\u30EB\u6575\u30D0\u30D6\u30EB\u5F3E"
+  rangeX:
+    min: 1
+    max: 1
+  rangeY:
+    min: 1
+    max: 1
+  spawnZ: 23
+  enemyPrefabs:
+  - {fileID: 720357861559527564, guid: 31e8761e039f52a418b8c4b580672724, type: 3}
+  spawnTimer: 5
