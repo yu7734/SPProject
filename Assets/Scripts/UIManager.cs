@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
     private LaserCannon laserCannon;
     [Tooltip("LaserCannonの最大強化段階（1回押したらPowerUpにフォールバック）")]
     private const int laserMaxLevel = 1;
-    [SerializeField, Tooltip("現在のレーザーキャノン段階。0=未取得, 1〜=取得済み段階")]
+    [SerializeField, Tooltip("現在のレーザーキャノン段階。0=未取得, 1〜3=取得済み段階")]
     private int laserLevel = 0;
 
     [Header("=== Item: Fanel ===")]
@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour
     [SerializeField, Tooltip("最大強化後のItemボタン表示")] private string laserLabelPower = "Power";
     [SerializeField, Tooltip("通常状態のFanelボタン表示")] private string fanelLabelNormal = "Fanel";
     [SerializeField, Tooltip("最大装備後のFanelボタン表示")] private string fanelLabelPower = "Power";
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -136,8 +135,10 @@ public class UIManager : MonoBehaviour
 
     // === 3つ目のボタン用：レーザーキャノン優位、最大強化後はPowerUpへフォールバック ===
     // 呼び出しルール:
-    //   laserLevel < laserMaxLevel  → LaserCannonを取得/強化
-    //   laserLevel >= laserMaxLevel → PowerUp（攻撃力アップ）にフォールバック
+    //   laserLevel == 0  → LaserCannonを有効化（LaserNum=0 / LaserSphere1）
+    //   laserLevel == 1  → LaserNum=1 / LaserSphere2 に進化
+    //   laserLevel == 2  → LaserNum=2 / LaserSphere3 に進化（最終強化）
+    //   laserLevel >= 3  → PowerUp（攻撃力アップ）にフォールバック
     public void LaserOrPower()
     {
         if (laserLevel < laserMaxLevel)
@@ -168,7 +169,7 @@ public class UIManager : MonoBehaviour
             Debug.Log($"[UpgradeLaser] laserCannon component GetComponent result = {(laserCannon == null ? "NULL" : "OK")}");
         }
 
-        // laserLevel: 0→1 (LaserNum=0), 1→2 (LaserNum=1), 2→3 (LaserNum=2) ...
+        // laserLevel: 0→1 (LaserNum=0), 1→2 (LaserNum=1), 2→3 (LaserNum=2)
         if (laserCannon != null)
         {
             int newIndex = Mathf.Clamp(laserLevel, 0, laserMaxLevel - 1);
