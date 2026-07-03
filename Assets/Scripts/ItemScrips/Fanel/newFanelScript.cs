@@ -4,6 +4,7 @@ using UnityEngine;
 public enum Tracking { Off, On }
 public class newFanelScript : MonoBehaviour
 {
+    [Header("ManagerをGameシーン上に配置\nFanelをGameシーン上に4つ配置")]
     [SerializeField] string SearchTag = "Enemy";
     FanelManager fanelManager;
     public Tracking Tracking = Tracking.Off;
