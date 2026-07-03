@@ -30,7 +30,15 @@ public class LaserCannon : MonoBehaviour
     {
         if (!ui.bSelect)
         {
-            Instantiate(BigLaser[LaserNum], transform.position + offset, Quaternion.identity);
+            // 安全チェック：BigLaser配列が空、またはLaserNumが範囲外なら何もしない
+            if (BigLaser == null || BigLaser.Length == 0)
+            {
+                Debug.LogWarning("LaserCannon: BigLaser配列がアサインされていません。Inspectorで LaserSphere1/2/3 を設定してください。");
+                return;
+            }
+            int index = Mathf.Clamp(LaserNum, 0, BigLaser.Length - 1);
+            if (BigLaser[index] == null) return;
+            Instantiate(BigLaser[index], transform.position + offset, Quaternion.identity);
         }
     }
 }
