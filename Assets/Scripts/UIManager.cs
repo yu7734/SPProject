@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
     [SerializeField, Tooltip("最大強化後のItemボタン表示")] private string laserLabelPower = "Power";
     [SerializeField, Tooltip("通常状態のFanelボタン表示")] private string fanelLabelNormal = "Fanel";
     [SerializeField, Tooltip("最大装備後のFanelボタン表示")] private string fanelLabelPower = "Power";
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
