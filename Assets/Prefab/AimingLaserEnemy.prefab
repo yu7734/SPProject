@@ -132,7 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
-  exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  exprosion: {fileID: 3568262549743503624, guid: 957eb27b10dccb64b9afcef7d15bee45, type: 3}
 --- !u!114 &-5050811875019860035
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3142,6 +3142,7 @@ GameObject:
   - component: {fileID: 765115620}
   - component: {fileID: 765115622}
   - component: {fileID: 765115621}
+  - component: {fileID: 765115623}
   m_Layer: 5
   m_Name: SerectIteImage
   m_TagString: Untagged
@@ -3209,6 +3210,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765115619}
   m_CullTransparentMesh: 1
+--- !u!114 &765115623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765115619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881799cb10bb88846b70768cce3c17d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetButton: {fileID: 1679972788}
+  delayOneFrame: 1
+  autoRestoreWhenNothingSelected: 0
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,6 +4784,7 @@ GameObject:
   - component: {fileID: 1541973854}
   - component: {fileID: 1541973856}
   - component: {fileID: 1541973855}
+  - component: {fileID: 1541973857}
   m_Layer: 5
   m_Name: pausepanel
   m_TagString: Untagged
@@ -4838,6 +4855,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541973853}
   m_CullTransparentMesh: 1
+--- !u!114 &1541973857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541973853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881799cb10bb88846b70768cce3c17d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetButton: {fileID: 489731952}
+  delayOneFrame: 1
+  autoRestoreWhenNothingSelected: 0
 --- !u!1 &1589193444
 GameObject:
   m_ObjectHideFlags: 0
