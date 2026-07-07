@@ -3998,7 +3998,6 @@ MonoBehaviour:
   levelText: {fileID: 698951775}
   levelFormat: Level - {0}
   smoothSpeed: 8
-  maxExperience: 100
 --- !u!114 &1060628672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4220,8 +4219,10 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  _experiencePoint: 100
+  _experiencePoint: 500
   _level: 1
+  exprrienceMax: 100
+  exprrienceMaxUp: 10
   bSelect: 0
   laserCannonObject: {fileID: 617775350}
   laserCannon: {fileID: 949554762}
