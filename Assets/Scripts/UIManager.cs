@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,11 +11,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int _experiencePoint;
     [SerializeField, Header("現在のレベル（初期値1）")] private int _level = 1;
 
+    ///<summary>次のレベルまでに必要な経験値数の初期値</summary>
+    [SerializeField, Header("レベルアップに必要な経験値初期値")] private int exprrienceMax = 100;
+    /// <summary>レベルが上がった回数</summary>
+    private int levelUpCount = 0;
+    /// <summary>必要な経験値数の増加量</summary>
+    [SerializeField, Header("必要な経験値増加量")] private int exprrienceMaxUp = 10;
+
+    /// <summary>計算後の必要経験値</summary>
+    private int _maxExprrience = 100;
+
     // 外部からの読み取り用プロパティ（HUDPanel / EXPBar からアクセスされる）
     public int experiencePoint => _experiencePoint;
     public int level => _level;
 
     public bool bSelect;
+
+    public int maxExprrience => _maxExprrience;
 
     // ===== アイテム選択肢用 =====
     [Header("=== Item: LaserCannon ===")]
@@ -45,6 +57,11 @@ public class UIManager : MonoBehaviour
     [SerializeField, Tooltip("最大強化後のItemボタン表示")] private string laserLabelPower = "Power";
     [SerializeField, Tooltip("通常状態のFanelボタン表示")] private string fanelLabelNormal = "Fanel";
     [SerializeField, Tooltip("最大装備後のFanelボタン表示")] private string fanelLabelPower = "Power";
+
+    private void Awake()
+    {
+        _maxExprrience = exprrienceMax;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -85,12 +102,13 @@ public class UIManager : MonoBehaviour
     //アイテム選択シーン
     private void SelectItem()
     {
-        if (_experiencePoint >= 100)
+        // 必要経験値数が増える都合上レベルアップ処理を変更
+        if (_experiencePoint >= _maxExprrience&&!bSelect)
         {
             bSelect = true;
-            // 経験値が 100 を超えた回数だけレベルアップ
-            _level += _experiencePoint / 100;
-            _experiencePoint %= 100;
+            ++_level;
+            _experiencePoint -= _maxExprrience;
+            _maxExprrience += exprrienceMaxUp;
             selectItemImage.SetActive(true);
             Time.timeScale = 0;
 

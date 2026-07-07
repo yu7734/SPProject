@@ -10,7 +10,7 @@ public class EXPBar : MonoBehaviour
     [SerializeField, Header("レベル表示テキスト（例：Level - 1）")] private TextMeshProUGUI levelText;
     [SerializeField, Header("レベル表示のフォーマット（{0}が現在レベル）")] private string levelFormat = "Level - {0}";
     [SerializeField, Header("バーの追従速度")] private float smoothSpeed = 8f;
-    [SerializeField, Header("レベルアップに必要な経験値")] private int maxExperience = 100;
+    //[SerializeField, Header("レベルアップに必要な経験値")] private int maxExperience = 100;
 
     void Update()
     {
@@ -18,8 +18,9 @@ public class EXPBar : MonoBehaviour
 
         // UIManagerから直接経験値を取得
         int currentExp = uiManager.experiencePoint;
+        int maxExp = uiManager.maxExprrience;
 
-        float ratio = (float)currentExp / Mathf.Max(1, maxExperience);
+        float ratio = (float)currentExp / Mathf.Max(1, maxExp);
         ratio = Mathf.Clamp01(ratio);
 
         // ゲーム停止中（アイテム選択中）でも動くように unscaledDeltaTime を使用
@@ -28,7 +29,7 @@ public class EXPBar : MonoBehaviour
         // EXPの数値を「現在EXP/最大EXP」の形式で表示
         if (expText != null)
         {
-            expText.text = $"{Mathf.Clamp(currentExp, 0, maxExperience)}/{maxExperience}";
+            expText.text = $"{Mathf.Clamp(currentExp, 0, maxExp)}/{maxExp}";
         }
 
         // レベル表示
