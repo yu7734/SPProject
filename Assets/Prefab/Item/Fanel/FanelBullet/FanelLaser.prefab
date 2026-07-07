@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 2392960535360912241}
   - component: {fileID: 8897842880269451759}
   - component: {fileID: 8974765710068024719}
-  - component: {fileID: 2347769216971132833}
-  - component: {fileID: -9051184507754538812}
+  - component: {fileID: 2968108220612676439}
   m_Layer: 0
-  m_Name: PlayerLaser
+  m_Name: FanelLaser
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +139,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2347769216971132833
+--- !u!114 &2968108220612676439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,17 +154,3 @@ MonoBehaviour:
   bulletSpeed: 3000
   bulletDamageRate: 1
   bulletDamageBonus: 0
---- !u!114 &-9051184507754538812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6830236781976906278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e172b8dbc2bfb47448120341016702ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SearchTag: Enemy
-  SearchDistance: 2
