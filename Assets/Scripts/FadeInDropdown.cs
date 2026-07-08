@@ -9,6 +9,7 @@ using UnityEngine;
 ///   - アニメ中は blocksRaycasts=false / interactable=false でクリック不可
 ///   - Time.timeScale = 0 でも動く（unscaledDeltaTime を使用）
 ///   - 派手すぎない dropDistance と duration を Inspector で調整可能
+///   - Awake で本来の位置を1回だけ記憶するので、ズレた位置で止まらない
 ///
 /// 使い方:
 ///   1. アニメさせたい UI パネル（例: SerectItemImage）や個別ボタンにこのスクリプトを AddComponent
