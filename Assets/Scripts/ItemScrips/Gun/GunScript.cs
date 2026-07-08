@@ -12,10 +12,8 @@ public class GunScript : MonoBehaviour
     PlayerInput playerInput;
     void Awake()
     {
-        GameObject GameManager = GameObject.Find("GameManager");
-        ui = GameManager.GetComponent<UIManager>();
-        GameObject Player = GameObject.Find("Player");
-        playerInput = Player.GetComponent<PlayerInput>();
+        ui = FindAnyObjectByType<UIManager>();
+        playerInput = FindAnyObjectByType<PlayerInput>();
     }
 
     // Update is called once per frame
