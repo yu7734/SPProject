@@ -3142,6 +3142,7 @@ GameObject:
   - component: {fileID: 765115620}
   - component: {fileID: 765115622}
   - component: {fileID: 765115621}
+  - component: {fileID: 765115624}
   - component: {fileID: 765115623}
   m_Layer: 5
   m_Name: SerectIteImage
@@ -3169,8 +3170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.016479492, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.008300781, y: 0}
+  m_SizeDelta: {x: -0.016479492, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765115621
 MonoBehaviour:
@@ -3219,12 +3220,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 765115619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881799cb10bb88846b70768cce3c17d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 85b5519df87e0594685e8f1bf21f466f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetButton: {fileID: 1679972788}
-  delayOneFrame: 1
-  autoRestoreWhenNothingSelected: 0
+  duration: 1
+  dropDistance: 60
+  easeType: 1
+--- !u!225 &765115624
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765115619}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,7 +4248,7 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  _experiencePoint: 500
+  _experiencePoint: 0
   _level: 1
   exprrienceMax: 100
   exprrienceMaxUp: 10
