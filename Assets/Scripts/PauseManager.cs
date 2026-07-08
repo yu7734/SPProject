@@ -95,13 +95,24 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    // Escキーが押されたかを判定（New Input System / 旧 Input Manager の両対応）
+    // Escキー / コントローラーのStartボタンが押されたかを判定（New Input System / 旧 Input Manager の両対応）
     private bool IsEscapePressed()
     {
 #if ENABLE_INPUT_SYSTEM
-        return Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+        // キーボード Esc
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            return true;
+        }
+        // ゲームパッドの Start ボタン（Xbox=Menu / PS=Options）
+        if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
+        {
+            return true;
+        }
+        return false;
 #else
-        return Input.GetKeyDown(KeyCode.Escape);
+        // 旧 Input Manager：Esc または "Submit"/"Cancel" ボタン
+        return Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Cancel");
 #endif
     }
 
