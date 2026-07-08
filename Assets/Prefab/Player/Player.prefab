@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 3248423529176856624}
   - component: {fileID: 4485700448457686790}
   - component: {fileID: 3387444970664966248}
+  - component: {fileID: -4984924638923568422}
   - component: {fileID: 7030150969893951348}
   - component: {fileID: 8513766026860292035}
   m_Layer: 0
@@ -162,13 +163,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   moveInput: {x: 0, y: 0}
+  minPlayerRangeX: 0
+  maxPlayerRangeX: 0
+  minPlayerRangeY: 0
+  maxPlayerRangeY: 0
   bulletPrefab: {fileID: 6830236781976906278, guid: c5b92e8728bdede479bccdea1aad1641, type: 3}
+  bulletSpeed: 0
   shotPoint: {fileID: 230322089902159654}
   playerHP: 100
   MaxPlayerHP: 100
-  enemy: []
   ui: {fileID: 0}
-  justDodgeManager: {fileID: 5409762031440898568}
   playerModel: {fileID: 3854595739909943108}
   bJustDodge: 0
   dodgeCoolTime: 0
@@ -224,6 +228,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.72
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4984924638923568422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467476009098623023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01604a371c4c37e4fa891f373a69b474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSpeed: 3
 --- !u!114 &7030150969893951348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +378,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4984924638923568422}
+        m_TargetAssemblyTypeName: SpeedUpCommand, Assembly-CSharp
+        m_MethodName: OnGameSpeedUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c6bebbe-d172-40b6-84e6-8dba42e477dc
+    m_ActionName: 'Player/SpeedUpCommand[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -566,10 +599,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3248423529176856624}
   cameraShake: {fileID: 0}
-  yawTorqueMagnitude: 20
-  pithcTorqueMagnitude: 60
-  rollTorqueMagnitude: 30
-  restoringTorqueMagnitude: 100
 --- !u!54 &4417157468962316149
 Rigidbody:
   m_ObjectHideFlags: 0
