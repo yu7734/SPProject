@@ -207,22 +207,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7722781366759089924}
     m_Modifications:
-    - target: {fileID: 832796154826491069, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1306079529123716534, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
-      propertyPath: Ofset.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1546489899747537915, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
-      propertyPath: Ofset.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2689047287485794608, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4595118230070312321, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
       propertyPath: m_Name
       value: SyabonManager
@@ -4266,8 +4250,8 @@ MonoBehaviour:
   player: {fileID: 990258963}
   _experiencePoint: 0
   _level: 1
-  exprrienceMax: 100
-  exprrienceMaxUp: 10
+  exprrienceMax: 50
+  exprrienceMaxUp: 20
   bSelect: 0
   laserCannonObject: {fileID: 617775350}
   laserCannon: {fileID: 949554762}
@@ -7175,10 +7159,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7722781366759089924}
     m_Modifications:
-    - target: {fileID: 836293906497020067, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2707260208510251173, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
       propertyPath: m_Name
       value: GunManager
@@ -7223,22 +7203,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5395884712517568074, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189649227617570146, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7672778173485600159, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2742327054934161074, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-    - {fileID: 5637529187037588070, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
-    - {fileID: 2690986891310488474, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

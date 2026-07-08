@@ -53,7 +53,9 @@ MonoBehaviour:
   - {fileID: 836293906497020067}
   - {fileID: 7672778173485600159}
   - {fileID: 6189649227617570146}
+  GunBullet: {fileID: 6830236781976906278, guid: 8dcc8dae7b24710448c666eadfd1bce0, type: 3}
   GunCount: 0
+  Serect: 0
 --- !u!1001 &879626803993324332
 PrefabInstance:
   m_ObjectHideFlags: 0
