@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8949786704745908759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7381056556340825404}
+  - component: {fileID: 547153736506685435}
+  m_Layer: 0
+  m_Name: TutorialTargetSpawnerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7381056556340825404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8949786704745908759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 21.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547153736506685435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8949786704745908759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initPoolSize: 0
+  maxPoolSize: 3
+  EnemySpawnerMemo: "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB\u306E\u7684"
+  rangeX:
+    min: -4
+    max: 4
+  rangeY:
+    min: -3
+    max: 4
+  spawnZ: 20
+  enemyPrefabs:
+  - {fileID: 2491960067729714275, guid: 78a45afee6513934d83965fbc6d18750, type: 3}
+  spawnTimer: 0.25
