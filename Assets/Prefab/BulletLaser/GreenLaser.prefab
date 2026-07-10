@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 8897842880269451759}
   - component: {fileID: 8974765710068024719}
   - component: {fileID: 2968108220612676439}
-  - component: {fileID: 9003690134780352137}
-  - component: {fileID: 7509424849196465688}
   m_Layer: 0
   m_Name: GreenLaser
   m_TagString: PlayerBullet

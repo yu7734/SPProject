@@ -3290,6 +3290,11 @@ MonoBehaviour:
   - {fileID: 1890880186}
   - {fileID: 1679972790}
   - {fileID: 2131586096}
+  levelFormat: '{0}
+
+    <size=55%>Lv {1}/{2}</size>'
+  maxedLabel: Power
+  laserDisplayMax: 3
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,11 +3593,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &896691467 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5467476009098623023, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
-  m_PrefabInstance: {fileID: 7244485144327828576}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &909983285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,10 +4287,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1377977814}
   - component: {fileID: 1377977813}
-  - component: {fileID: 1377977818}
-  - component: {fileID: 1377977815}
-  - component: {fileID: 1377977817}
-  - component: {fileID: 1377977816}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4314,8 +4310,7 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   selectItemImage: {fileID: 765115619}
   player: {fileID: 990258963}
-  bullet: {fileID: 0}
-  _experiencePoint: 90
+  _experiencePoint: 0
   _level: 1
   exprrienceMax: 50
   exprrienceMaxUp: 20
@@ -4327,18 +4322,6 @@ MonoBehaviour:
   fanelManager: {fileID: 4859662784852281508, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
   gunManager: {fileID: 487813211}
   syabonManager: {fileID: 300828247}
-  laserButtonLabel: {fileID: 193401388}
-  fanelButtonLabel: {fileID: 2078087022}
-  laserLabelNormal: Laser
-  laserLabelPower: Power
-  fanelLabelNormal: Fanel
-  fanelLabelPower: Power
-  gunButtonLabel: {fileID: 645175239}
-  syabonButtonLabel: {fileID: 0}
-  gunLabelNormal: Gun
-  gunLabelPower: Power
-  syabonLabelNormal: Syabon
-  syabonLabelPower: Power
 --- !u!4 &1377977814
 Transform:
   m_ObjectHideFlags: 0
@@ -7710,104 +7693,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8380161179720321260, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
   m_PrefabInstance: {fileID: 7244485144327828576}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &7244485144327828578
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896691467}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.3
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &7244485144327828583
 --- !u!114 &7244485144327828582
 MonoBehaviour:
   m_ObjectHideFlags: 0
