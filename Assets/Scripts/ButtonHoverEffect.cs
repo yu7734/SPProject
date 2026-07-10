@@ -124,6 +124,24 @@ public class ButtonHoverEffect : MonoBehaviour,
         UpdateSelectedOnlyObjects(false);
     }
 
+    /// <summary>
+    /// 基準色（元の色）を外部から差し替える。
+    /// ItemSelectRandomizer などがアイテムに応じたボタン色を設定するときに使う。
+    /// 以降のホバー演出（Brightenの光り方・非選択時の戻り先）はこの色を基準に動作する。
+    /// </summary>
+    public void SetBaseColor(Color color)
+    {
+        originalColor = color;
+        if (targetImage == null)
+        {
+            targetImage = GetComponent<Image>();
+        }
+        if (targetImage != null)
+        {
+            targetImage.color = color;
+        }
+    }
+
     private void UpdateSelectedOnlyObjects(bool show)
     {
         if (selectedOnlyObjects == null) return;

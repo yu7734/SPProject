@@ -1935,6 +1935,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440867155}
   m_CullTransparentMesh: 1
+--- !u!114 &487813211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6572565884440787586, guid: 2209a2349e8f7ad4dadecdd6a14e8f97, type: 3}
+  m_PrefabInstance: {fileID: 1299485601589512649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed85ac151005ed42a553bb652621d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &489731952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,7 +2440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hp
+  m_text: Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3068,13 +3079,14 @@ GameObject:
   - component: {fileID: 765115624}
   - component: {fileID: 765115623}
   - component: {fileID: 765115625}
+  - component: {fileID: 765115626}
   m_Layer: 5
   m_Name: SerectIteImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &765115620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3177,6 +3189,40 @@ MonoBehaviour:
   targetButton: {fileID: 1679972788}
   delayOneFrame: 1
   autoRestoreWhenNothingSelected: 0
+--- !u!114 &765115626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765115619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bd7c2d257f72846827ffa110c14a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPool:
+  - label: Gun
+    color: {r: 0.45, g: 0.85, b: 0.45, a: 1}
+    action: 4
+  - label: Fanel
+    color: {r: 0.9, g: 0.4, b: 0.4, a: 1}
+    action: 3
+  - label: Laser
+    color: {r: 0.45, g: 0.75, b: 0.95, a: 1}
+    action: 2
+  - label: Syabon
+    color: {r: 0.7, g: 0.45, b: 0.9, a: 1}
+    action: 5
+  buttons:
+  - {fileID: 1890880186}
+  - {fileID: 1679972790}
+  - {fileID: 2131586096}
+  levelFormat: '{0}
+
+    <size=55%>Lv {1}/{2}</size>'
+  maxedLabel: Power
+  laserDisplayMax: 3
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4202,12 +4248,8 @@ MonoBehaviour:
   laserLevel: 0
   fanelPrefab: {fileID: 1393654434365384442, guid: 36385d89ab9570d47a3d30e715c3050c, type: 3}
   fanelManager: {fileID: 4859662784852281508, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
-  laserButtonLabel: {fileID: 193401388}
-  fanelButtonLabel: {fileID: 2078087022}
-  laserLabelNormal: Laser
-  laserLabelPower: Power
-  fanelLabelNormal: Fanel
-  fanelLabelPower: Power
+  gunManager: {fileID: 487813211}
+  syabonManager: {fileID: 300828247}
 --- !u!4 &1377977814
 Transform:
   m_ObjectHideFlags: 0
@@ -5431,7 +5473,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1377977813}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HPUp
+        m_MethodName: AddSyabon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
