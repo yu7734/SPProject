@@ -8,7 +8,7 @@ public class BulletManagert : MonoBehaviour
     [Tooltip("ダメージ倍率")]public float bulletDamageRate = 1.0f;
     [Tooltip("倍率計算後に固定値加算")]public int bulletDamageBonus = 0;
     int bulletAttack;
-        }
+        
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
