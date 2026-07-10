@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7357171117861188535}
   m_Layer: 0
   m_Name: AimingLaser
-  m_TagString: EnemyBullet
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
