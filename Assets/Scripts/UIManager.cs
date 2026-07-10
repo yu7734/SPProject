@@ -29,6 +29,13 @@ public class UIManager : MonoBehaviour
 
     public int maxExprrience => _maxExprrience;
 
+    // ===== アイテム段階の外部参照用（ItemSelectRandomizerなどが使用） =====
+    public int LaserLevel => laserLevel;
+    public int LaserMaxLevel => laserMaxLevel;
+    public int FanelMaxCount => fanelMaxCount;
+    public int GunMaxCount => gunMaxCount;
+    public int SyabonMaxCount => syabonMaxCount;
+
     // ===== アイテム選択肢用 =====
     [Header("=== Item: LaserCannon ===")]
     [SerializeField, Tooltip("シーンに配置済みのLaserCannonオブジェクト（初期は非アクティブ推奨）")]
@@ -48,15 +55,15 @@ public class UIManager : MonoBehaviour
     [Tooltip("ファンネルの最大数")]
     private const int fanelMaxCount = 4;
 
-    [Header("=== ボタン表示ラベル ===")]
-    [SerializeField, Tooltip("Itemボタン(Laser)内のTextMeshPro")]
-    private TextMeshProUGUI laserButtonLabel;
-    [SerializeField, Tooltip("Fanelボタン内のTextMeshPro")]
-    private TextMeshProUGUI fanelButtonLabel;
-    [SerializeField, Tooltip("通常状態のItemボタン表示")] private string laserLabelNormal = "Item";
-    [SerializeField, Tooltip("最大強化後のItemボタン表示")] private string laserLabelPower = "Power";
-    [SerializeField, Tooltip("通常状態のFanelボタン表示")] private string fanelLabelNormal = "Fanel";
-    [SerializeField, Tooltip("最大装備後のFanelボタン表示")] private string fanelLabelPower = "Power";
+    [Header("=== Item: Gun / Syabon ===")]
+    [SerializeField, Tooltip("シーンに配置済みのGunManager")]
+    private GunManagerScript gunManager;
+    [SerializeField, Tooltip("シーンに配置済みのSyabonManager")]
+    private SyabonManagerScript syabonManager;
+    /// <summary>ガンの最大段階数（GunManagerScript.SerectGunの4段階に対応）</summary>
+    private const int gunMaxCount = 4;
+    /// <summary>シャボンの最大段階数（SyabonManagerScript.SerectSyabonの4段階に対応）</summary>
+    private const int syabonMaxCount = 4;
 
     private void Awake()
     {
@@ -111,25 +118,7 @@ public class UIManager : MonoBehaviour
             _maxExprrience += exprrienceMaxUp;
             selectItemImage.SetActive(true);
             Time.timeScale = 0;
-
-            // ボタン表示ラベルを状態に応じて更新
-            UpdateButtonLabels();
-        }
-    }
-
-    // 各アイテムボタンの表示文字を状態に応じて切り替える
-    private void UpdateButtonLabels()
-    {
-        // Itemボタン(Laser): 最大強化済みなら Power 表記に
-        if (laserButtonLabel != null)
-        {
-            laserButtonLabel.text = (laserLevel >= laserMaxLevel) ? laserLabelPower : laserLabelNormal;
-        }
-        // Fanelボタン: ファンネル最大装備済みなら Power 表記に
-        if (fanelButtonLabel != null)
-        {
-            int currentFanel = (fanelManager != null) ? fanelManager.Fanelcount : 0;
-            fanelButtonLabel.text = (currentFanel >= fanelMaxCount) ? fanelLabelPower : fanelLabelNormal;
+            // ラベル・色・段階表示はパネル側の ItemSelectRandomizer が OnEnable で更新する
         }
     }
 
@@ -226,6 +215,50 @@ public class UIManager : MonoBehaviour
         // Fanelのインスタンスを生成（newFanelScript.Start内でFanelManager.Fanelcountをインクリメント）
         Instantiate(fanelPrefab);
 
+        CloseSelectUI();
+    }
+
+    // === ガン追加（最大4段階、上限後はPowerUpにフォールバック） ===
+    // 選択パネルのボタンOnClickに割り当てる
+    public void AddGun()
+    {
+        if (gunManager == null)
+        {
+            Debug.LogWarning("UIManager.AddGun: gunManager is not assigned.");
+            CloseSelectUI();
+            return;
+        }
+
+        if (gunManager.GunCount >= gunMaxCount)
+        {
+            // 最大段階に達したらPowerUpにフォールバック
+            PowerUp();
+            return;
+        }
+
+        gunManager.SerectGun();
+        CloseSelectUI();
+    }
+
+    // === シャボン追加（最大4段階、上限後はPowerUpにフォールバック） ===
+    // 選択パネルのボタンOnClickに割り当てる
+    public void AddSyabon()
+    {
+        if (syabonManager == null)
+        {
+            Debug.LogWarning("UIManager.AddSyabon: syabonManager is not assigned.");
+            CloseSelectUI();
+            return;
+        }
+
+        if (syabonManager.SyabonCount >= syabonMaxCount)
+        {
+            // 最大段階に達したらPowerUpにフォールバック
+            PowerUp();
+            return;
+        }
+
+        syabonManager.SerectSyabon();
         CloseSelectUI();
     }
 
