@@ -7221,14 +7221,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2938909185062001225, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -2938909185062001225, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: spawnTimer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2386028378136015771, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7269,25 +7261,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4782783293320573894, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782783293320573894, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: spawnTimer
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6562564495504082392, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
       propertyPath: m_Name
       value: EnemySpawnerManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6562564495504082392, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6562564495504082392, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
