@@ -5,18 +5,6 @@ public class BulletManagert : MonoBehaviour
     Rigidbody rb;
     [SerializeField] private float bulletSpeed;
     [SerializeField] public static int bulletPower = 5;
-    private PlaySEManager playSEManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        playSEManager = GetComponent<PlaySEManager>();
-
-    }
-    void Start()
-    {
-        rb.linearVelocity = this.transform.forward * bulletSpeed * Time.fixedDeltaTime;
     [Tooltip("ダメージ倍率")]public float bulletDamageRate = 1.0f;
     [Tooltip("倍率計算後に固定値加算")]public int bulletDamageBonus = 0;
     int bulletAttack;
