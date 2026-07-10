@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEditor.SearchService;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,9 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI experienceText;
     [SerializeField] private GameObject selectItemImage;
     [SerializeField] private PlayerManager player;
-    [SerializeField] private AudioClip selectSE;
-    private AudioSource audio;
-    //[SerializeField] private BulletManagert bullet;
+    private PlaySEManager playSEManager;
+    [SerializeField] private BulletManagert bullet;
     [SerializeField] private int _experiencePoint;
     [SerializeField, Header("現在のレベル（初期値1）")] private int _level = 1;
 
@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        playSEManager = GetComponent<PlaySEManager>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,6 +66,8 @@ public class UIManager : MonoBehaviour
         if (_experiencePoint >= 100)
         {
             bSelect = true;
+            playSEManager.PlaySE(1);
+            //openAudio.PlayOneShot(openItemSE);
             // 経験値が 100 を超えた回数だけレベルアップ
             _level += _experiencePoint / 100;
             _experiencePoint %= 100;
@@ -78,7 +80,7 @@ public class UIManager : MonoBehaviour
     public void PowerUp()
     {
         BulletManagert.bulletPower += 5;
-        audio.PlayOneShot(selectSE);
+        playSEManager.PlaySE(0);
         Time.timeScale = 1;
         bSelect = false;
         selectItemImage.SetActive(false);
@@ -89,7 +91,7 @@ public class UIManager : MonoBehaviour
     {
         player.MaxPlayerHP += 10;
         player.playerHP += 10;
-        audio.PlayOneShot(selectSE);
+        playSEManager.PlaySE(0);
         Time.timeScale = 1;
         bSelect = false;
         selectItemImage.SetActive(false);

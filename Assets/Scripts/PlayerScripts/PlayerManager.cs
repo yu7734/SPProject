@@ -27,8 +27,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField, Tooltip("弾の速度")] private float bulletSpeed;
 
-    [SerializeField] private AudioClip bulletSE;
-    private AudioSource audio;
+    [SerializeField] private PlaySEManager playSEManager;
     
     //発射する位置
     [SerializeField] private Transform shotPoint;
@@ -60,9 +59,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        //bulletPrefab = GetComponent<Rigidbody>();
-        //Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
+        playSEManager = GetComponent<PlaySEManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -127,7 +124,7 @@ public class PlayerManager : MonoBehaviour
         {
             //Vector3 playerShotDirection = playerChildObject.rotation;
             //弾を呼び出す
-            audio.PlayOneShot(bulletSE);
+            playSEManager.PlaySE(0);
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
 
         }
