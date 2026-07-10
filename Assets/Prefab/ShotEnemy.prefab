@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6403168884136164498}
   - component: {fileID: 2674671007568266344}
   - component: {fileID: 8699908776044055405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShotEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 16.55}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1449812521842234594}
@@ -131,7 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
-  exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  exprosion: {fileID: 3568262549743503624, guid: 957eb27b10dccb64b9afcef7d15bee45, type: 3}
 --- !u!114 &8699908776044055405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,15 +145,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1667e82863105b94dab0256737d3316c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeX:
+    min: -10
+    max: 10
+  rangeY:
+    min: -10
+    max: 10
+  playerDistance: 7
   attackPower: 10
-  maxEnemyHP: 50
+  maxEnemyHP: 40
   enemyMoveSpeed: 3
   Bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
   isTracking: 1
   coolTime: 3
   enemyBulletForce: 1500
   offset: 1.5
-  playerDistance: 3
 --- !u!1 &5844787781922101772
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +171,7 @@ GameObject:
   - component: {fileID: 1449812521842234594}
   - component: {fileID: 3948058138819620570}
   - component: {fileID: 5369898506219124864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

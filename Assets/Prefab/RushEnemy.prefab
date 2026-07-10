@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -850026788006474330}
   - component: {fileID: 2674671007568266344}
   - component: {fileID: 8689709892366153393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RushEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -29,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720357861559527564}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 16.55}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1946404934447318862}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &4066032087193441066
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
+  hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
   exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
 --- !u!114 &8689709892366153393
 MonoBehaviour:
@@ -144,19 +145,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56410ff2015c3644087a631ad2db3725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeX:
+    min: 0
+    max: 0
+  rangeY:
+    min: 0
+    max: 0
+  playerDistance: 3
   attackPower: 30
   maxEnemyHP: 5
   enemyMoveSpeed: 10
   stopTime: 1
   lookAtTime: 3
   canShot: 0
-  shot:
-    Bullet: {fileID: 0}
-    isTracking: 0
-    coolTime: 0.5
-    enemyBulletForce: 3
-    offset: 1.5
-    playerDistance: 0
 --- !u!1 &3098837181651534511
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,7 @@ GameObject:
   - component: {fileID: 1946404934447318862}
   - component: {fileID: 3330944991038030685}
   - component: {fileID: 4809529720001651165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private UIManager ui;
     [SerializeField] private GameObject playerBullet;
 
+    [SerializeField] private GameObject hit;
     [SerializeField] private GameObject exprosion;
     [NonSerialized] public Transform player;
 
@@ -33,6 +34,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP;
+
         isReleased = false;
         if (ui == null)
         {
@@ -98,6 +100,10 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         if (enemyHP <= 0)
         {
             EnemyDie();
+        }
+        else
+        {
+            Instantiate(hit, this.transform.position, Quaternion.identity);
         }
 
     }

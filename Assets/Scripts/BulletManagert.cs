@@ -17,6 +17,17 @@ public class BulletManagert : MonoBehaviour
     void Start()
     {
         rb.linearVelocity = this.transform.forward * bulletSpeed * Time.fixedDeltaTime;
+    [Tooltip("ダメージ倍率")]public float bulletDamageRate = 1.0f;
+    [Tooltip("倍率計算後に固定値加算")]public int bulletDamageBonus = 0;
+    int bulletAttack;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        //RigidBody���擾���A�v���C���[�̌����Ă�������ɒe���΂�
+        rb = GetComponent<Rigidbody>(); 
+        rb.linearVelocity = this.transform.forward * bulletSpeed * Time.fixedDeltaTime;
+        bulletAttack = (int)(bulletPower * bulletDamageRate) + bulletDamageBonus;
+        Debug.Log(bulletAttack);
     }
 
     // Update is called once per frame
@@ -29,15 +40,9 @@ public class BulletManagert : MonoBehaviour
     {
         if (other.CompareTag(this.tag)) return;
         IEnemyDamage damage = other.gameObject.GetComponentInParent<IEnemyDamage>();
-
-
-        //if (other.CompareTag("Enemy"))
-            playSEManager.PlaySE(0);
-
         if (damage != null)
         {
-            damage.EnemyDamaged(bulletPower);
-            //audioSource.PlayOneShot(audioClip);
+            damage.EnemyDamaged(bulletAttack);
             Destroy(gameObject);
         }
     }

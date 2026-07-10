@@ -4,6 +4,7 @@ using UnityEngine;
 public enum Tracking { Off, On }
 public class newFanelScript : MonoBehaviour
 {
+    [Header("ManagerをGameシーン上に配置\nFanelをGameシーン上に4つ配置")]
     [SerializeField] string SearchTag = "Enemy";
     FanelManager fanelManager;
     public Tracking Tracking = Tracking.Off;
@@ -18,8 +19,7 @@ public class newFanelScript : MonoBehaviour
         player = GameObject.Find("Player");//自機のオブジェクト名
         transform.position = player.transform.position + offset;//出現した時にプレイヤーの真後ろに生成
         setup = transform.rotation;
-        GameObject fanelManagerObj = GameObject.Find("FanelManager");
-        fanelManager = fanelManagerObj.GetComponent<FanelManager>();
+        fanelManager = FindAnyObjectByType<FanelManager>();
     }
 
     void Start()

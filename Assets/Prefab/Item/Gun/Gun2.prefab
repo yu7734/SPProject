@@ -71,9 +71,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 692d7de11414e93459381e053bf8b721, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3084463289320621808}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 692d7de11414e93459381e053bf8b721, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2267069207949575168}
   m_SourcePrefab: {fileID: 100100000, guid: 692d7de11414e93459381e053bf8b721, type: 3}
 --- !u!1 &3666933277069971985 stripped
 GameObject:
@@ -81,22 +78,6 @@ GameObject:
   m_PrefabInstance: {fileID: 4477415525795606336}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3084463289320621808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666933277069971985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfb612181e723f947ac83d6df8719282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooltime: 2
-  shotReady: 1
-  bulletPrefab: {fileID: 6830236781976906278, guid: 8dcc8dae7b24710448c666eadfd1bce0, type: 3}
-  Ofset: {x: 0, y: 0, z: 1}
---- !u!114 &2267069207949575168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
