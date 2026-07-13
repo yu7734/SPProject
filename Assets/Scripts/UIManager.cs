@@ -47,19 +47,15 @@ public class UIManager : MonoBehaviour
     [SerializeField, Tooltip("現在のレーザーキャノン段階。0=未取得, 1〜3=取得済み段階")]
     private int laserLevel = 0;
 
-    [Header("=== Item: Fanel ===")]
-    [SerializeField, Tooltip("ファンネルのPrefab")]
-    private GameObject fanelPrefab;
+    [Header("=== Item: Fanel / Gun / Syabon ===")]
     [SerializeField, Tooltip("シーンに配置済みのFanelManager")]
-    private FanelManager fanelManager;
-    [Tooltip("ファンネルの最大数")]
-    private const int fanelMaxCount = 4;
-
-    [Header("=== Item: Gun / Syabon ===")]
+    private newFanelManager fanelManager;
     [SerializeField, Tooltip("シーンに配置済みのGunManager")]
     private GunManagerScript gunManager;
     [SerializeField, Tooltip("シーンに配置済みのSyabonManager")]
     private SyabonManagerScript syabonManager;
+    /// <summary>ファンネルの最大段階数（GunManagerScript.Fanelの4段階に対応）</summary>
+    private const int fanelMaxCount = 4;
     /// <summary>ガンの最大段階数（GunManagerScript.SerectGunの4段階に対応）</summary>
     private const int gunMaxCount = 4;
     /// <summary>シャボンの最大段階数（SyabonManagerScript.SerectSyabonの4段階に対応）</summary>
@@ -198,22 +194,21 @@ public class UIManager : MonoBehaviour
     // === ファンネル1個追加（最大4個、上限後はPowerUpにフォールバック） ===
     public void AddFanel()
     {
-        if (fanelManager == null || fanelPrefab == null)
+        if (fanelManager == null)
         {
             Debug.LogWarning("UIManager.AddFanel: fanelManager or fanelPrefab is not assigned.");
             CloseSelectUI();
             return;
         }
 
-        if (fanelManager.Fanelcount >= fanelMaxCount)
+        if (fanelManager.FanelCount >= fanelMaxCount)
         {
             // 最大数に達したらPowerUpにフォールバック（Itemボタンと同じ挙動）
             PowerUp();
             return;
         }
 
-        // Fanelのインスタンスを生成（newFanelScript.Start内でFanelManager.Fanelcountをインクリメント）
-        Instantiate(fanelPrefab);
+        fanelManager.SerectFanel();
 
         CloseSelectUI();
     }
