@@ -5,6 +5,11 @@ public class SyabonManagerScript : MonoBehaviour
     [SerializeField] GameObject[] Syabon;
     [SerializeField] GameObject SyabonBullet;
     BulletManagert BulletManagert;
+    [Tooltip("Œ‚‚ÂŠp“x‚Ì”ÍˆÍ")] public float x_Range = 10f, y_Range = 10f;
+    [Tooltip("Œ‚‚Ä‚éó‘Ô‚Å‚ÌŒ‚‚Â•p“x")] public float ShotInterval = 0.2f;
+    [Tooltip("Œ‚‚½‚È‚¢ŠÔ")] public float ShotCooltime = 1f;
+    [Tooltip("Œ‚‚Ä‚éŠÔ")] public float ShotDuration = 3f;
+    [Tooltip("ˆê“x‚ÉŒ‚‚ÂŒÂ”")] public int ShotFrequency = 2;
     public int SyabonCount = 0;
     [SerializeField] bool Serect=false; 
     void Awake()
