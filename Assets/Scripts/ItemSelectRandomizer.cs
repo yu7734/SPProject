@@ -46,14 +46,14 @@ public class ItemSelectRandomizer : MonoBehaviour
     private UIManager ui;
     private GunManagerScript gunManager;
     private SyabonManagerScript syabonManager;
-    private FanelManager fanelManager;
+    private newFanelManager fanelManager;
 
     void Awake()
     {
         ui = FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
         gunManager = FindAnyObjectByType<GunManagerScript>(FindObjectsInactive.Include);
         syabonManager = FindAnyObjectByType<SyabonManagerScript>(FindObjectsInactive.Include);
-        fanelManager = FindAnyObjectByType<FanelManager>(FindObjectsInactive.Include);
+        fanelManager = FindAnyObjectByType<newFanelManager>(FindObjectsInactive.Include);
         if (buttons == null || buttons.Length == 0)
         {
             buttons = GetComponentsInChildren<Button>(true);
@@ -140,7 +140,7 @@ public class ItemSelectRandomizer : MonoBehaviour
                 return true;
             case ItemAction.AddFanel:
                 if (fanelManager == null || ui == null) return false;
-                current = fanelManager.Fanelcount;
+                current = fanelManager.FanelCount;
                 max = ui.FanelMaxCount;
                 return true;
             case ItemAction.LaserOrPower:
