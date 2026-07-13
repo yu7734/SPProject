@@ -4205,6 +4205,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5467476009098623023, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
   m_PrefabInstance: {fileID: 7244485144327828576}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1364346784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1851900022898370009, guid: 55ce888c60cf9c04a8ebd203c3bb67f6, type: 3}
+  m_PrefabInstance: {fileID: 71059267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73d09bc321320d45aba6c95df19e97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1377977812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,7 +4260,7 @@ MonoBehaviour:
   fanelPrefab: {fileID: 1393654434365384442, guid: 36385d89ab9570d47a3d30e715c3050c, type: 3}
   fanelManager: {fileID: 4859662784852281508, guid: d4545587b4fc5d844bf38ff2fc9e833c, type: 3}
   gunManager: {fileID: 487813211}
-  syabonManager: {fileID: 300828247}
+  syabonManager: {fileID: 1364346784}
 --- !u!4 &1377977814
 Transform:
   m_ObjectHideFlags: 0
