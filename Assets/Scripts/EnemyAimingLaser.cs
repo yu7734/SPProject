@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyManager))]
@@ -31,11 +32,29 @@ public class EnemyAimingLaser : EnemyAttackBase
     float chargeTime;
     private LineRenderer lineRenderer;
 
+    public override void OnReset()
+    {
+        base.OnReset();
+
+        timer = 0;
+        laserTimer = 0;
+        chargeTime = 0;
+        if (lineRenderer == null) { 
+            lineRenderer = GetComponent<LineRenderer>();
+        }
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = false;
+            lineRenderer.startColor = startColor;
+            lineRenderer.endColor = startColor;
+        }
+    }
     private void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        if(!lineRenderer)lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         lineRenderer.enabled = false;
+        
     }
     // Update is called once per frame
     private void Update()
@@ -75,7 +94,7 @@ public class EnemyAimingLaser : EnemyAttackBase
         Vector3 spawnPosition = transform.position + transform.forward * offset;
 
         GameObject newBullet = Instantiate(Laser, spawnPosition, transform.rotation);
-        Debug.Log("弾を生成しました: " + newBullet.name);
+        Debug.Log("レーザー敵が弾を生成: " + newBullet.name);
         Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
         Bulletrb.AddForce(transform.forward * enemyBulletForce);
         Destroy(newBullet, 3f);

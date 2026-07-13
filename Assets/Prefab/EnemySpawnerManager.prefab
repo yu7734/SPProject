@@ -41,7 +41,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6562564495504082392}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
   m_Name: 
@@ -59,7 +59,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
   - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
-  spawnTimer: 1
+  spawnTimer: 1.5
+  onlySpawn: 0
 --- !u!114 &-2938909185062001225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6562564495504082392}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286de9e613c575b40abe8f163757d67a, type: 3}
   m_Name: 
@@ -84,7 +85,8 @@ MonoBehaviour:
   spawnZ: 20
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 93e1f977ef5e29a4c9c6463f5b36f6a2, type: 3}
-  spawnTimer: 5
+  spawnTimer: 10
+  onlySpawn: 1
 --- !u!114 &6264320676704088284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +112,4 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 720357861559527564, guid: 31e8761e039f52a418b8c4b580672724, type: 3}
   spawnTimer: 5
+  onlySpawn: 1

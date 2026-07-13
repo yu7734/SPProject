@@ -17,6 +17,12 @@ public class BulletEnemy : EnemyAttackBase
 
     [NonSerialized] public float shotTimer = 0;
 
+    public override void OnReset()
+    {
+        base.OnReset();
+
+        shotTimer = 0;
+    }
     private void Update()
     {
         if (player == null) return;

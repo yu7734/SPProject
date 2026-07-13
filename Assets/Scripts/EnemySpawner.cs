@@ -6,7 +6,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemySpawner : MonoBehaviour
 {
-
     [Serializable]
     public struct SpawnRange
     {
@@ -36,6 +35,8 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> enemyPrefabs = new();
     [SerializeField, Tooltip("湧く間隔")]
     private float spawnTimer = 5f;
+    [SerializeField, Tooltip("一体だけ湧くか")]
+    public bool onlySpawn = false;
 
     private float timer;
 
@@ -70,7 +71,11 @@ public class EnemySpawner : MonoBehaviour
                     enemyManagerScript.OnReset();
                 }
             },
-            actionOnRelease: (obj) => obj.SetActive(false),
+            actionOnRelease: (obj)  =>{
+                obj.SetActive(false);
+                if (onlySpawn) timer = 0;
+                //Debug.Log($"{gameObject.name} {timer}");
+            },
             actionOnDestroy: (obj) => Destroy(obj),
             collectionCheck: true,
             defaultCapacity: initPoolSize,  //10
