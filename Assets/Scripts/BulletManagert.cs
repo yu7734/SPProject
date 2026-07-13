@@ -8,12 +8,14 @@ public class BulletManagert : MonoBehaviour
     [Tooltip("ダメージ倍率")]public float bulletDamageRate = 1.0f;
     [Tooltip("倍率計算後に固定値加算")]public int bulletDamageBonus = 0;
     int bulletAttack;
+    [SerializeField] private PlaySound playSound;
         
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         //RigidBody���擾���A�v���C���[�̌����Ă�������ɒe���΂�
         rb = GetComponent<Rigidbody>(); 
+        playSound = GetComponent<PlaySound>();
         rb.linearVelocity = this.transform.forward * bulletSpeed * Time.fixedDeltaTime;
         bulletAttack = (int)(bulletPower * bulletDamageRate) + bulletDamageBonus;
         Debug.Log(bulletAttack);
@@ -29,6 +31,13 @@ public class BulletManagert : MonoBehaviour
     {
         if (other.CompareTag(this.tag)) return;
         IEnemyDamage damage = other.gameObject.GetComponentInParent<IEnemyDamage>();
+
+        if (other.CompareTag("Enemy"))
+        {
+            playSound.PlaySE(0);
+            Debug.Log("再生");
+        }
+
         if (damage != null)
         {
             damage.EnemyDamaged(bulletAttack);

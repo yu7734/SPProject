@@ -65,6 +65,8 @@ public class UIManager : MonoBehaviour
     /// <summary>シャボンの最大段階数（SyabonManagerScript.SerectSyabonの4段階に対応）</summary>
     private const int syabonMaxCount = 4;
 
+    [SerializeField] private PlaySound playSound;
+
     private void Awake()
     {
         _maxExprrience = exprrienceMax;
@@ -116,6 +118,7 @@ public class UIManager : MonoBehaviour
             ++_level;
             _experiencePoint -= _maxExprrience;
             _maxExprrience += exprrienceMaxUp;
+            playSound.PlaySE(0);
             selectItemImage.SetActive(true);
             Time.timeScale = 0;
             // ラベル・色・段階表示はパネル側の ItemSelectRandomizer が OnEnable で更新する
@@ -127,6 +130,7 @@ public class UIManager : MonoBehaviour
     {
         BulletManagert.bulletPower += 5;
         Time.timeScale = 1;
+        playSound.PlaySE(1);
         bSelect = false;
         selectItemImage.SetActive(false);
     }
@@ -137,6 +141,7 @@ public class UIManager : MonoBehaviour
         player.MaxPlayerHP += 10;
         player.playerHP += 10;
         Time.timeScale = 1;
+        playSound.PlaySE(1);
         bSelect = false;
         selectItemImage.SetActive(false);
     }
@@ -266,6 +271,7 @@ public class UIManager : MonoBehaviour
     private void CloseSelectUI()
     {
         Time.timeScale = 1;
+        playSound.PlaySE(1);
         bSelect = false;
         if (selectItemImage != null) selectItemImage.SetActive(false);
     }
