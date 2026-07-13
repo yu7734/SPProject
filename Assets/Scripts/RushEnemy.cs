@@ -9,11 +9,8 @@ public class RushEnemy : EnemyAttackBase
     private float stopTime;
     [SerializeField, Tooltip("プレイヤーを見ている時間（秒）")]
     private float lookAtTime;
-    [SerializeField, Tooltip("射撃するかどうか")]
-    private bool canShot = false;
 
     private float rushTimer;
-    [NonSerialized] public float shotTimer;
 
     private void Update()
     {
@@ -25,7 +22,6 @@ public class RushEnemy : EnemyAttackBase
     {
         base.OnReset();
         rushTimer = 0;
-        if (canShot) shotTimer = 0;
     }
     public void RushPattern()  //lookAtTimeになるまでプレイヤーの座標に向けて移動し、それ以降はその時向いていた方向に直線的に移動。プレイヤーZが手前に移動したとき非表示。
     {
