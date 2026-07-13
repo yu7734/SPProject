@@ -10,10 +10,8 @@ public class ItemLaserShotScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        GameObject GameManager = GameObject.Find("GameManager");
-        ui = GameManager.GetComponent<UIManager>();
-        GameObject Player = GameObject.Find("Player");
-        playerInput = Player.GetComponent<PlayerInput>();
+        ui = FindAnyObjectByType<UIManager>();
+        playerInput = FindAnyObjectByType<PlayerInput>();
     }
 
     // Update is called once per frame

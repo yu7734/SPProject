@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LaserCannon : MonoBehaviour
 {
@@ -12,8 +11,7 @@ public class LaserCannon : MonoBehaviour
 
     void Awake()
     {
-        GameObject GameManager = GameObject.Find("GameManager");
-        ui = GameManager.GetComponent<UIManager>();
+        ui = FindAnyObjectByType<UIManager>();
     }
 
     void Update()
