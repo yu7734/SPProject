@@ -5,6 +5,9 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
     [SerializeField, Tooltip("PlayerManagerを取得")] private PlayerManager player;
     [SerializeField, Tooltip("CameraShake取得")] public CameraShake cameraShake;
 
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] AudioClip playerHitedSE;
+
     //ダメージ処理
     public void Damage(int value)
     {
@@ -14,6 +17,9 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
             Debug.Log("hit");
             //カメラを揺らす
             cameraShake.CameraShaker();
+
+            //SEを鳴らす
+            soundManager.Play(playerHitedSE);
             //HP減少
             player.playerHP -= Mathf.Max(0, value);
         }

@@ -159,7 +159,6 @@ MonoBehaviour:
   enemyMoveSpeed: 10
   stopTime: 1
   lookAtTime: 3
-  canShot: 0
 --- !u!1 &3098837181651534511
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +172,7 @@ GameObject:
   - component: {fileID: 4809529720001651165}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

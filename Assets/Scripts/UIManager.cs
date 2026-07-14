@@ -61,6 +61,14 @@ public class UIManager : MonoBehaviour
     /// <summary>シャボンの最大段階数（SyabonManagerScript.SerectSyabonの4段階に対応）</summary>
     private const int syabonMaxCount = 4;
 
+    [Header("=== Sound ===")]
+    [SerializeField] 
+    private SoundManager soundManager;
+    [SerializeField, Tooltip("アイテム選択画面が開いた時のSE")] 
+    private AudioClip openItemSelectSE;
+    [SerializeField, Tooltip("アイテム選択画面でアイテムを選んだ時のSE")] 
+    private AudioClip pushItemSelectSE;
+
     private void Awake()
     {
         _maxExprrience = exprrienceMax;
@@ -112,6 +120,7 @@ public class UIManager : MonoBehaviour
             ++_level;
             _experiencePoint -= _maxExprrience;
             _maxExprrience += exprrienceMaxUp;
+            soundManager.Play(openItemSelectSE);
             selectItemImage.SetActive(true);
             Time.timeScale = 0;
             // ラベル・色・段階表示はパネル側の ItemSelectRandomizer が OnEnable で更新する
@@ -261,6 +270,7 @@ public class UIManager : MonoBehaviour
     private void CloseSelectUI()
     {
         Time.timeScale = 1;
+        soundManager.Play(pushItemSelectSE);
         bSelect = false;
         if (selectItemImage != null) selectItemImage.SetActive(false);
     }
