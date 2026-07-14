@@ -118,6 +118,215 @@ public static class AddItemSelectButtonsTool
             "シーンを保存してください（Ctrl+S）。", "OK");
     }
 
+    /// <summary>
+    /// 選択パネルの各ボタンをカード型レイアウト（名前/Lv/アイコン/説明文）に変換する。
+    /// メニュー: Tools > SpacePhantom > 選択ボタンをカード型レイアウトに変換
+    /// 既存のTMPを「アイテム名」として上段に移動し、Lv・アイコン・説明文の子要素を追加する。
+    /// </summary>
+    [MenuItem("Tools/SpacePhantom/選択ボタンをカード型レイアウトに変換")]
+    public static void ConvertToCardLayout()
+    {
+        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
+        if (ui == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "シーン内にUIManagerが見つかりません。Gameシーンを開いてから実行してください。", "OK");
+            return;
+        }
+        var so = new SerializedObject(ui);
+        var panel = so.FindProperty("selectItemImage").objectReferenceValue as GameObject;
+        if (panel == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "UIManagerのSelect Item Image（選択パネル）が未設定です。", "OK");
+            return;
+        }
+
+        int converted = 0;
+        foreach (var btn in panel.GetComponentsInChildren<Button>(true))
+        {
+            if (btn.GetComponentInChildren<ItemButtonView>(true) != null) continue; // 変換済み
+
+            // 既存のTMPを「アイテム名」として上段に配置し直す
+            var nameTmp = btn.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (nameTmp == null) continue;
+            Undo.RecordObject(nameTmp.rectTransform, "Card Layout");
+            Undo.RecordObject(nameTmp, "Card Layout");
+            nameTmp.alignment = TextAlignmentOptions.Center;
+            nameTmp.raycastTarget = false;
+
+            // Lv・アイコン・説明文の子要素を追加
+            var levelTmp = CreateTmpChild(btn.transform, "LevelText", nameTmp, new Vector2(0.06f, 0.68f), new Vector2(0.94f, 0.79f));
+            levelTmp.text = "Lv 0/4";
+
+            var iconGo = new GameObject("Icon", typeof(RectTransform));
+            Undo.RegisterCreatedObjectUndo(iconGo, "Card Layout");
+            iconGo.transform.SetParent(btn.transform, false);
+            var iconImage = iconGo.AddComponent<Image>();
+            iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+            iconImage.enabled = false; // スプライト未設定の間は非表示
+
+            var descTmp = CreateTmpChild(btn.transform, "DescText", nameTmp, new Vector2(0.03f, 0.06f), new Vector2(0.97f, 0.38f));
+            descTmp.text = "〜説明〜";
+
+            // ItemButtonViewを付けて参照を接続
+            var view = Undo.AddComponent<ItemButtonView>(btn.gameObject);
+            view.nameLabel = nameTmp;
+            view.levelLabel = levelTmp;
+            view.iconImage = iconImage;
+            view.descLabel = descTmp;
+            ApplyCardAnchors(view);
+            EditorUtility.SetDirty(view);
+            converted++;
+        }
+
+        EditorSceneManager.MarkSceneDirty(panel.scene);
+        EditorUtility.DisplayDialog("完了",
+            converted > 0
+                ? $"{converted}個のボタンをカード型に変換しました。\nアイコン画像はRandomizerのItem Poolの各Icon欄に割り当ててください。\nシーンを保存してください（Ctrl+S）。"
+                : "変換対象がありません（すべて変換済みです）。", "OK");
+    }
+
+    /// <summary>
+    /// カードの4要素の配置を整えなおす。
+    /// メニュー: Tools > SpacePhantom > カードレイアウトを再調整
+    /// 変換済みのカードに対して何度でも実行可能。
+    /// </summary>
+    [MenuItem("Tools/SpacePhantom/カードレイアウトを再調整")]
+    public static void RelayoutItemCards()
+    {
+        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
+        var so = (ui != null) ? new SerializedObject(ui) : null;
+        var panel = so?.FindProperty("selectItemImage").objectReferenceValue as GameObject;
+        if (panel == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "選択パネルが見つかりません。Gameシーンを開いてから実行してください。", "OK");
+            return;
+        }
+
+        int count = 0;
+        foreach (var view in panel.GetComponentsInChildren<ItemButtonView>(true))
+        {
+            Undo.RecordObject(view.nameLabel != null ? (Object)view.nameLabel.rectTransform : view, "Relayout Card");
+            ApplyCardAnchors(view);
+            count++;
+        }
+
+        EditorSceneManager.MarkSceneDirty(panel.scene);
+        EditorUtility.DisplayDialog("完了",
+            count > 0 ? $"{count}枚のカードを再配置しました。シーンを保存してください（Ctrl+S）。"
+                      : "カードが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
+    }
+
+    /// <summary>
+    /// Projectウィンドウで選択中のTMPフォントアセット(SDF)を、
+    /// アイテム選択カードの全テキスト（名前/Lv/説明文）に一括適用する。
+    /// メニュー: Tools > SpacePhantom > 選択中のフォントをアイテムカードに適用
+    /// </summary>
+    [MenuItem("Tools/SpacePhantom/選択中のフォントをアイテムカードに適用")]
+    public static void ApplyFontToItemCards()
+    {
+        var font = Selection.activeObject as TMP_FontAsset;
+        if (font == null)
+        {
+            EditorUtility.DisplayDialog("エラー",
+                "先にProjectウィンドウでフォントアセット（〜 SDF）を選択してから実行してください。\n（TTFファイルではなく、右クリック→Create > TextMeshPro > Font Assetで作った方です）", "OK");
+            return;
+        }
+
+        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
+        var so = (ui != null) ? new SerializedObject(ui) : null;
+        var panel = so?.FindProperty("selectItemImage").objectReferenceValue as GameObject;
+        if (panel == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "選択パネルが見つかりません。Gameシーンを開いてから実行してください。", "OK");
+            return;
+        }
+
+        int count = 0;
+        foreach (var view in panel.GetComponentsInChildren<ItemButtonView>(true))
+        {
+            foreach (var tmp in new[] { view.nameLabel, view.levelLabel, view.descLabel })
+            {
+                if (tmp == null) continue;
+                Undo.RecordObject(tmp, "Apply Card Font");
+                tmp.font = font;
+                EditorUtility.SetDirty(tmp);
+                count++;
+            }
+        }
+
+        EditorSceneManager.MarkSceneDirty(panel.scene);
+        EditorUtility.DisplayDialog("完了",
+            count > 0
+                ? $"{count}個のテキストに「{font.name}」を適用しました。シーンを保存してください（Ctrl+S）。"
+                : "カード型のテキストが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
+    }
+
+    // カード内の配置定義（ここを変えて「再調整」を実行すれば全カードに反映される）
+    private static void ApplyCardAnchors(ItemButtonView view)
+    {
+        if (view.nameLabel != null)
+        {
+            SetAnchors(view.nameLabel.rectTransform, new Vector2(0.06f, 0.79f), new Vector2(0.94f, 0.97f));
+            view.nameLabel.enableAutoSizing = true;
+            view.nameLabel.fontSizeMin = 10f;
+            view.nameLabel.fontSizeMax = 64f;
+            EditorUtility.SetDirty(view.nameLabel);
+        }
+        if (view.levelLabel != null)
+        {
+            SetAnchors(view.levelLabel.rectTransform, new Vector2(0.06f, 0.68f), new Vector2(0.94f, 0.79f));
+            view.levelLabel.enableAutoSizing = true;
+            view.levelLabel.fontSizeMin = 8f;
+            view.levelLabel.fontSizeMax = 46f;
+            EditorUtility.SetDirty(view.levelLabel);
+        }
+        if (view.iconImage != null)
+        {
+            SetAnchors((RectTransform)view.iconImage.transform, new Vector2(0.20f, 0.30f), new Vector2(0.80f, 0.66f));
+            EditorUtility.SetDirty(view.iconImage);
+        }
+        if (view.descLabel != null)
+        {
+            // 説明文はアイコンの下に横幅広めのボックスを確保し、自動縮小で必ず収める
+            SetAnchors(view.descLabel.rectTransform, new Vector2(0.03f, 0.06f), new Vector2(0.97f, 0.38f));
+            view.descLabel.enableAutoSizing = true;
+            view.descLabel.fontSizeMin = 8f;
+            view.descLabel.fontSizeMax = 20f;
+            view.descLabel.textWrappingMode = TextWrappingModes.Normal;
+            EditorUtility.SetDirty(view.descLabel);
+        }
+    }
+
+    private static void SetAnchors(RectTransform rt, Vector2 min, Vector2 max)
+    {
+        rt.anchorMin = min;
+        rt.anchorMax = max;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+    }
+
+    // フォント設定を既存TMPからコピーした子TMPを作る
+    private static TextMeshProUGUI CreateTmpChild(Transform parent, string name, TextMeshProUGUI copyFrom, Vector2 anchorMin, Vector2 anchorMax)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        Undo.RegisterCreatedObjectUndo(go, "Card Layout");
+        go.transform.SetParent(parent, false);
+        SetAnchors((RectTransform)go.transform, anchorMin, anchorMax);
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        if (copyFrom != null)
+        {
+            tmp.font = copyFrom.font;
+            tmp.color = copyFrom.color;
+        }
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.enableAutoSizing = true;
+        tmp.fontSizeMin = 8f;
+        tmp.fontSizeMax = 40f;
+        tmp.raycastTarget = false;
+        return tmp;
+    }
+
     // テンプレートを複製してラベル・位置・OnClickを設定し、ラベルのTMPを返す
     private static TextMeshProUGUI CreateButton(Button template, string name, string label, Vector2 anchoredPos, UnityEngine.Events.UnityAction onClick)
     {

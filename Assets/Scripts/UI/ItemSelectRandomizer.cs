@@ -20,16 +20,20 @@ public class ItemSelectRandomizer : MonoBehaviour
         public string label = "Item";
         public Color color = Color.white;
         public ItemAction action = ItemAction.PowerUp;
+        [Tooltip("カード中央に表示するアイコン。未設定なら非表示")]
+        public Sprite icon;
+        [Tooltip("カード下段に表示する説明文"), TextArea(1, 3)]
+        public string description = "";
     }
 
     [Header("抽選候補（Inspectorで追加・変更可）")]
     [SerializeField]
     private ItemOption[] itemPool =
     {
-        new ItemOption { label = "Gun",    color = new Color(0.45f, 0.85f, 0.45f), action = ItemAction.AddGun },       // 緑
-        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel },     // 赤
-        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower }, // 青
-        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon },    // 紫
+        new ItemOption { label = "Gun",    color = new Color(0.45f, 0.85f, 0.45f), action = ItemAction.AddGun,       description = "サブの銃を増設して\n同時に攻撃する" },       // 緑
+        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel,     description = "自機の周囲にファンネルを展開\nレーザーで攻撃する" }, // 赤
+        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower, description = "一定間隔で前方に\n強力なレーザーを発射する" },  // 青
+        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon,    description = "シャボン弾を広範囲に\nばらまいて攻撃する" },    // 紫
     };
 
     [Header("対象ボタン（空のままなら子から自動取得）")]
@@ -38,22 +42,32 @@ public class ItemSelectRandomizer : MonoBehaviour
     [Header("段階表示")]
     [SerializeField, Tooltip("段階表示付きラベルの書式。{0}=アイテム名, {1}=現在段階, {2}=最大段階")]
     private string levelFormat = "{0}\n<size=55%>Lv {1}/{2}</size>";
-    [SerializeField, Tooltip("最大段階に達したアイテムの表示（選んだときの効果はPowerUpになる）")]
-    private string maxedLabel = "Power";
     [SerializeField, Tooltip("Laserの表示上の最大段階。実際の上限(UIManagerのlaserMaxLevel)より大きい場合、表記だけこの値になる（将来の3段階化を見込んだ表示用）")]
     private int laserDisplayMax = 3;
+    [SerializeField, Tooltip("カード型表示(ItemButtonView)のLv行の書式。{0}=現在段階, {1}=最大段階")]
+    private string cardLevelFormat = "Lv {0}/{1}";
+
+    [Header("最大強化済みアイテムの差し替えカード")]
+    [SerializeField, Tooltip("強化が終わったアイテムが抽選されたとき、代わりに表示されるカード（効果もこのActionになる）")]
+    private ItemOption maxedReplacement = new ItemOption
+    {
+        label = "Power",
+        color = new Color(0.95f, 0.75f, 0.30f), // オレンジ
+        action = ItemAction.PowerUp,
+        description = "弾の攻撃力を上げる",
+    };
 
     private UIManager ui;
     private GunManagerScript gunManager;
     private SyabonManagerScript syabonManager;
-    private FanelManager fanelManager;
+    private newFanelManager fanelManager;
 
     void Awake()
     {
         ui = FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
         gunManager = FindAnyObjectByType<GunManagerScript>(FindObjectsInactive.Include);
         syabonManager = FindAnyObjectByType<SyabonManagerScript>(FindObjectsInactive.Include);
-        fanelManager = FindAnyObjectByType<FanelManager>(FindObjectsInactive.Include);
+        fanelManager = FindAnyObjectByType<newFanelManager>(FindObjectsInactive.Include);
         if (buttons == null || buttons.Length == 0)
         {
             buttons = GetComponentsInChildren<Button>(true);
@@ -78,18 +92,37 @@ public class ItemSelectRandomizer : MonoBehaviour
             var btn = buttons[i];
             var option = pool[i % pool.Count]; // 候補がボタン数より少ない場合はループ
 
-            // ラベル（段階のあるアイテムは「名前 + Lv 現在/最大」、最大到達済みはmaxedLabel）
-            var tmp = btn.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (tmp != null)
+            // 強化が終わったアイテムはPowerカードに丸ごと差し替える（色・アイコン・説明・効果すべて）
+            if (maxedReplacement != null
+                && TryGetStage(option.action, out int curCheck, out int maxCheck)
+                && curCheck >= maxCheck)
             {
-                string text = option.label;
-                if (TryGetStage(option.action, out int cur, out int max))
+                option = maxedReplacement;
+            }
+
+            // 表示内容の反映
+            bool hasStage = TryGetStage(option.action, out int cur, out int max);
+            // Laserだけ表示上の最大値を上書きできる（将来の3段階化を見込んだ表示用）
+            int dispMax = (option.action == ItemAction.LaserOrPower && laserDisplayMax > max) ? laserDisplayMax : max;
+
+            var view = btn.GetComponentInChildren<ItemButtonView>(true);
+            if (view != null)
+            {
+                // カード型（名前 / Lv / アイコン / 説明文）
+                view.Apply(
+                    option.label,
+                    hasStage ? string.Format(cardLevelFormat, cur, dispMax) : "",
+                    option.icon,
+                    option.description);
+            }
+            else
+            {
+                // 従来のシンプル表示（TMP1個だけのボタン）
+                var tmp = btn.GetComponentInChildren<TextMeshProUGUI>(true);
+                if (tmp != null)
                 {
-                    // Laserだけ表示上の最大値を上書きできる（実際の上限に達したらPower表記になるのは変わらない）
-                    int dispMax = (option.action == ItemAction.LaserOrPower && laserDisplayMax > max) ? laserDisplayMax : max;
-                    text = (cur >= max) ? maxedLabel : string.Format(levelFormat, option.label, cur, dispMax);
+                    tmp.text = hasStage ? string.Format(levelFormat, option.label, cur, dispMax) : option.label;
                 }
-                tmp.text = text;
             }
 
             // 色（アイテムに応じたイメージカラー）
@@ -140,7 +173,7 @@ public class ItemSelectRandomizer : MonoBehaviour
                 return true;
             case ItemAction.AddFanel:
                 if (fanelManager == null || ui == null) return false;
-                current = fanelManager.Fanelcount;
+                current = fanelManager.FanelCount;
                 max = ui.FanelMaxCount;
                 return true;
             case ItemAction.LaserOrPower:
