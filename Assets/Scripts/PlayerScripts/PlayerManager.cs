@@ -45,6 +45,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Header("回避のクールタイム")] 
     private float coolTime;
 
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private AudioClip shotSE;
+    [SerializeField] private AudioClip dodgeSE;
+
     //回避のステートマシン
     public enum dodgeState
     {
@@ -124,7 +128,7 @@ public class PlayerManager : MonoBehaviour
             //Vector3 playerShotDirection = playerChildObject.rotation;
             //弾を呼び出す
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
-
+            soundManager.Play(shotSE);
         }
     }
 
@@ -135,6 +139,7 @@ public class PlayerManager : MonoBehaviour
         {
             //自機を回転
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
+            soundManager.Play(dodgeSE);//SEを鳴らす
             bJustDodge = true;
             _state = dodgeState.dodge;
         }
