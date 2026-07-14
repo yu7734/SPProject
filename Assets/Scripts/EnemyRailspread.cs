@@ -22,6 +22,12 @@ public class EnemyRailspread : EnemyAttackBase
 
     [NonSerialized] public float shotTimer = 0;
 
+    public override void OnReset()
+    {
+        base.OnReset();
+
+        shotTimer = 0;
+    }
     // Update is called once per frame
     void Update()
     {

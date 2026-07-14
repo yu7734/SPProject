@@ -187,7 +187,7 @@ public class JustDodgeManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && (player.bJustDodge == true))
+        if (other.CompareTag("EnemyBullet") && (player.bJustDodge == true))
         {
             player.bJustDodge = false;
             Debug.Log("Just");

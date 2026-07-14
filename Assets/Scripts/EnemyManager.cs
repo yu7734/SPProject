@@ -13,12 +13,17 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     //敵のHP
 
     private int enemyHP;
+    [SerializeField,Tooltip("一定時間毎のHPの増加量")]
+    private int hpGrowthRate;
+    [SerializeField, Tooltip("HP増加までの時間")]
+    private float timeUntilIncrease;
+
     [SerializeField]
     private UIManager ui;
     [SerializeField] private GameObject playerBullet;
 
-    [SerializeField] private GameObject hit;
-    [SerializeField] private GameObject exprosion;
+    [SerializeField,Tooltip("敵にヒット時の演出")] private GameObject hit;
+    [SerializeField,Tooltip("敵を撃破時の演出")] private GameObject exprosion;
     [NonSerialized] public Transform player;
 
     EnemyAttackBase enemyAttackBase;
@@ -33,8 +38,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     }
     public void OnReset()
     {
-        enemyHP = enemyAttackBase.maxEnemyHP;
-
+        enemyHP = enemyAttackBase.maxEnemyHP+(int)(Time.timeSinceLevelLoad/timeUntilIncrease * hpGrowthRate);
+        //Debug.Log($"{ Time.timeSinceLevelLoad} {enemyHP}");
         isReleased = false;
         if (ui == null)
         {
