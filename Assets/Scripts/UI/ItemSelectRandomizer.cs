@@ -42,11 +42,6 @@ public class ItemSelectRandomizer : MonoBehaviour
     [Header("段階表示")]
     [SerializeField, Tooltip("段階表示付きラベルの書式。{0}=アイテム名, {1}=現在段階, {2}=最大段階")]
     private string levelFormat = "{0}\n<size=55%>Lv {1}/{2}</size>";
-    [SerializeField, Tooltip("Laserの表示上の最大段階。実際の上限(UIManagerのlaserMaxLevel)より大きい場合、表記だけこの値になる（将来の3段階化を見込んだ表示用）")]
-    private int laserDisplayMax = 3;
-    [SerializeField, Tooltip("カード型表示(ItemButtonView)のLv行の書式。{0}=現在段階, {1}=最大段階")]
-    private string cardLevelFormat = "Lv {0}/{1}";
-
     [Header("最大強化済みアイテムの差し替えカード")]
     [SerializeField, Tooltip("強化が終わったアイテムが抽選されたとき、代わりに表示されるカード（効果もこのActionになる）")]
     private ItemOption maxedReplacement = new ItemOption
@@ -56,6 +51,10 @@ public class ItemSelectRandomizer : MonoBehaviour
         action = ItemAction.PowerUp,
         description = "弾の攻撃力を上げる",
     };
+    [SerializeField, Tooltip("Laserの表示上の最大段階。実際の上限(UIManagerのlaserMaxLevel)より大きい場合、表記だけこの値になる（将来の3段階化を見込んだ表示用）")]
+    private int laserDisplayMax = 3;
+    [SerializeField, Tooltip("カード型表示(ItemButtonView)のLv行の書式。{0}=現在段階, {1}=最大段階")]
+    private string cardLevelFormat = "Lv {0}/{1}";
 
     private UIManager ui;
     private GunManagerScript gunManager;

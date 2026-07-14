@@ -150,22 +150,26 @@ public static class AddItemSelectButtonsTool
             if (nameTmp == null) continue;
             Undo.RecordObject(nameTmp.rectTransform, "Card Layout");
             Undo.RecordObject(nameTmp, "Card Layout");
+            SetAnchors(nameTmp.rectTransform, new Vector2(0.08f, 0.70f), new Vector2(0.92f, 0.90f));
             nameTmp.alignment = TextAlignmentOptions.Center;
+            nameTmp.enableAutoSizing = true;
+            nameTmp.fontSizeMin = 10f;
             nameTmp.raycastTarget = false;
 
             // Lv・アイコン・説明文の子要素を追加
-            var levelTmp = CreateTmpChild(btn.transform, "LevelText", nameTmp, new Vector2(0.06f, 0.68f), new Vector2(0.94f, 0.79f));
+            var levelTmp = CreateTmpChild(btn.transform, "LevelText", nameTmp, new Vector2(0.08f, 0.60f), new Vector2(0.92f, 0.70f));
             levelTmp.text = "Lv 0/4";
 
             var iconGo = new GameObject("Icon", typeof(RectTransform));
             Undo.RegisterCreatedObjectUndo(iconGo, "Card Layout");
             iconGo.transform.SetParent(btn.transform, false);
+            SetAnchors((RectTransform)iconGo.transform, new Vector2(0.28f, 0.30f), new Vector2(0.72f, 0.58f));
             var iconImage = iconGo.AddComponent<Image>();
             iconImage.preserveAspect = true;
             iconImage.raycastTarget = false;
             iconImage.enabled = false; // スプライト未設定の間は非表示
 
-            var descTmp = CreateTmpChild(btn.transform, "DescText", nameTmp, new Vector2(0.03f, 0.06f), new Vector2(0.97f, 0.38f));
+            var descTmp = CreateTmpChild(btn.transform, "DescText", nameTmp, new Vector2(0.08f, 0.06f), new Vector2(0.92f, 0.26f));
             descTmp.text = "〜説明〜";
 
             // ItemButtonViewを付けて参照を接続
@@ -184,37 +188,6 @@ public static class AddItemSelectButtonsTool
             converted > 0
                 ? $"{converted}個のボタンをカード型に変換しました。\nアイコン画像はRandomizerのItem Poolの各Icon欄に割り当ててください。\nシーンを保存してください（Ctrl+S）。"
                 : "変換対象がありません（すべて変換済みです）。", "OK");
-    }
-
-    /// <summary>
-    /// カードの4要素の配置を整えなおす。
-    /// メニュー: Tools > SpacePhantom > カードレイアウトを再調整
-    /// 変換済みのカードに対して何度でも実行可能。
-    /// </summary>
-    [MenuItem("Tools/SpacePhantom/カードレイアウトを再調整")]
-    public static void RelayoutItemCards()
-    {
-        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
-        var so = (ui != null) ? new SerializedObject(ui) : null;
-        var panel = so?.FindProperty("selectItemImage").objectReferenceValue as GameObject;
-        if (panel == null)
-        {
-            EditorUtility.DisplayDialog("エラー", "選択パネルが見つかりません。Gameシーンを開いてから実行してください。", "OK");
-            return;
-        }
-
-        int count = 0;
-        foreach (var view in panel.GetComponentsInChildren<ItemButtonView>(true))
-        {
-            Undo.RecordObject(view.nameLabel != null ? (Object)view.nameLabel.rectTransform : view, "Relayout Card");
-            ApplyCardAnchors(view);
-            count++;
-        }
-
-        EditorSceneManager.MarkSceneDirty(panel.scene);
-        EditorUtility.DisplayDialog("完了",
-            count > 0 ? $"{count}枚のカードを再配置しました。シーンを保存してください（Ctrl+S）。"
-                      : "カードが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
     }
 
     /// <summary>
@@ -260,6 +233,37 @@ public static class AddItemSelectButtonsTool
             count > 0
                 ? $"{count}個のテキストに「{font.name}」を適用しました。シーンを保存してください（Ctrl+S）。"
                 : "カード型のテキストが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
+    }
+
+    /// <summary>
+    /// カードの4要素の配置を整えなおす（文字を上に寄せて、説明文が収まるように）。
+    /// メニュー: Tools > SpacePhantom > カードレイアウトを再調整
+    /// 変換済みのカードに対して何度でも実行可能。
+    /// </summary>
+    [MenuItem("Tools/SpacePhantom/カードレイアウトを再調整")]
+    public static void RelayoutItemCards()
+    {
+        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
+        var so = (ui != null) ? new SerializedObject(ui) : null;
+        var panel = so?.FindProperty("selectItemImage").objectReferenceValue as GameObject;
+        if (panel == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "選択パネルが見つかりません。Gameシーンを開いてから実行してください。", "OK");
+            return;
+        }
+
+        int count = 0;
+        foreach (var view in panel.GetComponentsInChildren<ItemButtonView>(true))
+        {
+            Undo.RecordObject(view.nameLabel != null ? (Object)view.nameLabel.rectTransform : view, "Relayout Card");
+            ApplyCardAnchors(view);
+            count++;
+        }
+
+        EditorSceneManager.MarkSceneDirty(panel.scene);
+        EditorUtility.DisplayDialog("完了",
+            count > 0 ? $"{count}枚のカードを再配置しました。シーンを保存してください（Ctrl+S）。"
+                      : "カードが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
     }
 
     // カード内の配置定義（ここを変えて「再調整」を実行すれば全カードに反映される）
