@@ -5289,6 +5289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377977814}
   - component: {fileID: 1377977813}
+  - component: {fileID: 1377977815}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5341,6 +5342,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377977815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377977812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150b31d82ffe7b444a610e7413993e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 41350932}
+  keyboardMouseSprite: {fileID: 21300000, guid: 6ad5ec41fccab07429f6a441b256a13b, type: 3}
+  gamepadSprite: {fileID: 1254760749, guid: 9ab9933e0db89774cb918765d4f9a39c, type: 3}
+  stickThreshold: 0.3
 --- !u!1 &1407454747
 GameObject:
   m_ObjectHideFlags: 0
@@ -5874,7 +5891,6 @@ GameObject:
   - component: {fileID: 1541973856}
   - component: {fileID: 1541973855}
   - component: {fileID: 1541973857}
-  - component: {fileID: 1541973858}
   m_Layer: 5
   m_Name: pausepanel
   m_TagString: Untagged
@@ -5960,22 +5976,6 @@ MonoBehaviour:
   targetButton: {fileID: 489731952}
   delayOneFrame: 1
   autoRestoreWhenNothingSelected: 0
---- !u!114 &1541973858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541973853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 150b31d82ffe7b444a610e7413993e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetImage: {fileID: 41350932}
-  keyboardMouseSprite: {fileID: 21300000, guid: 6ad5ec41fccab07429f6a441b256a13b, type: 3}
-  gamepadSprite: {fileID: 1254760749, guid: 9ab9933e0db89774cb918765d4f9a39c, type: 3}
-  stickThreshold: 0.3
 --- !u!1 &1589193444
 GameObject:
   m_ObjectHideFlags: 0
