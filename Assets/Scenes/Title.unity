@@ -652,8 +652,13 @@ MonoBehaviour:
   pressedScale: 1.05
   scaleDuration: 0.15
   enableColorChange: 1
-  hoverColor: {r: 2.4954083, g: 0, b: 0.05262467, a: 1}
+  colorMode: 0
   colorDuration: 0.15
+  hoverColor: {r: 2.4954083, g: 0, b: 0.05262467, a: 1}
+  flowColorA: {r: 0.2, g: 1, b: 1, a: 1}
+  flowColorB: {r: 0.6, g: 0.3, b: 1, a: 1}
+  flowSpeed: 1.5
+  flowAlways: 0
   targetImage: {fileID: 0}
   syncSelectionOnHover: 1
   playHoverSound: 1
@@ -1368,8 +1373,13 @@ MonoBehaviour:
   pressedScale: 1.05
   scaleDuration: 0.15
   enableColorChange: 1
-  hoverColor: {r: 0, g: 9.981633, b: 6.226362, a: 1}
+  colorMode: 0
   colorDuration: 0.15
+  hoverColor: {r: 0, g: 9.981633, b: 6.226362, a: 1}
+  flowColorA: {r: 0.2, g: 1, b: 1, a: 1}
+  flowColorB: {r: 0.6, g: 0.3, b: 1, a: 1}
+  flowSpeed: 1.5
+  flowAlways: 0
   targetImage: {fileID: 0}
   syncSelectionOnHover: 1
   playHoverSound: 1
@@ -1433,7 +1443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ad5ec41fccab07429f6a441b256a13b, type: 3}
+  m_Sprite: {fileID: 1254760749, guid: 9ab9933e0db89774cb918765d4f9a39c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1951,8 +1961,13 @@ MonoBehaviour:
   pressedScale: 1.05
   scaleDuration: 0.15
   enableColorChange: 1
-  hoverColor: {r: 0, g: 1.8691097, b: 1.537763, a: 1}
+  colorMode: 0
   colorDuration: 0.15
+  hoverColor: {r: 0, g: 1.8691097, b: 1.537763, a: 1}
+  flowColorA: {r: 0.2, g: 1, b: 1, a: 1}
+  flowColorB: {r: 0.6, g: 0.3, b: 1, a: 1}
+  flowSpeed: 1.5
+  flowAlways: 0
   targetImage: {fileID: 0}
   syncSelectionOnHover: 1
   playHoverSound: 1
@@ -1976,7 +1991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1569828842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2183,8 +2198,9 @@ GameObject:
   - component: {fileID: 1702641507}
   - component: {fileID: 1702641509}
   - component: {fileID: 1702641508}
+  - component: {fileID: 1702641510}
   m_Layer: 5
-  m_Name: Image
+  m_Name: titleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2247,6 +2263,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702641506}
   m_CullTransparentMesh: 1
+--- !u!114 &1702641510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702641506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e311a55c0a210c340a73f0e2277f6bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatAmplitude: 9
+  floatPeriod: 7
+  useGlow: 1
+  glowPeriod: 2.5
+  glowStrength: 0.35
+  glowColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  phaseOffset: 0
+  targetGraphic: {fileID: 0}
+  rt: {fileID: 0}
+  basePos: {x: 0, y: 0}
+  baseColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  hasBase: 0
+  time: 0
 --- !u!1 &1871262245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,6 +2306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871262247}
   - component: {fileID: 1871262246}
+  - component: {fileID: 1871262248}
   m_Layer: 0
   m_Name: Titlemanager
   m_TagString: Untagged
@@ -2292,6 +2342,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871262248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871262245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150b31d82ffe7b444a610e7413993e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 1169705436}
+  keyboardMouseSprite: {fileID: 21300000, guid: 6ad5ec41fccab07429f6a441b256a13b, type: 3}
+  gamepadSprite: {fileID: 1254760749, guid: 9ab9933e0db89774cb918765d4f9a39c, type: 3}
+  stickThreshold: 0.3
 --- !u!1 &1875943300
 GameObject:
   m_ObjectHideFlags: 0
