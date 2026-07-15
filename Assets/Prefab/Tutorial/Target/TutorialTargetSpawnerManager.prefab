@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7381056556340825404
 Transform:
   m_ObjectHideFlags: 0
@@ -54,6 +54,12 @@ MonoBehaviour:
     min: -3
     max: 4
   spawnZ: 20
-  enemyPrefabs:
-  - {fileID: 2491960067729714275, guid: 78a45afee6513934d83965fbc6d18750, type: 3}
-  spawnTimer: 0.25
+  enemyList:
+  - enemyPrefabs: {fileID: 2491960067729714275, guid: 78a45afee6513934d83965fbc6d18750, type: 3}
+    spawn: 0
+  onlySpawn: 0
+  interval:
+    initSpawnTimer: 0
+    timeUntilDecrease: 0
+    enemyIntervalDecrease: 0
+    minInterval: 0
