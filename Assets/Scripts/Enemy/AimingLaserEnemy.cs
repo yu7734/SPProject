@@ -1,10 +1,8 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(EnemyManager))]
 [RequireComponent(typeof(LineRenderer))]
-public class EnemyAimingLaser : EnemyAttackBase
+public class AimingLaserEnemy : EnemyAttackBase
 {
     [SerializeField, Header("照準レーザーにかかわる変数")]
     private GameObject Laser;

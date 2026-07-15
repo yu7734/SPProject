@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BulletEnemy : EnemyAttackBase
+public class ShotEnemy : EnemyAttackBase
 {
     [SerializeField, Header("射撃にかかわる変数")]
     private GameObject Bullet;
