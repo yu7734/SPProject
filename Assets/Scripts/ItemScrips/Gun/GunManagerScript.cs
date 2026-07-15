@@ -5,6 +5,7 @@ public class GunManagerScript : MonoBehaviour
     [SerializeField] GameObject[] Gun;
     [SerializeField] GameObject GunBullet;
     BulletManagert bulletManagert;
+    public float cooltime = 2f;
     public int GunCount=0;
     [SerializeField] bool Serect=false;
 

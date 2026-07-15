@@ -6,6 +6,8 @@ public class newFanelManager : MonoBehaviour
     GameObject Player;
     [SerializeField] GameObject FanelPrefab;
     GameObject[] Fanel;
+    [SerializeField] GameObject FanelBullet;
+    BulletManagert bulletManagert;
     Vector3 PlayerPos;
     [HideInInspector] public Vector3[] vector3s= new Vector3[MaxLoop];
     int loop = 0;
@@ -17,6 +19,7 @@ public class newFanelManager : MonoBehaviour
     void Awake() 
     {
         Player = GameObject.Find("Player");
+        bulletManagert = FanelBullet.GetComponent<BulletManagert>();
         for(int i=0;i<MaxLoop;i++)vector3s[i] = Player.transform.position;
     }
     

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
+public class PlayerObjectManager : MonoBehaviour, IPlayerDamage, IPlayerHeal
 {
     [SerializeField, Tooltip("PlayerManagerを取得")] private PlayerManager player;
     [SerializeField, Tooltip("CameraShake取得")] public CameraShake cameraShake;
@@ -23,5 +23,14 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage
             //HP減少
             player.playerHP -= Mathf.Max(0, value);
         }
+    }
+
+    //回復処理
+    public void Heal(int value)
+    {
+        Debug.Log("Heal");
+        //ここにカメラ効果とSE
+        //HP回復
+        player.playerHP += Mathf.Max(0, value);
     }
 }
