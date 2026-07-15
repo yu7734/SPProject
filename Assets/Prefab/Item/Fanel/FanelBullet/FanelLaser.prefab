@@ -154,3 +154,4 @@ MonoBehaviour:
   bulletSpeed: 3000
   bulletDamageRate: 1
   bulletDamageBonus: 0
+  hitSE: {fileID: 8300000, guid: 4980ed1d0ef0ecc4591886f956706661, type: 3}
