@@ -266,6 +266,49 @@ public static class AddItemSelectButtonsTool
                       : "カードが見つかりません。先に「選択ボタンをカード型レイアウトに変換」を実行してください。", "OK");
     }
 
+    /// <summary>
+    /// 各カードボタンにFadeInDropdownを付けて、左から順に時間差で降ってくるように設定する。
+    /// メニュー: Tools > SpacePhantom > カードの時間差ドロップをセットアップ
+    /// 何度実行してもOK（ディレイ値を設定し直すだけ）。
+    /// </summary>
+    [MenuItem("Tools/SpacePhantom/カードの時間差ドロップをセットアップ")]
+    public static void SetupStaggeredDrop()
+    {
+        const float delayStep = 0.08f; // カード1枚ごとの出現ディレイ（秒）
+
+        var ui = Object.FindAnyObjectByType<UIManager>(FindObjectsInactive.Include);
+        var so = (ui != null) ? new SerializedObject(ui) : null;
+        var panel = so?.FindProperty("selectItemImage").objectReferenceValue as GameObject;
+        if (panel == null)
+        {
+            EditorUtility.DisplayDialog("エラー", "選択パネルが見つかりません。Gameシーンを開いてから実行してください。", "OK");
+            return;
+        }
+
+        // ボタンを画面上の並び順（左→右）にしてディレイを振る
+        var btns = panel.GetComponentsInChildren<Button>(true)
+            .OrderBy(b => b.GetComponent<RectTransform>().position.x)
+            .ToArray();
+
+        int count = 0;
+        foreach (var btn in btns)
+        {
+            var drop = btn.GetComponent<FadeInDropdown>();
+            if (drop == null)
+            {
+                drop = Undo.AddComponent<FadeInDropdown>(btn.gameObject); // CanvasGroupも自動で付く
+            }
+            var dropSo = new SerializedObject(drop);
+            dropSo.FindProperty("startDelay").floatValue = delayStep * count;
+            dropSo.ApplyModifiedProperties();
+            count++;
+        }
+
+        EditorSceneManager.MarkSceneDirty(panel.scene);
+        EditorUtility.DisplayDialog("完了",
+            $"{count}枚のカードに時間差ドロップを設定しました（左から{delayStep}秒間隔）。\nシーンを保存してください（Ctrl+S）。", "OK");
+    }
+
     // カード内の配置定義（ここを変えて「再調整」を実行すれば全カードに反映される）
     private static void ApplyCardAnchors(ItemButtonView view)
     {

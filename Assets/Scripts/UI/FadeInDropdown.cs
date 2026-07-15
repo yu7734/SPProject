@@ -29,6 +29,9 @@ public class FadeInDropdown : MonoBehaviour
     [SerializeField, Tooltip("アニメーションのイージング（滑らかさ）")]
     private EaseType easeType = EaseType.OutCubic;
 
+    [SerializeField, Tooltip("アニメ開始前の待ち時間（秒・unscaled）。カードの時間差出現などに使う")]
+    private float startDelay = 0f;
+
     public enum EaseType
     {
         Linear,
@@ -88,6 +91,14 @@ public class FadeInDropdown : MonoBehaviour
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
+
+        // 時間差出現用のディレイ（透明のまま待つ / timeScale=0でも動く）
+        float wait = 0f;
+        while (wait < startDelay)
+        {
+            wait += Time.unscaledDeltaTime;
+            yield return null;
+        }
 
         // duration が 0 以下なら即完了
         if (duration <= 0f)
