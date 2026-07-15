@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpGrowthRate: 0
-  timeUntilIncrease: 0
+  hpGrowthRate: 1
+  timeUntilIncrease: 3.4028235e+38
   ui: {fileID: 0}
   playerBullet: {fileID: 0}
   hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
