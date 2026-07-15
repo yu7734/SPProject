@@ -7333,7 +7333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85394ae16d7143cda7f912101655a770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
+  timeLimit: 300
   timerText: {fileID: 2134377098}
   clearSceneName: GameClear
   useMinutesFormat: 1
