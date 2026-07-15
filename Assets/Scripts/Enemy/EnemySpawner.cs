@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEngine.EventSystems.EventTrigger;
+using static UnityEngine.Splines.SplineInstantiate;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,6 +11,24 @@ public class EnemySpawner : MonoBehaviour
     {
         public float min;
         public float max;
+    }
+    [Serializable]
+    public struct SpawnEnemy
+    {
+         public GameObject enemyPrefabs;
+         public float spawn;
+    }
+    [Serializable]
+    public struct EnemyInterval
+    {
+        [Tooltip("初期の湧く間隔")]
+        public float initSpawnTimer;
+        [Tooltip("敵の湧き時間が減るまでの時間")]
+        public float timeUntilDecrease;
+        [Tooltip("敵の湧き時間の減少幅")]
+        public float enemyIntervalDecrease;
+        [Tooltip("敵の湧き時間の最低値")]
+        public float minInterval;
     }
     [Header("ObjectPool")]
     [SerializeField, Tooltip("敵の初期生成数")] private int initPoolSize = 10;
@@ -32,14 +50,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnZ;
 
     [SerializeField, Tooltip("この中からランダムで出現")]
-    private List<GameObject> enemyPrefabs = new();
-    [SerializeField, Tooltip("湧く間隔")]
-    private float spawnTimer = 5f;
+    private List<SpawnEnemy> enemyList = new();
     [SerializeField, Tooltip("一体だけ湧くか")]
-    public bool onlySpawn = false;
-
+    private bool onlySpawn = false;
+    [SerializeField]
+    private EnemyInterval interval;
     private float timer;
 
+    private List<SpawnEnemy> availableEnemy=new();
     void Awake()
     {
         SetupEnemyPool();
@@ -52,11 +70,11 @@ public class EnemySpawner : MonoBehaviour
     /// </remarks>
     private void SetupEnemyPool()
     {
-        foreach (var prefab in enemyPrefabs)
+        foreach (var prefab in enemyList)
         {
             IObjectPool<GameObject> pool = null;
             pool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(prefab),
+            createFunc: () => Instantiate(prefab.enemyPrefabs),
 
             actionOnGet: (obj) => {
                 obj.SetActive(true);
@@ -81,14 +99,15 @@ public class EnemySpawner : MonoBehaviour
             defaultCapacity: initPoolSize,  //10
             maxSize: maxPoolSize    //100
             );
-            pools.Add(prefab, pool);
+            pools.Add(prefab.enemyPrefabs, pool);
         }
 
     }
     private void Update()
     {
+
         timer += Time.deltaTime;
-        if (timer >= spawnTimer)
+        if (timer >= Math.Max((interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease),interval.minInterval))
         {
             // 全てのプールの「貸し出し中」の合計をチェック
             int activeEnemyCount = 0;
@@ -103,8 +122,17 @@ public class EnemySpawner : MonoBehaviour
             // 画面内の敵が maxPoolSize 未満の時だけ湧かせる
             if (activeEnemyCount < maxPoolSize)
             {
+                availableEnemy.Clear();
+                foreach (var data in enemyList)
+                {
+                    if(data.spawn <= Time.timeSinceLevelLoad)
+                    {
+                        availableEnemy.Add(data);
+                    }
+                }
                 EnemySpawn();
                 timer = 0;
+
             }
         }
     }
@@ -114,15 +142,17 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     void EnemySpawn()
     {
-        int rndIndex = UnityEngine.Random.Range(0, enemyPrefabs.Count);
-        GameObject selectedEnemyPrefab = enemyPrefabs[rndIndex];
+        if (availableEnemy.Count == 0) return;
+        int rndIndex = UnityEngine.Random.Range(0, availableEnemy.Count);
+        
+        SpawnEnemy selectedEnemyPrefab = availableEnemy[rndIndex];
 
-        var pool = pools[selectedEnemyPrefab];
+        var pool = pools[selectedEnemyPrefab.enemyPrefabs];
         GameObject enemy = pool.Get();
 
         float x = UnityEngine.Random.Range(rangeX.min, rangeX.max);
         float y = UnityEngine.Random.Range(rangeY.min, rangeY.max);
         enemy.transform.position = new Vector3(x, y, spawnZ);
-        enemy.transform.rotation = selectedEnemyPrefab.transform.rotation;
+        enemy.transform.rotation = selectedEnemyPrefab.enemyPrefabs.transform.rotation;
     }
 }

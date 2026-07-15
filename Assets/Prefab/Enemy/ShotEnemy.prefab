@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpGrowthRate: 1
+  hpGrowthRate: 3
   timeUntilIncrease: 10
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
@@ -155,7 +155,7 @@ MonoBehaviour:
     max: 10
   playerDistance: 7
   attackPower: 10
-  maxEnemyHP: 40
+  maxEnemyHP: 10
   enemyMoveSpeed: 3
   Bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
   isTracking: 1

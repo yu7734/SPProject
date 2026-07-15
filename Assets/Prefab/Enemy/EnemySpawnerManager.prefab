@@ -56,11 +56,17 @@ MonoBehaviour:
     min: -8
     max: 8
   spawnZ: 17
-  enemyPrefabs:
-  - {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
-  - {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
-  spawnTimer: 1.5
+  enemyList:
+  - enemyPrefabs: {fileID: 720357861559527564, guid: 7b35b88bb4f519040aceeca5782650e8, type: 3}
+    spawn: 30
+  - enemyPrefabs: {fileID: 720357861559527564, guid: 07e45c519c750d840bec920ec2103c9b, type: 3}
+    spawn: 0
   onlySpawn: 0
+  interval:
+    initSpawnTimer: 3
+    timeUntilDecrease: 10
+    enemyIntervalDecrease: 0.1
+    minInterval: 1
 --- !u!114 &-2938909185062001225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,10 +89,15 @@ MonoBehaviour:
     min: 0
     max: 0
   spawnZ: 20
-  enemyPrefabs:
-  - {fileID: 720357861559527564, guid: 93e1f977ef5e29a4c9c6463f5b36f6a2, type: 3}
-  spawnTimer: 10
+  enemyList:
+  - enemyPrefabs: {fileID: 720357861559527564, guid: 93e1f977ef5e29a4c9c6463f5b36f6a2, type: 3}
+    spawn: 30
   onlySpawn: 1
+  interval:
+    initSpawnTimer: 10
+    timeUntilDecrease: 30
+    enemyIntervalDecrease: 1
+    minInterval: 5
 --- !u!114 &6264320676704088284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +120,12 @@ MonoBehaviour:
     min: 1
     max: 1
   spawnZ: 23
-  enemyPrefabs:
-  - {fileID: 720357861559527564, guid: 31e8761e039f52a418b8c4b580672724, type: 3}
-  spawnTimer: 5
+  enemyList:
+  - enemyPrefabs: {fileID: 720357861559527564, guid: 31e8761e039f52a418b8c4b580672724, type: 3}
+    spawn: 0
   onlySpawn: 1
+  interval:
+    initSpawnTimer: 5
+    timeUntilDecrease: 10
+    enemyIntervalDecrease: 0.3
+    minInterval: 3

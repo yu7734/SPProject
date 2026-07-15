@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -39,7 +38,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP+(int)(Time.timeSinceLevelLoad/timeUntilIncrease * hpGrowthRate);
-        //Debug.Log($"{ Time.timeSinceLevelLoad} {enemyHP}");
+        Debug.Log($"{ Time.timeSinceLevelLoad} {enemyHP}");
         isReleased = false;
         if (ui == null)
         {
