@@ -56,6 +56,19 @@ public class ItemSelectRandomizer : MonoBehaviour
     [SerializeField, Tooltip("カード型表示(ItemButtonView)のLv行の書式。{0}=現在段階, {1}=最大段階")]
     private string cardLevelFormat = "Lv {0}/{1}";
 
+    [Header("選択時の演出")]
+    [SerializeField, Tooltip("選んだカードがふくらむ演出を有効にする")]
+    private bool useChooseFlourish = true;
+    [SerializeField, Tooltip("選んだカードの最大拡大率")]
+    private float choosePunchScale = 1.15f;
+    [SerializeField, Tooltip("演出の長さ（秒・タイムスケール停止中でも動く）")]
+    private float chooseDuration = 0.3f;
+    [SerializeField, Range(0f, 1f), Tooltip("選ばれなかったカードの薄さ（ボタンにCanvasGroupがある場合のみ有効）")]
+    private float unchosenAlpha = 0.35f;
+
+    /// <summary>選択演出の再生中フラグ（多重クリック防止）</summary>
+    private bool isChoosing = false;
+
     private UIManager ui;
     private GunManagerScript gunManager;
     private SyabonManagerScript syabonManager;
@@ -78,6 +91,8 @@ public class ItemSelectRandomizer : MonoBehaviour
     {
         if (ui == null || buttons == null || buttons.Length == 0 || itemPool.Length == 0) return;
 
+        isChoosing = false; // 前回の選択演出の状態をリセット
+
         // シャッフル（Fisher-Yates）して先頭からボタン数ぶん採用 → 重複なし
         var pool = new List<ItemOption>(itemPool);
         for (int i = pool.Count - 1; i > 0; i--)
@@ -90,6 +105,11 @@ public class ItemSelectRandomizer : MonoBehaviour
         {
             var btn = buttons[i];
             var option = pool[i % pool.Count]; // 候補がボタン数より少ない場合はループ
+
+            // 前回の選択演出で変更した状態を戻す
+            btn.interactable = true;
+            var cgReset = btn.GetComponent<CanvasGroup>();
+            if (cgReset != null) cgReset.alpha = 1f;
 
             // 強化が終わったアイテムはPowerカードに丸ごと差し替える（色・アイコン・説明・効果すべて）
             if (maxedReplacement != null
@@ -146,7 +166,8 @@ public class ItemSelectRandomizer : MonoBehaviour
             // ランタイムのリスナーを張り替え
             btn.onClick.RemoveAllListeners();
             var captured = option;
-            btn.onClick.AddListener(() => Execute(captured.action));
+            var capturedBtn = btn;
+            btn.onClick.AddListener(() => Choose(captured.action, capturedBtn));
         }
     }
 
@@ -183,6 +204,60 @@ public class ItemSelectRandomizer : MonoBehaviour
             default:
                 return false;
         }
+    }
+
+    /// <summary>
+    /// カードが押されたときの入口。演出ONなら「選んだカードがふくらみ、他が薄くなる」
+    /// 演出を挟んでから効果を発動する。演出中の多重クリックは無視。
+    /// </summary>
+    private void Choose(ItemAction action, Button chosenBtn)
+    {
+        if (isChoosing) return;
+        if (!useChooseFlourish || chosenBtn == null)
+        {
+            Execute(action);
+            return;
+        }
+        StartCoroutine(ChooseRoutine(action, chosenBtn));
+    }
+
+    private System.Collections.IEnumerator ChooseRoutine(ItemAction action, Button chosenBtn)
+    {
+        isChoosing = true;
+
+        // 全ボタンをクリック不可に、選ばれなかったカードは薄くする
+        foreach (var b in buttons)
+        {
+            if (b == null) continue;
+            b.interactable = false;
+            if (b != chosenBtn)
+            {
+                var cg = b.GetComponent<CanvasGroup>();
+                if (cg != null) cg.alpha = unchosenAlpha;
+            }
+        }
+
+        // ButtonHoverEffectはスケールと色を毎フレーム上書きするので、演出中だけ止める
+        var hover = chosenBtn.GetComponent<ButtonHoverEffect>();
+        if (hover != null) hover.enabled = false;
+
+        // ふくらんで戻るパンチスケール（timeScale=0でも動くようunscaled）
+        var rt = chosenBtn.GetComponent<RectTransform>();
+        Vector3 baseScale = rt.localScale;
+        float t = 0f;
+        while (t < chooseDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            float n = Mathf.Clamp01(t / chooseDuration);
+            float s = 1f + (choosePunchScale - 1f) * Mathf.Sin(n * Mathf.PI); // 前半ふくらみ→後半戻る
+            rt.localScale = baseScale * s;
+            yield return null;
+        }
+        rt.localScale = baseScale;
+        if (hover != null) hover.enabled = true; // OnEnableでスケール等は初期化される
+
+        isChoosing = false;
+        Execute(action); // ここでUIManagerが効果を発動してパネルを閉じる
     }
 
     private void Execute(ItemAction action)
