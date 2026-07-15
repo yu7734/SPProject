@@ -125,6 +125,7 @@ MonoBehaviour:
   bulletSpeed: 3000
   bulletDamageRate: 0.2
   bulletDamageBonus: 0
+  hitSE: {fileID: 8300000, guid: 4980ed1d0ef0ecc4591886f956706661, type: 3}
 --- !u!54 &233219855323772338
 Rigidbody:
   m_ObjectHideFlags: 0
