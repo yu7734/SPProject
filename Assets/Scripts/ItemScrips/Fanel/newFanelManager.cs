@@ -58,16 +58,16 @@ public class newFanelManager : MonoBehaviour
         switch (FanelCount)
         {
             case 0:
-                Instantiate(FanelPrefab, vector3s[FanelPos1],Quaternion.identity);
+                Instantiate(FanelPrefab, vector3s[(FanelPos1 + loop) % MaxLoop], Quaternion.identity);
                 break;
             case 1:
-                Instantiate(FanelPrefab, vector3s[FanelPos2], Quaternion.identity);
+                Instantiate(FanelPrefab, vector3s[(FanelPos2 + loop) % MaxLoop], Quaternion.identity);
                 break;
             case 2:
-                Instantiate(FanelPrefab, vector3s[FanelPos3], Quaternion.identity);
+                Instantiate(FanelPrefab, vector3s[(FanelPos3 + loop) % MaxLoop], Quaternion.identity);
                 break;
             case 3:
-                Instantiate(FanelPrefab, vector3s[FanelPos4], Quaternion.identity);
+                Instantiate(FanelPrefab, vector3s[(FanelPos4 + loop) % MaxLoop], Quaternion.identity);
                 break;
             default:
                 break;
