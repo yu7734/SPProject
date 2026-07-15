@@ -3600,6 +3600,7 @@ MonoBehaviour:
   duration: 1
   dropDistance: 60
   easeType: 1
+  startDelay: 0
 --- !u!225 &765115624
 CanvasGroup:
   m_ObjectHideFlags: 0
