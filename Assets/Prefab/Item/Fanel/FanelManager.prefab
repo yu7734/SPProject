@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FanelPrefab: {fileID: 1393654434365384442, guid: 36385d89ab9570d47a3d30e715c3050c, type: 3}
-  Fanel: []
+  FanelBullet: {fileID: 6830236781976906278, guid: 5dba484b997295948babb8e0ae42e4ae, type: 3}
   vector3s:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -68,5 +68,5 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   FanelCount: 0
-  Select: 0
   offset: {x: 0, y: 0, z: -1.25}
+  Select: 0

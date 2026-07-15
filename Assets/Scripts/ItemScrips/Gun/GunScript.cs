@@ -3,24 +3,25 @@ using UnityEngine.InputSystem;
 
 public class GunScript : MonoBehaviour
 {
-    public float cooltime = 2f;
     float time = 0f;
     public bool shotReady = true;
     [SerializeField] private GameObject bulletPrefab;
     UIManager ui;
+    GunManagerScript manager;
     [SerializeField] Vector3 Ofset = new(0f, 0f, 1f);
     PlayerInput playerInput;
     void Awake()
     {
         ui = FindAnyObjectByType<UIManager>();
         playerInput = FindAnyObjectByType<PlayerInput>();
+        manager = FindAnyObjectByType<GunManagerScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!ui.bSelect&&!shotReady) time += Time.deltaTime;
-        if (!shotReady && time >= cooltime) shotReady = true;
+        if (!shotReady && time >= manager.cooltime) shotReady = true;
         if (playerInput.actions["Attack"].triggered && shotReady)OnShot();
     }
 

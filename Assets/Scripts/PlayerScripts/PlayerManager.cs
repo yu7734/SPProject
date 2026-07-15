@@ -9,6 +9,12 @@ public interface IPlayerDamage
     //public void Death();
 }
 
+/// <summary>プレイヤーが受ける回復</summary>
+public interface IPlayerHeal 
+{ 
+    public void Heal(int value);
+}
+
 
 public class PlayerManager : MonoBehaviour
 {
