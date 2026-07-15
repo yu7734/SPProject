@@ -29,6 +29,6 @@ public class SpeedUpCommand : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-    }
 #endif
+    }
 }
