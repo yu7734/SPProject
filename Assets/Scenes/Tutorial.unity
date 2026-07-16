@@ -7942,6 +7942,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 9e0776d45b5b8fd4cb75dd472df9aa1c, type: 3}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: coolTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: playerHP
       value: 100
       objectReference: {fileID: 0}
