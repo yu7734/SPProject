@@ -8840,6 +8840,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1144708834}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 1117674039}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: exprosionSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e84d5725d699414b90b9da065b30928, type: 3}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: playerExprosion
+      value: 
+      objectReference: {fileID: 3568262549743503624, guid: 957eb27b10dccb64b9afcef7d15bee45, type: 3}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: exprosionSE.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: 'exprosionSE.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e84d5725d699414b90b9da065b30928, type: 3}
+    - target: {fileID: 5777419476146685294, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: 'exprosionSE.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 94e051f7705170946834a9f7ec6bfe8e, type: 3}
     - target: {fileID: 6110504749793821870, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_Enabled
       value: 1
