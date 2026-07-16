@@ -122,8 +122,9 @@ GameObject:
   - component: {fileID: 8380161179720321260}
   - component: {fileID: 3248423529176856624}
   - component: {fileID: 4485700448457686790}
-  - component: {fileID: 3387444970664966248}
+  - component: {fileID: 5777419476146685294}
   - component: {fileID: -4984924638923568422}
+  - component: {fileID: 3387444970664966248}
   - component: {fileID: 7030150969893951348}
   - component: {fileID: 8513766026860292035}
   m_Layer: 0
@@ -177,6 +178,9 @@ MonoBehaviour:
   bJustDodge: 0
   dodgeCoolTime: 0
   coolTime: 1
+  soundManager: {fileID: 0}
+  shotSE: {fileID: 0}
+  dodgeSE: {fileID: 0}
   _state: 0
 --- !u!114 &4485700448457686790
 MonoBehaviour:
@@ -207,6 +211,37 @@ MonoBehaviour:
   expPopupScreenOffset: {x: 0, y: 30}
   expPopupFloatUp: 60
   expPopupPopScale: 1.2
+--- !u!114 &5777419476146685294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467476009098623023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d728b70ff626a445957840c1417e369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 0}
+  playerExprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  exprosionSE:
+  - {fileID: 8300000, guid: 0e84d5725d699414b90b9da065b30928, type: 3}
+  - {fileID: 8300000, guid: 94e051f7705170946834a9f7ec6bfe8e, type: 3}
+  sound: {fileID: 0}
+--- !u!114 &-4984924638923568422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467476009098623023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01604a371c4c37e4fa891f373a69b474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSpeed: 3
 --- !u!135 &3387444970664966248
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -228,19 +263,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.72
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4984924638923568422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5467476009098623023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01604a371c4c37e4fa891f373a69b474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameSpeed: 3
 --- !u!114 &7030150969893951348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3248423529176856624}
   cameraShake: {fileID: 0}
+  soundManager: {fileID: 0}
+  playerHitedSE: {fileID: 0}
 --- !u!54 &4417157468962316149
 Rigidbody:
   m_ObjectHideFlags: 0
