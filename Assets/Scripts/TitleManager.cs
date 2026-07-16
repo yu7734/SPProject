@@ -78,6 +78,13 @@ public class TitleManager : MonoBehaviour
 #endif
     }
 
+    // チュートリアルボタンを押したときに呼ばれる
+    public void OnTutorialButton()
+    {
+        // チュートリアルシーンに遷移
+        SceneManager.LoadScene("Tutorial");
+    }
+
     // スタートボタンを押したときに呼ばれる
     public void OnStartButton()
     {
