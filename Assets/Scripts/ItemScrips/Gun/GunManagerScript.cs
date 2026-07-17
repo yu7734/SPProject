@@ -12,6 +12,7 @@ public class GunManagerScript : MonoBehaviour
     void Awake()
     {
         bulletManagert = GunBullet.GetComponent<BulletManagert>();
+        bulletManagert.bulletDamageRate = bulletManagert.BASE_bulletDamageRate;
     }
     // Update is called once per frame
     void Update()

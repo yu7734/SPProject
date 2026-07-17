@@ -20,7 +20,8 @@ public class newFanelManager : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         bulletManagert = FanelBullet.GetComponent<BulletManagert>();
-        for(int i=0;i<MaxLoop;i++)vector3s[i] = Player.transform.position;
+        bulletManagert.bulletDamageRate = bulletManagert.BASE_bulletDamageRate;
+        for (int i=0;i<MaxLoop;i++)vector3s[i] = Player.transform.position;
     }
     
     void FixedUpdate()
