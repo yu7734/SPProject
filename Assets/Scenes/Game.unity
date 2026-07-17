@@ -6149,6 +6149,11 @@ MonoBehaviour:
   keyboardMouseSprite: {fileID: 21300000, guid: 6ad5ec41fccab07429f6a441b256a13b, type: 3}
   gamepadSprite: {fileID: 1254760749, guid: 9ab9933e0db89774cb918765d4f9a39c, type: 3}
   stickThreshold: 0.3
+--- !u!1 &1576941761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6562564495504082392, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
+  m_PrefabInstance: {fileID: 2634859111706571003}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1589193444
 GameObject:
   m_ObjectHideFlags: 0
@@ -7179,6 +7184,8 @@ PlayableDirector:
     value: {fileID: 330585552}
   - key: {fileID: 4209844156413162290, guid: bec02cca12047874fb0180cfefd00486, type: 2}
     value: {fileID: 135547419}
+  - key: {fileID: 6467457242377691986, guid: bec02cca12047874fb0180cfefd00486, type: 2}
+    value: {fileID: 1576941761}
   m_ExposedReferences:
     m_References:
     - 794dc7aa563e6b14cb3c462f077b473a: {fileID: 1249492988}
