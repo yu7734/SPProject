@@ -154,17 +154,17 @@ MonoBehaviour:
   rangeY:
     min: 0
     max: 0
-  playerDistance: 3
-  attackPower: 0
+  fireStopDistance: 3
+  collisionDamage: 0
   maxEnemyHP: 50
-  enemyMoveSpeed: 3
-  Laser: {fileID: 6678171959917968696, guid: 957f3a0fa53994043bbb4de7f6341840, type: 3}
+  moveSpeed: 3
+  laser: {fileID: 6678171959917968696, guid: 957f3a0fa53994043bbb4de7f6341840, type: 3}
   stopTime: 3
   aimingTime: 3
-  laserTimeLimit: 2
-  enemyBulletForce: 3000
+  laserShotTime: 2
+  bulletForce: 3000
   laserInterval: 0.04
-  offset: 1.5
+  spawnOffset: 1.5
   startColor: {r: 0, g: 0, b: 1, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &-2333561780525997936
