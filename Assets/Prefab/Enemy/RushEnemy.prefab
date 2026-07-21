@@ -153,12 +153,12 @@ MonoBehaviour:
   rangeY:
     min: 0
     max: 0
-  playerDistance: 3
-  attackPower: 30
+  fireStopDistance: 3
+  collisionDamage: 20
   maxEnemyHP: 5
-  enemyMoveSpeed: 10
+  moveSpeed: 10
   stopTime: 1
-  lookAtTime: 3
+  lookAtPlayerTime: 3
 --- !u!1 &3098837181651534511
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,7 @@ public interface IEnemyDamage
 
 public class EnemyManager : MonoBehaviour, IEnemyDamage
 {
-    //敵のHP
-
+    /// <summary> 敵のHP </summary>
     private int enemyHP;
     [SerializeField,Tooltip("一定時間毎のHPの増加量")]
     private int hpGrowthRate;
@@ -21,13 +20,17 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private UIManager ui;
     [SerializeField] private GameObject playerBullet;
 
-    [SerializeField,Tooltip("敵にヒット時の演出")] private GameObject hit;
-    [SerializeField,Tooltip("敵を撃破時の演出")] private GameObject exprosion;
+    [SerializeField,Tooltip("敵に攻撃をヒットさせた時の演出")]
+    private GameObject hit;
+    [SerializeField,Tooltip("敵を撃破したときの演出")]
+    private GameObject exprosion;
     [NonSerialized] public Transform player;
 
     EnemyAttackBase enemyAttackBase;
     Rigidbody rb;
+    /// <summary> すでにオブジェクトプールに戻っているかチェック(二重の演出防止) </summary>
     private bool isReleased = false;
+    /// <summary> EnemySpawnerのオブジェクトプール </summary>
     public IObjectPool<GameObject> MyPool { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,10 +38,10 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         enemyAttackBase = GetComponent<EnemyAttackBase>();
     }
+    /// <summary> プールが再利用されるたびに実行 </summary>
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP+(int)(Time.timeSinceLevelLoad/timeUntilIncrease * hpGrowthRate);
-        Debug.Log($"{ Time.timeSinceLevelLoad} {enemyHP}");
         isReleased = false;
         if (ui == null)
         {
@@ -62,7 +65,6 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     // Update is called once per frame
     void Update()
     {
-        //if (player == null) return;
         if (isReleased) return;
 
         if (transform.position.z <= -9.7f)
@@ -89,14 +91,15 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
             if (enemyAttackBase != null)
             {
-                damage.Damage(enemyAttackBase.attackPower);
+                damage.Damage(enemyAttackBase.collisionDamage);
                 EnemyDie();
             }
 
-            Debug.Log("hit");
+            //Debug.Log("hit");
         }
     }
-    //敵が受けるダメージ量
+    /// <summary> 敵がダメージを受ける処理 </summary>
+    ///<param name="damage">敵が受けるダメージ量</param>
     public void EnemyDamaged(int damage)
     {
         if (isReleased) return;
@@ -111,7 +114,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         }
 
     }
-
+    /// <summary> 敵が倒されたときの処理 </summary>
     private void EnemyDie()
     {
         if (isReleased) return;

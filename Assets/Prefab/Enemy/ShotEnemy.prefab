@@ -153,15 +153,15 @@ MonoBehaviour:
   rangeY:
     min: -10
     max: 10
-  playerDistance: 7
-  attackPower: 10
+  fireStopDistance: 7
+  collisionDamage: 10
   maxEnemyHP: 10
-  enemyMoveSpeed: 3
-  Bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
-  isTracking: 1
+  moveSpeed: 3
+  bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
+  trackingPlayer: 1
   coolTime: 3
-  enemyBulletForce: 1500
-  offset: 1.5
+  bulletForce: 1500
+  spawnOffset: 1.5
 --- !u!1 &5844787781922101772
 GameObject:
   m_ObjectHideFlags: 0

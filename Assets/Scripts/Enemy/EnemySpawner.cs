@@ -31,8 +31,10 @@ public class EnemySpawner : MonoBehaviour
         public float minInterval;
     }
     [Header("ObjectPool")]
-    [SerializeField, Tooltip("敵の初期生成数")] private int initPoolSize = 10;
-    [SerializeField, Tooltip("敵の生成上限(これ以上はdeleteされる)")] private int maxPoolSize = 100;
+    [SerializeField, Tooltip("敵の初期生成数")]
+    private int initPoolSize = 10;
+    [SerializeField, Tooltip("敵の生成上限(これ以上はdeleteされる)")]
+    private int maxPoolSize = 100;
 
 
     private Dictionary<GameObject, IObjectPool<GameObject>> pools = new();
@@ -47,17 +49,24 @@ public class EnemySpawner : MonoBehaviour
     private SpawnRange rangeX;
     [SerializeField, Tooltip("Y座標のminからmaxまででランダム")]
     private SpawnRange rangeY;
+    /// <summary> 敵が湧くZ座標 </summary>
     [SerializeField] private float spawnZ;
 
+    /// <summary> そのenemySpawnerでゲーム中に湧く敵のリスト </summary>
     [SerializeField, Tooltip("この中からランダムで出現")]
     private List<SpawnEnemy> enemyList = new();
+
+    /// <summary> その時点で湧く敵のリスト </summary>
+    private List<SpawnEnemy> availableEnemy = new();
+
+    /// <summary> その敵が一体だけ湧くならtrue </summary>
     [SerializeField, Tooltip("一体だけ湧くか")]
     private bool onlySpawn = false;
     [SerializeField]
     private EnemyInterval interval;
-    private float timer;
 
-    private List<SpawnEnemy> availableEnemy=new();
+    /// <summary> 通常のタイマー </summary>
+    private float timer;
     void Awake()
     {
         SetupEnemyPool();
@@ -109,8 +118,7 @@ public class EnemySpawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= Math.Max((interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease),interval.minInterval))
         {
-            // 全てのプールの「貸し出し中」の合計をチェック
-            int activeEnemyCount = 0;
+            int activeEnemyCount = 0;                                           // 全てのプールの「貸し出し中」の合計をチェック
             foreach (var pool in pools.Values)
             {
                 if (pool is ObjectPool<GameObject> concretePool)
@@ -118,9 +126,8 @@ public class EnemySpawner : MonoBehaviour
                     activeEnemyCount += concretePool.CountActive;
                 }
             }
-
-            // 画面内の敵が maxPoolSize 未満の時だけ湧かせる
-            if (activeEnemyCount < maxPoolSize)
+                                                                            
+            if (activeEnemyCount < maxPoolSize)                                 // 画面内の敵が maxPoolSize 未満の時だけその時点で湧ける敵を湧かせる
             {
                 availableEnemy.Clear();
                 foreach (var data in enemyList)

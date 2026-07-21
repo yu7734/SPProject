@@ -154,16 +154,16 @@ MonoBehaviour:
   rangeY:
     min: -10
     max: 10
-  playerDistance: 7
-  attackPower: 10
+  fireStopDistance: 7
+  collisionDamage: 10
   maxEnemyHP: 10
-  enemyMoveSpeed: 3
-  Bullet: {fileID: 6678171959917968696, guid: d43b0bdf16a4e254ba7939204fab98ee, type: 3}
+  moveSpeed: 3
+  bullet: {fileID: 6678171959917968696, guid: d43b0bdf16a4e254ba7939204fab98ee, type: 3}
   coolTime: 0.5
-  enemyBulletForce: 750
-  offset: 1.5
-  rangeMin: 2.5
-  rangeMax: 3
+  bulletForce: 750
+  spawnOffset: 1.5
+  minSpreadRange: 2.5
+  maxSpreadRange: 3
 --- !u!114 &6271215281304353177
 MonoBehaviour:
   m_ObjectHideFlags: 0

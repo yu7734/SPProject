@@ -1,21 +1,28 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShotEnemy : EnemyAttackBase
 {
     [SerializeField, Header("射撃にかかわる変数")]
-    private GameObject Bullet;
+    private GameObject bullet;
+
+    /// <summary> trueなら自機狙い </summary>
     [SerializeField, Tooltip("自機狙いかどうか")]
-    private bool isTracking = false;
+    private bool trackingPlayer;
+
+    /// <summary> 弾を撃つ間隔(秒) </summary>
     [SerializeField, Tooltip("弾を撃つ間隔（秒）")]
-    private float coolTime = 0.5f;
-    [SerializeField, Tooltip("弾を撃つ力（速さ）")]
-    private float enemyBulletForce = 3f;
+    private float coolTime;
 
-    [SerializeField, Tooltip("弾を最初に生成する場所")]
-    private float offset = 1.5f;
+    /// <summary> 弾を撃つ力(速さ)  </summary>
+    [SerializeField, Tooltip("弾を撃つ力。この値が大きいほど弾が早く飛ぶ")]
+    private float bulletForce;
 
-    [NonSerialized] public float shotTimer = 0;
+    /// <summary> 弾の生成位置のオフセット </summary>
+    [SerializeField, Tooltip("敵の位置からの弾の発射位置までの距離のズレ")]
+    private float spawnOffset;
+
+    /// <summary> 射撃専用のタイマー </summary>
+    private float shotTimer = 0;
 
     public override void OnReset()
     {
@@ -26,36 +33,38 @@ public class ShotEnemy : EnemyAttackBase
     private void Update()
     {
         if (player == null) return;
-        transform.position -= Vector3.forward * enemyMoveSpeed * Time.deltaTime;
-        if ((transform.position.x > rangeX.min && transform.position.x <= rangeX.max) &&
-            (transform.position.y > rangeY.min && transform.position.y <= rangeY.max) &&
-             transform.position.z > player.position.z + playerDistance)
-            ShotPattern();
+        transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+
+        if ((transform.position.x > rangeX.min && transform.position.x <= rangeX.max) &&        //Xmin < transform.position.x > Xmax
+            (transform.position.y > rangeY.min && transform.position.y <= rangeY.max) &&        //Ymin < transform.position.y > Ymax
+             transform.position.z > player.position.z + fireStopDistance)                         
+            ShotPattern();                                                                      //全て当てはまっていれば弾を撃つ
     }
+    /// <summary> 一般的な射撃にかかわる関数 </summary>
     public void ShotPattern()
     {
         shotTimer += Time.deltaTime;
-        if (shotTimer > coolTime)   //coolTimeごとにoffsetの距離前に生成してその時点のプレイヤーの方向にenemyBulletForceの力で撃つ。３秒後に各自破壊。
+        if (shotTimer > coolTime)   
         {
-            Vector3 spawnPosition = transform.position + transform.forward * offset;
+            Vector3 spawnPosition = transform.position + transform.forward * spawnOffset;
 
             Vector3 direction = (player.position - spawnPosition).normalized;
             Quaternion rotation = Quaternion.LookRotation(direction);
 
-            GameObject newBullet = Instantiate(Bullet, spawnPosition, rotation);
+            GameObject newBullet = Instantiate(bullet, spawnPosition, rotation);
             Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
 
-            if (isTracking)
+            if (trackingPlayer)
             {
                 Vector3 shotDirection = (player.position - spawnPosition).normalized;
-                Bulletrb.AddForce(-shotDirection * -enemyBulletForce);
+                Bulletrb.AddForce(-shotDirection * -bulletForce);                          //その時点のプレイヤーの方向に撃つ。
             }
             else
             {
-                Bulletrb.AddForce(-transform.forward * enemyBulletForce);
+                Bulletrb.AddForce(-transform.forward * bulletForce);
             }
 
-            Destroy(newBullet, 3f);
+            Destroy(newBullet, 3f);                                                             //３秒後に各自破壊
             shotTimer = 0;
         }
     }
