@@ -686,6 +686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 185542877}
   - component: {fileID: 185542876}
+  - component: {fileID: 185542878}
   m_Layer: 0
   m_Name: TutorialManager
   m_TagString: Untagged
@@ -726,6 +727,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &185542878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185542875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7518ae44b674dc94dbc6520c8f901687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStart: 1
 --- !u!1 &193401386
 GameObject:
   m_ObjectHideFlags: 0
@@ -9184,6 +9198,10 @@ PrefabInstance:
       propertyPath: shotSE
       value: 
       objectReference: {fileID: 8300000, guid: 7cc27bffae0190441b4db5dcfaec43be, type: 3}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 185542878}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: dodgeSE
       value: 
