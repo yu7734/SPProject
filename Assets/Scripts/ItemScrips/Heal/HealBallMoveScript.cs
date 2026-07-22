@@ -1,9 +1,12 @@
+using System.Threading;
 using UnityEngine;
 
 public class HealBallMoveScript : MonoBehaviour
 { 
     Vector3 playerpos;
-    float smoothSpeed = 3f;
+    [SerializeField,Tooltip("‹ß‚Ã‚­‘¬“x")]float smoothSpeed = 3f;
+    float timer = 0f;
+    [SerializeField,Tooltip("oŒ»‚µ‚Ä‚©‚ç‰½•bŒã‚ÉÁ‚¦‚é‚©")]float extinction = 4f;
     void Awake()
     {
         playerpos=GameObject.Find("Player").transform.position;
@@ -12,8 +15,10 @@ public class HealBallMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 desiredPosition = playerpos;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, playerpos, smoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
+
+        timer += Time.deltaTime;
+        if(timer>extinction)Destroy(gameObject);
     }
 }
