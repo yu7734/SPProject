@@ -38,7 +38,7 @@ public class TutorialManagerScript : MonoBehaviour
                 UIManager.Experience(-(UIManager.experiencePoint));
                 break;
         }
-        if(PlayerManager.playerHP != PlayerManager.MaxPlayerHP) PlayerManager.playerHP = PlayerManager.MaxPlayerHP;
+        if(PlayerManager.playerHP <=10) PlayerManager.playerHP += 10;
     }
 
     void NextStep() 
@@ -47,11 +47,11 @@ public class TutorialManagerScript : MonoBehaviour
         {
             case Step.step_one:
                 StepText.text = "Step 1";
-                DescriptionText.text = "Break All Target";
+                DescriptionText.text = "Break All Target\nWASD:Move\nEnter:Shot";
                 break;
             case Step.step_two:
                 StepText.text = "Step 2";
-                DescriptionText.text = "Just Dodge Enemy Bullet";
+                DescriptionText.text = "Just Dodge Enemy Bullet\nSpace:Dodge";
                 break;
             default:
             case Step.step_tree:
