@@ -8,7 +8,7 @@ public class RushEnemy : EnemyAttackBase
     [SerializeField, Tooltip("初期停止時間（秒）")]
     private float stopTime;
 
-    [SerializeField, Tooltip("プレイヤーを見ている時間（秒）")]
+    [SerializeField, Tooltip("プレイヤーを見ている時間（秒)")]
     private float lookAtPlayerTime;
 
     /// <summary> 突撃専用のタイマー </summary>
@@ -25,15 +25,19 @@ public class RushEnemy : EnemyAttackBase
         rushTimer = 0;
     }
     /// <summary> 一般的な突撃にかかわる関数 </summary>
-    public void RushPattern() 
+    public void RushPattern()
     {
         rushTimer += Time.deltaTime;
         if (rushTimer < stopTime) return;
         if (rushTimer < lookAtPlayerTime)
         {
-            transform.LookAt(player.transform);                                     //lookAtTimeになるまでプレイヤーの座標に向けて移動
+            transform.LookAt(player.transform);                                                     //lookAtTimeになるまでプレイヤーの座標に向けて移動
         }
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;       //その時向いていた方向に移動。
+        transform.position += transform.forward *
+            (Mathf.Min(approachMoveSpeed.maxSpeed, approachMoveSpeed.speed + (Time.timeSinceLevelLoad / approachMoveSpeed.timeUntilIncrease * approachMoveSpeed.intervalIncrease)) *
+            Time.deltaTime);                                                                        //その時向いていた方向に移動。
+
+        //Debug.Log(approachMoveSpeed.speed + (Time.timeSinceLevelLoad / approachMoveSpeed.timeUntilIncrease * approachMoveSpeed.intervalIncrease));
 
     }
 }

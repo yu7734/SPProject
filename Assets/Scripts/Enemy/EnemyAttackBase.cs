@@ -12,6 +12,23 @@ public class EnemyAttackBase : MonoBehaviour
         [SerializeField, Tooltip("弾を撃つ範囲(最大)")]
         public float max;
     }
+
+    [Serializable]
+    public struct MoveSpeed
+    {
+        [SerializeField, Tooltip("プレイヤー側に移動する速度")]
+        public float speed;
+
+        [SerializeField, Tooltip("移動速度の増加までの時間")]
+        public float timeUntilIncrease;
+
+        [SerializeField, Tooltip("移動速度の増加間隔")]
+        public float intervalIncrease;
+
+        [SerializeField, Tooltip("移動速度の最大値")]
+        public float maxSpeed;
+    }
+
     /// <summary> 射撃範囲 </summary>
     [Header("敵が弾を撃つ範囲")]
     [SerializeField, Tooltip("X座標")]
@@ -33,9 +50,9 @@ public class EnemyAttackBase : MonoBehaviour
 
     [NonSerialized] public Transform player;
 
-    /// <summary> 敵の移動速度 </summary>
+    /// <summary> 敵の移動速度(プレイヤー方向に移動する敵にのみ影響する) </summary>
     [SerializeField, Tooltip("敵が向かってくる速さ")]
-    protected float moveSpeed;
+    protected MoveSpeed approachMoveSpeed;
 
     Rigidbody rb;
 

@@ -33,7 +33,9 @@ public class ShotEnemy : EnemyAttackBase
     private void Update()
     {
         if (player == null) return;
-        transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+        transform.position -= Vector3.forward *
+            (Mathf.Min(approachMoveSpeed.maxSpeed, approachMoveSpeed.speed + (Time.timeSinceLevelLoad/approachMoveSpeed.timeUntilIncrease * approachMoveSpeed.intervalIncrease)) * 
+            Time.deltaTime);
 
         if ((transform.position.x > rangeX.min && transform.position.x <= rangeX.max) &&        //Xmin < transform.position.x > Xmax
             (transform.position.y > rangeY.min && transform.position.y <= rangeY.max) &&        //Ymin < transform.position.y > Ymax

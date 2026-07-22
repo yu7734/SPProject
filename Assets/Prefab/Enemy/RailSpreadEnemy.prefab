@@ -157,7 +157,7 @@ MonoBehaviour:
   fireStopDistance: 7
   collisionDamage: 10
   maxEnemyHP: 10
-  moveSpeed: 3
+  moveSpeed: 0
   bullet: {fileID: 6678171959917968696, guid: d43b0bdf16a4e254ba7939204fab98ee, type: 3}
   coolTime: 0.5
   bulletForce: 750
