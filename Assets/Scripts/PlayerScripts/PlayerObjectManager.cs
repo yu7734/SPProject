@@ -32,5 +32,6 @@ public class PlayerObjectManager : MonoBehaviour, IPlayerDamage, IPlayerHeal
         //ここにカメラ効果とSE
         //HP回復
         player.playerHP += Mathf.Max(0, value);
+        if (player.MaxPlayerHP < player.playerHP) player.playerHP = player.MaxPlayerHP;
     }
 }

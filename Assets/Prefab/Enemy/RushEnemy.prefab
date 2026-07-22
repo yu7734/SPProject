@@ -136,7 +136,7 @@ MonoBehaviour:
   hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
   exprosion: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
   Healball: {fileID: 8425003110391596631, guid: 9e2e18529085a32409d0d8c9182631e9, type: 3}
-  Drop_probability: 75
+  DropPercentage: 30
 --- !u!114 &8689709892366153393
 MonoBehaviour:
   m_ObjectHideFlags: 0

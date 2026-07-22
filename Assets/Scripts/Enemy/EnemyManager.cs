@@ -22,8 +22,13 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     [SerializeField] private GameObject playerBullet;
 
     [SerializeField,Tooltip("敵にヒット時の演出")] private GameObject hit;
-    [SerializeField,Tooltip("敵を撃破時の演出")] private GameObject exprosion;
+    [SerializeField, Tooltip("敵を撃破時の演出")] private GameObject exprosion;
     [NonSerialized] public Transform player;
+
+    [SerializeField, Tooltip("敵撃破時に落ちる回復")] private GameObject Healball;
+    [SerializeField, Tooltip("回復の落ちる確率")] private float DropPercentage = 30f;
+    System.Random random=new System.Random();
+    float DropHealball;
 
     EnemyAttackBase enemyAttackBase;
     Rigidbody rb;
@@ -33,6 +38,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
+        DropHealball = random.Next(100)+1;
         enemyAttackBase = GetComponent<EnemyAttackBase>();
     }
     public void OnReset()
@@ -103,6 +109,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         enemyHP -= Mathf.Max(0, damage);
         if (enemyHP <= 0)
         {
+            if (Healball != null&&DropHealball<=DropPercentage) Instantiate(Healball, transform.position, Quaternion.identity);
             EnemyDie();
         }
         else

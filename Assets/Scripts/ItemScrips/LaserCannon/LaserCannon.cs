@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LaserCannon : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class LaserCannon : MonoBehaviour
             }
             int index = Mathf.Clamp(LaserNum, 0, BigLaser.Length - 1);
             if (BigLaser[index] == null) return;
-            Instantiate(BigLaser[index], transform.position + offset, Quaternion.identity);
+            Instantiate(BigLaser[index], transform.position + offset, transform.rotation);
         }
     }
 }
