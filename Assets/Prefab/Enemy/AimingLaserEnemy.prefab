@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpGrowthRate: 3
-  timeUntilIncrease: 10
+  hpGrowthRate: 5
+  timeUntilIncrease: 20
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
@@ -154,17 +154,17 @@ MonoBehaviour:
   rangeY:
     min: 0
     max: 0
-  playerDistance: 3
-  attackPower: 0
+  fireStopDistance: 3
+  collisionDamage: 0
   maxEnemyHP: 50
-  enemyMoveSpeed: 3
-  Laser: {fileID: 6678171959917968696, guid: 957f3a0fa53994043bbb4de7f6341840, type: 3}
+  moveSpeed: 3
+  laser: {fileID: 6678171959917968696, guid: 957f3a0fa53994043bbb4de7f6341840, type: 3}
   stopTime: 3
   aimingTime: 3
-  laserTimeLimit: 2
-  enemyBulletForce: 3000
+  laserShotTime: 2
+  bulletForce: 3000
   laserInterval: 0.04
-  offset: 1.5
+  spawnOffset: 1.5
   startColor: {r: 0, g: 0, b: 1, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &-2333561780525997936

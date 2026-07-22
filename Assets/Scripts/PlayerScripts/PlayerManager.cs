@@ -51,6 +51,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Header("回避のクールタイム")] 
     private float coolTime;
 
+    [SerializeField] private ToggleGameObject toggle;
+
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private AudioClip shotSE;
     [SerializeField] private AudioClip dodgeSE;
@@ -123,12 +125,17 @@ public class PlayerManager : MonoBehaviour
     //移動ボタン
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!toggle.isStart) return;
+
         moveInput = context.ReadValue<Vector2>();
     }
 
     //発射ボタン
     public void OnShot(InputAction.CallbackContext context)
     {
+        //スタートムービー中は操作不可
+        if (!toggle.isStart) return;
+
         if (context.performed && !ui.bSelect)
         {
             //Vector3 playerShotDirection = playerChildObject.rotation;

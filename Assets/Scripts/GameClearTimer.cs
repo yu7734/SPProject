@@ -38,6 +38,9 @@ public class GameClearTimer : MonoBehaviour
     [SerializeField, Tooltip("警告時（残りわずか）の文字色")]
     private Color warningColor = new Color(1f, 0.3f, 0.3f, 1f);
 
+    [SerializeField, Tooltip("スタートムービー関係のスクリプトを参照")]
+    private ToggleGameObject toggle;
+
     // 残り時間
     private float remainingTime;
     // 二重遷移を防ぐフラグ
@@ -51,7 +54,8 @@ public class GameClearTimer : MonoBehaviour
 
     void Update()
     {
-        if (hasCleared) return;
+        //ムービー中なら時間を減らさない（イケユウ）
+        if (hasCleared || !toggle.isStart) return;
 
         // 時間を減らす（ジャスト回避のスローなどに合わせるなら deltaTime のままでOK）
         remainingTime -= Time.deltaTime;
