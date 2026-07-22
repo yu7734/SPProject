@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hp
+  m_text: Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce84370f1cbd6544ba495c9923ba0218, type: 2}
   m_sharedMaterial: {fileID: -517199686433410371, guid: ce84370f1cbd6544ba495c9923ba0218, type: 2}
@@ -7257,7 +7257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1377977813}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HPUp
+        m_MethodName: AddGun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

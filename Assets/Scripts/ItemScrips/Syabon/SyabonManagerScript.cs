@@ -15,6 +15,7 @@ public class SyabonManagerScript : MonoBehaviour
     void Awake()
     {
         BulletManagert = SyabonBullet.GetComponent<BulletManagert>();
+        BulletManagert.bulletDamageRate = BulletManagert.BASE_bulletDamageRate; 
     }
 
     void Update() 

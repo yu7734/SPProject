@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpGrowthRate: 1
+  hpGrowthRate: 0
   timeUntilIncrease: 3.4028235e+38
   ui: {fileID: 0}
   playerBullet: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
     max: 0
   playerDistance: 0
   attackPower: 0
-  maxEnemyHP: 1
+  maxEnemyHP: 0
   enemyMoveSpeed: 0
 --- !u!1001 &291766338400679842
 PrefabInstance:

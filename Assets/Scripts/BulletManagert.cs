@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 
+
 public class BulletManagert : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] private float bulletSpeed;
     [SerializeField] public static int bulletPower = 5;
-    [Tooltip("ダメージ倍率")]public float bulletDamageRate = 1.0f;
+    /// <summary>初期化用の変数なので攻撃力をいじる場合はインスペクターでBASEを
+    /// scriptでbulletDamageRateを変更してください</summary>
+    [Tooltip("ダメージ倍率")]public float BASE_bulletDamageRate = 1.0f;
+    [HideInInspector] public float bulletDamageRate = 1.0f;
     [Tooltip("倍率計算後に固定値加算")]public int bulletDamageBonus = 0;
     int bulletAttack;
     //[SerializeField, Tooltip("命中した時のSEオブジェクト")] private GameObject hitSE;
@@ -43,9 +47,4 @@ public class BulletManagert : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //public void EnemyDamage(EnemyManager enemy)
-    //{
-    //    enemy.EnemyDamaged(bulletPower);
-    //}
 }

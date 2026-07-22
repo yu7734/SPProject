@@ -7319,6 +7319,18 @@ PrefabInstance:
       propertyPath: frequency
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 2241047594004574050, guid: 59b686a6e534b144e8c5ca7117525fd3, type: 3}
+      propertyPath: Star1.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241047594004574050, guid: 59b686a6e534b144e8c5ca7117525fd3, type: 3}
+      propertyPath: 'Star1.Array.data[0]'
+      value: 
+      objectReference: {fileID: 437314430778629639, guid: 80e7440974f1b6c44a5cf9ad9f556f45, type: 3}
+    - target: {fileID: 2241047594004574050, guid: 59b686a6e534b144e8c5ca7117525fd3, type: 3}
+      propertyPath: 'Star1.Array.data[2]'
+      value: 
+      objectReference: {fileID: 437314430778629639, guid: 41a30937e6deca84f8cff11ac7706c1c, type: 3}
     - target: {fileID: 7665566448096312288, guid: 59b686a6e534b144e8c5ca7117525fd3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

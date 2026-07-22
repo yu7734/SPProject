@@ -5,12 +5,14 @@ public class SyabonScript : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     UIManager ui;
     SyabonManagerScript Manager;
+    Transform playerRot;
     [SerializeField] Vector3 Ofset = new(0f, 0f, 0f);
     float time1 = 0, time2 = 0;
     float x = 0, y = 0;
     
     void Awake()
     {
+        playerRot=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         Manager = FindAnyObjectByType<SyabonManagerScript>();
         ui = FindAnyObjectByType<UIManager>();
     }
@@ -34,8 +36,8 @@ public class SyabonScript : MonoBehaviour
 
     void RandomShot() 
     {
-        x = Random.Range(-Manager.x_Range, Manager.x_Range);
-        y = Random.Range(-Manager.y_Range, Manager.y_Range);
+        x = Random.Range(-Manager.x_Range, Manager.x_Range) + playerRot.eulerAngles.x;
+        y = Random.Range(-Manager.y_Range, Manager.y_Range) + playerRot.eulerAngles.y;
         Instantiate(bulletPrefab, transform.position + Ofset, Quaternion.Euler(x, y, 0f));
     }
 }
