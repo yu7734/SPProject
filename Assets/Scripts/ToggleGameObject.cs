@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ToggleGameObject : MonoBehaviour
 {
-    public bool isStart;
+    private bool isStart = false;
     public void ActivateGameObject()
     {
         gameObject.SetActive(true);
@@ -13,8 +13,10 @@ public class ToggleGameObject : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void GameStart()
-    {
-        isStart = true;
+    public bool GetSetIsStart {
+        get { return isStart; } 
+        set { isStart = value; } 
     }
+
+    public void GameStart() { GetSetIsStart = true; }
 }
