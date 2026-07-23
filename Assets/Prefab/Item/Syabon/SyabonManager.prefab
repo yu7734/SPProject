@@ -50,6 +50,12 @@ MonoBehaviour:
   - {fileID: 2689047287485794608}
   - {fileID: 832796154826491069}
   SyabonBullet: {fileID: 8107978291522367935, guid: a36ce310905cde64683de65ddc2a6d10, type: 3}
+  x_Range: 7.5
+  y_Range: 7.5
+  ShotInterval: 0.25
+  ShotCooltime: 1
+  ShotDuration: 3
+  ShotFrequency: 3
   SyabonCount: 0
   Serect: 0
 --- !u!1001 &761392971215332790

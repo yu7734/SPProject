@@ -13,8 +13,6 @@ public class UIManager : MonoBehaviour
 
     ///<summary>次のレベルまでに必要な経験値数の初期値</summary>
     [SerializeField, Header("レベルアップに必要な経験値初期値")] private int exprrienceMax = 100;
-    /// <summary>レベルが上がった回数</summary>
-    private int levelUpCount = 0;
     /// <summary>必要な経験値数の増加量</summary>
     [SerializeField, Header("必要な経験値増加量")] private int exprrienceMaxUp = 10;
 
