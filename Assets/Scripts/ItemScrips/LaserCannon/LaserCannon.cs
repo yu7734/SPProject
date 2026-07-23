@@ -13,6 +13,14 @@ public class LaserCannon : MonoBehaviour
     void Awake()
     {
         ui = FindAnyObjectByType<UIManager>();
+        for (int i = 0; i < BigLaser.Length; i++) 
+        {
+            for (int j = 0; j < BigLaser[i].transform.childCount; j++) 
+            { 
+                BulletManagert bulletManagert = BigLaser[i].transform.GetChild(j).gameObject.GetComponent<BulletManagert>();
+                bulletManagert.bulletDamageRate = bulletManagert.BASE_bulletDamageRate;
+            }
+        }
     }
 
     void Update()

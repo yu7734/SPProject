@@ -131,10 +131,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGrowthRate: 5
   timeUntilIncrease: 20
+  maxHpGrowth: 60
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
   exprosion: {fileID: 3568262549743503624, guid: 957eb27b10dccb64b9afcef7d15bee45, type: 3}
+  Healball: {fileID: 0}
+  DropPercentage: 30
 --- !u!114 &8699908776044055405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +159,11 @@ MonoBehaviour:
   fireStopDistance: 7
   collisionDamage: 10
   maxEnemyHP: 10
-  moveSpeed: 3
+  approachMoveSpeed:
+    speed: 3
+    timeUntilIncrease: 1
+    intervalIncrease: 1
+    maxSpeed: 3
   bullet: {fileID: 6678171959917968696, guid: da2c656b2e3787c4c8810de40b37080e, type: 3}
   trackingPlayer: 1
   coolTime: 3
@@ -214,7 +221,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 13, y: 3, z: 5}
+  m_Size: {x: 15, y: 4, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &5369898506219124864
 BoxCollider:
@@ -235,5 +242,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 10}
+  m_Size: {x: 3, y: 3, z: 10}
   m_Center: {x: 0, y: 0, z: 0}

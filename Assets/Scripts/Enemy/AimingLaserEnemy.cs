@@ -109,7 +109,7 @@ public class AimingLaserEnemy : EnemyAttackBase
         Vector3 spawnPosition = transform.position + transform.forward * spawnOffset;
 
         GameObject newBullet = Instantiate(laser, spawnPosition, transform.rotation);
-        Debug.Log("レーザー敵が弾を生成: " + newBullet.name);
+        Debug.Log("レーザー敵が弾を生成 ");
         Rigidbody Bulletrb = newBullet.GetComponent<Rigidbody>();
         Bulletrb.AddForce(transform.forward * bulletForce);
         Destroy(newBullet, 3f);

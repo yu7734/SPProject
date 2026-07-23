@@ -126,7 +126,7 @@ public class PlayerManager : MonoBehaviour
     //移動ボタン
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!toggle.GetSetIsStart) return;
+        if (toggle!=null&&!toggle.GetSetIsStart) return;
 
         moveInput = context.ReadValue<Vector2>();
     }
@@ -135,7 +135,7 @@ public class PlayerManager : MonoBehaviour
     public void OnShot(InputAction.CallbackContext context)
     {
         //スタートムービー中は操作不可
-        if (!toggle.GetSetIsStart) return;
+        if (toggle!=null&&!toggle.GetSetIsStart) return;
 
         if (context.performed && !ui.bSelect)
         {

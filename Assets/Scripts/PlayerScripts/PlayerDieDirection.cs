@@ -4,7 +4,7 @@ public class PlayerDieDirection : MonoBehaviour
 {
     private PlayerManager playerManager;
     [SerializeField, Tooltip("BGMを参照")] 
-    private AudioSource audio;
+    private new AudioSource audio;
     [SerializeField, Tooltip("プレイヤーが爆発するエフェクト")]
     private GameObject playerExprosion;
     [SerializeField, Tooltip("爆発するSE")]
