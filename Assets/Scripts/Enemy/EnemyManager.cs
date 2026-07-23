@@ -15,6 +15,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private int hpGrowthRate;
     [SerializeField, Tooltip("HP増加までの時間")]
     private float timeUntilIncrease;
+    [SerializeField, Tooltip("HPの増加量の最大値(制限時間や増加量により変更する必要あり)")]
+    private int maxHpGrowth;
 
     [SerializeField]
     private UIManager ui;
@@ -47,7 +49,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     /// <summary> プールが再利用されるたびに実行 </summary>
     public void OnReset()
     {
-        enemyHP = enemyAttackBase.maxEnemyHP+(int)(Time.timeSinceLevelLoad/timeUntilIncrease * hpGrowthRate);
+        enemyHP = enemyAttackBase.maxEnemyHP+Mathf.Min(maxHpGrowth,(int)(Time.timeSinceLevelLoad/timeUntilIncrease) * hpGrowthRate);
         isReleased = false;
         if (ui == null)
         {
