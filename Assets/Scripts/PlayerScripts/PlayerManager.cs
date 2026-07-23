@@ -98,6 +98,7 @@ public class PlayerManager : MonoBehaviour
                 DodgeCoolTime();
                 break;
         }
+        Debug.Log(toggle.GetSetIsStart);
     }
 
     private void FixedUpdate()
@@ -125,7 +126,7 @@ public class PlayerManager : MonoBehaviour
     //移動ボタン
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (toggle!=null&&!toggle.isStart) return;
+        if (toggle!=null&&!toggle.GetSetIsStart) return;
 
         moveInput = context.ReadValue<Vector2>();
     }
@@ -134,7 +135,7 @@ public class PlayerManager : MonoBehaviour
     public void OnShot(InputAction.CallbackContext context)
     {
         //スタートムービー中は操作不可
-        if (toggle!=null&&!toggle.isStart) return;
+        if (toggle!=null&&!toggle.GetSetIsStart) return;
 
         if (context.performed && !ui.bSelect)
         {

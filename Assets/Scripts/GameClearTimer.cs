@@ -40,11 +40,15 @@ public class GameClearTimer : MonoBehaviour
 
     [SerializeField, Tooltip("スタートムービー関係のスクリプトを参照")]
     private ToggleGameObject toggle;
-
     // 残り時間
     private float remainingTime;
     // 二重遷移を防ぐフラグ
     private bool hasCleared = false;
+
+    private void Awake()
+    {
+
+    }
 
     void Start()
     {
@@ -55,7 +59,7 @@ public class GameClearTimer : MonoBehaviour
     void Update()
     {
         //ムービー中なら時間を減らさない（イケユウ）
-        if (hasCleared || !toggle.isStart) return;
+        if (hasCleared || !toggle.GetSetIsStart) return;
 
         // 時間を減らす（ジャスト回避のスローなどに合わせるなら deltaTime のままでOK）
         remainingTime -= Time.deltaTime;
