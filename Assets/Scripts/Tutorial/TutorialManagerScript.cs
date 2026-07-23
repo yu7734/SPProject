@@ -4,7 +4,6 @@ using TMPro;
 enum Step { step_one, step_two,step_tree}
 public class TutorialManagerScript : MonoBehaviour
 {
-    bool Next = true;
     Step step = Step.step_one;
     [SerializeField] GameObject Avoid, TutorialTagetSpawnerManager;
     [SerializeField] PlayerManager PlayerManager;
@@ -22,7 +21,6 @@ public class TutorialManagerScript : MonoBehaviour
                 {
                     Avoid.SetActive(true);
                     step = Step.step_two;
-                    Next = true;
                 }
                 break;
             case Step.step_two:
@@ -30,15 +28,14 @@ public class TutorialManagerScript : MonoBehaviour
                 {
                     TutorialTagetSpawnerManager.SetActive(true);
                     step = Step.step_tree;
-                    Next = true;
                 }
                 break;
             default:
             case Step.step_tree:
-                UIManager.Experience(-(UIManager.experiencePoint));
+                if(UIManager.experiencePoint!=0)UIManager.Experience(-UIManager.experiencePoint);
                 break;
         }
-        if(PlayerManager.playerHP <=10) PlayerManager.playerHP += 10;
+        if(PlayerManager.playerHP <=20) PlayerManager.playerHP += 10;
     }
 
     void NextStep() 
@@ -59,6 +56,5 @@ public class TutorialManagerScript : MonoBehaviour
                 DescriptionText.text = "Exit Tutorial";
                 break;
         }
-        Next = false;
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6716480837112997621
 Transform:
   m_ObjectHideFlags: 0
@@ -82,7 +82,11 @@ MonoBehaviour:
   fireStopDistance: 0
   collisionDamage: 0
   maxEnemyHP: 0
-  moveSpeed: 0
+  approachMoveSpeed:
+    speed: 0
+    timeUntilIncrease: 0
+    intervalIncrease: 0
+    maxSpeed: 0
 --- !u!1001 &291766338400679842
 PrefabInstance:
   m_ObjectHideFlags: 0
