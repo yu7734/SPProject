@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 //プレイヤーに受けるダメージ
 public interface IPlayerDamage
@@ -77,6 +78,9 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         playerChildObject = transform.GetChild(0).gameObject;
+        string currentScene = SceneManager.GetActiveScene().name;//現在のシーン名を取得
+        if (currentScene == "Tutorial")//現在のシーンがチュートリアルシーンならプレイヤーの操作を可能にする
+            toggle.GetSetIsStart = true;
     }
 
     // Update is called once per frame
