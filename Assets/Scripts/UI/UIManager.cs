@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
     private void SelectItem()
     {
         // 必要経験値数が増える都合上レベルアップ処理を変更
-        if (_experiencePoint >= _maxExprrience&&!bSelect)
+        if (_experiencePoint >= _maxExprrience&&!bSelect&&player.gameObject.activeSelf)
         {
             bSelect = true;
             ++_level;

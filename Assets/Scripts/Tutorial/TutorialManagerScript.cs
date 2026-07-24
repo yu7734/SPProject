@@ -53,7 +53,7 @@ public class TutorialManagerScript : MonoBehaviour
             default:
             case Step.step_tree:
                 StepText.text = "Step 3";
-                DescriptionText.text = "Exit Tutorial";
+                DescriptionText.text = "Exit Tutorial\nESC:Pause\n&Menu";
                 break;
         }
     }
