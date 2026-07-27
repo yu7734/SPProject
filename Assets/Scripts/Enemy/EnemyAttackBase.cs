@@ -43,9 +43,11 @@ public class EnemyAttackBase : MonoBehaviour
     protected float fireStopDistance;
 
     /// <summary> 敵が衝突した場合のダメージ </summary>
+    [SerializeField, Tooltip("敵が衝突した場合のダメージ")]
     public int collisionDamage;
 
     /// <summary> 敵の最大HP(時間経過で増加) </summary>
+    [SerializeField, Tooltip("敵の初期の最大HP")]
     public int maxEnemyHP;
 
     [NonSerialized] public Transform player;
