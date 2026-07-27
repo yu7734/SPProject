@@ -17,10 +17,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private float timeUntilIncrease;
     [SerializeField, Tooltip("HPの増加量の最大値(制限時間や増加量により変更する必要あり)")]
     private int maxHpGrowth;
-
     [SerializeField]
     private UIManager ui;
-    [SerializeField] private GameObject playerBullet;
 
     [SerializeField,Tooltip("敵に攻撃をヒットさせた時の演出")]
     private GameObject hit;
@@ -35,6 +33,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
     EnemyAttackBase enemyAttackBase;
     Rigidbody rb;
+    /// <summary> 敵を倒したときの入手経験値 /// </summary>    
+    private int exp = 10;
     /// <summary> すでにオブジェクトプールに戻っているかチェック(二重の演出防止) </summary>
     private bool isReleased = false;
     /// <summary> EnemySpawnerのオブジェクトプール </summary>
@@ -136,7 +136,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
         if (ui != null)
         {
-            ui.Experience(10);
+            ui.Experience(exp);
         }
 
         if (MyPool != null)

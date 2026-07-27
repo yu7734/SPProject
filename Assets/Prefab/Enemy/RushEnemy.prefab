@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720357861559527564}
-  m_Mesh: {fileID: 4300000, guid: 623ce85391ae32e4ca77337ff16c9047, type: 3}
+  m_Mesh: {fileID: 4300000, guid: b64b840303fba2742b9ef1f9499ec789, type: 3}
 --- !u!23 &8695163145267107749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   hpGrowthRate: 5
   timeUntilIncrease: 30
   maxHpGrowth: 40
+  exp: 10
   ui: {fileID: 0}
   playerBullet: {fileID: 8478904341349103195, guid: d27041896425c0648b4ed9b04a3fe996, type: 3}
   hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
