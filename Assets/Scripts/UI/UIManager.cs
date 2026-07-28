@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -116,6 +116,7 @@ public class UIManager : MonoBehaviour
         {
             bSelect = true;
             ++_level;
+            player.MaxPlayerHP += 5;
             _experiencePoint -= _maxExprrience;
             _maxExprrience += exprrienceMaxUp;
             soundManager.Play(openItemSelectSE);
