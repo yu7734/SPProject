@@ -30,10 +30,10 @@ public class ItemSelectRandomizer : MonoBehaviour
     [SerializeField]
     private ItemOption[] itemPool =
     {
-        new ItemOption { label = "Gun",    color = new Color(0.45f, 0.85f, 0.45f), action = ItemAction.AddGun,       description = "サブの銃を増設して\n同時に攻撃する" },       // 緑
-        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel,     description = "自機の周囲にファンネルを展開\nレーザーで攻撃する" }, // 赤
-        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower, description = "一定間隔で前方に\n強力なレーザーを発射する" },  // 青
-        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon,    description = "シャボン弾を広範囲に\nばらまいて攻撃する" },    // 紫
+        new ItemOption { label = "Gun",    color = new Color(0.45f, 0.85f, 0.45f), action = ItemAction.AddGun,       description = "自機の左右に銃を増設\n一定間隔で追加のショット" },       // 緑
+        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel,     description = "自機の軌跡を追う僚機を追加\nショットに合わせて援護射撃" }, // 赤
+        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower, description = "前方へ回転する極太レーザーを\n一定間隔で自動発射" },  // 青
+        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon,    description = "シャボン弾を前方へ乱射\n広範囲をまとめて制圧" },    // 紫
     };
 
     [Header("対象ボタン（空のままなら子から自動取得）")]
@@ -49,7 +49,7 @@ public class ItemSelectRandomizer : MonoBehaviour
         label = "Power",
         color = new Color(0.95f, 0.75f, 0.30f), // オレンジ
         action = ItemAction.PowerUp,
-        description = "弾の攻撃力を上げる",
+        description = "すべての弾の攻撃力を強化",
     };
     [SerializeField, Tooltip("Laserの表示上の最大段階。実際の上限(UIManagerのlaserMaxLevel)より大きい場合、表記だけこの値になる（将来の3段階化を見込んだ表示用）")]
     private int laserDisplayMax = 3;
