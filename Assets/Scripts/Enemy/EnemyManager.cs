@@ -39,7 +39,6 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private bool isReleased = false;
     /// <summary> EnemySpawnerのオブジェクトプール </summary>
     public IObjectPool<GameObject> MyPool { get; set; }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -100,7 +99,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             if (enemyAttackBase != null)
             {
                 damage.Damage(enemyAttackBase.collisionDamage);
-                EnemyDie();
+                EnemyDie(true);
             }
 
             //Debug.Log("hit");
@@ -115,7 +114,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         if (enemyHP <= 0)
         {
             if (Healball != null&&DropHealball<=DropPercentage) Instantiate(Healball, transform.position, Quaternion.identity);
-            EnemyDie();
+            EnemyDie(false);
         }
         else
         {
@@ -124,7 +123,9 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
 
     }
     /// <summary> 敵が倒されたときの処理 </summary>
-    private void EnemyDie()
+    /// <param name="isCollision">敵が衝突で倒されたかどうか。
+    /// 衝突ならtrue,弾で倒したならfalse </param>
+    private void EnemyDie(bool isCollision)
     {
         if (isReleased) return;
         isReleased = true;
@@ -134,7 +135,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             ui = GameObject.Find("GameManager").GetComponent<UIManager>();
         }
 
-        if (ui != null)
+        if (ui != null&&!isCollision)
         {
             ui.Experience(exp);
         }
