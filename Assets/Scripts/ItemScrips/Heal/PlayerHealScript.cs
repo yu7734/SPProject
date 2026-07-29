@@ -11,8 +11,8 @@ public class PlayerHealScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Healing = Healing + (int)(Time.timeSinceLevelLoad/ UntilIncreaseHealing * HealingRate);
-            if (other.TryGetComponent<IPlayerHeal>(out var Heal)) Heal.Heal(Healing);
+            int TotalHealing = Healing + (int)(Time.timeSinceLevelLoad/ UntilIncreaseHealing * HealingRate);
+            if (other.TryGetComponent<IPlayerHeal>(out var Heal)) Heal.Heal(TotalHealing);
             Destroy(gameObject);
         }
     }
