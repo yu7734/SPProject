@@ -1,16 +1,23 @@
+using DG.Tweening.Core.Easing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
     [SerializeField, Header("スコア表示テキスト")] private TextMeshProUGUI scoreText;
     [SerializeField, Header("ハイスコア表示テキスト")] private TextMeshProUGUI highScoreText;
 
+    [SerializeField, Tooltip("フェードシステムのスクリプト")] private FadeManager fadeManager;
+    [SerializeField, Tooltip("フェードスタートスクリプト")] private FadeManager fadeStartManager;
+    [SerializeField, Tooltip("フェードの画像オブジェクト")] private GameObject fadeObject;
+
     void Start()
     {
         // ゲームオーバー画面では時間を通常通りに戻す
         Time.timeScale = 1f;
+
+        fadeManager.FadeStart(fadeManager.GameStart);
 
         // スコア表示
         if (ScoreManager.Instance != null)
@@ -25,22 +32,26 @@ public class GameOverManager : MonoBehaviour
     // もう一度ボタン → ゲームシーンに戻る
     public void OnRetryButton()
     {
+        if (fadeManager.GetSetBfade) return;//フェード中なら操作不可
         // スコアをリセットしてから遷移
         if (ScoreManager.Instance != null)
         {
             ScoreManager.Instance.ResetScore();
         }
-        SceneManager.LoadScene("Game");
+        fadeObject.SetActive(true);
+        // ゲームシーンに遷移（シーン名は実際のファイル名に合わせる）
+        fadeManager.FadeStart(fadeManager.ChangeGameScene);
     }
 
     // タイトルへボタン → タイトルに戻る
     public void OnTitleButton()
     {
+        if (fadeManager.GetSetBfade) return;//フェード中なら操作不可
         // スコアをリセットしてから遷移
         if (ScoreManager.Instance != null)
         {
             ScoreManager.Instance.ResetScore();
         }
-        SceneManager.LoadScene("Title");
+        fadeManager.FadeStart(fadeManager.ChangeTitleScene);
     }
 }

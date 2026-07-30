@@ -9,6 +9,8 @@ public class TitleManager : MonoBehaviour
     [Header("操作方法パネル")]
     [Tooltip("操作方法を表示するパネル（Inspectorからドラッグ＆ドロップ）")]
     [SerializeField] private GameObject howToPlayPanel;
+    [SerializeField, Tooltip("フェードシステムのスクリプト")] private FadeManager fadeManager;
+    [SerializeField, Tooltip("フェードの画像オブジェクト")] private GameObject fadeObject;
 
     // パネルを開いた瞬間のキー押下を無視するためのフラグ
     private bool ignoreInputThisFrame = false;
@@ -81,16 +83,19 @@ public class TitleManager : MonoBehaviour
     // チュートリアルボタンを押したときに呼ばれる
     public void OnTutorialButton()
     {
+        fadeObject.SetActive(true);
         // チュートリアルシーンに遷移
-        SceneManager.LoadScene("Tutorial");
+        fadeManager.FadeStart(fadeManager.ChangeTutorialScene);
     }
 
     // スタートボタンを押したときに呼ばれる
     public void OnStartButton()
     {
+        fadeObject.SetActive(true);
         // ゲームシーンに遷移（シーン名は実際のファイル名に合わせる）
-        SceneManager.LoadScene("Game");
+        fadeManager.FadeStart(fadeManager.ChangeGameScene);
     }
+
 
     // 「操作方法」ボタンを押したときに呼ばれる
     public void OnHowToPlayButton()
