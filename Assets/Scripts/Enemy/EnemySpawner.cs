@@ -116,6 +116,7 @@ public class EnemySpawner : MonoBehaviour
     {
 
         timer += Time.deltaTime;
+        //Debug.Log(interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease);
         if (timer >= Math.Max((interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease),interval.minInterval))
         {
             int activeEnemyCount = 0;                                           // 全てのプールの「貸し出し中」の合計をチェック

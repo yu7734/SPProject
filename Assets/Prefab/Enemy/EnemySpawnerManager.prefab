@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 4782783293320573894}
   - component: {fileID: -2938909185062001225}
   - component: {fileID: 6264320676704088284}
+  - component: {fileID: 5465936867008469263}
   m_Layer: 0
   m_Name: EnemySpawnerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2386028378136015771
 Transform:
   m_ObjectHideFlags: 0
@@ -64,9 +65,9 @@ MonoBehaviour:
   onlySpawn: 0
   interval:
     initSpawnTimer: 3
-    timeUntilDecrease: 10
-    enemyIntervalDecrease: 0.1
-    minInterval: 1
+    timeUntilDecrease: 30
+    enemyIntervalDecrease: 0.5
+    minInterval: 0.5
 --- !u!114 &-2938909185062001225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +130,15 @@ MonoBehaviour:
     timeUntilDecrease: 10
     enemyIntervalDecrease: 0.3
     minInterval: 3
+--- !u!114 &5465936867008469263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562564495504082392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7518ae44b674dc94dbc6520c8f901687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
