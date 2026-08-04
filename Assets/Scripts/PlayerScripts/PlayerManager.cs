@@ -102,7 +102,6 @@ public class PlayerManager : MonoBehaviour
                 DodgeCoolTime();
                 break;
         }
-        Debug.Log(toggle.GetSetIsStart);
     }
 
     private void FixedUpdate()
