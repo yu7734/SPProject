@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -91,8 +92,8 @@ public class FadeManager : MonoBehaviour
 
     public void ChangeGameScene() { SceneManager.LoadScene("Game"); }//ゲームシーンに遷移
     public void ChangeTutorialScene() { SceneManager.LoadScene("Tutorial"); }//チュートリアルシーンに遷移
-    public void ChangeTitleScene() { SceneManager.LoadScene("Game"); }//タイトルシーンに遷移
+    public void ChangeTitleScene() { SceneManager.LoadScene("Title"); }//タイトルシーンに遷移
     public void GameStart() { }
 
-    public bool GetSetBfade {  get { return bFade; } set { bFade = value; } }//bFadeのアクセッサ
+    public bool Bfade { get; set; }//bFadeのアクセッサ
 }
