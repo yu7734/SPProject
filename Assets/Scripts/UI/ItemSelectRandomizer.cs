@@ -31,9 +31,9 @@ public class ItemSelectRandomizer : MonoBehaviour
     private ItemOption[] itemPool =
     {
         new ItemOption { label = "Gun",    color = new Color(0.45f, 0.85f, 0.45f), action = ItemAction.AddGun,       description = "自機の左右に銃を増設\n一定間隔で追加のショット" },       // 緑
-        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel,     description = "自機の軌跡を追う僚機を追加\nショットに合わせて援護射撃" }, // 赤
-        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower, description = "前方へ回転する極太レーザーを\n一定間隔で自動発射" },  // 青
-        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon,    description = "シャボン弾を前方へ乱射\n広範囲をまとめて制圧" },    // 紫
+        new ItemOption { label = "Fanel",  color = new Color(0.90f, 0.40f, 0.40f), action = ItemAction.AddFanel,     description = "自機の軌跡を追うファンネルを追加\nショットに合わせて援護射撃" }, // 赤
+        new ItemOption { label = "Laser",  color = new Color(0.45f, 0.75f, 0.95f), action = ItemAction.LaserOrPower, description = "前方へ強力な弾を\n一定間隔で自動発射" },  // 青
+        new ItemOption { label = "Syabon", color = new Color(0.70f, 0.45f, 0.90f), action = ItemAction.AddSyabon,    description = "シャボン弾を前方へ乱射\n広範囲をまとめて攻撃" },    // 紫
     };
 
     [Header("対象ボタン（空のままなら子から自動取得）")]
