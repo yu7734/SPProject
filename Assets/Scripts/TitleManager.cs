@@ -9,12 +9,15 @@ public class TitleManager : MonoBehaviour
     [Header("操作方法パネル")]
     [Tooltip("操作方法を表示するパネル（Inspectorからドラッグ＆ドロップ）")]
     [SerializeField] private GameObject howToPlayPanel;
+    [SerializeField, Tooltip("フェードシステムのスクリプト")] private FadeManager fadeManager;
+    [SerializeField, Tooltip("フェードの画像オブジェクト")] private GameObject fadeObject;
 
     // パネルを開いた瞬間のキー押下を無視するためのフラグ
     private bool ignoreInputThisFrame = false;
 
     private void Start()
     {
+        fadeManager.FadeStart(fadeManager.GameStart);
         // 起動時は操作方法パネルを非表示にしておく
         if (howToPlayPanel != null)
         {
@@ -81,20 +84,25 @@ public class TitleManager : MonoBehaviour
     // チュートリアルボタンを押したときに呼ばれる
     public void OnTutorialButton()
     {
+        fadeObject.SetActive(true);
         // チュートリアルシーンに遷移
-        SceneManager.LoadScene("Tutorial");
+        fadeManager.FadeStart(fadeManager.ChangeTutorialScene);
     }
 
     // スタートボタンを押したときに呼ばれる
     public void OnStartButton()
     {
+        if (fadeManager.Bfade) return;//フェード中なら操作不可
+        fadeObject.SetActive(true);
         // ゲームシーンに遷移（シーン名は実際のファイル名に合わせる）
-        SceneManager.LoadScene("Game");
+        fadeManager.FadeStart(fadeManager.ChangeGameScene);
     }
+
 
     // 「操作方法」ボタンを押したときに呼ばれる
     public void OnHowToPlayButton()
     {
+        if (fadeManager.Bfade) return;//フェード中なら操作不可
         if (howToPlayPanel != null)
         {
             howToPlayPanel.SetActive(true);
@@ -106,6 +114,8 @@ public class TitleManager : MonoBehaviour
     // 操作方法パネルの「閉じる」ボタンで呼ばれる
     public void OnCloseHowToPlayButton()
     {
+        if (fadeManager.Bfade) return;//フェード中なら操作不可
+
         if (howToPlayPanel != null)
         {
             howToPlayPanel.SetActive(false);
@@ -121,6 +131,8 @@ public class TitleManager : MonoBehaviour
     // 終了ボタンを押したときに呼ばれる
     public void OnQuitButton()
     {
+        if (fadeManager.Bfade) return;//フェード中なら操作不可
+
         // エディタ実行中はプレイ停止、ビルド後はアプリ終了
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
