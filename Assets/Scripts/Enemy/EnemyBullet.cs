@@ -19,7 +19,7 @@ public class EnemyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(Tags.Player))
         {
             IPlayerDamage damage = other.GetComponent<IPlayerDamage>();
             if (damage != null)

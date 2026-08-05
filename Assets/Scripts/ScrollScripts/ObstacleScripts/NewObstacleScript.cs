@@ -5,7 +5,7 @@ public class NewObstacleScript : MonoBehaviour
     GameObject Camera;//プレハブ化するのでプライベート
     void Start()
     {
-        Camera = GameObject.Find("Main Camera");//名前指定なので変えると動かなくなる
+        Camera = GameObject.Find(GameObjectName.MainCamera);//名前指定なので変えると動かなくなる
         //stageを変更する時にDestroy(this.gameObject)する必要あり
 
     }

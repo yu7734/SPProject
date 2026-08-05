@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CapsuleTrackingScript : MonoBehaviour
 {
-    [SerializeField] string SearchTag="Enemy";
+    string SearchTag=Tags.Enemy;
     public float SearchDistance = 2f;//1以下にすると追尾がほぼ無効になる
     float SearchDirectivity = 1f;//この値を上げると指向性が上がるが不具合の元となる、触るな危険
 

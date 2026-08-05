@@ -17,7 +17,7 @@ public class ItemLaserShotScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.actions["Attack"].triggered) OnShot();
+        if (playerInput.actions[PlayerInputActionName.Attack].triggered) OnShot();
     }
 
     public void OnShot()

@@ -12,7 +12,7 @@ enum Direction
 }
 public class RaycastTrackingScript : MonoBehaviour
 {
-    [SerializeField] string SearchTag = "Enemy";
+    string SearchTag = Tags.Enemy;
 
     [Tooltip("サーチ範囲(円柱状)")]public float radius = 1f; // 円柱の半径
     [SerializeField,Tooltip("サーチする方向")] Direction direction;

@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 public class HealBallMoveScript : MonoBehaviour
@@ -9,7 +8,7 @@ public class HealBallMoveScript : MonoBehaviour
     [SerializeField,Tooltip("èoåªÇµÇƒÇ©ÇÁâΩïbå„Ç…è¡Ç¶ÇÈÇ©")]float extinction = 4f;
     void Awake()
     {
-        playerpos=GameObject.Find("Player").transform.position;
+        playerpos=GameObject.Find(Tags.Player).transform.position;
     }
 
     // Update is called once per frame

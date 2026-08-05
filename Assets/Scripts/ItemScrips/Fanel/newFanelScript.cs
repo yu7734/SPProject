@@ -5,7 +5,7 @@ public enum Tracking { Off, On }
 public class newFanelScript : MonoBehaviour
 {
     [Header("ManagerをGameシーン上に配置\nFanelをGameシーン上に4つ配置")]
-    [SerializeField] string SearchTag = "Enemy";
+    string SearchTag = Tags.Enemy;
     FanelManager fanelManager;
     public Tracking Tracking = Tracking.Off;
     GameObject player;
@@ -16,7 +16,7 @@ public class newFanelScript : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player");//自機のオブジェクト名
+        player = GameObject.Find(GameObjectName.Player);//自機のオブジェクト名
         transform.position = player.transform.position + offset;//出現した時にプレイヤーの真後ろに生成
         setup = transform.rotation;
         fanelManager = FindAnyObjectByType<FanelManager>();

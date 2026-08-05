@@ -18,8 +18,8 @@ public class TrackingEnemyBullet : MonoBehaviour
 
     void Awake()
     {
-        Camera = GameObject.Find("Main Camera");
-        player = GameObject.Find("Player");
+        Camera = GameObject.Find(GameObjectName.MainCamera);
+        player = GameObject.Find(GameObjectName.Player);
     }
     void Update()
     {

@@ -11,8 +11,8 @@ public class TrackingEnemyCapsuleBullet1 : MonoBehaviour
 
     void Start()
     {
-        Camera = GameObject.Find("Main Camera");
-        player = GameObject.Find("Player");
+        Camera = GameObject.Find(GameObjectName.MainCamera);
+        player = GameObject.Find(GameObjectName.Player);
     }
     void Update()
     {

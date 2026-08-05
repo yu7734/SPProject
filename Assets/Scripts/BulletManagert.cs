@@ -38,7 +38,7 @@ public class BulletManagert : MonoBehaviour
         if (other.CompareTag(this.tag)) return;
         IEnemyDamage damage = other.gameObject.GetComponentInParent<IEnemyDamage>();
 
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(Tags.Enemy))
             soundManager.Play(hitSE);
 
         if (damage != null)

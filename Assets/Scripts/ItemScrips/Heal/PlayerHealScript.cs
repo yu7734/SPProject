@@ -9,7 +9,7 @@ public class PlayerHealScript : MonoBehaviour
     public float HealingRate = 5f;
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(Tags.Player))
         {
             int TotalHealing = Healing + (int)(Time.timeSinceLevelLoad/ UntilIncreaseHealing * HealingRate);
             if (other.TryGetComponent<IPlayerHeal>(out var Heal)) Heal.Heal(TotalHealing);
