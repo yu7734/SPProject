@@ -154,6 +154,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed && _state == dodgeState.None)
         {
+            if (ui.bSelect) return;
             //自機を回転
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
             soundManager.Play(dodgeSE);//SEを鳴らす

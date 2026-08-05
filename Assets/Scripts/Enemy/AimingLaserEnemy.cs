@@ -72,7 +72,7 @@ public class AimingLaserEnemy : EnemyAttackBase
     // Update is called once per frame
     private void Update()
     {
-        Aiming();
+        if(player!=null)Aiming();
 
         //Debug.Log(laserTimer);
     }

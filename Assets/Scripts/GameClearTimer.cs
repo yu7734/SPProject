@@ -44,10 +44,12 @@ public class GameClearTimer : MonoBehaviour
     private float remainingTime;
     // 二重遷移を防ぐフラグ
     private bool hasCleared = false;
+    //プレイヤーが生きているか
+    GameObject Player;
 
     private void Awake()
     {
-
+        Player = FindAnyObjectByType<PlayerManager>().gameObject;
     }
 
     void Start()
@@ -68,7 +70,7 @@ public class GameClearTimer : MonoBehaviour
         {
             remainingTime = 0f;
             UpdateTimerText();
-            GameClear();
+            if(Player.activeSelf)GameClear();
             return;
         }
 
