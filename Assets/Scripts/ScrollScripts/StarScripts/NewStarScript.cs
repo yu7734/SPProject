@@ -8,7 +8,7 @@ public class NewStarScript : MonoBehaviour
     [SerializeField] float Speed = 50f;
     void Start()
     {
-        Camera = GameObject.Find("Main Camera");//名前指定なので変えると動かなくなる
+        Camera = GameObject.Find(GameObjectName.MainCamera);//名前指定なので変えると動かなくなる
         Instantiate(Star, transform.position+transform.up*Distance, Quaternion.identity, transform);//stageを変更する時にSestroy(this.gameObject)する必要あり
     }
     void Update()

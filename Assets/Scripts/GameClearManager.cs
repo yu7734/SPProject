@@ -37,7 +37,7 @@ public class GameClearManager : MonoBehaviour
 
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.ResetScore();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneName.Game);
         fadeObject.SetActive(true);
         fadeManager.FadeStart(fadeManager.ChangeGameScene);// ゲームシーンに遷移
     }
@@ -49,7 +49,7 @@ public class GameClearManager : MonoBehaviour
 
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.ResetScore();
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene(SceneName.Title);
         fadeObject.SetActive(true);
         fadeManager.FadeStart(fadeManager.ChangeTitleScene);
     }

@@ -18,7 +18,7 @@ public class newFanelManager : MonoBehaviour
     const int FanelPos1 = 14,FanelPos2 = 9,FanelPos3=4,FanelPos4=0;
     void Awake() 
     {
-        Player = GameObject.Find("Player");
+        Player = GameObject.Find(GameObjectName.Player);
         bulletManagert = FanelBullet.GetComponent<BulletManagert>();
         bulletManagert.bulletDamageRate = bulletManagert.BASE_bulletDamageRate;
         for (int i=0;i<MaxLoop;i++)vector3s[i] = Player.transform.position;
@@ -76,7 +76,7 @@ public class newFanelManager : MonoBehaviour
             default:
                 break;
         }
-        Fanel = GameObject.FindGameObjectsWithTag("Fanel");
+        Fanel = GameObject.FindGameObjectsWithTag(Tags.Fanel);
         ++FanelCount;
     }
 }

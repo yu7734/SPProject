@@ -12,7 +12,7 @@ public class SyabonScript : MonoBehaviour
     
     void Awake()
     {
-        playerRot=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerRot=GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<Transform>();
         Manager = FindAnyObjectByType<SyabonManagerScript>();
         ui = FindAnyObjectByType<UIManager>();
     }

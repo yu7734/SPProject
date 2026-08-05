@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         isReleased = false;
         if (ui == null)
         {
-            ui = GameObject.Find("GameManager").GetComponent<UIManager>();
+            ui = GameObject.Find(GameObjectName.GameManager).GetComponent<UIManager>();
         }
 
     }
@@ -61,8 +61,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         rb = GetComponent<Rigidbody>();
 
-        GameObject playerObject = GameObject.FindWithTag("Player"); //プレイヤーはPlayerタグを使用する想定
-        ui = GameObject.Find("GameManager").GetComponent<UIManager>();
+        GameObject playerObject = GameObject.FindWithTag(Tags.Player); //プレイヤーはPlayerタグを使用する想定
+        ui = GameObject.Find(GameObjectName.GameManager).GetComponent<UIManager>();
         if (playerObject != null)
         {
             player = playerObject.transform;
@@ -132,7 +132,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         Instantiate(exprosion, this.transform.position, Quaternion.identity);
         if (ui == null)
         {
-            ui = GameObject.Find("GameManager").GetComponent<UIManager>();
+            ui = GameObject.Find(GameObjectName.GameManager).GetComponent<UIManager>();
         }
 
         if (ui != null&&!isCollision)

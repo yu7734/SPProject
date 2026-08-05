@@ -30,7 +30,7 @@ public class NewScrollManager : MonoBehaviour
             break;
 
             case 2:
-                GameObject[] tagobj2 = GameObject.FindGameObjectsWithTag("Stage2");//Stage2tagのついたobjectをtagobj1に配列化
+                GameObject[] tagobj2 = GameObject.FindGameObjectsWithTag(Tags.Stage2);//Stage2tagのついたobjectをtagobj1に配列化
                 int j=Random.Range(0,Stage2.Length);
                 if (tagobj2.Length < Stage2.Length) Instantiate(Stage2[j],new Vector3(j, 0f, 0f), Quaternion.identity, StagePearent[1].transform);//tagobj1とStage2に割り当てられたPrefabの数を比較、ランダムに呼び出し
             break;

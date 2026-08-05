@@ -90,9 +90,9 @@ public class FadeManager : MonoBehaviour
         onFadeComplete.AddListener(action);
     }
 
-    public void ChangeGameScene() { SceneManager.LoadScene("Game"); }//ゲームシーンに遷移
-    public void ChangeTutorialScene() { SceneManager.LoadScene("Tutorial"); }//チュートリアルシーンに遷移
-    public void ChangeTitleScene() { SceneManager.LoadScene("Title"); }//タイトルシーンに遷移
+    public void ChangeGameScene() { SceneManager.LoadScene(SceneName.Game); }//ゲームシーンに遷移
+    public void ChangeTutorialScene() { SceneManager.LoadScene(SceneName.Tutorial); }//チュートリアルシーンに遷移
+    public void ChangeTitleScene() { SceneManager.LoadScene(SceneName.Title); }//タイトルシーンに遷移
     public void GameStart() { }
 
     public bool Bfade { get; set; }//bFadeのアクセッサ

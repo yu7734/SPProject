@@ -66,7 +66,7 @@ public class EnemyAttackBase : MonoBehaviour
     /// <summary> プールが再利用されるたびに実行 </summary>
     public virtual void OnReset()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player"); 
+        GameObject playerObject = GameObject.FindWithTag(Tags.Player); 
         if (playerObject != null)
         {
             player = playerObject.transform;

@@ -79,7 +79,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerChildObject = transform.GetChild(0).gameObject;
         string currentScene = SceneManager.GetActiveScene().name;//現在のシーン名を取得
-        if (currentScene == "Tutorial")//現在のシーンがチュートリアルシーンならプレイヤーの操作を可能にする
+        if (currentScene == SceneName.Tutorial)//現在のシーンがチュートリアルシーンならプレイヤーの操作を可能にする
             toggle.GetSetIsStart = true;
     }
 

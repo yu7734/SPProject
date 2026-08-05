@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEngine.Splines.SplineInstantiate;
 
 public class EnemySpawner : MonoBehaviour
 {

@@ -68,7 +68,7 @@ public class ReticleManager : MonoBehaviour
 
         if (target == null)
         {
-            GameObject playerObject = GameObject.FindWithTag("Player");
+            GameObject playerObject = GameObject.FindWithTag(Tags.Player);
             if (playerObject != null)
             {
                 target = playerObject.transform;

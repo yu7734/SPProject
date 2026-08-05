@@ -16,7 +16,7 @@ public class NewStarScrollManager : MonoBehaviour
         {
             default:
             case 1:
-                GameObject[] tagobj = GameObject.FindGameObjectsWithTag("Star");//Star‚Ì‚Â‚¢‚½object‚ğtagobj‚É”z—ñ‰»
+                GameObject[] tagobj = GameObject.FindGameObjectsWithTag(Tags.Star);//Star‚Ì‚Â‚¢‚½object‚ğtagobj‚É”z—ñ‰»
                 timer += Time.deltaTime;
                 if (timer >= frequency)//frequency•b–ˆ‚ÉStar‚ğ¶¬‚·‚é
                 {

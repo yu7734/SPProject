@@ -17,7 +17,7 @@ public class TutorialManagerScript : MonoBehaviour
         switch (step)
         {
             case Step.step_one:
-                if (!GameObject.FindGameObjectWithTag("Enemy")) 
+                if (!GameObject.FindGameObjectWithTag(Tags.Enemy)) 
                 {
                     Avoid.SetActive(true);
                     step = Step.step_two;

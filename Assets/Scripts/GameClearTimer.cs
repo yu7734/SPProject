@@ -23,7 +23,7 @@ public class GameClearTimer : MonoBehaviour
     private TextMeshProUGUI timerText;
 
     [SerializeField, Header("クリア時に遷移するシーン名")]
-    private string clearSceneName = "GameClear";
+    private string clearSceneName = SceneName.GameClear;
 
     [Header("===== 表示設定 =====")]
     [SerializeField, Tooltip("「mm:ss」形式で表示する。OFFなら秒数のみ")]

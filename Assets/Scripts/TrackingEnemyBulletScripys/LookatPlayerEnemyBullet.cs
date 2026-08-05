@@ -4,6 +4,7 @@ public class LookatPlayerEnemyBullet : MonoBehaviour
 {
     void Awake()
     {
-        gameObject.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        GameObject Player = GameObject.FindWithTag(Tags.Player);
+        if (Player != null) gameObject.transform.LookAt(Player.transform);
     }
 }

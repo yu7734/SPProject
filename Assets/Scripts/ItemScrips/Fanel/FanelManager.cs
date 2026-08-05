@@ -19,7 +19,7 @@ public class FanelManager : MonoBehaviour
 
     void FanelSetup()
     {
-        Fanel = GameObject.FindGameObjectsWithTag("Fanel");
+        Fanel = GameObject.FindGameObjectsWithTag(Tags.Fanel);
         Fanel = Fanel.OrderBy(f => f.name).ToArray();
         Array.Resize(ref fanelScripts , Fanel.Length);
         for (int i = 0; i < Fanel.Length; i++) fanelScripts[i] = Fanel[i].GetComponent<newFanelScript>();

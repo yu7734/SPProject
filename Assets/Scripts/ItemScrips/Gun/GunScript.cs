@@ -15,7 +15,7 @@ public class GunScript : MonoBehaviour
     {
         ui = FindAnyObjectByType<UIManager>();
         playerInput = FindAnyObjectByType<PlayerInput>();
-        playerRot = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        playerRot = GameObject.FindWithTag(GameObjectName.Player).GetComponent<Transform>();
         manager = FindAnyObjectByType<GunManagerScript>();
     }
 
@@ -25,7 +25,7 @@ public class GunScript : MonoBehaviour
         Debug.Log(playerRot.eulerAngles);
         if (!ui.bSelect&&!shotReady) time += Time.deltaTime;
         if (!shotReady && time >= manager.cooltime) shotReady = true;
-        if (playerInput.actions["Attack"].triggered && shotReady)OnShot();
+        if (playerInput.actions[PlayerInputActionName.Attack].triggered && shotReady)OnShot();
     }
 
     public void OnShot()

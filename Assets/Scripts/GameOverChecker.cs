@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameOverChecker : MonoBehaviour
 {
     [SerializeField, Header("プレイヤー参照")] private PlayerManager player;
-    [SerializeField, Header("遷移先シーン名")] private string gameOverSceneName = "GameOver";
+    [SerializeField, Header("遷移先シーン名")] private string gameOverSceneName = SceneName.GameOver;
     [SerializeField, Header("遷移までの待ち時間（秒）")] private float delay = 1.0f;
 
     private bool isTriggered = false;
