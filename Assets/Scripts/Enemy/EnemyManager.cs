@@ -140,6 +140,12 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             ui.Experience(exp);
         }
 
+        // 撃墜数のカウント（弾で倒したときのみ。体当たりや画面外への離脱は数えない）
+        if (!isCollision && KillCountManager.Instance != null)
+        {
+            KillCountManager.Instance.AddKill();
+        }
+
         if (MyPool != null)
         {
             MyPool.Release(this.gameObject);
