@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 
 //プレイヤーに受けるダメージ
 public interface IPlayerDamage
@@ -81,6 +84,7 @@ public class PlayerManager : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;//現在のシーン名を取得
         if (currentScene == SceneName.Tutorial)//現在のシーンがチュートリアルシーンならプレイヤーの操作を可能にする
             toggle.GetSetIsStart = true;
+        AutoShot();
     }
 
     // Update is called once per frame
@@ -147,6 +151,26 @@ public class PlayerManager : MonoBehaviour
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
             soundManager.Play(shotSE);
         }
+    }
+
+    //private IEnumerator AutoShot()
+    //{
+    //    //スタートムービー中は操作不可
+    //    if (toggle != null && !toggle.GetSetIsStart) return null;
+
+    //    yield 
+    //}
+
+    private async UniTask AutoShot()
+    {
+        while (true)
+        {
+            await UniTask.WaitUntil(() => toggle.GetSetIsStart);
+            Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
+            soundManager.Play(shotSE);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        }
+
     }
 
     //回避ボタンが押されたら
