@@ -1353,7 +1353,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9461,12 +9461,16 @@ PrefabInstance:
       value: 'Player/SpeedUpCommand[/Keyboard/leftShift]'
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9478,15 +9482,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnGameSpeedUp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SpeedUpCommand, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7970430722123539372, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_Radius
