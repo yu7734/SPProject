@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 
-//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
+//ƒvƒŒƒCƒ„[‚Éó‚¯‚éƒ_ƒ[ƒW
 public interface IPlayerDamage
 {
     public void Damage(int value);
     //public void Death();
 }
 
-/// <summary>ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå—ã‘ã‚‹å›å¾©</summary>
+/// <summary>ƒvƒŒƒCƒ„[‚ªó‚¯‚é‰ñ•œ</summary>
 public interface IPlayerHeal 
 { 
     public void Heal(int value);
@@ -22,37 +23,40 @@ public interface IPlayerHeal
 
 public class PlayerManager : MonoBehaviour
 {
-    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ”ãƒ¼ãƒ‰
+    //ƒvƒŒƒCƒ„[‚ÌƒXƒs[ƒh
     [SerializeField] private float playerSpeed;
     public Vector2 moveInput = Vector2.zero;
 
-    [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ç¯„å›²")]
-    [SerializeField, Tooltip("æ¨ªç§»å‹•ã®æœ€å°")] private float minPlayerRangeX;
-    [SerializeField, Tooltip("æ¨ªç§»å‹•ã®æœ€å¤§")] private float maxPlayerRangeX;
-    [SerializeField, Tooltip("ç¸¦ç§»å‹•ã®æœ€å°")] private float minPlayerRangeY;
-    [SerializeField, Tooltip("ç¸¦ç§»å‹•ã®æœ€å¤§")] private float maxPlayerRangeY;
+    [Header("ƒvƒŒƒCƒ„[‚ÌˆÚ“®”ÍˆÍ")]
+    [SerializeField, Tooltip("‰¡ˆÚ“®‚ÌÅ¬")] private float minPlayerRangeX;
+    [SerializeField, Tooltip("‰¡ˆÚ“®‚ÌÅ‘å")] private float maxPlayerRangeX;
+    [SerializeField, Tooltip("cˆÚ“®‚ÌÅ¬")] private float minPlayerRangeY;
+    [SerializeField, Tooltip("cˆÚ“®‚ÌÅ‘å")] private float maxPlayerRangeY;
 
-    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
-    [Tooltip("è‡ªæ©Ÿã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®")] private GameObject playerChildObject;
+    //ƒvƒŒƒCƒ„[
+    [Tooltip("©‹@ƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u")] private GameObject playerChildObject;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField, Tooltip("å¼¾ã®é€Ÿåº¦")] private float bulletSpeed;
+    [SerializeField, Tooltip("’e‚Ì‘¬“x")] private float bulletSpeed;
+    private bool isAutoMode; //’e‚Ì”­Ëó‘Ô‚ªƒtƒ‹ƒI[ƒg‚©‚Ç‚¤‚©
+    private CancellationTokenSource cts;//UniTask‚ÌƒLƒƒƒ“ƒZƒ‹ˆ—‚ğ‚·‚é‚½‚ß‚Ì•Ï”
+    [SerializeField, Tooltip("©“®”­Ë‚ÌŠÔŠu")] private float autoShotTime;
     
-    //ç™ºå°„ã™ã‚‹ä½ç½®
+    //”­Ë‚·‚éˆÊ’u
     [SerializeField] private Transform shotPoint;
 
-    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½“åŠ›")] public int playerHP;
-    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æœ€å¤§ä½“åŠ›")] public int MaxPlayerHP;
+    [SerializeField, Header("ƒvƒŒƒCƒ„[‚Ì‘Ì—Í")] public int playerHP;
+    [SerializeField, Header("ƒvƒŒƒCƒ„[‚ÌÅ‘å‘Ì—Í")] public int MaxPlayerHP;
 
 
     [SerializeField] private UIManager ui;
 
     [SerializeField] private Transform playerModel;
     float dodgetime = 0;
-    //ã‚¸ãƒ£ã‚¹ãƒˆå›é¿ã®ãƒ•ãƒ©ã‚°
+    //ƒWƒƒƒXƒg‰ñ”ğ‚Ìƒtƒ‰ƒO
     public bool bJustDodge = false;
     float justDodgeTime = 0;
     public float dodgeCoolTime = 0;
-    [SerializeField, Header("å›é¿ã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ")] 
+    [SerializeField, Header("‰ñ”ğ‚ÌƒN[ƒ‹ƒ^ƒCƒ€")] 
     private float coolTime;
 
     [SerializeField] private ToggleGameObject toggle;
@@ -61,7 +65,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private AudioClip shotSE;
     [SerializeField] private AudioClip dodgeSE;
 
-    //å›é¿ã®ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³
+    //‰ñ”ğ‚ÌƒXƒe[ƒgƒ}ƒVƒ“
     public enum dodgeState
     {
         None,
@@ -80,11 +84,13 @@ public class PlayerManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        var cts = new CancellationTokenSource(); //CancellationTokenSource‚Ì¶¬
+        CancellationToken token = cts.Token; //
         playerChildObject = transform.GetChild(0).gameObject;
-        string currentScene = SceneManager.GetActiveScene().name;//ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³åã‚’å–å¾—
-        if (currentScene == SceneName.Tutorial)//ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ãŒãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã‚·ãƒ¼ãƒ³ãªã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ“ä½œã‚’å¯èƒ½ã«ã™ã‚‹
+        string currentScene = SceneManager.GetActiveScene().name;//Œ»İ‚ÌƒV[ƒ“–¼‚ğæ“¾
+        if (currentScene == SceneName.Tutorial)//Œ»İ‚ÌƒV[ƒ“‚ªƒ`ƒ…[ƒgƒŠƒAƒ‹ƒV[ƒ“‚È‚çƒvƒŒƒCƒ„[‚Ì‘€ì‚ğ‰Â”\‚É‚·‚é
             toggle.GetSetIsStart = true;
-        AutoShot();
+        //AutoShot();
     }
 
     // Update is called once per frame
@@ -92,16 +98,16 @@ public class PlayerManager : MonoBehaviour
     {
         switch (_state)
         {
-            //ä½•ã‚‚ãªã„çŠ¶æ…‹
+            //‰½‚à‚È‚¢ó‘Ô
             case dodgeState.None:
                 break;
 
-            //å›é¿çŠ¶æ…‹
+            //‰ñ”ğó‘Ô
             case dodgeState.dodge:
                 Dodge();
                 break;
 
-            //ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ çŠ¶æ…‹
+            //ƒN[ƒ‹ƒ^ƒCƒ€ó‘Ô
             case dodgeState.coolTime:
                 DodgeCoolTime();
                 break;
@@ -115,22 +121,22 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerController()
     {
-        //ç§»å‹•
+        //ˆÚ“®
         var move = new Vector3(moveInput.x, moveInput.y, 0) * playerSpeed * Time.deltaTime;
         transform.Translate(move);
 
-        //ç¾åœ¨ã®ä½ç½®
+        //Œ»İ‚ÌˆÊ’u
         Vector3 currentPosition = this.transform.position;
 
-        //ç§»å‹•ç¯„å›²
+        //ˆÚ“®”ÍˆÍ
         currentPosition.x = Mathf.Clamp(currentPosition.x, minPlayerRangeX, maxPlayerRangeX);
         currentPosition.y = Mathf.Clamp(currentPosition.y, minPlayerRangeY, maxPlayerRangeY);
 
-        //ç¾åœ¨ã®ä½ç½®ã‚’currentPositionã«ã™ã‚‹
+        //Œ»İ‚ÌˆÊ’u‚ğcurrentPosition‚É‚·‚é
         this.transform.position = currentPosition;
     }
 
-    //ç§»å‹•ãƒœã‚¿ãƒ³
+    //ˆÚ“®ƒ{ƒ^ƒ“
     public void OnMove(InputAction.CallbackContext context)
     {
         if (toggle!=null&&!toggle.GetSetIsStart) return;
@@ -138,50 +144,63 @@ public class PlayerManager : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
-    //ç™ºå°„ãƒœã‚¿ãƒ³
+    //”­Ëƒ{ƒ^ƒ“
     public void OnShot(InputAction.CallbackContext context)
     {
-        //ã‚¹ã‚¿ãƒ¼ãƒˆãƒ ãƒ¼ãƒ“ãƒ¼ä¸­ã¯æ“ä½œä¸å¯
-        if (toggle!=null&&!toggle.GetSetIsStart) return;
+        //ƒXƒ^[ƒgƒ€[ƒr[’†‚Í‘€ì•s‰Â
+        if (toggle!=null&&!toggle.GetSetIsStart || isAutoMode) return;
 
         if (context.performed && !ui.bSelect)
         {
             //Vector3 playerShotDirection = playerChildObject.rotation;
-            //å¼¾ã‚’å‘¼ã³å‡ºã™
+            //’e‚ğŒÄ‚Ño‚·
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
             soundManager.Play(shotSE);
         }
     }
 
-    //private IEnumerator AutoShot()
-    //{
-    //    //ã‚¹ã‚¿ãƒ¼ãƒˆãƒ ãƒ¼ãƒ“ãƒ¼ä¸­ã¯æ“ä½œä¸å¯
-    //    if (toggle != null && !toggle.GetSetIsStart) return null;
+    public void OnAutoSwitch(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isAutoMode = !isAutoMode;//ƒI[ƒgƒ‚[ƒhØ‚è‘Ö‚¦
+            Debug.Log(isAutoMode);
+            if (isAutoMode)//ƒI[ƒgƒ‚[ƒhON
+            {
+                cts = new CancellationTokenSource(); //CancellationTokenSource‚Ì¶¬
+                CancellationToken token = cts.Token; //CancellationToken‚©‚çCancellationTokenSource‚ğæ“¾
+                AutoShot(token).Forget();//’e‚Ì©“®”­Ë
+            }
+            else//ƒI[ƒgƒ‚[ƒhOFF
+            {
+                cts?.Cancel();//ƒLƒƒƒ“ƒZƒ‹ˆ—
+                cts?.Dispose();//CancellationTokenSource‚ğ”jŠü
+                cts = null;
+            }
+        }
+    }
 
-    //    yield 
-    //}
-
-    private async UniTask AutoShot()
+    private async UniTask AutoShot(CancellationToken token) //UniTask‚ğg‚Á‚Ä”ñ“¯Šúˆ—
     {
         while (true)
         {
-            await UniTask.WaitUntil(() => toggle.GetSetIsStart);
+            await UniTask.WaitUntil(() => toggle.GetSetIsStart, cancellationToken: token); //ƒ€[ƒr[’†‚Ü‚½‚ÍƒI[ƒgƒ‚[ƒh‚Å‚È‚¯‚ê‚Îˆ—‚Ís‚í‚È‚¢
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
             soundManager.Play(shotSE);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await UniTask.Delay(TimeSpan.FromSeconds(autoShotTime), cancellationToken: token);//ˆê’èŠÔ‘Ò‚Á‚Ä‚©‚ç”­Ë
         }
 
     }
 
-    //å›é¿ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰
+    //‰ñ”ğƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ç
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (context.performed && _state == dodgeState.None)
         {
             if (ui.bSelect) return;
-            //è‡ªæ©Ÿã‚’å›è»¢
+            //©‹@‚ğ‰ñ“]
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
-            soundManager.Play(dodgeSE);//SEã‚’é³´ã‚‰ã™
+            soundManager.Play(dodgeSE);//SE‚ğ–Â‚ç‚·
             bJustDodge = true;
             _state = dodgeState.dodge;
         }
@@ -189,12 +208,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Dodge()
     {
-        //ã‚¸ãƒ£ã‚¹ãƒˆå›é¿ã®ã‚«ã‚¦ãƒ³ãƒˆé–‹å§‹
+        //ƒWƒƒƒXƒg‰ñ”ğ‚ÌƒJƒEƒ“ƒgŠJn
         justDodgeTime += Time.deltaTime;
         if (justDodgeTime >= 0.3f)
             bJustDodge = false;
 
-        //å›é¿ã®ã‚«ã‚¦ãƒ³ãƒˆé–‹å§‹
+        //‰ñ”ğ‚ÌƒJƒEƒ“ƒgŠJn
         dodgetime += Time.deltaTime;
         if (dodgetime >= 1f)
         {
@@ -204,7 +223,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
+    //ƒN[ƒ‹ƒ^ƒCƒ€
     void DodgeCoolTime()
     {
         dodgeCoolTime += Time.deltaTime;
