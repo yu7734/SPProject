@@ -38,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField, Tooltip("弾の速度")] private float bulletSpeed;
     private bool isAutoMode; //弾の発射状態がフルオートかどうか
+    private CancellationTokenSource cts;//UniTaskのキャンセル処理をするための変数
+    [SerializeField, Tooltip("自動発射の間隔")] private float autoShotTime;
     
     //発射する位置
     [SerializeField] private Transform shotPoint;
@@ -163,7 +165,18 @@ public class PlayerManager : MonoBehaviour
         {
             isAutoMode = !isAutoMode;//オートモード切り替え
             Debug.Log(isAutoMode);
-            //if (isAutoMode) AutoShot();
+            if (isAutoMode)//オートモードON
+            {
+                cts = new CancellationTokenSource(); //CancellationTokenSourceの生成
+                CancellationToken token = cts.Token; //CancellationTokenからCancellationTokenSourceを取得
+                AutoShot(token).Forget();//弾の自動発射
+            }
+            else//オートモードOFF
+            {
+                cts?.Cancel();//キャンセル処理
+                cts?.Dispose();//CancellationTokenSourceを破棄
+                cts = null;
+            }
         }
     }
 
@@ -171,10 +184,10 @@ public class PlayerManager : MonoBehaviour
     {
         while (true)
         {
-            await UniTask.WaitUntil(() => toggle.GetSetIsStart); //ムービー中またはオートモードでなければ処理は行わない
+            await UniTask.WaitUntil(() => toggle.GetSetIsStart, cancellationToken: token); //ムービー中またはオートモードでなければ処理は行わない
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
             soundManager.Play(shotSE);
-            //await UniTask.Delay(TimeSpan.FromSeconds(0.5f), token);//一定時間待ってから発射
+            await UniTask.Delay(TimeSpan.FromSeconds(autoShotTime), cancellationToken: token);//一定時間待ってから発射
         }
 
     }
