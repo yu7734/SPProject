@@ -1273,8 +1273,6 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
-  - component: {fileID: 330585551}
-  - component: {fileID: 330585549}
   - component: {fileID: 330585550}
   - component: {fileID: 330585552}
   - component: {fileID: 330585553}
@@ -1353,7 +1351,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1412,66 +1410,6 @@ Skybox:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 2d056ac30ecc9e542b26e06133f23602, type: 2}
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ImpulseDefinition:
-    ImpulseChannel: 1
-    ImpulseShape: 0
-    CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ImpulseDuration: 0.2
-    ImpulseType: 3
-    DissipationRate: 0
-    RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    AmplitudeGain: 3
-    FrequencyGain: 3
-    RepeatMode: 0
-    Randomize: 1
-    TimeEnvelope:
-      AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      AttackTime: 0
-      SustainTime: 0.2
-      DecayTime: 0.7
-      ScaleWithImpact: 1
-      HoldForever: 0
-    ImpactRadius: 100
-    DirectionMode: 0
-    DissipationMode: 2
-    DissipationDistance: 100
-    PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: -1, z: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  IgnoreTag: 
-  UseImpactDirection: 0
-  ScaleImpactWithMass: 0
-  ScaleImpactWithSpeed: 0
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,21 +1434,6 @@ MonoBehaviour:
     FrequencyGain: 1
     Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &330585551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e060a5150744248a27f6b3d22b517b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 330585546}
-  positionStrength: {x: 0.1, y: 0.1, z: 0.1}
-  rotationStrength: {x: 0, y: 0, z: 0}
 --- !u!114 &330585552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5482,6 +5405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1249492989}
   - component: {fileID: 1249492988}
+  - component: {fileID: 1249492990}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: Untagged
@@ -5547,6 +5471,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249492990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249492987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e060a5150744248a27f6b3d22b517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 1249492989}
+  positionStrength: {x: 0.5, y: 0.5, z: 0}
 --- !u!1 &1288815174
 GameObject:
   m_ObjectHideFlags: 0
@@ -9117,7 +9055,7 @@ PrefabInstance:
     - target: {fileID: 755372567412337364, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 330585551}
+      objectReference: {fileID: 1249492990}
     - target: {fileID: 755372567412337364, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
       propertyPath: soundManager
       value: 
@@ -9363,7 +9301,7 @@ PrefabInstance:
     - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 330585551}
+      objectReference: {fileID: 0}
     - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: yawTorqueMagnitude
       value: 20
