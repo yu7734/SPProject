@@ -141,7 +141,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (toggle!=null&&!toggle.GetSetIsStart) return;
 
-        moveInput = context.ReadValue<Vector2>();
+        //設定画面の上下／左右反転を反映してから使う
+        moveInput = GameSettings.Instance.ApplyInvert(context.ReadValue<Vector2>());
     }
 
     //���˃{�^��
