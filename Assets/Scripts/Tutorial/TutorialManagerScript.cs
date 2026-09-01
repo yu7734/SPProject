@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 enum Step { step_one, step_two,step_tree}
 public class TutorialManagerScript : MonoBehaviour
@@ -8,7 +9,8 @@ public class TutorialManagerScript : MonoBehaviour
     [SerializeField] GameObject Avoid, TutorialTagetSpawnerManager;
     [SerializeField] PlayerManager PlayerManager;
     [SerializeField] UIManager UIManager;
-    [SerializeField] TextMeshProUGUI StepText, DescriptionText;
+    [SerializeField] TextMeshProUGUI StepText, DescriptionText,PanelText;
+    [SerializeField] Image TutorialPanel;
 
     // Update is called once per frame
     void Update()
