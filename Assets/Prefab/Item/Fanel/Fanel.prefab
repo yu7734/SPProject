@@ -78,9 +78,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8759341276014386647}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8627875595544899329}
   m_SourcePrefab: {fileID: 100100000, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
 --- !u!1 &1393654434365384442 stripped
@@ -88,21 +85,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d61a28f34bc6be4e8f5bad19887ec43, type: 3}
   m_PrefabInstance: {fileID: 2276051205324151723}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8759341276014386647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393654434365384442}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084a71c874682e64c8c0e6039d679a87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SearchTag: Enemy
-  Tracking: 0
-  offset: {x: 0, y: 0, z: -2}
 --- !u!114 &8627875595544899329
 MonoBehaviour:
   m_ObjectHideFlags: 0
