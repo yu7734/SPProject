@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerObjectManager : MonoBehaviour, IPlayerDamage, IPlayerHeal
 {
     [SerializeField, Tooltip("PlayerManagerを取得")] private PlayerManager player;
-    [SerializeField, Tooltip("CameraShake取得")] public CameraShake cameraShake;
+    [SerializeField, Tooltip("CameraShake取得")] private CameraShake cameraShake;
 
     [SerializeField] private SoundManager soundManager;
     [SerializeField] AudioClip playerHitedSE;

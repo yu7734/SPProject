@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] private new Transform camera;
-    [SerializeField] private Vector3 positionStrength;
-    [SerializeField] private Vector3 rotationStrength;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Vector3 positionStrength = new Vector3(1, 1, 0);
 
     public void CameraShaker()
     {
+        Debug.Log("カメラシェイク");
         //カメラの揺れアニメーションを完了させる関数
-        camera.DOComplete();
-        camera.DOShakePosition(2, positionStrength);
+        cameraTransform.transform.DOComplete();
+        cameraTransform.DOShakePosition(0.5f, positionStrength);
     }
 }
