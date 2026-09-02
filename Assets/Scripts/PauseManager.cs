@@ -32,6 +32,10 @@ public class PauseManager : MonoBehaviour
     [Tooltip("アイテム選択中はResumeしても時間を止めたままにするために参照する。未設定でも動作するが、設定推奨。")]
     [SerializeField] private UIManager uiManager;
 
+    [Header("設定パネルの参照")]
+    [Tooltip("設定パネル(SettingsMenu)。開いている間はEscでポーズ解除しないようにする。未設定なら実行時に自動で探す")]
+    [SerializeField] private SettingsMenu settingsMenu;
+
     // 現在ポーズ中かどうか
     public bool IsPaused { get; private set; } = false;
 
@@ -60,10 +64,26 @@ public class PauseManager : MonoBehaviour
         }
         Time.timeScale = 1f;
         IsPaused = false;
+
+        // 設定パネルが未設定なら自動で探しておく（非アクティブなものも含めて検索）
+        if (settingsMenu == null)
+        {
+            settingsMenu = FindAnyObjectByType<SettingsMenu>(FindObjectsInactive.Include);
+        }
     }
 
     private void Update()
     {
+        // 設定パネルが開いているときは、Escでポーズ解除させない（設定を閉じるだけにする）
+        if (settingsMenu != null && settingsMenu.IsOpen)
+        {
+            if (IsEscapePressed())
+            {
+                settingsMenu.Close();
+            }
+            return; // 設定表示中は通常のEsc処理をスキップ
+        }
+
         // 操作説明パネルが開いているときは、任意のキーで閉じる（Escでポーズ解除は無効化）
         if (howToPlayPanel != null && howToPlayPanel.activeSelf)
         {
