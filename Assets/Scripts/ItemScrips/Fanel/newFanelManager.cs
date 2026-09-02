@@ -79,4 +79,17 @@ public class newFanelManager : MonoBehaviour
         Fanel = GameObject.FindGameObjectsWithTag(Tags.Fanel);
         ++FanelCount;
     }
+
+    public void FanelShot()
+    {
+        foreach (GameObject fanel in Fanel)
+        {
+            if (fanel == null) continue; //ファンネルがあるならスルー
+
+            ItemLaserShotScript itemLaserShotScript = fanel.GetComponent<ItemLaserShotScript>();
+
+            if (itemLaserShotScript == null) return;
+            itemLaserShotScript.OnShot();
+        }
+    }
 }

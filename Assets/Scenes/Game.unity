@@ -13879,6 +13879,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6830236781976906278, guid: f2dec804df9ce27499dc69461e53ecd5, type: 3}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: fanelManager
+      value: 
+      objectReference: {fileID: 597747571}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: soundManager
       value: 
       objectReference: {fileID: 1117674039}

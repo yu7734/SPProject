@@ -5,26 +5,27 @@ public class ItemLaserShotScript : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     UIManager ui;
+    private PlayerManager playerManager;
     [SerializeField] Vector3 Ofset = new (0f, 0f, 0f);
     PlayerInput playerInput;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         ui = FindAnyObjectByType<UIManager>();
+        playerManager = FindAnyObjectByType<PlayerManager>();
         playerInput = FindAnyObjectByType<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.actions[PlayerInputActionName.Attack].triggered) OnShot();
+        if (playerInput.actions[PlayerInputActionName.Attack].triggered &&
+            !playerManager.AutoMode && !ui.bSelect) 
+            OnShot();
     }
 
     public void OnShot()
     {
-        if (!ui.bSelect)
-        {
-            Instantiate(bulletPrefab, transform.position+Ofset, Quaternion.identity);
-        }
+        Instantiate(bulletPrefab, transform.position+Ofset, Quaternion.identity);
     }
 }

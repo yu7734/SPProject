@@ -11,7 +11,6 @@ using System.Threading;
 public interface IPlayerDamage
 {
     public void Damage(int value);
-    //public void Death();
 }
 
 /// <summary>プレイヤーが受ける回復</summary>
@@ -39,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Tooltip("弾の速度")] private float bulletSpeed;
     private bool isAutoMode; //弾の発射状態がフルオートかどうか
     private CancellationTokenSource cts;//UniTaskのキャンセル処理をするための変数
+    [SerializeField] private newFanelManager fanelManager;
     [SerializeField, Tooltip("自動発射の間隔")] private float autoShotTime;
     
     //発射する位置
@@ -75,12 +75,6 @@ public class PlayerManager : MonoBehaviour
 
     public dodgeState _state = dodgeState.None;
 
-    private void Awake()
-    {
-        //bulletPrefab = GetComponent<Rigidbody>();
-        //Rigidbody bulletRigid = bulletPrefab.GetComponent<Rigidbody>();
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -90,7 +84,6 @@ public class PlayerManager : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;//現在のシーン名を取得
         if (currentScene == SceneName.Tutorial)//現在のシーンがチュートリアルシーンならプレイヤーの操作を可能にする
             toggle.GetSetIsStart = true;
-        //AutoShot();
     }
 
     // Update is called once per frame
@@ -141,7 +134,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (toggle!=null&&!toggle.GetSetIsStart) return;
 
-        //險ｭ螳夂判髱｢縺ｮ荳贋ｸ具ｼ丞ｷｦ蜿ｳ蜿崎ｻ｢繧貞渚譏縺励※縺九ｉ菴ｿ縺�
+        //險ｭ螳夂判髱｢縺ｮ荳贋ｸ具ｼ丞ｷｦ蜿ｳ蜿崎ｻ｢繧貞渚譏縺励※縺九ｉ菴ｿ縺・
         moveInput = GameSettings.Instance.ApplyInvert(context.ReadValue<Vector2>());
     }
 
@@ -187,6 +180,7 @@ public class PlayerManager : MonoBehaviour
         {
             await UniTask.WaitUntil(() => toggle.GetSetIsStart, cancellationToken: token); //ムービー中またはオートモードでなければ処理は行わない
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
+            if (fanelManager.FanelCount > 0) fanelManager.FanelShot();//ファンネルがあるなら発射
             soundManager.Play(shotSE);
             await UniTask.Delay(TimeSpan.FromSeconds(autoShotTime), cancellationToken: token);//一定時間待ってから発射
         }
@@ -235,5 +229,7 @@ public class PlayerManager : MonoBehaviour
             _state = dodgeState.None;
         }
     }
+
+    public bool AutoMode { get { return isAutoMode; } }//オート発射状態のアクセッサ
 }
 
