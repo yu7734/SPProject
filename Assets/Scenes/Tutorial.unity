@@ -1964,9 +1964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e060a5150744248a27f6b3d22b517b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 330585546}
+  cameraTransform: {fileID: 330585546}
   positionStrength: {x: 0.1, y: 0.1, z: 0.1}
-  rotationStrength: {x: 0, y: 0, z: 0}
 --- !u!114 &330585552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8695,6 +8694,7 @@ MonoBehaviour:
   titleSceneName: Title
   inputIgnoreDuration: 0.15
   uiManager: {fileID: 1377977813}
+  settingsMenu: {fileID: 0}
 --- !u!4 &1982466855
 Transform:
   m_ObjectHideFlags: 0
@@ -10423,9 +10423,17 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: autoShotTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6830236781976906278, guid: f2dec804df9ce27499dc69461e53ecd5, type: 3}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: fanelManager
+      value: 
+      objectReference: {fileID: 1006509285}
     - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: soundManager
       value: 
@@ -10446,6 +10454,10 @@ PrefabInstance:
       propertyPath: minPlayerRangeY
       value: -0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 3248423529176856624, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: gunManagerScript
+      value: 
+      objectReference: {fileID: 646864985}
     - target: {fileID: 3320037375537976657, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: cameraShake
       value: 
@@ -10477,7 +10489,7 @@ PrefabInstance:
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 330585545}
     - target: {fileID: 4485700448457686790, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: expPopupText
       value: 
@@ -10543,7 +10555,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
@@ -10551,7 +10571,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7244485144327828582}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 990258963}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
@@ -10559,11 +10587,23 @@ PrefabInstance:
       value: OnGameSpeedUp
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAutoSwitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SpeedUpCommand, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030150969893951348, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7970430722123539372, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
@@ -10614,7 +10654,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4984924638923568422, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4482654805904373246, guid: 455573d1273d1b64e8e198c509c1af18, type: 3}
     m_AddedGameObjects:
