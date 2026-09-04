@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 /// <summary>
 /// 「撃墜した敵機の数」を管理するシングルトン。
@@ -50,6 +51,8 @@ public class KillCountManager : MonoBehaviour
     /// </summary>
     public void AddKill()
     {
+        string currentSceneName=SceneManager.GetActiveScene().name;
+        if (currentSceneName == "Tutorial") return;
         killCount++;
     }
 
