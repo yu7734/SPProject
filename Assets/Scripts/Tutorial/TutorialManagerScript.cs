@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,10 +6,12 @@ using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 enum Step { step_one, step_two,step_tree}
-public enum Language { JP,ENG}
+// Languageï¼ˆJP / ENGï¼‰ã¯ Assets/Scripts/Localization/Localization.cs ã«ç§»å‹•ã—ãŸï¼ˆè¨­å®šã¨å…±é€šï¼‰
 public class TutorialManagerScript : MonoBehaviour
 {
     Step step = Step.step_one;
+    [Tooltip("ON ãªã‚‰è¨­å®šï¼ˆSettingsï¼‰ã®è¨€èªã«å¾“ã†ã€‚OFF ãªã‚‰ä¸‹ã® language ã‚’ãã®ã¾ã¾ä½¿ã†ï¼ˆå‹•ä½œç¢ºèªç”¨ï¼‰")]
+    public bool followSettingsLanguage = true;
     public Language language = Language.JP;
     bool TutorialTextActive = true;
     bool ReadingText = true;
@@ -27,32 +29,42 @@ public class TutorialManagerScript : MonoBehaviour
     string[] InstructionTextString = new string[10];
     private void Awake()
     {
+        if (followSettingsLanguage)
+        {
+            language = Localization.Current;
+        }
+
         switch (language) 
         {
             default:
             case Language.ENG:
+                if (ENG_Orbiron != null)
+                {
+                    DescriptionText.font = ENG_Orbiron;
+                    PanelText.font = ENG_Orbiron;
+                }
                 StepTextString[0] = "Step 1";
                 StepTextString[1] = "Step 2";
                 StepTextString[2] = "Step 3";
-                DescriptionTextString[0] = "Break All Target\nWASD/L-S:Move\nEnter/X/ :Shot";
-                DescriptionTextString[1] = "Just Dodge\nEnemy Bullet\nSpace/A/~:Dodge";
-                DescriptionTextString[2] = "Exit Tutorial\nESC/Start/ß:\nPause&Menu";
-                InstructionTextString[0] = "Step 1\nBreak All Target\nWASD/Left-Stick:Move  Enter/X/ :Shot";
-                InstructionTextString[1] = "Step 2\nIf you dodge an enemy's shot just before it hits you, you'll earn <color=#FF00FF>EXP</color>.\nKeep doing this until you level up.\nSpace/A/~:Dodge";
-                InstructionTextString[2] = "Step 3\nAs you level up, you can choose one weapon from three options. if you choose the same one repeatedly, it will become stronger.\nExit the menu.  ESC/Start/ß:Pause&Menu";
+                DescriptionTextString[0] = "Break All Target\nWASD/L-S:Move\nEnter/X/â–¡:Shot";
+                DescriptionTextString[1] = "Just Dodge\nEnemy Bullet\nSpace/A/Ã—:Dodge";
+                DescriptionTextString[2] = "Exit Tutorial\nESC/Start/â‰¡:\nPause&Menu";
+                InstructionTextString[0] = "Step 1\nBreak All Target\nWASD/Left-Stick:Move  Enter/X/â–¡:Shot";
+                InstructionTextString[1] = "Step 2\nIf you dodge an enemy's shot just before it hits you, you'll earn <color=#FF00FF>EXP</color>.\nKeep doing this until you level up.\nSpace/A/Ã—:Dodge";
+                InstructionTextString[2] = "Step 3\nAs you level up, you can choose one weapon from three options. if you choose the same one repeatedly, it will become stronger.\nExit the menu.  ESC/Start/â‰¡:Pause&Menu";
                 break;
             case Language.JP:
                 StepTextString[0] = "Step 1";
                 StepTextString[1] = "Step 2";
                 StepTextString[2] = "Step 3";
-                DescriptionText.font = JP_Murecho;
-                DescriptionTextString[0] = "‘S‚Ä‚Ìƒ^[ƒQƒbƒg‚ğ‰ó‚¹\nWASD/L-S:ˆÚ“®\nEnter/X/ :ËŒ‚";
-                DescriptionTextString[1] = "“G‚Ì’e‚ğƒMƒŠƒMƒŠ‚Å”ğ‚¯‚ë\nSpace/A/~:‰ñ”ğ";
-                DescriptionTextString[2] = "ƒ`ƒ…[ƒgƒŠƒAƒ‹‚ğ”²‚¯‚é\nESC/Start/ß:\nPause&Menu";
-                PanelText.font = JP_Murecho;
-                InstructionTextString[0] = "Step 1\n‘S‚Ä‚Ìƒ^[ƒQƒbƒg‚ğ‰ó‚¹\nWASD/Left-Stick:ˆÚ“®  Enter/X/ :ËŒ‚";
-                InstructionTextString[1] = "Step 2\n“G‚Ì’e‚ğ“–‚½‚é’¼‘O‚Å”ğ‚¯‚é‚Æ<color=#FF00FF>EXP</color>‚ª‚½‚Ü‚é\nƒŒƒxƒ‹ƒAƒbƒv‚·‚é‚Ü‚ÅŒJ‚è•Ô‚¹\nSpace/A/~:‰ñ”ğ";
-                InstructionTextString[2] = "Step 3\nƒŒƒxƒ‹‚ªã‚ª‚é‚Æ•‘•‚ğ3‘ğ‚Ì’†‚©‚ç1‚Â‘I‚×‚éA‰½“x‚à“¯‚¶•¨‚ğ‘I‚ñ‚¾ê‡‚Í‹­‰»‚³‚ê‚Ä‚¢‚­\nƒƒjƒ…[‚©‚ç‘Şo‚µ‚ë  ESC/Start/ß:Pause&Menu";
+                if (JP_Murecho != null) DescriptionText.font = JP_Murecho;
+                DescriptionTextString[0] = "å…¨ã¦ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å£Šã›\nWASD/L-S:ç§»å‹•\nEnter/X/â–¡:å°„æ’ƒ";
+                DescriptionTextString[1] = "æ•µã®å¼¾ã‚’ã‚®ãƒªã‚®ãƒªã§é¿ã‘ã‚\nSpace/A/Ã—:å›é¿";
+                DescriptionTextString[2] = "ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã‚’æŠœã‘ã‚‹\nESC/Start/â‰¡:\nPause&Menu";
+                if (JP_Murecho != null) PanelText.font = JP_Murecho;
+                InstructionTextString[0] = "Step 1\nå…¨ã¦ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å£Šã›\nWASD/Left-Stick:ç§»å‹•  Enter/X/â–¡:å°„æ’ƒ";
+                InstructionTextString[1] = "Step 2\næ•µã®å¼¾ã‚’å½“ãŸã‚‹ç›´å‰ã§é¿ã‘ã‚‹ã¨<color=#FF00FF>EXP</color>ãŒãŸã¾ã‚‹\nãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã™ã‚‹ã¾ã§ç¹°ã‚Šè¿”ã›\nSpace/A/Ã—:å›é¿";
+                InstructionTextString[2] = "Step 3\nãƒ¬ãƒ™ãƒ«ãŒä¸ŠãŒã‚‹ã¨æ­¦è£…ã‚’3æŠã®ä¸­ã‹ã‚‰1ã¤é¸ã¹ã‚‹ã€ä½•åº¦ã‚‚åŒã˜ç‰©ã‚’é¸ã‚“ã å ´åˆã¯å¼·åŒ–ã•ã‚Œã¦ã„ã\nãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‹ã‚‰é€€å‡ºã—ã‚  ESC/Start/â‰¡:Pause&Menu";
                 break;
         }
     }

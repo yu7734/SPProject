@@ -9,8 +9,10 @@ using TMPro;
 public class GameClearManager : MonoBehaviour
 {
     [SerializeField, Header("撃墜数表示テキスト")] private TextMeshProUGUI killCountText;
-    [SerializeField, Tooltip("表示フォーマット（{0}に撃墜数が入る）")]
+    [SerializeField, Tooltip("表示フォーマット（{0}に撃墜数が入る）。日本語表示のとき")]
     private string killCountFormat = "撃墜した敵機の数: {0}";
+    [SerializeField, Tooltip("英語表示のときのフォーマット。空なら日本語の方を使う")]
+    private string killCountFormatEng = "Enemies Destroyed: {0}";
     [SerializeField, Tooltip("撃墜数の桁数。4なら 0012 のようにゼロ埋めされる")]
     private int killCountDigits = 4;
 
@@ -33,7 +35,8 @@ public class GameClearManager : MonoBehaviour
         if (killCountText == null) return;
 
         int kills = (KillCountManager.Instance != null) ? KillCountManager.Instance.KillCount : 0;
-        killCountText.text = string.Format(killCountFormat, kills.ToString("D" + Mathf.Max(1, killCountDigits)));
+        string format = Localization.Pick(killCountFormat, killCountFormatEng);
+        killCountText.text = string.Format(format, kills.ToString("D" + Mathf.Max(1, killCountDigits)));
     }
 
     // もう一度ボタン → ゲームシーンに戻る

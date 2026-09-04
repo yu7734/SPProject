@@ -22,8 +22,25 @@ public class ItemSelectRandomizer : MonoBehaviour
         public ItemAction action = ItemAction.PowerUp;
         [Tooltip("カード中央に表示するアイコン。未設定なら非表示")]
         public Sprite icon;
-        [Tooltip("カード下段に表示する説明文"), TextArea(1, 3)]
+        [Tooltip("カード下段に表示する説明文（日本語）"), TextArea(1, 3)]
         public string description = "";
+        [Tooltip("英語表示のときの説明文。空なら Localization の item.desc.<label> を使い、それも無ければ日本語をそのまま出す"), TextArea(1, 3)]
+        public string descriptionEng = "";
+
+        /// <summary>今の言語（設定）に合った説明文を返す</summary>
+        public string GetDescription()
+        {
+            if (Localization.IsEnglish)
+            {
+                if (!string.IsNullOrEmpty(descriptionEng)) return descriptionEng;
+                if (Localization.TryGet("item.desc." + label, Language.ENG, out string eng)) return eng;
+                return description;
+            }
+
+            if (!string.IsNullOrEmpty(description)) return description;
+            if (Localization.TryGet("item.desc." + label, Language.JP, out string jp)) return jp;
+            return description;
+        }
     }
 
     [Header("抽選候補（Inspectorで追加・変更可）")]
@@ -132,7 +149,7 @@ public class ItemSelectRandomizer : MonoBehaviour
                     option.label,
                     hasStage ? string.Format(cardLevelFormat, cur, dispMax) : "",
                     option.icon,
-                    option.description);
+                    option.GetDescription());
             }
             else
             {

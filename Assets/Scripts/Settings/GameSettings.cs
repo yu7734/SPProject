@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ゲーム全体の設定値（操作の反転・音量）を保持するシングルトン。
+/// ゲーム全体の設定値（操作の反転・音量・言語）を保持するシングルトン。
 /// PlayerPrefs に保存されるので、アプリを終了しても設定が残る。
 ///
 /// 【重要】このクラスはシーンに配置する必要がありません。
@@ -12,6 +12,7 @@ using UnityEngine;
 /// 読み書きの例：
 ///   GameSettings.Instance.InvertY = true;          // 上下反転をON
 ///   float v = GameSettings.Instance.SeVolume;      // SE音量を取得
+///   GameSettings.Instance.Language = Language.ENG; // 表示言語を英語に
 /// 値が変わると OnSettingsChanged が呼ばれます。
 /// </summary>
 public class GameSettings : MonoBehaviour
@@ -22,6 +23,7 @@ public class GameSettings : MonoBehaviour
     private const string KeySeVolume     = "SP_Settings_SeVolume";
     private const string KeyInvertX      = "SP_Settings_InvertX";
     private const string KeyInvertY      = "SP_Settings_InvertY";
+    private const string KeyLanguage     = "SP_Settings_Language";
 
     // ===== 初期値（既存のゲームバランスを変えないよう、音量は全て 1.0 = 等倍） =====
     public const float DefaultMasterVolume = 1f;
@@ -29,6 +31,7 @@ public class GameSettings : MonoBehaviour
     public const float DefaultSeVolume     = 1f;
     public const bool  DefaultInvertX      = false;
     public const bool  DefaultInvertY      = false;
+    public const Language DefaultLanguage  = Language.JP;
 
     private static GameSettings instance;
     private static bool isQuitting = false;
@@ -58,6 +61,7 @@ public class GameSettings : MonoBehaviour
     private float seVolume     = DefaultSeVolume;
     private bool  invertX      = DefaultInvertX;
     private bool  invertY      = DefaultInvertY;
+    private Language language  = DefaultLanguage;
 
     /// <summary>全体音量（0〜1）</summary>
     public float MasterVolume
@@ -92,6 +96,32 @@ public class GameSettings : MonoBehaviour
     {
         get => invertY;
         set => SetBool(ref invertY, value, KeyInvertY);
+    }
+
+    /// <summary>
+    /// 表示言語（JP / ENG）。
+    /// 変えると OnSettingsChanged と Localization.OnLanguageChanged の両方が呼ばれるので、
+    /// 文言を出しているUIはどちらかを購読して表示を更新する。
+    /// </summary>
+    public Language Language
+    {
+        get => language;
+        set
+        {
+            if (language == value) return;
+
+            language = value;
+            PlayerPrefs.SetInt(KeyLanguage, (int)value);
+            PlayerPrefs.Save();
+            OnSettingsChanged?.Invoke();
+            Localization.RaiseLanguageChanged();
+        }
+    }
+
+    /// <summary>表示言語を JP ⇔ ENG で切り替える（設定メニューのボタン用）</summary>
+    public void ToggleLanguage()
+    {
+        Language = (language == Language.JP) ? Language.ENG : Language.JP;
     }
 
     /// <summary>ゲーム起動時に自動生成する（どのシーンから再生を始めても存在する状態になる）</summary>
@@ -149,8 +179,17 @@ public class GameSettings : MonoBehaviour
         seVolume     = Mathf.Clamp01(PlayerPrefs.GetFloat(KeySeVolume,     DefaultSeVolume));
         invertX      = PlayerPrefs.GetInt(KeyInvertX, DefaultInvertX ? 1 : 0) != 0;
         invertY      = PlayerPrefs.GetInt(KeyInvertY, DefaultInvertY ? 1 : 0) != 0;
+        language     = ReadLanguage();
 
         OnSettingsChanged?.Invoke();
+        Localization.RaiseLanguageChanged();
+    }
+
+    /// <summary>PlayerPrefs から言語を読む。壊れた値が入っていたら初期値にする</summary>
+    private static Language ReadLanguage()
+    {
+        int raw = PlayerPrefs.GetInt(KeyLanguage, (int)DefaultLanguage);
+        return System.Enum.IsDefined(typeof(Language), raw) ? (Language)raw : DefaultLanguage;
     }
 
     /// <summary>全ての設定を初期値に戻す</summary>
@@ -161,15 +200,19 @@ public class GameSettings : MonoBehaviour
         seVolume     = DefaultSeVolume;
         invertX      = DefaultInvertX;
         invertY      = DefaultInvertY;
+        bool languageChanged = (language != DefaultLanguage);
+        language     = DefaultLanguage;
 
         PlayerPrefs.SetFloat(KeyMasterVolume, masterVolume);
         PlayerPrefs.SetFloat(KeyBgmVolume,    bgmVolume);
         PlayerPrefs.SetFloat(KeySeVolume,     seVolume);
         PlayerPrefs.SetInt(KeyInvertX, invertX ? 1 : 0);
         PlayerPrefs.SetInt(KeyInvertY, invertY ? 1 : 0);
+        PlayerPrefs.SetInt(KeyLanguage, (int)language);
         PlayerPrefs.Save();
 
         OnSettingsChanged?.Invoke();
+        if (languageChanged) Localization.RaiseLanguageChanged();
     }
 
     /// <summary>移動入力に反転設定を適用して返す（PlayerManager から呼ぶ）</summary>

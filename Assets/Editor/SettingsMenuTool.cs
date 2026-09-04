@@ -35,6 +35,20 @@ public static class SettingsMenuTool
         Debug.Log("[SettingsMenu] 設定パネルを作成しました。ヒエラルキーで編集できます。シーンの保存（Ctrl+S）を忘れずに。", menu.gameObject);
     }
 
+    /// <summary>既存のパネルに言語（JPN/ENG）の行を足してシーンを変更済みにする</summary>
+    public static void AddLanguageRow(SettingsMenu menu)
+    {
+        if (menu == null) return;
+
+        Undo.RecordObject(menu, "Add Language Row");
+        menu.AddLanguageRow(true);
+
+        EditorUtility.SetDirty(menu);
+        EditorSceneManager.MarkSceneDirty(menu.gameObject.scene);
+
+        Debug.Log("[SettingsMenu] 言語切り替えの行を追加しました。シーンの保存（Ctrl+S）を忘れずに。", menu.gameObject);
+    }
+
     /// <summary>UIを消してメニューの並びを元に戻す</summary>
     public static void Clear(SettingsMenu menu)
     {
@@ -47,6 +61,36 @@ public static class SettingsMenuTool
         EditorSceneManager.MarkSceneDirty(menu.gameObject.scene);
 
         Debug.Log("[SettingsMenu] 設定パネルを削除し、メニューの並びを元に戻しました。", menu.gameObject);
+    }
+}
+
+/// <summary>
+/// 言語（JPN/ENG）の行が無い設定パネルを見つけたら、再生しなくてもシーン上に自動で足す。
+/// エディタ起動時・スクリプトのコンパイル後・シーンを開いたときに一度だけ確認する。
+/// 追加されたらシーンが「未保存」になるので、位置を調整したら Ctrl+S で保存する。
+/// </summary>
+[InitializeOnLoad]
+public static class SettingsMenuAutoLanguageRow
+{
+    static SettingsMenuAutoLanguageRow()
+    {
+        EditorSceneManager.sceneOpened += (scene, mode) => EditorApplication.delayCall += AddMissingRows;
+        EditorApplication.delayCall += AddMissingRows;
+    }
+
+    private static void AddMissingRows()
+    {
+        if (Application.isPlaying) return;
+
+        SettingsMenu[] menus = Object.FindObjectsByType<SettingsMenu>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (SettingsMenu menu in menus)
+        {
+            if (menu == null) continue;
+            if (!menu.HasUI || menu.HasLanguageRow) continue;
+            if (PrefabUtility.IsPartOfPrefabAsset(menu)) continue;
+
+            SettingsMenuTool.AddLanguageRow(menu);
+        }
     }
 }
 
@@ -81,6 +125,17 @@ public class SettingsMenuInspector : Editor
                 SettingsMenuTool.Build(menu);
             }
             return;
+        }
+
+        if (!menu.HasLanguageRow)
+        {
+            EditorGUILayout.HelpBox("言語（JPN/ENG）の行がまだありません。通常はシーンを開いたときに自動で追加されます。" +
+                                    "出てこない場合は下のボタンで追加してください。", MessageType.Info);
+
+            if (GUILayout.Button("言語切り替えの行を追加する"))
+            {
+                SettingsMenuTool.AddLanguageRow(menu);
+            }
         }
 
         if (GUILayout.Button("UIを作り直す（手を加えた変更は消えます）"))
