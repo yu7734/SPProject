@@ -1280,6 +1280,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1788693887}
+  - {fileID: 1703893356}
+  - {fileID: 1311274060}
   - {fileID: 765115620}
   - {fileID: 858422407}
   - {fileID: 1060628670}
@@ -1287,8 +1289,6 @@ RectTransform:
   - {fileID: 2134377097}
   - {fileID: 1541973854}
   - {fileID: 645235597}
-  - {fileID: 1703893356}
-  - {fileID: 1311274060}
   - {fileID: 399263178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1964,9 +1964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e060a5150744248a27f6b3d22b517b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 330585546}
+  cameraTransform: {fileID: 0}
   positionStrength: {x: 0.1, y: 0.1, z: 0.1}
-  rotationStrength: {x: 0, y: 0, z: 0}
 --- !u!114 &330585552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8695,6 +8694,7 @@ MonoBehaviour:
   titleSceneName: Title
   inputIgnoreDuration: 0.15
   uiManager: {fileID: 1377977813}
+  settingsMenu: {fileID: 0}
 --- !u!4 &1982466855
 Transform:
   m_ObjectHideFlags: 0
