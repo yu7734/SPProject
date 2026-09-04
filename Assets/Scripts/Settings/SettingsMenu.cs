@@ -13,7 +13,7 @@ using UnityEditor.Events;
 #endif
 
 /// <summary>
-/// 設定（Settings）パネルの本体。音量3種と操作の反転を変更できる。
+/// 設定（Settings）パネルの本体。音量3種・操作の反転・表示言語（JPN/ENG）を変更できる。
 ///
 /// UIは「Tools > SpacePhantom > 設定パネル(Settings)を作成」を1回実行すると
 /// シーン上に本物のオブジェクトとして生成される。
@@ -55,6 +55,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private string seLabel = "SE";
     [SerializeField] private string invertYLabel = "Invert Vertical";
     [SerializeField] private string invertXLabel = "Invert Horizontal";
+    [SerializeField] private string languageLabel = "Language";
+    [SerializeField, Tooltip("言語ボタンに出す文字（日本語のとき）")] private string jpnStateLabel = "JPN";
+    [SerializeField, Tooltip("言語ボタンに出す文字（英語のとき）")] private string engStateLabel = "ENG";
     [SerializeField] private string resetLabel = "Reset";
     [SerializeField] private string closeLabel = "Close";
     [SerializeField] private string onLabel = "ON";
@@ -100,6 +103,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Button invertXButton;
     [SerializeField] private TextMeshProUGUI invertYStateText;
     [SerializeField] private TextMeshProUGUI invertXStateText;
+    [SerializeField, Tooltip("言語切り替えボタン。空なら実行時（またはInspectorのボタン）で自動追加される")]
+    private Button languageButton;
+    [SerializeField] private TextMeshProUGUI languageStateText;
     [SerializeField] private Button resetButton;
     [SerializeField] private Button closeButton;
     [SerializeField, Tooltip("メニューに追加された Settings ボタン")]
@@ -123,12 +129,20 @@ public class SettingsMenu : MonoBehaviour
     /// <summary>生成済みかどうか（エディタツールから見る用）</summary>
     public bool HasUI => panelRoot != null;
 
+    /// <summary>言語切り替えの行があるか（古いシーンには無いので、無ければ自動で足す）</summary>
+    public bool HasLanguageRow => languageButton != null;
+
     private void Start()
     {
         // 参照が空＝ツールでの生成をしていない場合の保険。実行時に組み立てる
         if (panelRoot == null)
         {
             BuildUI(false);
+        }
+        else if (languageButton == null)
+        {
+            // 言語の行が追加される前に作られたパネルには、実行時に行だけ足す
+            AddLanguageRow(false);
         }
 
         ApplyValuesToUI();
@@ -137,6 +151,17 @@ public class SettingsMenu : MonoBehaviour
         {
             panelRoot.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        // 別の設定パネル（例：ポーズ中のもの）で言語が変わっても表示を合わせる
+        Localization.OnLanguageChanged += RefreshTexts;
+    }
+
+    private void OnDisable()
+    {
+        Localization.OnLanguageChanged -= RefreshTexts;
     }
 
     private void Update()
@@ -258,6 +283,13 @@ public class SettingsMenu : MonoBehaviour
         RefreshTexts();
     }
 
+    /// <summary>表示言語を JPN ⇔ ENG で切り替える（ボタンの OnClick 用）</summary>
+    public void ToggleLanguage()
+    {
+        if (GameSettings.Instance != null) GameSettings.Instance.ToggleLanguage();
+        RefreshTexts();
+    }
+
     /// <summary>設定を初期値に戻す（ボタンの OnClick 用）</summary>
     public void ResetSettings()
     {
@@ -312,6 +344,7 @@ public class SettingsMenu : MonoBehaviour
         float se = (settings != null) ? settings.SeVolume : GameSettings.DefaultSeVolume;
         bool invertY = (settings != null) ? settings.InvertY : GameSettings.DefaultInvertY;
         bool invertX = (settings != null) ? settings.InvertX : GameSettings.DefaultInvertX;
+        Language language = (settings != null) ? settings.Language : GameSettings.DefaultLanguage;
 
         if (masterValueText != null) masterValueText.text = ToPercent(master);
         if (bgmValueText != null) bgmValueText.text = ToPercent(bgm);
@@ -319,6 +352,34 @@ public class SettingsMenu : MonoBehaviour
 
         SetStateText(invertYStateText, invertY);
         SetStateText(invertXStateText, invertX);
+
+        if (languageStateText != null)
+        {
+            languageStateText.text = (language == Language.ENG) ? engStateLabel : jpnStateLabel;
+            languageStateText.color = accentColor;
+        }
+
+        // 行のラベルも言語に合わせる（上下反転 / Invert Vertical など）
+        SetRowLabel(invertYButton, Localization.Get("settings.invertY", language));
+        SetRowLabel(invertXButton, Localization.Get("settings.invertX", language));
+        SetRowLabel(languageButton, Localization.Get("settings.language", language));
+    }
+
+    /// <summary>ON/OFF ボタンと同じ行にあるラベル（"Label"）の文字を書き換える</summary>
+    private static void SetRowLabel(Button rowButton, string label)
+    {
+        TextMeshProUGUI labelText = FindRowLabel(rowButton);
+        if (labelText != null) labelText.text = label;
+    }
+
+    /// <summary>行ボタンの隣にあるラベルの TextMeshPro を探す（無ければ null）</summary>
+    private static TextMeshProUGUI FindRowLabel(Button rowButton)
+    {
+        if (rowButton == null) return null;
+        Transform row = rowButton.transform.parent;
+        if (row == null) return null;
+        Transform label = row.Find("Label");
+        return (label != null) ? label.GetComponent<TextMeshProUGUI>() : null;
     }
 
     private void SetStateText(TextMeshProUGUI target, bool isOn)
@@ -405,11 +466,95 @@ public class SettingsMenu : MonoBehaviour
         invertXButton = null;
         invertYStateText = null;
         invertXStateText = null;
+        languageButton = null;
+        languageStateText = null;
         resetButton = null;
         closeButton = null;
         firstSelectable = null;
 
         buildingInEditor = false;
+    }
+
+    /// <summary>
+    /// 既に作られているパネルに「言語（JPN/ENG）」の行だけを後から足す。
+    /// 行が6つ入るように既存の行の縦位置を詰め直し、ボタンの移動順もつなぎ直す。
+    /// 実行時（Start）と、Inspector のボタンの両方から呼ばれる。
+    /// </summary>
+    public void AddLanguageRow(bool editorMode)
+    {
+        if (panelRoot == null || languageButton != null) return;
+        if (masterSlider == null || invertXButton == null) return;
+
+        buildingInEditor = editorMode;
+
+        // 既存の行は「行のRectTransform」がスライダー / ボタンの親
+        RectTransform[] rows =
+        {
+            masterSlider.transform.parent as RectTransform,
+            bgmSlider != null ? bgmSlider.transform.parent as RectTransform : null,
+            seSlider != null ? seSlider.transform.parent as RectTransform : null,
+            invertYButton != null ? invertYButton.transform.parent as RectTransform : null,
+            invertXButton.transform.parent as RectTransform,
+        };
+        Transform content = rows[0] != null ? rows[0].parent : null;
+        if (content == null)
+        {
+            buildingInEditor = false;
+            return;
+        }
+
+        // 実際のパネルの高さから行の位置を決める（手で大きさを変えていても崩れないように）
+        float panelHeight = windowSize.y;
+        RectTransform frame = content.parent as RectTransform;
+        if (frame != null && frame.sizeDelta.y > 0f)
+        {
+            panelHeight = frame.sizeDelta.y;
+        }
+        GetRowLayout(panelHeight, out float rowTop, out float rowStep);
+
+        for (int i = 0; i < rows.Length; ++i)
+        {
+            if (rows[i] == null) continue;
+            RecordUndo(rows[i], "Add Language Row");
+            Vector2 pos = rows[i].anchoredPosition;
+            pos.y = rowTop - rowStep * i;
+            rows[i].anchoredPosition = pos;
+        }
+
+        // 新しい行のフォントは、既存の行ラベル（日本語が出せるフォント）と同じにする
+        TextMeshProUGUI sampleLabel = FindRowLabel(invertXButton);
+        uiFont = (sampleLabel != null) ? sampleLabel.font : fontOverride;
+
+        languageButton = CreateToggleRow(content, languageLabel, rowTop - rowStep * rows.Length, out languageStateText);
+        RegisterCreated(languageButton.transform.parent.gameObject);
+
+        // 移動順：左右反転 → 言語 → Reset / Close
+        SetNavigation(invertXButton, invertYButton, languageButton, null, null);
+        SetNavigation(languageButton, invertXButton, resetButton, null, null);
+        if (resetButton != null) SetNavigation(resetButton, languageButton, masterSlider, closeButton, closeButton);
+        if (closeButton != null) SetNavigation(closeButton, languageButton, masterSlider, resetButton, resetButton);
+
+        if (buildingInEditor)
+        {
+#if UNITY_EDITOR
+            UnityEventTools.AddPersistentListener(languageButton.onClick, new UnityAction(ToggleLanguage));
+#endif
+        }
+        else
+        {
+            languageButton.onClick.AddListener(ToggleLanguage);
+        }
+
+        RefreshTexts();
+        buildingInEditor = false;
+    }
+
+    /// <summary>行の先頭位置と間隔（6行がパネルに収まるように決める）</summary>
+    private static void GetRowLayout(float panelHeight, out float rowTop, out float rowStep)
+    {
+        float halfHeight = panelHeight * 0.5f;
+        rowTop = halfHeight - 106f;
+        rowStep = 44f;
     }
 
     private void ResolveTemplateAndFont()
@@ -486,14 +631,14 @@ public class SettingsMenu : MonoBehaviour
         line.raycastTarget = false;
 
         // --- 各行 ---
-        float rowTop = halfHeight - 118f;
-        const float rowStep = 52f;
+        GetRowLayout(windowSize.y, out float rowTop, out float rowStep);
 
         masterSlider = CreateSliderRow(content, masterLabel, rowTop, out masterValueText);
         bgmSlider = CreateSliderRow(content, bgmLabel, rowTop - rowStep, out bgmValueText);
         seSlider = CreateSliderRow(content, seLabel, rowTop - rowStep * 2f, out seValueText);
         invertYButton = CreateToggleRow(content, invertYLabel, rowTop - rowStep * 3f, out invertYStateText);
         invertXButton = CreateToggleRow(content, invertXLabel, rowTop - rowStep * 4f, out invertXStateText);
+        languageButton = CreateToggleRow(content, languageLabel, rowTop - rowStep * 5f, out languageStateText);
 
         // --- 下部のボタン ---
         float bottomY = -halfHeight + 46f;
@@ -507,9 +652,10 @@ public class SettingsMenu : MonoBehaviour
         SetNavigation(bgmSlider, masterSlider, seSlider, null, null);
         SetNavigation(seSlider, bgmSlider, invertYButton, null, null);
         SetNavigation(invertYButton, seSlider, invertXButton, null, null);
-        SetNavigation(invertXButton, invertYButton, resetButton, null, null);
-        SetNavigation(resetButton, invertXButton, masterSlider, closeButton, closeButton);
-        SetNavigation(closeButton, invertXButton, masterSlider, resetButton, resetButton);
+        SetNavigation(invertXButton, invertYButton, languageButton, null, null);
+        SetNavigation(languageButton, invertXButton, resetButton, null, null);
+        SetNavigation(resetButton, languageButton, masterSlider, closeButton, closeButton);
+        SetNavigation(closeButton, languageButton, masterSlider, resetButton, resetButton);
 
         firstSelectable = masterSlider;
     }
@@ -667,6 +813,7 @@ public class SettingsMenu : MonoBehaviour
             if (seSlider != null) UnityEventTools.AddPersistentListener(seSlider.onValueChanged, new UnityAction<float>(SetSeVolume));
             if (invertYButton != null) UnityEventTools.AddPersistentListener(invertYButton.onClick, new UnityAction(ToggleInvertY));
             if (invertXButton != null) UnityEventTools.AddPersistentListener(invertXButton.onClick, new UnityAction(ToggleInvertX));
+            if (languageButton != null) UnityEventTools.AddPersistentListener(languageButton.onClick, new UnityAction(ToggleLanguage));
             if (resetButton != null) UnityEventTools.AddPersistentListener(resetButton.onClick, new UnityAction(ResetSettings));
             if (closeButton != null) UnityEventTools.AddPersistentListener(closeButton.onClick, new UnityAction(Close));
             if (menuButton != null) UnityEventTools.AddPersistentListener(menuButton.onClick, new UnityAction(Open));
@@ -680,6 +827,7 @@ public class SettingsMenu : MonoBehaviour
         if (seSlider != null) seSlider.onValueChanged.AddListener(SetSeVolume);
         if (invertYButton != null) invertYButton.onClick.AddListener(ToggleInvertY);
         if (invertXButton != null) invertXButton.onClick.AddListener(ToggleInvertX);
+        if (languageButton != null) languageButton.onClick.AddListener(ToggleLanguage);
         if (resetButton != null) resetButton.onClick.AddListener(ResetSettings);
         if (closeButton != null) closeButton.onClick.AddListener(Close);
         if (menuButton != null) menuButton.onClick.AddListener(Open);
