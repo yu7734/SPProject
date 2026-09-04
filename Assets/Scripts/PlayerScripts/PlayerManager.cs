@@ -194,7 +194,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed && _state == dodgeState.None)
         {
-            if (ui.bSelect) return;
+            if (ui.bSelect || toggle != null && !toggle.GetSetIsStart) return;
             //Ž©‹@‚ð‰ñ“]
             playerModel.DORotate(new Vector3(0f, 0, 360), 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutQuart);
             soundManager.Play(dodgeSE);//SE‚ð–Â‚ç‚·
