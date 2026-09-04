@@ -39,6 +39,7 @@ public class PlayerManager : MonoBehaviour
     private bool isAutoMode; //弾の発射状態がフルオートかどうか
     private CancellationTokenSource cts;//UniTaskのキャンセル処理をするための変数
     [SerializeField] private newFanelManager fanelManager;
+    [SerializeField] private GunManagerScript gunManagerScript;
     [SerializeField, Tooltip("自動発射の間隔")] private float autoShotTime;
     
     //発射する位置
@@ -181,6 +182,7 @@ public class PlayerManager : MonoBehaviour
             await UniTask.WaitUntil(() => toggle.GetSetIsStart, cancellationToken: token); //ムービー中またはオートモードでなければ処理は行わない
             Instantiate(bulletPrefab, shotPoint.transform.position, playerChildObject.transform.rotation);
             if (fanelManager.FanelCount > 0) fanelManager.FanelShot();//ファンネルがあるなら発射
+            if (gunManagerScript.GunCount > 0) gunManagerScript.GunShot();
             soundManager.Play(shotSE);
             await UniTask.Delay(TimeSpan.FromSeconds(autoShotTime), cancellationToken: token);//一定時間待ってから発射
         }

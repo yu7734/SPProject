@@ -26,6 +26,7 @@ public class GunManagerScript : MonoBehaviour
 
     public void SerectGun() 
     {
+        
         switch (GunCount) 
         {
             case 0:
@@ -45,4 +46,15 @@ public class GunManagerScript : MonoBehaviour
         }
         GunCount++;
     }
-}
+
+    public void GunShot() 
+    { 
+        foreach (GameObject Gun in Gun) 
+        {
+            if (!Gun.activeSelf) continue;
+            GunScript gunScript = Gun.GetComponent<GunScript>();
+            if (gunScript == null) return;
+            gunScript.OnShot();
+        }
+    }
+}   

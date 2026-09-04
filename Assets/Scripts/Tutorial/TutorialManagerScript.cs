@@ -12,6 +12,7 @@ public class TutorialManagerScript : MonoBehaviour
     Step step = Step.step_one;
     public Language language = Language.JP;
     bool TutorialTextActive = true;
+    bool ReadingText = true;
     float Timer = 0f;
     [SerializeField] GameObject Avoid, TutorialTagetSpawnerManager;
     [SerializeField] PlayerManager PlayerManager;
@@ -74,6 +75,7 @@ public class TutorialManagerScript : MonoBehaviour
                     Avoid.SetActive(true);
                     step = Step.step_two;
                     TutorialTextActive = true;
+                    ReadingText = true;
                 }
                 break;
             case Step.step_two:
@@ -87,6 +89,7 @@ public class TutorialManagerScript : MonoBehaviour
                     TutorialTagetSpawnerManager.SetActive(true);
                     step = Step.step_tree;
                     TutorialTextActive = true;
+                    ReadingText = true;
                 }
                 break;
             default:
@@ -149,13 +152,14 @@ public class TutorialManagerScript : MonoBehaviour
     }
     void ReadText() 
     {
-        if (Timer > 1 && IsAnyKeyPressed()) 
+        if (Timer > 1 && IsAnyKeyPressed()&& ReadingText) 
         {
             TutorialPanel.gameObject.SetActive(false);
             ShotImagePanel.SetActive(false);
             MoveImagePanel.SetActive(false);
             DodgeImagePanel.SetActive(false);
             PauseImagePanel.SetActive(false);
+            ReadingText = false;
             if(!UIManager.bSelect)Time.timeScale = 1f;
         }
     }

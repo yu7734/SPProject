@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class GunScript : MonoBehaviour
 {
     float time = 0f;
-    public bool shotReady = true;
+    bool shotReady = true;
     [SerializeField] private GameObject bulletPrefab;
     UIManager ui;
     GunManagerScript manager;
@@ -22,7 +22,6 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerRot.eulerAngles);
         if (!ui.bSelect&&!shotReady) time += Time.deltaTime;
         if (!shotReady && time >= manager.cooltime) shotReady = true;
         if (playerInput.actions[PlayerInputActionName.Attack].triggered && shotReady)OnShot();
