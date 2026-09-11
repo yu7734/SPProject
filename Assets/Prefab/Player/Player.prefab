@@ -170,6 +170,9 @@ MonoBehaviour:
   maxPlayerRangeY: 0
   bulletPrefab: {fileID: 6830236781976906278, guid: c5b92e8728bdede479bccdea1aad1641, type: 3}
   bulletSpeed: 0
+  fanelManager: {fileID: 0}
+  gunManagerScript: {fileID: 0}
+  autoShotTime: 0
   shotPoint: {fileID: 230322089902159654}
   playerHP: 100
   MaxPlayerHP: 100
@@ -178,6 +181,7 @@ MonoBehaviour:
   bJustDodge: 0
   dodgeCoolTime: 0
   coolTime: 1
+  toggle: {fileID: 0}
   soundManager: {fileID: 0}
   shotSE: {fileID: 0}
   dodgeSE: {fileID: 0}
@@ -261,7 +265,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.72
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7030150969893951348
 MonoBehaviour:
@@ -416,6 +420,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4c6bebbe-d172-40b6-84e6-8dba42e477dc
     m_ActionName: 'Player/SpeedUpCommand[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3da36029-8bb2-4213-a30f-11f676f67095
+    m_ActionName: 'Player/ModeSwitch[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
