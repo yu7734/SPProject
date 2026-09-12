@@ -1,11 +1,12 @@
 using UnityEngine;
 
-enum Pattern 
-{
-    Patten_one, Patten_two
-}
 public class TrackingEnemyBullet : MonoBehaviour
 {
+    enum Pattern 
+    {
+        Patten_one, Patten_two
+    }
+
     GameObject Camera;
     GameObject player;
     float timer = 0;

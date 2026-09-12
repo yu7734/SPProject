@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ed4d41137fc02a45aab42a8914e2e72, type: 2}
+  - {fileID: -876546973899608171, guid: 53a9f1011bd4da64a9a172dbc517c143, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Healing: 20
+  UntilIncreaseHealing: 30
+  HealingRate: 5
 --- !u!114 &5185978719220403820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eab292495bab9f4b988270907cfa722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothSpeed: 3
+  extinction: 4
 --- !u!1001 &2576758577438358860
 PrefabInstance:
   m_ObjectHideFlags: 0
