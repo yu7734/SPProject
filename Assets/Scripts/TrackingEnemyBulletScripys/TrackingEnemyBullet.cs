@@ -21,6 +21,7 @@ public class TrackingEnemyBullet : MonoBehaviour
     {
         Camera = GameObject.Find(GameObjectName.MainCamera);
         player = GameObject.Find(GameObjectName.Player);
+        if (player == null) Destroy(gameObject);
     }
     void Update()
     {
@@ -48,6 +49,6 @@ public class TrackingEnemyBullet : MonoBehaviour
         float pos1 = transform.position.z;//Camera‚Ì‘¶İ‚·‚é•û‚Ö‘‚«Š·‚¦‚Ë‚Î‚È‚ç‚È‚¢
         float pos2 = Camera.transform.position.z;//ã‹L‚Æ“¯—l
         if (pos1 <= pos2) Destroy(gameObject);//Camera‚ÌŒã‚ë‚És‚Á‚½‚ç‚±‚ê‚Ìobject‚ğ”j‰ó‚·‚é
-
+        Destroy(gameObject, 5f);//•ÛŒ¯‚Æ‚µ‚Ä¶¬‚³‚ê‚Ä‚©‚ç5•bŒã‚É”j‰ó‚³‚ê‚é
     }
 }
