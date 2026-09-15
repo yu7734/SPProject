@@ -2304,7 +2304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &256158729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6420,13 +6420,14 @@ GameObject:
   m_Component:
   - component: {fileID: 780455587}
   - component: {fileID: 780455586}
+  - component: {fileID: 780455588}
   m_Layer: 0
   m_Name: BossMovie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &780455586
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -6437,7 +6438,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: c8a9e1056e2e33840bd7ec8671455de2, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6463,6 +6464,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780455588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780455585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa169167408078419330a811d72b589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossObject: {fileID: 93278931}
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -10103,7 +10117,7 @@ RectTransform:
   m_Father: {fileID: 1423529218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11017,6 +11031,10 @@ PrefabInstance:
     - target: {fileID: 4173110984986732922, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_Name
       value: Spaceship13_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173110984986732922, guid: 5fc589b85dc14b341971090508825d60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986965338, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12876,7 +12894,7 @@ RectTransform:
   m_Father: {fileID: 386551423}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13319,7 +13337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85394ae16d7143cda7f912101655a770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 300
+  timeLimit: 15
   timerText: {fileID: 2134377098}
   clearSceneName: GameClear
   useMinutesFormat: 1
@@ -13327,6 +13345,7 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   warningColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   toggle: {fileID: 1917194532}
+  StartBossBattle: {fileID: 780455585}
 --- !u!1 &2078087020
 GameObject:
   m_ObjectHideFlags: 0
@@ -14447,6 +14466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2938909185062001225, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
+      propertyPath: clearTimer
+      value: 
+      objectReference: {fileID: 2074404176}
     - target: {fileID: 2386028378136015771, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14487,6 +14510,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4782783293320573894, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
+      propertyPath: clearTimer
+      value: 
+      objectReference: {fileID: 2074404176}
+    - target: {fileID: 6264320676704088284, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
+      propertyPath: clearTimer
+      value: 
+      objectReference: {fileID: 2074404176}
     - target: {fileID: 6562564495504082392, guid: 5da3cf38f014b6c48b64628a7fd66322, type: 3}
       propertyPath: m_Name
       value: EnemySpawnerManager

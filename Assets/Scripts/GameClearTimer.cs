@@ -46,6 +46,7 @@ public class GameClearTimer : MonoBehaviour
     private bool hasCleared = false;
     //プレイヤーが生きているか
     GameObject Player;
+    [SerializeField] private GameObject StartBossBattle;
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class GameClearTimer : MonoBehaviour
         {
             remainingTime = 0f;
             UpdateTimerText();
-            if(Player.activeSelf)GameClear();
+            if (Player.activeSelf) StartBossBattle.SetActive(true);
             return;
         }
 
@@ -115,4 +116,6 @@ public class GameClearTimer : MonoBehaviour
 
         SceneManager.LoadScene(clearSceneName);
     }
+
+    public float GetRemaningTime { get { return remainingTime; } }
 }
