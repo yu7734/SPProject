@@ -6427,7 +6427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &780455586
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -11034,7 +11034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986732922, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986965338, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11042,11 +11042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986965338, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.3
+      value: 6.1
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986965338, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -41.4
+      value: -7.17
       objectReference: {fileID: 0}
     - target: {fileID: 4173110984986965338, guid: 5fc589b85dc14b341971090508825d60, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13337,7 +13337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85394ae16d7143cda7f912101655a770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 15
+  timeLimit: 7
   timerText: {fileID: 2134377098}
   clearSceneName: GameClear
   useMinutesFormat: 1
