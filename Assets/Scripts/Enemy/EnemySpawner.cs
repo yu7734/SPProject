@@ -67,7 +67,9 @@ public class EnemySpawner : MonoBehaviour
     /// <summary> 通常のタイマー </summary>
     private float timer;
 
+    [Header("ゲームクリア関連")]
     [SerializeField] private GameClearTimer clearTimer;
+    [SerializeField, Tooltip("スポナーを消す時間")] private float spawnerNotActiveTime;
     void Awake()
     {
         SetupEnemyPool();
@@ -146,7 +148,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         //時間になったらスポーン機能を非アクティブにする
-        if (clearTimer.GetRemaningTime <= 0) this.gameObject.SetActive(false);
+        if (clearTimer.GetRemaningTime <= spawnerNotActiveTime) this.gameObject.SetActive(false);
     }
     /// <summary>
     /// プレハブの中からランダムに指定して、
