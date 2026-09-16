@@ -14209,6 +14209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8305220010565703045, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1

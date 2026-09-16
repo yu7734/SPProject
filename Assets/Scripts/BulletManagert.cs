@@ -24,7 +24,7 @@ public class BulletManagert : MonoBehaviour
         soundManager = FindAnyObjectByType<SoundManager>();
         rb.linearVelocity = this.transform.forward * bulletSpeed * Time.fixedDeltaTime;
         bulletAttack = (int)(bulletPower * bulletDamageRate) + bulletDamageBonus;
-        Debug.Log(bulletAttack);
+        //Debug.Log(bulletAttack);
     }
 
     // Update is called once per frame

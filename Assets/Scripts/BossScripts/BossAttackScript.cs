@@ -31,6 +31,7 @@ public class BossAttackScript : MonoBehaviour
     [Header("GatlingÉpÉ^Å[Éì"), SerializeField, Tooltip("ÉuÉå")] Vector2 Renge = new(10f, 10f);
     [SerializeField, Tooltip("åÇÇøë±ÇØÇÈéûä‘")] float continuationTime = 3f;
     [SerializeField,Tooltip("íeÇ∆íeÇÃä‘äu")] float Interval = 0.2f;
+    [SerializeField, Tooltip("íeë¨")] float bulletSpeed = 25f;
     [SerializeField,Tooltip("é©ã@ë_Ç¢Ç©")]Aiming aiming = Aiming.ON;
 
     void Awake()
@@ -110,6 +111,8 @@ public class BossAttackScript : MonoBehaviour
                     break;
             }
             GameObject GetBallet=Instantiate(Ballet, ShotPoints[i].transform.position, Quaternion.Euler(x + ShotPoints[i].transform.eulerAngles.x, y + ShotPoints[i].transform.eulerAngles.y, 0f));
+            Rigidbody rb = GetBallet.GetComponent<Rigidbody>();
+            rb.AddForce(GetBallet.transform.forward * bulletSpeed,ForceMode.VelocityChange);
             Destroy(GetBallet, 3f);
         }
     }
