@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -41,7 +41,8 @@ public class GameClearTimer : MonoBehaviour
     [SerializeField, Tooltip("スタートムービー関係のスクリプトを参照")]
     private ToggleGameObject toggle;
     // 残り時間
-    private float remainingTime;
+    [HideInInspector]
+    public float remainingTime;
     // 二重遷移を防ぐフラグ
     private bool hasCleared = false;
     //プレイヤーが生きているか
@@ -106,7 +107,7 @@ public class GameClearTimer : MonoBehaviour
     /// <summary>
     /// ゲームクリア処理：クリアシーンへ遷移する
     /// </summary>
-    private void GameClear()
+    public void GameClear()
     {
         if (hasCleared) return;
         hasCleared = true;

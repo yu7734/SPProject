@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public interface IEnemyDamage
 {
@@ -32,6 +35,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     float DropHealball;
 
     EnemyAttackBase enemyAttackBase;
+    BossAttackScript bossAttackScript;
+    AimingLaserEnemy laserEnemy;
     Rigidbody rb;
     /// <summary> 敵を倒したときの入手経験値 /// </summary>    
     private int exp = 10;
@@ -44,6 +49,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         DropHealball = random.Next(100)+1;
         enemyAttackBase = GetComponent<EnemyAttackBase>();
+        bossAttackScript = GetComponent<BossAttackScript>();
+        laserEnemy = GetComponent<AimingLaserEnemy>();
     }
     /// <summary> プールが再利用されるたびに実行 </summary>
     public void OnReset()
@@ -67,6 +74,18 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         {
             player = playerObject.transform;
         }
+        if (MyPool == null)
+        {
+            if (enemyAttackBase == null)
+            {
+                enemyAttackBase = GetComponent<EnemyAttackBase>();
+            }
+
+            if (enemyAttackBase != null)
+            {
+                enemyHP = enemyAttackBase.maxEnemyHP;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -80,7 +99,12 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             MyPool.Release(this.gameObject);
             return;
         }
-
+        if (BossManager.Instance.bossObject.activeSelf == true && laserEnemy != null)
+        {
+            isReleased = true;
+            MyPool.Release(this.gameObject);
+            return;
+        }
 
     }
 
@@ -114,7 +138,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         if (enemyHP <= 0)
         {
             if (Healball != null&&DropHealball<=DropPercentage) Instantiate(Healball, transform.position, Quaternion.identity);
-            EnemyDie(false);
+            if (bossAttackScript!=null) BossDie();
+            else EnemyDie(false);
         }
         else
         {
@@ -154,6 +179,39 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         {
             Destroy(this.gameObject);
         }
+    }
+
+    /// <summary> ボスが倒されたときの処理 </summary>
+    private void BossDie()
+    {
+        LineRenderer[] lineRenderers = GetComponentsInChildren<LineRenderer>();
+        Instantiate(exprosion, this.transform.position, Quaternion.identity);
+        if (ui == null)
+        {
+            ui = GameObject.Find(GameObjectName.GameManager).GetComponent<UIManager>();
+        }
+
+        if (ui != null)
+        {
+            ui.Experience(exp);
+        }
+
+        // 撃墜数のカウント
+        if (KillCountManager.Instance != null)
+        {
+            KillCountManager.Instance.AddKill();
+        }
+        GameClearTimer timer = FindAnyObjectByType<GameClearTimer>();
+
+        if (timer != null)
+        {
+            timer.GameClear();
+        }
+        else
+        {
+            SceneManager.LoadScene("GameClear");   　//ゲームクリア画面に
+        }
+        Destroy(this.gameObject);
     }
 }
 

@@ -72,6 +72,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField, Tooltip("スポナーを消す時間")] private float spawnerNotActiveTime;
     void Awake()
     {
+        clearTimer = FindAnyObjectByType<GameClearTimer>();
         SetupEnemyPool();
     }
     /// <summary>
@@ -119,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
     {
 
         timer += Time.deltaTime;
-        //Debug.Log(interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease);
+        if (clearTimer.remainingTime <= 0) return;
         if (timer >= Math.Max((interval.initSpawnTimer - (int)(Time.timeSinceLevelLoad / interval.timeUntilDecrease) * interval.enemyIntervalDecrease),interval.minInterval))
         {
             int activeEnemyCount = 0;                                           // 全てのプールの「貸し出し中」の合計をチェック
@@ -157,6 +158,7 @@ public class EnemySpawner : MonoBehaviour
     void EnemySpawn()
     {
         if (availableEnemy.Count == 0) return;
+     
         int rndIndex = UnityEngine.Random.Range(0, availableEnemy.Count);
         
         SpawnEnemy selectedEnemyPrefab = availableEnemy[rndIndex];

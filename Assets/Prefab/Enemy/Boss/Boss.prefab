@@ -235,13 +235,15 @@ GameObject:
   - component: {fileID: 263414291249669032}
   - component: {fileID: 1816465333038299265}
   - component: {fileID: 4706129830794645775}
+  - component: {fileID: 2807548508103349830}
+  - component: {fileID: 7060059308220915813}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2491399519873411617
 Transform:
   m_ObjectHideFlags: 0
@@ -426,6 +428,53 @@ MonoBehaviour:
   continuationTime: 5
   Interval: 0.1
   aiming: 0
+--- !u!114 &2807548508103349830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364880299571644976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185db84c5b897a348a31a4b423f15cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeX:
+    min: 0
+    max: 0
+  rangeY:
+    min: 0
+    max: 0
+  fireStopDistance: 0
+  collisionDamage: 0
+  maxEnemyHP: 10000
+  approachMoveSpeed:
+    speed: 0
+    timeUntilIncrease: 0
+    intervalIncrease: 0
+    maxSpeed: 0
+--- !u!114 &7060059308220915813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364880299571644976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd9c748704fb6243b1cd0f87c25ac24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpGrowthRate: 0
+  timeUntilIncrease: 0
+  maxHpGrowth: 0
+  ui: {fileID: 0}
+  hit: {fileID: 1957574241283590297, guid: 715059cf845bc4947bba1171de629ecf, type: 3}
+  exprosion: {fileID: 3568262549743503624, guid: 957eb27b10dccb64b9afcef7d15bee45, type: 3}
+  Healball: {fileID: 0}
+  DropPercentage: 0
+  enemySpawner: {fileID: 0}
 --- !u!1 &9165096237834854354
 GameObject:
   m_ObjectHideFlags: 0
