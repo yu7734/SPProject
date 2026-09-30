@@ -6394,6 +6394,7 @@ GameObject:
   - component: {fileID: 780455587}
   - component: {fileID: 780455586}
   - component: {fileID: 780455588}
+  - component: {fileID: 780455589}
   m_Layer: 0
   m_Name: BossMovie
   m_TagString: Untagged
@@ -6450,6 +6451,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossObject: {fileID: 1350676030}
+--- !u!114 &780455589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780455585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 0}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 780455588}
+          m_TargetAssemblyTypeName: StartBossBattle, Assembly-CSharp
+          m_MethodName: BossBattle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &784103629
 GameObject:
   m_ObjectHideFlags: 0
@@ -9351,6 +9382,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1350676043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350676030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: e9ff955a9c1d5da43a926e85ddb1f803, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 780455588}
+          m_TargetAssemblyTypeName: StartBossBattle, Assembly-CSharp
+          m_MethodName: BossBattle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1377977812
 GameObject:
   m_ObjectHideFlags: 0
@@ -9426,7 +9487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6071ede28ec672a41bf364a1734c9a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossObject: {fileID: 1983153410620020755}
+  bossObject: {fileID: 1350676030}
 --- !u!1 &1386465239
 GameObject:
   m_ObjectHideFlags: 0
@@ -12445,19 +12506,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ToggleGameObject, Assembly-CSharp
-          m_MethodName: ActivateGameObject
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &1917194532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13270,7 +13319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85394ae16d7143cda7f912101655a770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 300
+  timeLimit: 5
   timerText: {fileID: 2134377098}
   clearSceneName: GameClear
   useMinutesFormat: 1
@@ -13278,6 +13327,7 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   warningColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   toggle: {fileID: 1917194532}
+  remainingTime: 0
   StartBossBattle: {fileID: 780455585}
 --- !u!1 &2078087020
 GameObject:
@@ -14443,6 +14493,10 @@ PrefabInstance:
       propertyPath: maxEnemyHP
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 4706129830794645775, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: bossBattle
+      value: 
+      objectReference: {fileID: 780455588}
     - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -14462,12 +14516,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1350676035}
+    - targetCorrespondingSourceObject: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350676043}
   m_SourcePrefab: {fileID: 100100000, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
---- !u!1 &1983153410620020755 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
-  m_PrefabInstance: {fileID: 1983153410620020754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2634859111706571003
 PrefabInstance:
   m_ObjectHideFlags: 0
