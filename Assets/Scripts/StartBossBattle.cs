@@ -20,7 +20,7 @@ public class StartBossBattle : MonoBehaviour
 
     public void MoviePlay()
     {
-        bossObject.SetActive(true);
+        BossManager.Instance.ActiveBoss();
         playableDirector.Play();//ƒ€[ƒr[‚ğÄ¶
     }
 

@@ -14449,6 +14449,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 497525530907279211, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236700525462268265, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2491399519873411617, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3
@@ -14491,15 +14499,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2807548508103349830, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: maxEnemyHP
-      value: 10000
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292577758120968359, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4706129830794645775, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: bossBattle
       value: 
       objectReference: {fileID: 780455588}
+    - target: {fileID: 5030073175757306691, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391907093128982062, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456295492674853902, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636213119156643489, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668428331659021005, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: maxHpGrowth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: hpGrowthRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: timeUntilIncrease
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_IsActive
@@ -14508,6 +14556,10 @@ PrefabInstance:
     - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165096237834854354, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14632,6 +14684,10 @@ PrefabInstance:
     - target: {fileID: 755372567412337364, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
       propertyPath: pithcTorqueMagnitude
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480692165958562761, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 3480692165958562761, guid: 2632746e4fa6e684288c6dbe38c4b5f1, type: 3}
       propertyPath: m_LocalRotation.w
