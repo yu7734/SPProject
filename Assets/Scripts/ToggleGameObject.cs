@@ -5,6 +5,7 @@ public class ToggleGameObject : MonoBehaviour
     private bool isStart = false;
     public void ActivateGameObject()
     {
+        //敵スポナーがアクティブ化
         gameObject.SetActive(true);
     }
 

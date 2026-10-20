@@ -33,6 +33,9 @@ public class BossAttackScript : MonoBehaviour
     [SerializeField,Tooltip("弾と弾の間隔")] float Interval = 0.2f;
     [SerializeField,Tooltip("自機狙いか")]Aiming aiming = Aiming.ON;
 
+    [SerializeField, Tooltip("ボス出現ムービーのスクリプト")] 
+    private StartBossBattle bossBattle;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -41,6 +44,7 @@ public class BossAttackScript : MonoBehaviour
 
     private void Update()
     {
+        if (!bossBattle.GetIsBossBattle) return;//ムービーが終わったら攻撃開始
         switch (pattern) 
         { 
             case BossPattern.Idol:
