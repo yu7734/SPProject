@@ -1,8 +1,8 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    [Tooltip("ãƒœã‚¹ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")] 
+    [Tooltip("ƒ{ƒX‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg")] 
     public GameObject bossObject;
 
     public static BossManager Instance;
@@ -18,7 +18,7 @@ public class BossManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    /// <summary> æ™‚é–“åˆ¶é™ãŒçµ‚ã‚ã£ãŸç›´å¾Œã€ã‚‚ã—ãã¯ãƒœã‚¹ç™»å ´æ¼”å‡ºãŒçµ‚ã‚ã£ãŸç›´å¾Œã«å‘¼ã³å‡ºã™ </summary>
+    /// <summary> ŠÔ§ŒÀ‚ªI‚í‚Á‚½’¼ŒãA‚à‚µ‚­‚Íƒ{ƒX“oê‰‰o‚ªI‚í‚Á‚½’¼Œã‚ÉŒÄ‚Ño‚· </summary>
     public void ActiveBoss()
     {
 

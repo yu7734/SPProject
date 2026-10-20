@@ -1,4 +1,4 @@
-ï»¿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using System;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
@@ -12,25 +12,25 @@ public interface IEnemyDamage
 
 public class EnemyManager : MonoBehaviour, IEnemyDamage
 {
-    /// <summary> æ•µã®HP </summary>
+    /// <summary> “G‚ÌHP </summary>
     private int enemyHP;
-    [SerializeField,Tooltip("ä¸€å®šæ™‚é–“æ¯ã®HPã®å¢—åŠ é‡")]
+    [SerializeField,Tooltip("ˆê’èŠÔ–ˆ‚ÌHP‚Ì‘‰Á—Ê")]
     private int hpGrowthRate;
-    [SerializeField, Tooltip("HPå¢—åŠ ã¾ã§ã®æ™‚é–“")]
+    [SerializeField, Tooltip("HP‘‰Á‚Ü‚Å‚ÌŠÔ")]
     private float timeUntilIncrease;
-    [SerializeField, Tooltip("HPã®å¢—åŠ é‡ã®æœ€å¤§å€¤(åˆ¶é™æ™‚é–“ã‚„å¢—åŠ é‡ã«ã‚ˆã‚Šå¤‰æ›´ã™ã‚‹å¿…è¦ã‚ã‚Š)")]
+    [SerializeField, Tooltip("HP‚Ì‘‰Á—Ê‚ÌÅ‘å’l(§ŒÀŠÔ‚â‘‰Á—Ê‚É‚æ‚è•ÏX‚·‚é•K—v‚ ‚è)")]
     private int maxHpGrowth;
     [SerializeField]
     private UIManager ui;
 
-    [SerializeField,Tooltip("æ•µã«æ”»æ’ƒã‚’ãƒ’ãƒƒãƒˆã•ã›ãŸæ™‚ã®æ¼”å‡º")]
+    [SerializeField,Tooltip("“G‚ÉUŒ‚‚ğƒqƒbƒg‚³‚¹‚½‚Ì‰‰o")]
     private GameObject hit;
-    [SerializeField,Tooltip("æ•µã‚’æ’ƒç ´ã—ãŸã¨ãã®æ¼”å‡º")]
+    [SerializeField,Tooltip("“G‚ğŒ‚”j‚µ‚½‚Æ‚«‚Ì‰‰o")]
     private GameObject exprosion;
     [NonSerialized] public Transform player;
 
-    [SerializeField, Tooltip("æ•µæ’ƒç ´æ™‚ã«è½ã¡ã‚‹å›å¾©")] private GameObject Healball;
-    [SerializeField, Tooltip("å›å¾©ã®è½ã¡ã‚‹ç¢ºç‡")] private float DropPercentage = 30f;
+    [SerializeField, Tooltip("“GŒ‚”j‚É—‚¿‚é‰ñ•œ")] private GameObject Healball;
+    [SerializeField, Tooltip("‰ñ•œ‚Ì—‚¿‚éŠm—¦")] private float DropPercentage = 30f;
     System.Random random=new System.Random();
     float DropHealball;
 
@@ -38,11 +38,11 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     BossAttackScript bossAttackScript;
     AimingLaserEnemy laserEnemy;
     Rigidbody rb;
-    /// <summary> æ•µã‚’å€’ã—ãŸã¨ãã®å…¥æ‰‹çµŒé¨“å€¤ /// </summary>    
+    /// <summary> “G‚ğ“|‚µ‚½‚Æ‚«‚Ì“üèŒoŒ±’l /// </summary>    
     private int exp = 10;
-    /// <summary> ã™ã§ã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ã«æˆ»ã£ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯(äºŒé‡ã®æ¼”å‡ºé˜²æ­¢) </summary>
+    /// <summary> ‚·‚Å‚ÉƒIƒuƒWƒFƒNƒgƒv[ƒ‹‚É–ß‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN(“ñd‚Ì‰‰o–h~) </summary>
     private bool isReleased = false;
-    /// <summary> EnemySpawnerã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ« </summary>
+    /// <summary> EnemySpawner‚ÌƒIƒuƒWƒFƒNƒgƒv[ƒ‹ </summary>
     public IObjectPool<GameObject> MyPool { get; set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         bossAttackScript = GetComponent<BossAttackScript>();
         laserEnemy = GetComponent<AimingLaserEnemy>();
     }
-    /// <summary> ãƒ—ãƒ¼ãƒ«ãŒå†åˆ©ç”¨ã•ã‚Œã‚‹ãŸã³ã«å®Ÿè¡Œ </summary>
+    /// <summary> ƒv[ƒ‹‚ªÄ—˜—p‚³‚ê‚é‚½‚Ñ‚ÉÀs </summary>
     public void OnReset()
     {
         enemyHP = enemyAttackBase.maxEnemyHP+Mathf.Min(maxHpGrowth,(int)(Time.timeSinceLevelLoad/timeUntilIncrease) * hpGrowthRate);
@@ -68,7 +68,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         rb = GetComponent<Rigidbody>();
 
-        GameObject playerObject = GameObject.FindWithTag(Tags.Player); //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯Playerã‚¿ã‚°ã‚’ä½¿ç”¨ã™ã‚‹æƒ³å®š
+        GameObject playerObject = GameObject.FindWithTag(Tags.Player); //ƒvƒŒƒCƒ„[‚ÍPlayerƒ^ƒO‚ğg—p‚·‚é‘z’è
         ui = GameObject.Find(GameObjectName.GameManager).GetComponent<UIManager>();
         if (playerObject != null)
         {
@@ -93,7 +93,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     {
         if (isReleased) return;
 
-        if (transform.position.z <= -9.7f)
+        if (transform.position.z <= -9.7f && gameObject.name != "Boss")
         {
             isReleased = true;
             MyPool.Release(this.gameObject);
@@ -111,7 +111,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
     private void OnTriggerEnter(Collider other)
     {
         if (isReleased) return;
-        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
+        //ƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
         IPlayerDamage damage = other.gameObject.GetComponent<IPlayerDamage>();
         if (damage != null)
         {
@@ -129,8 +129,8 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             //Debug.Log("hit");
         }
     }
-    /// <summary> æ•µãŒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹å‡¦ç† </summary>
-    ///<param name="damage">æ•µãŒå—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸é‡</param>
+    /// <summary> “G‚ªƒ_ƒ[ƒW‚ğó‚¯‚éˆ— </summary>
+    ///<param name="damage">“G‚ªó‚¯‚éƒ_ƒ[ƒW—Ê</param>
     public void EnemyDamaged(int damage)
     {
         if (isReleased) return;
@@ -147,9 +147,9 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         }
 
     }
-    /// <summary> æ•µãŒå€’ã•ã‚ŒãŸã¨ãã®å‡¦ç† </summary>
-    /// <param name="isCollision">æ•µãŒè¡çªã§å€’ã•ã‚ŒãŸã‹ã©ã†ã‹ã€‚
-    /// è¡çªãªã‚‰true,å¼¾ã§å€’ã—ãŸãªã‚‰false </param>
+    /// <summary> “G‚ª“|‚³‚ê‚½‚Æ‚«‚Ìˆ— </summary>
+    /// <param name="isCollision">“G‚ªÕ“Ë‚Å“|‚³‚ê‚½‚©‚Ç‚¤‚©B
+    /// Õ“Ë‚È‚çtrue,’e‚Å“|‚µ‚½‚È‚çfalse </param>
     private void EnemyDie(bool isCollision)
     {
         if (isReleased) return;
@@ -165,7 +165,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             ui.Experience(exp);
         }
 
-        // æ’ƒå¢œæ•°ã®ã‚«ã‚¦ãƒ³ãƒˆï¼ˆå¼¾ã§å€’ã—ãŸã¨ãã®ã¿ã€‚ä½“å½“ãŸã‚Šã‚„ç”»é¢å¤–ã¸ã®é›¢è„±ã¯æ•°ãˆãªã„ï¼‰
+        // Œ‚’Ä”‚ÌƒJƒEƒ“ƒgi’e‚Å“|‚µ‚½‚Æ‚«‚Ì‚İB‘Ì“–‚½‚è‚â‰æ–ÊŠO‚Ö‚Ì—£’E‚Í”‚¦‚È‚¢j
         if (!isCollision && KillCountManager.Instance != null)
         {
             KillCountManager.Instance.AddKill();
@@ -181,7 +181,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         }
     }
 
-    /// <summary> ãƒœã‚¹ãŒå€’ã•ã‚ŒãŸã¨ãã®å‡¦ç† </summary>
+    /// <summary> ƒ{ƒX‚ª“|‚³‚ê‚½‚Æ‚«‚Ìˆ— </summary>
     private void BossDie()
     {
         LineRenderer[] lineRenderers = GetComponentsInChildren<LineRenderer>();
@@ -196,7 +196,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
             ui.Experience(exp);
         }
 
-        // æ’ƒå¢œæ•°ã®ã‚«ã‚¦ãƒ³ãƒˆ
+        // Œ‚’Ä”‚ÌƒJƒEƒ“ƒg
         if (KillCountManager.Instance != null)
         {
             KillCountManager.Instance.AddKill();
@@ -209,7 +209,7 @@ public class EnemyManager : MonoBehaviour, IEnemyDamage
         }
         else
         {
-            SceneManager.LoadScene("GameClear");   ã€€//ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ç”»é¢ã«
+            SceneManager.LoadScene("GameClear");   @//ƒQ[ƒ€ƒNƒŠƒA‰æ–Ê‚É
         }
         Destroy(this.gameObject);
     }

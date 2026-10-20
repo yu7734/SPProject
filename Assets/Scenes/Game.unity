@@ -13319,7 +13319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85394ae16d7143cda7f912101655a770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 5
+  timeLimit: 300
   timerText: {fileID: 2134377098}
   clearSceneName: GameClear
   useMinutesFormat: 1
@@ -14498,8 +14498,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2807548508103349830, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
-      propertyPath: maxEnemyHP
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807548508103349830, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: maxEnemyHP
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4292577758120968359, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_Layer
@@ -14530,16 +14534,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: maxHpGrowth
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: hpGrowthRate
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7060059308220915813, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: timeUntilIncrease
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7364880299571644976, guid: 7c8fcecaec8f2884abf0995cd77b5ac6, type: 3}
       propertyPath: m_Name
